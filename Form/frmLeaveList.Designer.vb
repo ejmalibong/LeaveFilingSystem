@@ -22,16 +22,28 @@ Partial Class frmLeaveList
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmLeaveList))
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnClose = New PinkieControls.ButtonXP()
         Me.btnView = New PinkieControls.ButtonXP()
         Me.btnFileLeave = New PinkieControls.ButtonXP()
         Me.grpCriteria = New System.Windows.Forms.GroupBox()
-        Me.pnlPager = New System.Windows.Forms.Panel()
+        Me.bindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
+        Me.txtTotalPageNumber = New System.Windows.Forms.ToolStripLabel()
+        Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMovePreviousItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorSeparator = New System.Windows.Forms.ToolStripSeparator()
+        Me.txtPageNumber = New System.Windows.Forms.ToolStripTextBox()
+        Me.BindingNavigatorSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.BindingNavigatorMoveNextItem = New System.Windows.Forms.ToolStripButton()
+        Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.btnGo = New System.Windows.Forms.ToolStripButton()
         Me.pnlDateSearch = New System.Windows.Forms.Panel()
         Me.lblStartFrom = New System.Windows.Forms.Label()
         Me.btnResetDate = New System.Windows.Forms.Button()
@@ -42,14 +54,6 @@ Partial Class frmLeaveList
         Me.lblCriteria = New System.Windows.Forms.Label()
         Me.cmbSearchCriteria = New System.Windows.Forms.ComboBox()
         Me.dgvList = New System.Windows.Forms.DataGridView()
-        Me.ColDateFiled = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColLeaveTypeId = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColStartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColEndDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColReason = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColClinicIsApproved = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ColClinicClearance = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grpStatus = New System.Windows.Forms.GroupBox()
         Me.rdMyFile = New System.Windows.Forms.RadioButton()
         Me.rdPending = New System.Windows.Forms.RadioButton()
@@ -57,7 +61,22 @@ Partial Class frmLeaveList
         Me.btnRefresh = New PinkieControls.ButtonXP()
         Me.btnDisapprove = New PinkieControls.ButtonXP()
         Me.btnApprove = New PinkieControls.ButtonXP()
+        Me.ColLeaveFilingId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColDateFiled = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColLeaveTypeId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColLeaveTypeName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColStartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColEndDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColReason = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColClinicIsApproved = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColClinicClearance = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RoutingStatusId = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColRoutingStatusName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.grpCriteria.SuspendLayout()
+        CType(Me.bindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.bindingNavigator.SuspendLayout()
         Me.pnlDateSearch.SuspendLayout()
         CType(Me.dgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStatus.SuspendLayout()
@@ -112,7 +131,7 @@ Partial Class frmLeaveList
         '
         Me.grpCriteria.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.grpCriteria.Controls.Add(Me.pnlPager)
+        Me.grpCriteria.Controls.Add(Me.bindingNavigator)
         Me.grpCriteria.Controls.Add(Me.pnlDateSearch)
         Me.grpCriteria.Controls.Add(Me.lblCriteria)
         Me.grpCriteria.Controls.Add(Me.cmbSearchCriteria)
@@ -123,12 +142,106 @@ Partial Class frmLeaveList
         Me.grpCriteria.TabIndex = 157
         Me.grpCriteria.TabStop = False
         '
-        'pnlPager
+        'bindingNavigator
         '
-        Me.pnlPager.Location = New System.Drawing.Point(988, 9)
-        Me.pnlPager.Name = "pnlPager"
-        Me.pnlPager.Size = New System.Drawing.Size(313, 28)
-        Me.pnlPager.TabIndex = 9
+        Me.bindingNavigator.AddNewItem = Nothing
+        Me.bindingNavigator.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.bindingNavigator.BackColor = System.Drawing.Color.White
+        Me.bindingNavigator.CountItem = Me.txtTotalPageNumber
+        Me.bindingNavigator.CountItemFormat = "of "
+        Me.bindingNavigator.DeleteItem = Nothing
+        Me.bindingNavigator.Dock = System.Windows.Forms.DockStyle.None
+        Me.bindingNavigator.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
+        Me.bindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.txtPageNumber, Me.txtTotalPageNumber, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.ToolStripSeparator1, Me.btnGo})
+        Me.bindingNavigator.Location = New System.Drawing.Point(1112, 10)
+        Me.bindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
+        Me.bindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
+        Me.bindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
+        Me.bindingNavigator.MovePreviousItem = Me.BindingNavigatorMovePreviousItem
+        Me.bindingNavigator.Name = "bindingNavigator"
+        Me.bindingNavigator.PositionItem = Me.txtPageNumber
+        Me.bindingNavigator.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
+        Me.bindingNavigator.Size = New System.Drawing.Size(201, 25)
+        Me.bindingNavigator.TabIndex = 11
+        Me.bindingNavigator.Text = "PagerPanel"
+        '
+        'txtTotalPageNumber
+        '
+        Me.txtTotalPageNumber.Name = "txtTotalPageNumber"
+        Me.txtTotalPageNumber.Size = New System.Drawing.Size(21, 22)
+        Me.txtTotalPageNumber.Text = "of "
+        Me.txtTotalPageNumber.ToolTipText = "Total number of items"
+        '
+        'BindingNavigatorMoveFirstItem
+        '
+        Me.BindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveFirstItem.Image = CType(resources.GetObject("BindingNavigatorMoveFirstItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveFirstItem.Name = "BindingNavigatorMoveFirstItem"
+        Me.BindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveFirstItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveFirstItem.Text = "Move first"
+        '
+        'BindingNavigatorMovePreviousItem
+        '
+        Me.BindingNavigatorMovePreviousItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMovePreviousItem.Image = CType(resources.GetObject("BindingNavigatorMovePreviousItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMovePreviousItem.Name = "BindingNavigatorMovePreviousItem"
+        Me.BindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMovePreviousItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMovePreviousItem.Text = "Move previous"
+        '
+        'BindingNavigatorSeparator
+        '
+        Me.BindingNavigatorSeparator.Name = "BindingNavigatorSeparator"
+        Me.BindingNavigatorSeparator.Size = New System.Drawing.Size(6, 25)
+        '
+        'txtPageNumber
+        '
+        Me.txtPageNumber.AccessibleName = "Position"
+        Me.txtPageNumber.AutoSize = False
+        Me.txtPageNumber.Name = "txtPageNumber"
+        Me.txtPageNumber.Size = New System.Drawing.Size(30, 23)
+        Me.txtPageNumber.Text = "0"
+        Me.txtPageNumber.TextBoxTextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtPageNumber.ToolTipText = "Current position"
+        '
+        'BindingNavigatorSeparator1
+        '
+        Me.BindingNavigatorSeparator1.Name = "BindingNavigatorSeparator1"
+        Me.BindingNavigatorSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'BindingNavigatorMoveNextItem
+        '
+        Me.BindingNavigatorMoveNextItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveNextItem.Image = CType(resources.GetObject("BindingNavigatorMoveNextItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveNextItem.Name = "BindingNavigatorMoveNextItem"
+        Me.BindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveNextItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveNextItem.Text = "Move next"
+        '
+        'BindingNavigatorMoveLastItem
+        '
+        Me.BindingNavigatorMoveLastItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.BindingNavigatorMoveLastItem.Image = CType(resources.GetObject("BindingNavigatorMoveLastItem.Image"), System.Drawing.Image)
+        Me.BindingNavigatorMoveLastItem.Name = "BindingNavigatorMoveLastItem"
+        Me.BindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = True
+        Me.BindingNavigatorMoveLastItem.Size = New System.Drawing.Size(23, 22)
+        Me.BindingNavigatorMoveLastItem.Text = "Move last"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 25)
+        '
+        'btnGo
+        '
+        Me.btnGo.AutoSize = False
+        Me.btnGo.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.btnGo.Image = CType(resources.GetObject("btnGo.Image"), System.Drawing.Image)
+        Me.btnGo.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.btnGo.Name = "btnGo"
+        Me.btnGo.Size = New System.Drawing.Size(35, 22)
+        Me.btnGo.Text = "Go"
         '
         'pnlDateSearch
         '
@@ -229,16 +342,16 @@ Partial Class frmLeaveList
         Me.dgvList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.5!)
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        Me.dgvList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Verdana", 8.5!)
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.dgvList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle11
         Me.dgvList.ColumnHeadersHeight = 25
         Me.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.dgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColDateFiled, Me.ColLeaveTypeId, Me.ColStartDate, Me.ColEndDate, Me.ColQuantity, Me.ColReason, Me.ColClinicIsApproved, Me.ColClinicClearance})
+        Me.dgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColLeaveFilingId, Me.ColDateFiled, Me.ColLeaveTypeId, Me.ColLeaveTypeName, Me.ColName, Me.ColStartDate, Me.ColEndDate, Me.ColQuantity, Me.ColReason, Me.ColClinicIsApproved, Me.ColClinicClearance, Me.RoutingStatusId, Me.ColRoutingStatusName})
         Me.dgvList.Location = New System.Drawing.Point(0, 37)
         Me.dgvList.MultiSelect = False
         Me.dgvList.Name = "dgvList"
@@ -250,77 +363,6 @@ Partial Class frmLeaveList
         Me.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.dgvList.Size = New System.Drawing.Size(1314, 515)
         Me.dgvList.TabIndex = 158
-        '
-        'ColDateFiled
-        '
-        Me.ColDateFiled.DataPropertyName = "CreationDate"
-        Me.ColDateFiled.HeaderText = "Date Filed"
-        Me.ColDateFiled.Name = "ColDateFiled"
-        Me.ColDateFiled.ReadOnly = True
-        Me.ColDateFiled.Width = 120
-        '
-        'ColLeaveTypeId
-        '
-        Me.ColLeaveTypeId.DataPropertyName = "LeaveTypeId"
-        Me.ColLeaveTypeId.HeaderText = "LeaveTypeId"
-        Me.ColLeaveTypeId.Name = "ColLeaveTypeId"
-        Me.ColLeaveTypeId.ReadOnly = True
-        Me.ColLeaveTypeId.Visible = False
-        '
-        'ColStartDate
-        '
-        Me.ColStartDate.DataPropertyName = "StartDate"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ColStartDate.DefaultCellStyle = DataGridViewCellStyle2
-        Me.ColStartDate.HeaderText = "Start Date"
-        Me.ColStartDate.Name = "ColStartDate"
-        Me.ColStartDate.ReadOnly = True
-        Me.ColStartDate.Width = 105
-        '
-        'ColEndDate
-        '
-        Me.ColEndDate.DataPropertyName = "EndDate"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ColEndDate.DefaultCellStyle = DataGridViewCellStyle3
-        Me.ColEndDate.HeaderText = "End Date"
-        Me.ColEndDate.Name = "ColEndDate"
-        Me.ColEndDate.ReadOnly = True
-        Me.ColEndDate.Width = 105
-        '
-        'ColQuantity
-        '
-        Me.ColQuantity.DataPropertyName = "Quantity"
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ColQuantity.DefaultCellStyle = DataGridViewCellStyle4
-        Me.ColQuantity.HeaderText = "Qty"
-        Me.ColQuantity.Name = "ColQuantity"
-        Me.ColQuantity.ReadOnly = True
-        Me.ColQuantity.Width = 60
-        '
-        'ColReason
-        '
-        Me.ColReason.DataPropertyName = "Reason"
-        Me.ColReason.HeaderText = "Reason"
-        Me.ColReason.Name = "ColReason"
-        Me.ColReason.ReadOnly = True
-        Me.ColReason.Width = 215
-        '
-        'ColClinicIsApproved
-        '
-        Me.ColClinicIsApproved.DataPropertyName = "ClinicIsApproved"
-        Me.ColClinicIsApproved.HeaderText = "Clinic Is Approved"
-        Me.ColClinicIsApproved.Name = "ColClinicIsApproved"
-        Me.ColClinicIsApproved.ReadOnly = True
-        Me.ColClinicIsApproved.Visible = False
-        '
-        'ColClinicClearance
-        '
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ColClinicClearance.DefaultCellStyle = DataGridViewCellStyle5
-        Me.ColClinicClearance.HeaderText = "Clinic"
-        Me.ColClinicClearance.Name = "ColClinicClearance"
-        Me.ColClinicClearance.ReadOnly = True
-        Me.ColClinicClearance.Width = 80
         '
         'grpStatus
         '
@@ -415,6 +457,117 @@ Partial Class frmLeaveList
         Me.btnApprove.TabIndex = 161
         Me.btnApprove.Text = "Approve"
         '
+        'ColLeaveFilingId
+        '
+        Me.ColLeaveFilingId.DataPropertyName = "LeaveFilingId"
+        Me.ColLeaveFilingId.HeaderText = "LeaveFilingId"
+        Me.ColLeaveFilingId.Name = "ColLeaveFilingId"
+        Me.ColLeaveFilingId.ReadOnly = True
+        Me.ColLeaveFilingId.Visible = False
+        '
+        'ColDateFiled
+        '
+        Me.ColDateFiled.DataPropertyName = "DateCreated"
+        Me.ColDateFiled.HeaderText = "Date Created"
+        Me.ColDateFiled.Name = "ColDateFiled"
+        Me.ColDateFiled.ReadOnly = True
+        Me.ColDateFiled.Width = 120
+        '
+        'ColLeaveTypeId
+        '
+        Me.ColLeaveTypeId.DataPropertyName = "LeaveTypeId"
+        Me.ColLeaveTypeId.HeaderText = "LeaveTypeId"
+        Me.ColLeaveTypeId.Name = "ColLeaveTypeId"
+        Me.ColLeaveTypeId.ReadOnly = True
+        Me.ColLeaveTypeId.Visible = False
+        '
+        'ColLeaveTypeName
+        '
+        Me.ColLeaveTypeName.DataPropertyName = "LeaveTypeName"
+        Me.ColLeaveTypeName.HeaderText = "Leave Type"
+        Me.ColLeaveTypeName.Name = "ColLeaveTypeName"
+        Me.ColLeaveTypeName.ReadOnly = True
+        Me.ColLeaveTypeName.Width = 125
+        '
+        'ColName
+        '
+        Me.ColName.DataPropertyName = "Name"
+        Me.ColName.HeaderText = "Name"
+        Me.ColName.Name = "ColName"
+        Me.ColName.ReadOnly = True
+        Me.ColName.Width = 200
+        '
+        'ColStartDate
+        '
+        Me.ColStartDate.DataPropertyName = "StartDate"
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColStartDate.DefaultCellStyle = DataGridViewCellStyle12
+        Me.ColStartDate.HeaderText = "Start Date"
+        Me.ColStartDate.Name = "ColStartDate"
+        Me.ColStartDate.ReadOnly = True
+        Me.ColStartDate.Width = 105
+        '
+        'ColEndDate
+        '
+        Me.ColEndDate.DataPropertyName = "EndDate"
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColEndDate.DefaultCellStyle = DataGridViewCellStyle13
+        Me.ColEndDate.HeaderText = "End Date"
+        Me.ColEndDate.Name = "ColEndDate"
+        Me.ColEndDate.ReadOnly = True
+        Me.ColEndDate.Width = 105
+        '
+        'ColQuantity
+        '
+        Me.ColQuantity.DataPropertyName = "Quantity"
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColQuantity.DefaultCellStyle = DataGridViewCellStyle14
+        Me.ColQuantity.HeaderText = "Qty"
+        Me.ColQuantity.Name = "ColQuantity"
+        Me.ColQuantity.ReadOnly = True
+        Me.ColQuantity.Width = 60
+        '
+        'ColReason
+        '
+        Me.ColReason.DataPropertyName = "Reason"
+        Me.ColReason.HeaderText = "Reason"
+        Me.ColReason.Name = "ColReason"
+        Me.ColReason.ReadOnly = True
+        Me.ColReason.Width = 265
+        '
+        'ColClinicIsApproved
+        '
+        Me.ColClinicIsApproved.DataPropertyName = "ClinicIsApproved"
+        Me.ColClinicIsApproved.HeaderText = "Clinic Is Approved"
+        Me.ColClinicIsApproved.Name = "ColClinicIsApproved"
+        Me.ColClinicIsApproved.ReadOnly = True
+        Me.ColClinicIsApproved.Visible = False
+        '
+        'ColClinicClearance
+        '
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColClinicClearance.DefaultCellStyle = DataGridViewCellStyle15
+        Me.ColClinicClearance.HeaderText = "Clinic"
+        Me.ColClinicClearance.Name = "ColClinicClearance"
+        Me.ColClinicClearance.ReadOnly = True
+        Me.ColClinicClearance.Width = 80
+        '
+        'RoutingStatusId
+        '
+        Me.RoutingStatusId.DataPropertyName = "RoutingStatusId"
+        Me.RoutingStatusId.HeaderText = "RoutingStatusId"
+        Me.RoutingStatusId.Name = "RoutingStatusId"
+        Me.RoutingStatusId.ReadOnly = True
+        Me.RoutingStatusId.Visible = False
+        '
+        'ColRoutingStatusName
+        '
+        Me.ColRoutingStatusName.DataPropertyName = "RoutingStatusName"
+        Me.ColRoutingStatusName.HeaderText = "Status"
+        Me.ColRoutingStatusName.Name = "ColRoutingStatusName"
+        Me.ColRoutingStatusName.ReadOnly = True
+        Me.ColRoutingStatusName.Width = 230
+        '
         'frmLeaveList
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -443,6 +596,10 @@ Partial Class frmLeaveList
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "List of Leave"
         Me.grpCriteria.ResumeLayout(False)
+        Me.grpCriteria.PerformLayout()
+        CType(Me.bindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.bindingNavigator.ResumeLayout(False)
+        Me.bindingNavigator.PerformLayout()
         Me.pnlDateSearch.ResumeLayout(False)
         Me.pnlDateSearch.PerformLayout()
         CType(Me.dgvList, System.ComponentModel.ISupportInitialize).EndInit()
@@ -472,13 +629,28 @@ Partial Class frmLeaveList
     Friend WithEvents rdMyFile As System.Windows.Forms.RadioButton
     Friend WithEvents btnDisapprove As PinkieControls.ButtonXP
     Friend WithEvents btnApprove As PinkieControls.ButtonXP
-    Friend WithEvents pnlPager As System.Windows.Forms.Panel
+    Friend WithEvents bindingNavigator As System.Windows.Forms.BindingNavigator
+    Friend WithEvents txtTotalPageNumber As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents BindingNavigatorMoveFirstItem As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorMovePreviousItem As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorSeparator As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents txtPageNumber As System.Windows.Forms.ToolStripTextBox
+    Friend WithEvents BindingNavigatorSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents BindingNavigatorMoveNextItem As System.Windows.Forms.ToolStripButton
+    Friend WithEvents BindingNavigatorMoveLastItem As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnGo As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ColLeaveFilingId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColDateFiled As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColLeaveTypeId As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColLeaveTypeName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColStartDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColEndDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColQuantity As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColReason As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColClinicIsApproved As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColClinicClearance As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents RoutingStatusId As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColRoutingStatusName As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

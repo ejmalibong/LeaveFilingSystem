@@ -63,7 +63,7 @@ Public Class frmLogin
         'txtEmployeeId.Text = "1907-002"
 
         'nurse
-        txtEmployeeId.Text = "1805-003"
+        'txtEmployeeId.Text = "1805-003"
 
         'sir eldrin
         'txtEmployeeId.Text = "2005-002"
@@ -72,7 +72,7 @@ Public Class frmLogin
         'txtEmployeeId.Text = "1708-001"
 
         'me
-        'txtEmployeeId.Text = "2009-002"
+        txtEmployeeId.Text = "2009-002"
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click

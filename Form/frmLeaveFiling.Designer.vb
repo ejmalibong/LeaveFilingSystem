@@ -40,8 +40,8 @@ Partial Class frmLeaveFiling
         Me.lblBalance = New System.Windows.Forms.Label()
         Me.lblLeaveType = New System.Windows.Forms.Label()
         Me.cmbLeaveType = New System.Windows.Forms.ComboBox()
-        Me.txtDateFiled = New System.Windows.Forms.Label()
-        Me.lblDateFiled = New System.Windows.Forms.Label()
+        Me.txtDateCreated = New System.Windows.Forms.Label()
+        Me.lblDateCreated = New System.Windows.Forms.Label()
         Me.lblRoutingStatus = New System.Windows.Forms.Label()
         Me.txtFileId = New System.Windows.Forms.Label()
         Me.lblFileId = New System.Windows.Forms.Label()
@@ -57,7 +57,6 @@ Partial Class frmLeaveFiling
         Me.lblName = New System.Windows.Forms.Label()
         Me.txtPosition = New System.Windows.Forms.Label()
         Me.txtName = New System.Windows.Forms.Label()
-        Me.cmbName = New System.Windows.Forms.ComboBox()
         Me.lblPosition = New System.Windows.Forms.Label()
         Me.txtDepartment = New System.Windows.Forms.Label()
         Me.lblDepartment = New System.Windows.Forms.Label()
@@ -323,32 +322,32 @@ Partial Class frmLeaveFiling
         Me.cmbLeaveType.TabIndex = 0
         Me.cmbLeaveType.ValueMember = "Id"
         '
-        'txtDateFiled
+        'txtDateCreated
         '
-        Me.txtDateFiled.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDateFiled.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.txtDateFiled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtDateFiled.Font = New System.Drawing.Font("Verdana", 9.0!)
-        Me.txtDateFiled.ForeColor = System.Drawing.Color.Black
-        Me.txtDateFiled.Location = New System.Drawing.Point(973, 9)
-        Me.txtDateFiled.Name = "txtDateFiled"
-        Me.txtDateFiled.Size = New System.Drawing.Size(200, 24)
-        Me.txtDateFiled.TabIndex = 363
-        Me.txtDateFiled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.txtDateFiled.UseCompatibleTextRendering = True
+        Me.txtDateCreated.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtDateCreated.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.txtDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtDateCreated.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.txtDateCreated.ForeColor = System.Drawing.Color.Black
+        Me.txtDateCreated.Location = New System.Drawing.Point(973, 9)
+        Me.txtDateCreated.Name = "txtDateCreated"
+        Me.txtDateCreated.Size = New System.Drawing.Size(200, 24)
+        Me.txtDateCreated.TabIndex = 363
+        Me.txtDateCreated.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.txtDateCreated.UseCompatibleTextRendering = True
         '
-        'lblDateFiled
+        'lblDateCreated
         '
-        Me.lblDateFiled.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblDateFiled.BackColor = System.Drawing.SystemColors.Control
-        Me.lblDateFiled.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblDateFiled.ForeColor = System.Drawing.Color.Black
-        Me.lblDateFiled.Location = New System.Drawing.Point(874, 9)
-        Me.lblDateFiled.Name = "lblDateFiled"
-        Me.lblDateFiled.Size = New System.Drawing.Size(100, 24)
-        Me.lblDateFiled.TabIndex = 362
-        Me.lblDateFiled.Text = " Date Filed"
-        Me.lblDateFiled.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblDateCreated.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblDateCreated.BackColor = System.Drawing.SystemColors.Control
+        Me.lblDateCreated.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblDateCreated.ForeColor = System.Drawing.Color.Black
+        Me.lblDateCreated.Location = New System.Drawing.Point(874, 9)
+        Me.lblDateCreated.Name = "lblDateCreated"
+        Me.lblDateCreated.Size = New System.Drawing.Size(100, 24)
+        Me.lblDateCreated.TabIndex = 362
+        Me.lblDateCreated.Text = " Date Created"
+        Me.lblDateCreated.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblRoutingStatus
         '
@@ -373,9 +372,8 @@ Partial Class frmLeaveFiling
         Me.txtFileId.Name = "txtFileId"
         Me.txtFileId.Size = New System.Drawing.Size(100, 24)
         Me.txtFileId.TabIndex = 383
-        Me.txtFileId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.txtFileId.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         Me.txtFileId.UseCompatibleTextRendering = True
-        Me.txtFileId.Visible = False
         '
         'lblFileId
         '
@@ -388,7 +386,6 @@ Partial Class frmLeaveFiling
         Me.lblFileId.TabIndex = 382
         Me.lblFileId.Text = " File ID"
         Me.lblFileId.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblFileId.Visible = False
         '
         'txtRoutingStatus
         '
@@ -412,13 +409,13 @@ Partial Class frmLeaveFiling
         Me.btnSave.DialogResult = System.Windows.Forms.DialogResult.None
         Me.btnSave.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.btnSave.Hint = ""
-        Me.btnSave.Location = New System.Drawing.Point(714, 603)
+        Me.btnSave.Location = New System.Drawing.Point(765, 603)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnSave.Size = New System.Drawing.Size(150, 32)
+        Me.btnSave.Size = New System.Drawing.Size(100, 32)
         Me.btnSave.TabIndex = 325
         Me.btnSave.TabStop = False
-        Me.btnSave.Text = "Save and Close"
+        Me.btnSave.Text = "Save"
         '
         'grpEmpInfo
         '
@@ -432,8 +429,6 @@ Partial Class frmLeaveFiling
         Me.grpEmpInfo.Controls.Add(Me.lblEmpStatus)
         Me.grpEmpInfo.Controls.Add(Me.lblName)
         Me.grpEmpInfo.Controls.Add(Me.txtPosition)
-        Me.grpEmpInfo.Controls.Add(Me.txtName)
-        Me.grpEmpInfo.Controls.Add(Me.cmbName)
         Me.grpEmpInfo.Controls.Add(Me.lblPosition)
         Me.grpEmpInfo.Controls.Add(Me.txtDepartment)
         Me.grpEmpInfo.Controls.Add(Me.lblDepartment)
@@ -550,23 +545,12 @@ Partial Class frmLeaveFiling
         Me.txtName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtName.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.txtName.ForeColor = System.Drawing.Color.Black
-        Me.txtName.Location = New System.Drawing.Point(153, 27)
+        Me.txtName.Location = New System.Drawing.Point(162, 65)
         Me.txtName.Name = "txtName"
         Me.txtName.Size = New System.Drawing.Size(473, 24)
         Me.txtName.TabIndex = 402
         Me.txtName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.txtName.UseCompatibleTextRendering = True
-        '
-        'cmbName
-        '
-        Me.cmbName.DisplayMember = "Name"
-        Me.cmbName.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cmbName.FormattingEnabled = True
-        Me.cmbName.Location = New System.Drawing.Point(153, 27)
-        Me.cmbName.Name = "cmbName"
-        Me.cmbName.Size = New System.Drawing.Size(473, 24)
-        Me.cmbName.TabIndex = 403
-        Me.cmbName.ValueMember = "Id"
         '
         'lblPosition
         '
@@ -1086,18 +1070,18 @@ Partial Class frmLeaveFiling
         'frmLeaveFiling
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
-        Me.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(1196, 647)
         Me.Controls.Add(Me.gprLeaveInfo)
-        Me.Controls.Add(Me.lblDateFiled)
-        Me.Controls.Add(Me.txtDateFiled)
+        Me.Controls.Add(Me.lblDateCreated)
+        Me.Controls.Add(Me.txtDateCreated)
         Me.Controls.Add(Me.lblRoutingStatus)
         Me.Controls.Add(Me.lblFileId)
         Me.Controls.Add(Me.txtFileId)
         Me.Controls.Add(Me.txtRoutingStatus)
         Me.Controls.Add(Me.btnClose)
+        Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.btnDelete)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
@@ -1137,8 +1121,8 @@ Partial Class frmLeaveFiling
     Friend WithEvents lblBalance As System.Windows.Forms.Label
     Friend WithEvents lblLeaveType As System.Windows.Forms.Label
     Friend WithEvents cmbLeaveType As System.Windows.Forms.ComboBox
-    Friend WithEvents txtDateFiled As System.Windows.Forms.Label
-    Friend WithEvents lblDateFiled As System.Windows.Forms.Label
+    Friend WithEvents txtDateCreated As System.Windows.Forms.Label
+    Friend WithEvents lblDateCreated As System.Windows.Forms.Label
     Friend WithEvents lblRoutingStatus As System.Windows.Forms.Label
     Friend WithEvents txtFileId As System.Windows.Forms.Label
     Friend WithEvents lblFileId As System.Windows.Forms.Label
@@ -1154,7 +1138,6 @@ Partial Class frmLeaveFiling
     Friend WithEvents lblName As System.Windows.Forms.Label
     Friend WithEvents txtPosition As System.Windows.Forms.Label
     Friend WithEvents txtName As System.Windows.Forms.Label
-    Friend WithEvents cmbName As System.Windows.Forms.ComboBox
     Friend WithEvents lblPosition As System.Windows.Forms.Label
     Friend WithEvents txtDepartment As System.Windows.Forms.Label
     Friend WithEvents lblDepartment As System.Windows.Forms.Label

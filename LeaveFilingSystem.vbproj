@@ -129,9 +129,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsLeaveFiling.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Dataset\dsLeaveFiling.vb">
-      <DependentUpon>dsLeaveFiling.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Form\frmLeaveFiling.Designer.vb">
       <DependentUpon>frmLeaveFiling.vb</DependentUpon>
     </Compile>
@@ -210,6 +207,7 @@
     <None Include="Dataset\dsLeaveFiling.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsLeaveFiling.Designer.vb</LastGenOutput>
     </None>
     <None Include="Dataset\dsLeaveFiling.xss">
       <DependentUpon>dsLeaveFiling.xsd</DependentUpon>
