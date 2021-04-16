@@ -33,10 +33,11 @@ Partial Class frmLogin
         '
         'txtEmployeeId
         '
-        Me.txtEmployeeId.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.txtEmployeeId.Location = New System.Drawing.Point(230, 56)
+        Me.txtEmployeeId.Font = New System.Drawing.Font("Segoe UI", 14.0!)
+        Me.txtEmployeeId.Location = New System.Drawing.Point(230, 54)
+        Me.txtEmployeeId.Multiline = True
         Me.txtEmployeeId.Name = "txtEmployeeId"
-        Me.txtEmployeeId.Size = New System.Drawing.Size(243, 29)
+        Me.txtEmployeeId.Size = New System.Drawing.Size(262, 34)
         Me.txtEmployeeId.TabIndex = 0
         Me.txtEmployeeId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -47,13 +48,12 @@ Partial Class frmLogin
         Me.btnLogin.DialogResult = System.Windows.Forms.DialogResult.None
         Me.btnLogin.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.Hint = "Login"
-        Me.btnLogin.Location = New System.Drawing.Point(270, 103)
+        Me.btnLogin.Location = New System.Drawing.Point(266, 99)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnLogin.Size = New System.Drawing.Size(100, 32)
+        Me.btnLogin.Size = New System.Drawing.Size(110, 36)
         Me.btnLogin.TabIndex = 91
-        Me.btnLogin.TabStop = False
-        Me.btnLogin.Text = "Login"
+        Me.btnLogin.Text = "  Login"
         '
         'btnClose
         '
@@ -62,18 +62,17 @@ Partial Class frmLogin
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnClose.Hint = "Close"
-        Me.btnClose.Location = New System.Drawing.Point(373, 103)
+        Me.btnClose.Location = New System.Drawing.Point(382, 99)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnClose.Size = New System.Drawing.Size(100, 32)
+        Me.btnClose.Size = New System.Drawing.Size(110, 36)
         Me.btnClose.TabIndex = 92
-        Me.btnClose.TabStop = False
         Me.btnClose.Text = "Close"
         '
         'lblCaption
         '
         Me.lblCaption.AutoSize = True
-        Me.lblCaption.Location = New System.Drawing.Point(226, 34)
+        Me.lblCaption.Location = New System.Drawing.Point(226, 32)
         Me.lblCaption.Name = "lblCaption"
         Me.lblCaption.Size = New System.Drawing.Size(86, 19)
         Me.lblCaption.TabIndex = 93
@@ -97,7 +96,7 @@ Partial Class frmLogin
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(484, 211)
+        Me.ClientSize = New System.Drawing.Size(504, 211)
         Me.Controls.Add(Me.picLogo)
         Me.Controls.Add(Me.lblCaption)
         Me.Controls.Add(Me.btnClose)

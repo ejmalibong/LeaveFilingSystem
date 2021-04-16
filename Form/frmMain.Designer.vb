@@ -27,10 +27,10 @@ Partial Class frmMain
         Me.mnuMain = New System.Windows.Forms.MenuStrip()
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LeaveFilingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HrListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatetimeToolStripMenuItem = New System.Windows.Forms.ToolStripLabel()
         Me.UserItemToolStripMenuItem = New System.Windows.Forms.ToolStripLabel()
@@ -38,6 +38,7 @@ Partial Class frmMain
         Me.stsMain = New System.Windows.Forms.StatusStrip()
         Me.DepartmentToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.SectionToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.StatusToolStripStatusLabel = New System.Windows.Forms.ToolStripStatusLabel()
         Me.tmrMain = New System.Windows.Forms.Timer(Me.components)
         Me.mnuMain.SuspendLayout()
         Me.stsMain.SuspendLayout()
@@ -46,7 +47,7 @@ Partial Class frmMain
         'mnuMain
         '
         Me.mnuMain.BackColor = System.Drawing.Color.White
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.WindowToolStripMenuItem, Me.DatetimeToolStripMenuItem, Me.UserItemToolStripMenuItem, Me.UsernameToolStripMenuItem})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.WindowToolStripMenuItem, Me.DatetimeToolStripMenuItem, Me.UserItemToolStripMenuItem, Me.UsernameToolStripMenuItem})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.mnuMain.Name = "mnuMain"
@@ -55,7 +56,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LeaveFilingToolStripMenuItem, Me.FileToolStripSeparator, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LeaveFilingToolStripMenuItem, Me.HrListToolStripMenuItem, Me.FileToolStripSeparator, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -63,31 +64,31 @@ Partial Class frmMain
         'LeaveFilingToolStripMenuItem
         '
         Me.LeaveFilingToolStripMenuItem.Name = "LeaveFilingToolStripMenuItem"
-        Me.LeaveFilingToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
-        Me.LeaveFilingToolStripMenuItem.Text = "Leave Filing"
+        Me.LeaveFilingToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.LeaveFilingToolStripMenuItem.Text = "Leave Records"
+        '
+        'HrListToolStripMenuItem
+        '
+        Me.HrListToolStripMenuItem.Name = "HrListToolStripMenuItem"
+        Me.HrListToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.HrListToolStripMenuItem.Text = "HR Records"
         '
         'FileToolStripSeparator
         '
         Me.FileToolStripSeparator.Name = "FileToolStripSeparator"
-        Me.FileToolStripSeparator.Size = New System.Drawing.Size(133, 6)
+        Me.FileToolStripSeparator.Size = New System.Drawing.Size(146, 6)
         '
         'LogOutToolStripMenuItem
         '
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
-        '
-        'ReportsToolStripMenuItem
-        '
-        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
-        Me.ReportsToolStripMenuItem.Text = "Reports"
         '
         'WindowToolStripMenuItem
         '
@@ -125,7 +126,7 @@ Partial Class frmMain
         'stsMain
         '
         Me.stsMain.BackColor = System.Drawing.Color.White
-        Me.stsMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DepartmentToolStripStatusLabel, Me.SectionToolStripStatusLabel})
+        Me.stsMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DepartmentToolStripStatusLabel, Me.SectionToolStripStatusLabel, Me.StatusToolStripStatusLabel})
         Me.stsMain.Location = New System.Drawing.Point(0, 239)
         Me.stsMain.Name = "stsMain"
         Me.stsMain.Size = New System.Drawing.Size(684, 22)
@@ -144,6 +145,13 @@ Partial Class frmMain
         Me.SectionToolStripStatusLabel.Size = New System.Drawing.Size(46, 17)
         Me.SectionToolStripStatusLabel.Text = "Section"
         '
+        'StatusToolStripStatusLabel
+        '
+        Me.StatusToolStripStatusLabel.Name = "StatusToolStripStatusLabel"
+        Me.StatusToolStripStatusLabel.Size = New System.Drawing.Size(522, 17)
+        Me.StatusToolStripStatusLabel.Spring = True
+        Me.StatusToolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        '
         'tmrMain
         '
         '
@@ -154,23 +162,23 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(684, 261)
         Me.Controls.Add(Me.stsMain)
         Me.Controls.Add(Me.mnuMain)
-        Me.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Font = New System.Drawing.Font("Segoe UI", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.IsMdiContainer = True
+        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
+        Me.IsMdiContainer = true
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = " SL/VL Application"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.mnuMain.ResumeLayout(False)
-        Me.mnuMain.PerformLayout()
-        Me.stsMain.ResumeLayout(False)
-        Me.stsMain.PerformLayout()
-        Me.ResumeLayout(False)
-        Me.PerformLayout()
+        Me.mnuMain.ResumeLayout(false)
+        Me.mnuMain.PerformLayout
+        Me.stsMain.ResumeLayout(false)
+        Me.stsMain.PerformLayout
+        Me.ResumeLayout(false)
+        Me.PerformLayout
 
-    End Sub
+End Sub
     Friend WithEvents mnuMain As System.Windows.Forms.MenuStrip
     Friend WithEvents stsMain As System.Windows.Forms.StatusStrip
     Friend WithEvents tmrMain As System.Windows.Forms.Timer
@@ -183,7 +191,8 @@ Partial Class frmMain
     Friend WithEvents LogOutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents LeaveFilingToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DepartmentToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents SectionToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents HrListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Public WithEvents StatusToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
 End Class

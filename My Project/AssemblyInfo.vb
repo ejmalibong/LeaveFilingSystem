@@ -8,10 +8,10 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("LeaveFiling")> 
+<Assembly: AssemblyTitle("Leave Application")> 
 <Assembly: AssemblyDescription("Leave Application System")> 
 <Assembly: AssemblyCompany("NBC Philippines Car Technology Corporation")> 
-<Assembly: AssemblyProduct("LeaveFiling")> 
+<Assembly: AssemblyProduct("Leave Application System")> 
 <Assembly: AssemblyCopyright("Copyright ©  2021")> 
 <Assembly: AssemblyTrademark("")> 
 

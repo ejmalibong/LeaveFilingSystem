@@ -13,23 +13,23 @@
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>X:\EJ\Leave Filing System\Published\</PublishUrl>
+    <PublishUrl>\\192.168.20.11\common\Leave Application System\Leave Application\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
+    <InstallFrom>Unc</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
     <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
+    <UpdateRequired>true</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <UpdateUrl>\\nbcp-db-001\t%24\EJ\Leave Filing System\Published\</UpdateUrl>
+    <UpdateUrl>\\192.168.20.11\common\Leave Application System\Leave Application\</UpdateUrl>
     <ProductName>Leave Application</ProductName>
-    <PublisherName>Leave Application</PublisherName>
-    <SuiteName>Leave Application</SuiteName>
-    <ApplicationRevision>9</ApplicationRevision>
+    <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
+    <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
+    <ApplicationRevision>15</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <UseApplicationTrust>false</UseApplicationTrust>
+    <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -129,16 +129,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsLeaveFiling.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmLeaveFiling.Designer.vb">
-      <DependentUpon>frmLeaveFiling.vb</DependentUpon>
+    <Compile Include="Dataset\dsLeaveFiling.vb">
+      <DependentUpon>dsLeaveFiling.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmLeaveFiling.vb">
+    <Compile Include="Form\frmHrRecord.Designer.vb">
+      <DependentUpon>frmHrRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmHrRecord.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\frmLeaveList.Designer.vb">
-      <DependentUpon>frmLeaveList.vb</DependentUpon>
+    <Compile Include="Form\frmLeaveForm.Designer.vb">
+      <DependentUpon>frmLeaveForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmLeaveList.vb">
+    <Compile Include="Form\frmLeaveForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmLeaveRecord.Designer.vb">
+      <DependentUpon>frmLeaveRecord.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmLeaveRecord.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmLogin.Designer.vb">
@@ -170,11 +179,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form\frmLeaveFiling.resx">
-      <DependentUpon>frmLeaveFiling.vb</DependentUpon>
+    <EmbeddedResource Include="Form\frmHrRecord.resx">
+      <DependentUpon>frmHrRecord.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frmLeaveList.resx">
-      <DependentUpon>frmLeaveList.vb</DependentUpon>
+    <EmbeddedResource Include="Form\frmLeaveForm.resx">
+      <DependentUpon>frmLeaveForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmLeaveRecord.resx">
+      <DependentUpon>frmLeaveRecord.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
@@ -248,6 +260,1114 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\3d bar chart 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Abort 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\About 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Accounting 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Address book 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Alarm 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Alarm clock 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Alert 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Alien 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Anchor 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Application 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Apply 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Back 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Bad mark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Bee 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Black bookmark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Black pin 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Black tag 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Blog 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Blue bookmark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Blue key 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Blue pin 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Blue tag 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Bomb 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Bookmark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Boss 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Bottom 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Briefcase 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Brush 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Bubble 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Buy 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Calculator 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Calendar 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Cancel 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Car key 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\CD 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Clipboard 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Clock 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Comment 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Company 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Compass 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Component 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Computer 16x16 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Copy 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Create 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Cut 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Danger 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Database 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Delete 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Delivery 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Diagram 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Dial 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Disaster 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Display 16x16 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Dollar 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Down 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Download 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Downloads folder 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Earth 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Eject 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\E-mail 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Equipment 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Erase 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Error 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Euro 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Exit 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Expand 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Eye 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Fall 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Fast-forward 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Favourites 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Female 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Female symbol 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Film 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Filter 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Find 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\First 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\First record 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Flag 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Flash drive 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Folder 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Forbidden 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Forward 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Free bsd 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Gift 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Globe 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Go 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Go back 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Go forward 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Good mark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Green bookmark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Green pin 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Green tag 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Hard disk 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Heart 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Help 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Help book 3d 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Help book 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Help symbol 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Hint 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\History 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Home 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Hourglass 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\How-to 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Hungup 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Info 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\In-yang 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Iphone 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Key 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Last 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Last recor 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Left-right 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Lightning 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Liner 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Linux 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\List 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Load 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Lock 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Low rating 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Magic wand 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Mail 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Male 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Male symbol 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Medium rating 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Message 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Mobile-phone 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Modify 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Move 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Movie 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Music 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Mute 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Network connection 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\New 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\New document 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Next 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Next track 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\No 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\No-entry 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Notes 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\OK 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Paste 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Pause 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\People 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Percent 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Person 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Phone 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Phone number 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Pie chart 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Pinion 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Play 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Playback 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Play-music 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Previous 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Previous record 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Print 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Problem 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Question 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Radiation 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Raise 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Record 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Red bookmark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Red mark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Red pin 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Red star 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Red tag 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Redo 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Refresh 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Remove 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Repair 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Report 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Retort 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Rewind 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Sad 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Save 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Schedule 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Script 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Search 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Shield 16x16 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Shopping cart 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Silence 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Smile 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Sound 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Stop 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Stop sign 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Stopwatch 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Sum 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Sync 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Table 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Target 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Taxi 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Terminate 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Text 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Text preview 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Thumbs down 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Thumbs up 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Toolbox 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Top 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Trackback 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Trash 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Tune 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Turn off 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Twitter 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Undo 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Unlock 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Up 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Update 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Up-down 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Upload 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\User group 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\View 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Volume 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Wallet 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Warning 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Wrench 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Yellow bookmark 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Yellow pin 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Yellow tag 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Yes 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\16x16\Zoom 16 x 16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\3d bar chart 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Abort 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\About 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Add 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Anchor 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Application 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Apply 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Back 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Bad mark 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Blue key 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Blue tag 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Boss 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Bottom 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Calculator 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Calendar 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Car key 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\CD 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Clipboard 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Clock 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Close 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Compass 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Component 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Copy 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Create 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Cut 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Danger 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Database 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Delete 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Delivery 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Dial 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Disaster 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Dollar 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Down 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Download 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Eject 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\E-mail 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Erase 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Error 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Euro 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Exit 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Fall 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Fast-forward 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Favourites 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Female 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Filter 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Find 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\First 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\First record 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Flag 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Folder 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Forbidden 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Forward 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Free bsd 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Go 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Go back 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Go forward 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Good-mark 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Green tag 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Heart 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Help 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Help book 3d 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Help book 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Hint 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Home 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\How-to 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Hungup 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Info 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Key 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Last 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Last recor 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Left-right 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Lightning 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Linux 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\List 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Load 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Lock 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Low rating 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Mail 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Male 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Medium rating 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Message 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Mobile-phone 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Modify 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Movie 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Music 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\New 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\New document 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Next 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Next track 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\No 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\No-entry 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Notes 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\OK 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Paste 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Pause 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\People 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Person 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Phone number 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Pie chart 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Pinion 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Play 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Playback 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Play-music 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Previous 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Previous record 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Problem 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Question 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Raise 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Record 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Red mark 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Red star 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Red tag 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Redo 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Refresh 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Remove 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Repair 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Report 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Retort 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Rewind 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Sad 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Save 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Search 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Shopping cart 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Smile 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Sound 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Stop 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Stop sign 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Sync 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Table 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Target 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Taxi 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Terminate 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Text 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Text preview 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Thumbs down 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Thumbs up 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Top 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Turn off 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Undo 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Unlock 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Up 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Update 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Up-down 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Upload 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\User group 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\View 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Warning 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Wrench 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Yes 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\24x24\Zoom 24 x 24.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
