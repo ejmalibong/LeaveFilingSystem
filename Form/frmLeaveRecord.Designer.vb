@@ -47,14 +47,6 @@ Partial Class frmLeaveRecord
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnGo = New System.Windows.Forms.ToolStripButton()
         Me.dgvList = New System.Windows.Forms.DataGridView()
-        Me.grpStatus = New System.Windows.Forms.GroupBox()
-        Me.rdDisapproved = New System.Windows.Forms.RadioButton()
-        Me.rdMyFile = New System.Windows.Forms.RadioButton()
-        Me.rdPending = New System.Windows.Forms.RadioButton()
-        Me.rdApproved = New System.Windows.Forms.RadioButton()
-        Me.btnRefresh = New PinkieControls.ButtonXP()
-        Me.btnDisapprove = New PinkieControls.ButtonXP()
-        Me.btnApprove = New PinkieControls.ButtonXP()
         Me.ColLeaveFileId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColDateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColLeaveTypeId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -66,6 +58,14 @@ Partial Class frmLeaveRecord
         Me.ColReason = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RoutingStatusId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColRoutingStatusName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.grpStatus = New System.Windows.Forms.GroupBox()
+        Me.rdDisapproved = New System.Windows.Forms.RadioButton()
+        Me.rdMyFile = New System.Windows.Forms.RadioButton()
+        Me.rdPending = New System.Windows.Forms.RadioButton()
+        Me.rdApproved = New System.Windows.Forms.RadioButton()
+        Me.btnRefresh = New PinkieControls.ButtonXP()
+        Me.btnDisapprove = New PinkieControls.ButtonXP()
+        Me.btnApprove = New PinkieControls.ButtonXP()
         Me.grpCriteria.SuspendLayout()
         CType(Me.bindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.bindingNavigator.SuspendLayout()
@@ -80,11 +80,11 @@ Partial Class frmLeaveRecord
         Me.btnClose.DefaultScheme = False
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnClose.Hint = "Close leave records"
-        Me.btnClose.Location = New System.Drawing.Point(1324, 518)
+        Me.btnClose.Hint = "Close leave record"
+        Me.btnClose.Location = New System.Drawing.Point(1320, 549)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnClose.Size = New System.Drawing.Size(110, 38)
+        Me.btnClose.Size = New System.Drawing.Size(110, 40)
         Me.btnClose.TabIndex = 155
         Me.btnClose.Text = "Close"
         '
@@ -95,12 +95,12 @@ Partial Class frmLeaveRecord
         Me.btnView.DefaultScheme = False
         Me.btnView.DialogResult = System.Windows.Forms.DialogResult.None
         Me.btnView.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnView.Hint = "Modify record"
+        Me.btnView.Hint = "View or modify record"
         Me.btnView.Image = Global.LeaveFilingSystem.My.Resources.Resources.Modify_16_x_16
-        Me.btnView.Location = New System.Drawing.Point(1139, 518)
+        Me.btnView.Location = New System.Drawing.Point(1134, 549)
         Me.btnView.Name = "btnView"
         Me.btnView.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnView.Size = New System.Drawing.Size(180, 38)
+        Me.btnView.Size = New System.Drawing.Size(180, 40)
         Me.btnView.TabIndex = 153
         Me.btnView.Text = "View / Edit Details"
         '
@@ -113,10 +113,10 @@ Partial Class frmLeaveRecord
         Me.btnApplyLeave.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnApplyLeave.Hint = "File new leave"
         Me.btnApplyLeave.Image = Global.LeaveFilingSystem.My.Resources.Resources.Create_16_x_16
-        Me.btnApplyLeave.Location = New System.Drawing.Point(1004, 518)
+        Me.btnApplyLeave.Location = New System.Drawing.Point(998, 549)
         Me.btnApplyLeave.Name = "btnApplyLeave"
         Me.btnApplyLeave.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnApplyLeave.Size = New System.Drawing.Size(130, 38)
+        Me.btnApplyLeave.Size = New System.Drawing.Size(130, 40)
         Me.btnApplyLeave.TabIndex = 152
         Me.btnApplyLeave.Text = "Apply Leave"
         '
@@ -142,10 +142,10 @@ Partial Class frmLeaveRecord
         Me.bindingNavigator.CountItemFormat = "of "
         Me.bindingNavigator.DeleteItem = Nothing
         Me.bindingNavigator.Dock = System.Windows.Forms.DockStyle.None
-        Me.bindingNavigator.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.bindingNavigator.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.bindingNavigator.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.bindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.txtPageNumber, Me.txtTotalPageNumber, Me.BindingNavigatorSeparator1, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.ToolStripSeparator1, Me.btnGo})
-        Me.bindingNavigator.Location = New System.Drawing.Point(1231, 12)
+        Me.bindingNavigator.Location = New System.Drawing.Point(1237, 12)
         Me.bindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.bindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.bindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
@@ -153,14 +153,14 @@ Partial Class frmLeaveRecord
         Me.bindingNavigator.Name = "bindingNavigator"
         Me.bindingNavigator.PositionItem = Me.txtPageNumber
         Me.bindingNavigator.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.bindingNavigator.Size = New System.Drawing.Size(205, 25)
+        Me.bindingNavigator.Size = New System.Drawing.Size(201, 25)
         Me.bindingNavigator.TabIndex = 165
         Me.bindingNavigator.Text = "PagerPanel"
         '
         'txtTotalPageNumber
         '
         Me.txtTotalPageNumber.Name = "txtTotalPageNumber"
-        Me.txtTotalPageNumber.Size = New System.Drawing.Size(25, 22)
+        Me.txtTotalPageNumber.Size = New System.Drawing.Size(21, 22)
         Me.txtTotalPageNumber.Text = "of "
         Me.txtTotalPageNumber.ToolTipText = "Total number of items"
         '
@@ -244,10 +244,9 @@ Partial Class frmLeaveRecord
         Me.dgvList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.dgvList.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.5!)
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -262,123 +261,9 @@ Partial Class frmLeaveRecord
         Me.dgvList.RowHeadersVisible = False
         Me.dgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
         Me.dgvList.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 11.0!)
-        Me.dgvList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvList.Size = New System.Drawing.Size(1442, 474)
+        Me.dgvList.Size = New System.Drawing.Size(1442, 500)
         Me.dgvList.TabIndex = 158
-        '
-        'grpStatus
-        '
-        Me.grpStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.grpStatus.BackColor = System.Drawing.Color.White
-        Me.grpStatus.Controls.Add(Me.rdDisapproved)
-        Me.grpStatus.Controls.Add(Me.rdMyFile)
-        Me.grpStatus.Controls.Add(Me.rdPending)
-        Me.grpStatus.Controls.Add(Me.rdApproved)
-        Me.grpStatus.Font = New System.Drawing.Font("Verdana", 9.0!)
-        Me.grpStatus.Location = New System.Drawing.Point(8, 512)
-        Me.grpStatus.Margin = New System.Windows.Forms.Padding(0)
-        Me.grpStatus.Name = "grpStatus"
-        Me.grpStatus.Padding = New System.Windows.Forms.Padding(0)
-        Me.grpStatus.Size = New System.Drawing.Size(451, 44)
-        Me.grpStatus.TabIndex = 159
-        Me.grpStatus.TabStop = False
-        '
-        'rdDisapproved
-        '
-        Me.rdDisapproved.AutoSize = True
-        Me.rdDisapproved.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.rdDisapproved.Location = New System.Drawing.Point(9, 15)
-        Me.rdDisapproved.Name = "rdDisapproved"
-        Me.rdDisapproved.Size = New System.Drawing.Size(114, 21)
-        Me.rdDisapproved.TabIndex = 4
-        Me.rdDisapproved.TabStop = True
-        Me.rdDisapproved.Text = "Disapproved"
-        Me.rdDisapproved.UseVisualStyleBackColor = True
-        '
-        'rdMyFile
-        '
-        Me.rdMyFile.AutoSize = True
-        Me.rdMyFile.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.rdMyFile.Location = New System.Drawing.Point(320, 15)
-        Me.rdMyFile.Name = "rdMyFile"
-        Me.rdMyFile.Size = New System.Drawing.Size(126, 21)
-        Me.rdMyFile.TabIndex = 3
-        Me.rdMyFile.TabStop = True
-        Me.rdMyFile.Text = "My Application"
-        Me.rdMyFile.UseVisualStyleBackColor = True
-        '
-        'rdPending
-        '
-        Me.rdPending.AutoSize = True
-        Me.rdPending.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.rdPending.Location = New System.Drawing.Point(226, 15)
-        Me.rdPending.Name = "rdPending"
-        Me.rdPending.Size = New System.Drawing.Size(81, 21)
-        Me.rdPending.TabIndex = 2
-        Me.rdPending.TabStop = True
-        Me.rdPending.Text = "Pending"
-        Me.rdPending.UseVisualStyleBackColor = True
-        '
-        'rdApproved
-        '
-        Me.rdApproved.AutoSize = True
-        Me.rdApproved.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.rdApproved.Location = New System.Drawing.Point(126, 15)
-        Me.rdApproved.Name = "rdApproved"
-        Me.rdApproved.Size = New System.Drawing.Size(94, 21)
-        Me.rdApproved.TabIndex = 1
-        Me.rdApproved.TabStop = True
-        Me.rdApproved.Text = "Approved"
-        Me.rdApproved.UseVisualStyleBackColor = True
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnRefresh.DefaultScheme = False
-        Me.btnRefresh.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnRefresh.Hint = "Refresh"
-        Me.btnRefresh.Image = Global.LeaveFilingSystem.My.Resources.Resources.Refresh_16_x_16
-        Me.btnRefresh.Location = New System.Drawing.Point(464, 518)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnRefresh.Size = New System.Drawing.Size(120, 38)
-        Me.btnRefresh.TabIndex = 160
-        Me.btnRefresh.Text = " Refresh"
-        '
-        'btnDisapprove
-        '
-        Me.btnDisapprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnDisapprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnDisapprove.DefaultScheme = False
-        Me.btnDisapprove.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnDisapprove.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnDisapprove.Hint = "Disapproved selected leave"
-        Me.btnDisapprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Delete_16_x_16
-        Me.btnDisapprove.Location = New System.Drawing.Point(713, 518)
-        Me.btnDisapprove.Name = "btnDisapprove"
-        Me.btnDisapprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnDisapprove.Size = New System.Drawing.Size(120, 38)
-        Me.btnDisapprove.TabIndex = 162
-        Me.btnDisapprove.Text = "Disapprove"
-        '
-        'btnApprove
-        '
-        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnApprove.DefaultScheme = False
-        Me.btnApprove.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnApprove.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnApprove.Hint = "Approve selected leave"
-        Me.btnApprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Apply_16_x_16
-        Me.btnApprove.Location = New System.Drawing.Point(588, 518)
-        Me.btnApprove.Name = "btnApprove"
-        Me.btnApprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnApprove.Size = New System.Drawing.Size(120, 38)
-        Me.btnApprove.TabIndex = 161
-        Me.btnApprove.Text = " Approve"
         '
         'ColLeaveFileId
         '
@@ -396,7 +281,7 @@ Partial Class frmLeaveRecord
         Me.ColDateCreated.HeaderText = "Date Created"
         Me.ColDateCreated.Name = "ColDateCreated"
         Me.ColDateCreated.ReadOnly = True
-        Me.ColDateCreated.Width = 180
+        Me.ColDateCreated.Width = 150
         '
         'ColLeaveTypeId
         '
@@ -412,7 +297,7 @@ Partial Class frmLeaveRecord
         Me.ColLeaveTypeName.HeaderText = "Leave Type"
         Me.ColLeaveTypeName.Name = "ColLeaveTypeName"
         Me.ColLeaveTypeName.ReadOnly = True
-        Me.ColLeaveTypeName.Width = 140
+        Me.ColLeaveTypeName.Width = 130
         '
         'ColEmployeeName
         '
@@ -420,7 +305,7 @@ Partial Class frmLeaveRecord
         Me.ColEmployeeName.HeaderText = "Name"
         Me.ColEmployeeName.Name = "ColEmployeeName"
         Me.ColEmployeeName.ReadOnly = True
-        Me.ColEmployeeName.Width = 260
+        Me.ColEmployeeName.Width = 270
         '
         'ColStartDate
         '
@@ -458,7 +343,7 @@ Partial Class frmLeaveRecord
         Me.ColReason.HeaderText = "Reason"
         Me.ColReason.Name = "ColReason"
         Me.ColReason.ReadOnly = True
-        Me.ColReason.Width = 285
+        Me.ColReason.Width = 300
         '
         'RoutingStatusId
         '
@@ -478,13 +363,125 @@ Partial Class frmLeaveRecord
         Me.ColRoutingStatusName.ReadOnly = True
         Me.ColRoutingStatusName.Width = 300
         '
+        'grpStatus
+        '
+        Me.grpStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.grpStatus.BackColor = System.Drawing.Color.White
+        Me.grpStatus.Controls.Add(Me.rdDisapproved)
+        Me.grpStatus.Controls.Add(Me.rdMyFile)
+        Me.grpStatus.Controls.Add(Me.rdPending)
+        Me.grpStatus.Controls.Add(Me.rdApproved)
+        Me.grpStatus.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.grpStatus.Location = New System.Drawing.Point(11, 541)
+        Me.grpStatus.Margin = New System.Windows.Forms.Padding(0)
+        Me.grpStatus.Name = "grpStatus"
+        Me.grpStatus.Padding = New System.Windows.Forms.Padding(0)
+        Me.grpStatus.Size = New System.Drawing.Size(451, 48)
+        Me.grpStatus.TabIndex = 159
+        Me.grpStatus.TabStop = False
+        '
+        'rdDisapproved
+        '
+        Me.rdDisapproved.AutoSize = True
+        Me.rdDisapproved.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.rdDisapproved.Location = New System.Drawing.Point(9, 15)
+        Me.rdDisapproved.Name = "rdDisapproved"
+        Me.rdDisapproved.Size = New System.Drawing.Size(112, 24)
+        Me.rdDisapproved.TabIndex = 4
+        Me.rdDisapproved.TabStop = True
+        Me.rdDisapproved.Text = "Disapproved"
+        Me.rdDisapproved.UseVisualStyleBackColor = True
+        '
+        'rdMyFile
+        '
+        Me.rdMyFile.AutoSize = True
+        Me.rdMyFile.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.rdMyFile.Location = New System.Drawing.Point(320, 15)
+        Me.rdMyFile.Name = "rdMyFile"
+        Me.rdMyFile.Size = New System.Drawing.Size(128, 24)
+        Me.rdMyFile.TabIndex = 3
+        Me.rdMyFile.TabStop = True
+        Me.rdMyFile.Text = "My Application"
+        Me.rdMyFile.UseVisualStyleBackColor = True
+        '
+        'rdPending
+        '
+        Me.rdPending.AutoSize = True
+        Me.rdPending.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.rdPending.Location = New System.Drawing.Point(226, 15)
+        Me.rdPending.Name = "rdPending"
+        Me.rdPending.Size = New System.Drawing.Size(80, 24)
+        Me.rdPending.TabIndex = 2
+        Me.rdPending.TabStop = True
+        Me.rdPending.Text = "Pending"
+        Me.rdPending.UseVisualStyleBackColor = True
+        '
+        'rdApproved
+        '
+        Me.rdApproved.AutoSize = True
+        Me.rdApproved.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.rdApproved.Location = New System.Drawing.Point(126, 15)
+        Me.rdApproved.Name = "rdApproved"
+        Me.rdApproved.Size = New System.Drawing.Size(93, 24)
+        Me.rdApproved.TabIndex = 1
+        Me.rdApproved.TabStop = True
+        Me.rdApproved.Text = "Approved"
+        Me.rdApproved.UseVisualStyleBackColor = True
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnRefresh.DefaultScheme = False
+        Me.btnRefresh.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnRefresh.Hint = "Refresh list"
+        Me.btnRefresh.Image = Global.LeaveFilingSystem.My.Resources.Resources.Refresh_16_x_16
+        Me.btnRefresh.Location = New System.Drawing.Point(468, 549)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnRefresh.Size = New System.Drawing.Size(120, 40)
+        Me.btnRefresh.TabIndex = 160
+        Me.btnRefresh.Text = " Refresh"
+        '
+        'btnDisapprove
+        '
+        Me.btnDisapprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnDisapprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnDisapprove.DefaultScheme = False
+        Me.btnDisapprove.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnDisapprove.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnDisapprove.Hint = "Disapproved selected record"
+        Me.btnDisapprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Delete_16_x_16
+        Me.btnDisapprove.Location = New System.Drawing.Point(720, 549)
+        Me.btnDisapprove.Name = "btnDisapprove"
+        Me.btnDisapprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnDisapprove.Size = New System.Drawing.Size(120, 40)
+        Me.btnDisapprove.TabIndex = 162
+        Me.btnDisapprove.Text = "Disapprove"
+        '
+        'btnApprove
+        '
+        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnApprove.DefaultScheme = False
+        Me.btnApprove.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnApprove.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnApprove.Hint = "Approve selected record"
+        Me.btnApprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Apply_16_x_16
+        Me.btnApprove.Location = New System.Drawing.Point(594, 549)
+        Me.btnApprove.Name = "btnApprove"
+        Me.btnApprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnApprove.Size = New System.Drawing.Size(120, 40)
+        Me.btnApprove.TabIndex = 161
+        Me.btnApprove.Text = " Approve"
+        '
         'frmLeaveRecord
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(1442, 584)
-        Me.ControlBox = False
+        Me.ClientSize = New System.Drawing.Size(1442, 600)
         Me.Controls.Add(Me.btnDisapprove)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnRefresh)
@@ -495,17 +492,15 @@ Partial Class frmLeaveRecord
         Me.Controls.Add(Me.btnApplyLeave)
         Me.Controls.Add(Me.grpStatus)
         Me.DoubleBuffered = True
-        Me.Font = New System.Drawing.Font("Verdana", 8.5!)
+        Me.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.KeyPreview = True
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(1300, 600)
         Me.Name = "frmLeaveRecord"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Leave Records"
-        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.grpCriteria.ResumeLayout(False)
         Me.grpCriteria.PerformLayout()
         CType(Me.bindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()

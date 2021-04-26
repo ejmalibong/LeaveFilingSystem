@@ -1,9 +1,11 @@
 ﻿Imports System.Data.SqlClient
 Imports BlackCoffeeLibrary.BlackCoffee
+Imports System.Deployment.Application
 
 Public Class frmLogin
     Private connection As New clsConnection
     Private dbLeaveFiling As New SqlDbMethod(connection.LocalConnection)
+    Private dbJeonsoft As New SqlDbMethod(connection.JeonsoftConnection)
     Private main As New Main
 
     Private employeeId As Integer = 0
@@ -20,6 +22,8 @@ Public Class frmLogin
     Private emailAddress As String = String.Empty
     Private mobileNumber As String = String.Empty
     Private nbcEmailAddress As String = String.Empty
+
+    Private arrSplitted() As String
 
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'sir alvin
@@ -97,13 +101,39 @@ Public Class frmLogin
         'sir vincent
         'txtEmployeeId.Text = "2011-002"
 
-        Application.EnableVisualStyles()
+        'cnc operator
+        'txtEmployeeId.Text = "1902-020"
+
+        If ApplicationDeployment.IsNetworkDeployed Then
+            lblVersion.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString
+        Else
+            lblVersion.Text = Application.ProductVersion.ToString
+        End If
+
         Me.ActiveControl = txtEmployeeId
     End Sub
 
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
+        arrSplitted = Split(txtEmployeeId.Text.Trim, " ", 2)
+        ValidateId(arrSplitted(0).ToString)
+    End Sub
+
+    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+        Application.Exit()
+    End Sub
+
+    Private Sub txtEmployeeId_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmployeeId.KeyDown
+        If e.KeyCode.Equals(Keys.Enter) Then
+            e.Handled = True
+
+            arrSplitted = Split(txtEmployeeId.Text.Trim, " ", 2)
+            ValidateId(arrSplitted(0).ToString)
+        End If
+    End Sub
+
+    Private Sub ValidateId(ByVal _employeeCode As String)
         If String.IsNullOrEmpty(txtEmployeeId.Text.Trim) Then
-            MessageBox.Show("Please enter your employee ID.", "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            MessageBox.Show("Please enter your employee ID.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             txtEmployeeId.Focus()
             Return
         End If
@@ -111,9 +141,9 @@ Public Class frmLogin
         Dim _count As Integer = 0
         Dim _prmEmpCode1(0) As SqlParameter
         _prmEmpCode1(0) = New SqlParameter("@EmployeeCode", SqlDbType.VarChar)
-        _prmEmpCode1(0).Value = txtEmployeeId.Text.Trim
+        _prmEmpCode1(0).Value = _employeeCode
 
-        _count = dbLeaveFiling.ExecuteScalar("RdEmployee", CommandType.StoredProcedure, _prmEmpCode1)
+        _count = dbJeonsoft.ExecuteScalar("SELECT COUNT(Id) FROM dbo.tblEmployees WHERE TRIM(EmployeeCode) = @EmployeeCode", CommandType.Text, _prmEmpCode1)
 
         If _count > 0 Then
             Dim _prmEmpCode2(0) As SqlParameter
@@ -142,7 +172,7 @@ Public Class frmLogin
                 If Not _reader.Item("MobileNo") Is DBNull.Value Then
                     mobileNumber = _reader.Item("MobileNo")
                 Else
-                    mobileNumber = 0
+                    mobileNumber = String.Empty
                 End If
 
                 If Not _reader.Item("NbcEmailAddress") Is DBNull.Value Then
@@ -167,13 +197,9 @@ Public Class frmLogin
             txtEmployeeId.Clear()
         Else
             MessageBox.Show("Employee not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            txtEmployeeId.Clear()
             txtEmployeeId.Focus()
+            txtEmployeeId.Select(txtEmployeeId.Text.Trim.Length, 0)
         End If
-    End Sub
-
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        Application.Exit()
     End Sub
 
 End Class

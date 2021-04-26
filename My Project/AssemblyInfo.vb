@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("Leave Application System")> 
 <Assembly: AssemblyCompany("NBC Philippines Car Technology Corporation")> 
 <Assembly: AssemblyProduct("Leave Application System")> 
-<Assembly: AssemblyCopyright("Copyright ©  2021")> 
+<Assembly: AssemblyCopyright("Copyright © 2021")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>

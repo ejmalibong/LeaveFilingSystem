@@ -24,13 +24,12 @@ Partial Class frmHrRecord
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmHrRecord))
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.btnClose = New PinkieControls.ButtonXP()
         Me.btnView = New PinkieControls.ButtonXP()
         Me.grpCriteria = New System.Windows.Forms.GroupBox()
@@ -55,8 +54,10 @@ Partial Class frmHrRecord
         Me.rdApproved = New System.Windows.Forms.RadioButton()
         Me.ColLeaveFileId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColDateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColDepartmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColLeaveTypeId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColLeaveTypeName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ColEmploymentType = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColStartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColEndDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -77,12 +78,12 @@ Partial Class frmHrRecord
         Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnClose.DefaultScheme = False
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.btnClose.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnClose.Hint = "Close Leave Records"
-        Me.btnClose.Location = New System.Drawing.Point(1166, 519)
+        Me.btnClose.Location = New System.Drawing.Point(1324, 549)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnClose.Size = New System.Drawing.Size(110, 36)
+        Me.btnClose.Size = New System.Drawing.Size(110, 40)
         Me.btnClose.TabIndex = 155
         Me.btnClose.Text = "Close"
         '
@@ -92,14 +93,14 @@ Partial Class frmHrRecord
         Me.btnView.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnView.DefaultScheme = False
         Me.btnView.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnView.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.btnView.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnView.Hint = "View / Edit Record"
-        Me.btnView.Location = New System.Drawing.Point(1000, 519)
+        Me.btnView.Location = New System.Drawing.Point(1168, 549)
         Me.btnView.Name = "btnView"
         Me.btnView.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnView.Size = New System.Drawing.Size(160, 36)
+        Me.btnView.Size = New System.Drawing.Size(150, 40)
         Me.btnView.TabIndex = 153
-        Me.btnView.Text = "    View Details"
+        Me.btnView.Text = "View Details"
         '
         'grpCriteria
         '
@@ -110,7 +111,7 @@ Partial Class frmHrRecord
         Me.grpCriteria.Location = New System.Drawing.Point(1, -6)
         Me.grpCriteria.Margin = New System.Windows.Forms.Padding(0)
         Me.grpCriteria.Name = "grpCriteria"
-        Me.grpCriteria.Size = New System.Drawing.Size(1282, 44)
+        Me.grpCriteria.Size = New System.Drawing.Size(1440, 44)
         Me.grpCriteria.TabIndex = 157
         Me.grpCriteria.TabStop = False
         '
@@ -126,7 +127,7 @@ Partial Class frmHrRecord
         Me.bindingNavigator.Font = New System.Drawing.Font("Segoe UI", 9.0!)
         Me.bindingNavigator.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.bindingNavigator.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BindingNavigatorMoveFirstItem, Me.BindingNavigatorMovePreviousItem, Me.BindingNavigatorSeparator, Me.txtPageNumber, Me.BindingNavigatorSeparator1, Me.txtTotalPageNumber, Me.BindingNavigatorMoveNextItem, Me.BindingNavigatorMoveLastItem, Me.ToolStripSeparator1, Me.btnGo})
-        Me.bindingNavigator.Location = New System.Drawing.Point(1078, 12)
+        Me.bindingNavigator.Location = New System.Drawing.Point(1236, 12)
         Me.bindingNavigator.MoveFirstItem = Me.BindingNavigatorMoveFirstItem
         Me.bindingNavigator.MoveLastItem = Me.BindingNavigatorMoveLastItem
         Me.bindingNavigator.MoveNextItem = Me.BindingNavigatorMoveNextItem
@@ -225,27 +226,25 @@ Partial Class frmHrRecord
         Me.dgvList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Verdana", 8.5!)
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.dgvList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle8
-        Me.dgvList.ColumnHeadersHeight = 25
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.dgvList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        Me.dgvList.ColumnHeadersHeight = 26
         Me.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        Me.dgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColLeaveFileId, Me.ColDateCreated, Me.ColLeaveTypeId, Me.ColLeaveTypeName, Me.ColName, Me.ColStartDate, Me.ColEndDate, Me.ColQuantity, Me.ColReason, Me.RoutingStatusId, Me.ColRoutingStatusName})
+        Me.dgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColLeaveFileId, Me.ColDateCreated, Me.ColDepartmentName, Me.ColLeaveTypeId, Me.ColLeaveTypeName, Me.ColEmploymentType, Me.ColName, Me.ColStartDate, Me.ColEndDate, Me.ColQuantity, Me.ColReason, Me.RoutingStatusId, Me.ColRoutingStatusName})
         Me.dgvList.Location = New System.Drawing.Point(0, 38)
         Me.dgvList.MultiSelect = False
         Me.dgvList.Name = "dgvList"
         Me.dgvList.ReadOnly = True
         Me.dgvList.RowHeadersVisible = False
         Me.dgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing
-        Me.dgvList.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dgvList.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.dgvList.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Segoe UI", 11.0!)
         Me.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
-        Me.dgvList.Size = New System.Drawing.Size(1284, 475)
+        Me.dgvList.Size = New System.Drawing.Size(1442, 500)
         Me.dgvList.TabIndex = 158
         '
         'btnRefresh
@@ -254,13 +253,13 @@ Partial Class frmHrRecord
         Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnRefresh.DefaultScheme = False
         Me.btnRefresh.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnRefresh.Hint = "Refresh"
         Me.btnRefresh.Image = Global.LeaveFilingSystem.My.Resources.Resources.Refresh_16_x_16
-        Me.btnRefresh.Location = New System.Drawing.Point(318, 519)
+        Me.btnRefresh.Location = New System.Drawing.Point(327, 548)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnRefresh.Size = New System.Drawing.Size(110, 36)
+        Me.btnRefresh.Size = New System.Drawing.Size(120, 40)
         Me.btnRefresh.TabIndex = 160
         Me.btnRefresh.Text = " Refresh"
         '
@@ -270,13 +269,13 @@ Partial Class frmHrRecord
         Me.btnDisapprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnDisapprove.DefaultScheme = False
         Me.btnDisapprove.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnDisapprove.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.btnDisapprove.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnDisapprove.Hint = "Disapprove Leave"
         Me.btnDisapprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Delete_16_x_16
-        Me.btnDisapprove.Location = New System.Drawing.Point(550, 519)
+        Me.btnDisapprove.Location = New System.Drawing.Point(579, 548)
         Me.btnDisapprove.Name = "btnDisapprove"
         Me.btnDisapprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnDisapprove.Size = New System.Drawing.Size(110, 36)
+        Me.btnDisapprove.Size = New System.Drawing.Size(120, 40)
         Me.btnDisapprove.TabIndex = 162
         Me.btnDisapprove.Text = "Disapprove"
         '
@@ -286,13 +285,13 @@ Partial Class frmHrRecord
         Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnApprove.DefaultScheme = False
         Me.btnApprove.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnApprove.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.btnApprove.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnApprove.Hint = "Approve Leave"
         Me.btnApprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Apply_16_x_16
-        Me.btnApprove.Location = New System.Drawing.Point(434, 519)
+        Me.btnApprove.Location = New System.Drawing.Point(453, 548)
         Me.btnApprove.Name = "btnApprove"
         Me.btnApprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnApprove.Size = New System.Drawing.Size(110, 36)
+        Me.btnApprove.Size = New System.Drawing.Size(120, 40)
         Me.btnApprove.TabIndex = 161
         Me.btnApprove.Text = " Approve"
         '
@@ -303,20 +302,22 @@ Partial Class frmHrRecord
         Me.grpStatus.Controls.Add(Me.rdDisapproved)
         Me.grpStatus.Controls.Add(Me.rdPending)
         Me.grpStatus.Controls.Add(Me.rdApproved)
-        Me.grpStatus.Location = New System.Drawing.Point(7, 513)
+        Me.grpStatus.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.grpStatus.Location = New System.Drawing.Point(9, 542)
         Me.grpStatus.Margin = New System.Windows.Forms.Padding(0)
         Me.grpStatus.Name = "grpStatus"
         Me.grpStatus.Padding = New System.Windows.Forms.Padding(0)
-        Me.grpStatus.Size = New System.Drawing.Size(306, 42)
+        Me.grpStatus.Size = New System.Drawing.Size(313, 46)
         Me.grpStatus.TabIndex = 163
         Me.grpStatus.TabStop = False
         '
         'rdDisapproved
         '
         Me.rdDisapproved.AutoSize = True
+        Me.rdDisapproved.Font = New System.Drawing.Font("Verdana", 10.0!)
         Me.rdDisapproved.Location = New System.Drawing.Point(9, 15)
         Me.rdDisapproved.Name = "rdDisapproved"
-        Me.rdDisapproved.Size = New System.Drawing.Size(104, 18)
+        Me.rdDisapproved.Size = New System.Drawing.Size(114, 21)
         Me.rdDisapproved.TabIndex = 4
         Me.rdDisapproved.TabStop = True
         Me.rdDisapproved.Text = "Disapproved"
@@ -325,9 +326,10 @@ Partial Class frmHrRecord
         'rdPending
         '
         Me.rdPending.AutoSize = True
-        Me.rdPending.Location = New System.Drawing.Point(222, 15)
+        Me.rdPending.Font = New System.Drawing.Font("Verdana", 10.0!)
+        Me.rdPending.Location = New System.Drawing.Point(229, 15)
         Me.rdPending.Name = "rdPending"
-        Me.rdPending.Size = New System.Drawing.Size(76, 18)
+        Me.rdPending.Size = New System.Drawing.Size(81, 21)
         Me.rdPending.TabIndex = 2
         Me.rdPending.TabStop = True
         Me.rdPending.Text = "Pending"
@@ -336,9 +338,10 @@ Partial Class frmHrRecord
         'rdApproved
         '
         Me.rdApproved.AutoSize = True
-        Me.rdApproved.Location = New System.Drawing.Point(124, 15)
+        Me.rdApproved.Font = New System.Drawing.Font("Verdana", 10.0!)
+        Me.rdApproved.Location = New System.Drawing.Point(129, 15)
         Me.rdApproved.Name = "rdApproved"
-        Me.rdApproved.Size = New System.Drawing.Size(85, 18)
+        Me.rdApproved.Size = New System.Drawing.Size(94, 21)
         Me.rdApproved.TabIndex = 1
         Me.rdApproved.TabStop = True
         Me.rdApproved.Text = "Approved"
@@ -355,12 +358,20 @@ Partial Class frmHrRecord
         'ColDateCreated
         '
         Me.ColDateCreated.DataPropertyName = "DateCreated"
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.ColDateCreated.DefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.ColDateCreated.DefaultCellStyle = DataGridViewCellStyle2
         Me.ColDateCreated.HeaderText = "Date Created"
         Me.ColDateCreated.Name = "ColDateCreated"
         Me.ColDateCreated.ReadOnly = True
-        Me.ColDateCreated.Width = 120
+        Me.ColDateCreated.Width = 150
+        '
+        'ColDepartmentName
+        '
+        Me.ColDepartmentName.DataPropertyName = "DepartmentName"
+        Me.ColDepartmentName.HeaderText = "Department"
+        Me.ColDepartmentName.Name = "ColDepartmentName"
+        Me.ColDepartmentName.ReadOnly = True
+        Me.ColDepartmentName.Width = 120
         '
         'ColLeaveTypeId
         '
@@ -376,7 +387,14 @@ Partial Class frmHrRecord
         Me.ColLeaveTypeName.HeaderText = "Leave Type"
         Me.ColLeaveTypeName.Name = "ColLeaveTypeName"
         Me.ColLeaveTypeName.ReadOnly = True
-        Me.ColLeaveTypeName.Width = 120
+        Me.ColLeaveTypeName.Width = 130
+        '
+        'ColEmploymentType
+        '
+        Me.ColEmploymentType.DataPropertyName = "EmploymentTypeName"
+        Me.ColEmploymentType.HeaderText = "Emp. Type"
+        Me.ColEmploymentType.Name = "ColEmploymentType"
+        Me.ColEmploymentType.ReadOnly = True
         '
         'ColName
         '
@@ -384,47 +402,45 @@ Partial Class frmHrRecord
         Me.ColName.HeaderText = "Name"
         Me.ColName.Name = "ColName"
         Me.ColName.ReadOnly = True
-        Me.ColName.Width = 240
+        Me.ColName.Width = 270
         '
         'ColStartDate
         '
         Me.ColStartDate.DataPropertyName = "StartDate"
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ColStartDate.DefaultCellStyle = DataGridViewCellStyle10
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColStartDate.DefaultCellStyle = DataGridViewCellStyle3
         Me.ColStartDate.HeaderText = "From"
         Me.ColStartDate.Name = "ColStartDate"
         Me.ColStartDate.ReadOnly = True
-        Me.ColStartDate.Width = 90
         '
         'ColEndDate
         '
         Me.ColEndDate.DataPropertyName = "EndDate"
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ColEndDate.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColEndDate.DefaultCellStyle = DataGridViewCellStyle4
         Me.ColEndDate.HeaderText = "To"
         Me.ColEndDate.Name = "ColEndDate"
         Me.ColEndDate.ReadOnly = True
-        Me.ColEndDate.Width = 90
         '
         'ColQuantity
         '
         Me.ColQuantity.DataPropertyName = "Quantity"
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.ColQuantity.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.ColQuantity.DefaultCellStyle = DataGridViewCellStyle5
         Me.ColQuantity.HeaderText = "Qty"
         Me.ColQuantity.Name = "ColQuantity"
         Me.ColQuantity.ReadOnly = True
-        Me.ColQuantity.Width = 50
+        Me.ColQuantity.Width = 55
         '
         'ColReason
         '
         Me.ColReason.DataPropertyName = "Reason"
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.ColReason.DefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.ColReason.DefaultCellStyle = DataGridViewCellStyle6
         Me.ColReason.HeaderText = "Reason"
         Me.ColReason.Name = "ColReason"
         Me.ColReason.ReadOnly = True
-        Me.ColReason.Width = 265
+        Me.ColReason.Width = 300
         '
         'RoutingStatusId
         '
@@ -437,20 +453,17 @@ Partial Class frmHrRecord
         'ColRoutingStatusName
         '
         Me.ColRoutingStatusName.DataPropertyName = "RoutingStatusName"
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.ColRoutingStatusName.DefaultCellStyle = DataGridViewCellStyle14
         Me.ColRoutingStatusName.HeaderText = "Status"
         Me.ColRoutingStatusName.Name = "ColRoutingStatusName"
         Me.ColRoutingStatusName.ReadOnly = True
-        Me.ColRoutingStatusName.Width = 280
+        Me.ColRoutingStatusName.Width = 300
         '
         'frmHrRecord
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(1284, 561)
-        Me.Controls.Add(Me.grpStatus)
+        Me.ClientSize = New System.Drawing.Size(1442, 600)
         Me.Controls.Add(Me.btnDisapprove)
         Me.Controls.Add(Me.btnApprove)
         Me.Controls.Add(Me.btnRefresh)
@@ -458,16 +471,16 @@ Partial Class frmHrRecord
         Me.Controls.Add(Me.grpCriteria)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnView)
+        Me.Controls.Add(Me.grpStatus)
         Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Verdana", 8.5!)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.KeyPreview = True
-        Me.MaximizeBox = False
-        Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(1300, 600)
         Me.Name = "frmHrRecord"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "HR Records"
         Me.grpCriteria.ResumeLayout(False)
         Me.grpCriteria.PerformLayout()
@@ -504,8 +517,10 @@ Partial Class frmHrRecord
     Friend WithEvents rdApproved As System.Windows.Forms.RadioButton
     Friend WithEvents ColLeaveFileId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColDateCreated As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColDepartmentName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColLeaveTypeId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColLeaveTypeName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents ColEmploymentType As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColStartDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColEndDate As System.Windows.Forms.DataGridViewTextBoxColumn

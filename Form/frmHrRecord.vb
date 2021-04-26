@@ -20,19 +20,19 @@ Public Class frmHrRecord
     Private adpLeaveFiling As New LeaveFilingTableAdapter
     Private dtLeaveFiling As New LeaveFilingDataTable
     Private bsLeaveFiling As New BindingSource
-    'constructor
-    Private employeeId As Integer = 0
-    Private employmentTypeId As Integer = 0
-    Private positionId As Integer = 0
-    Private teamId As Integer = 0
-    Private departmentId As Integer = 0
-    'paging
+    'pagination
     Private pageSize As Integer
     Private pageIndex As Integer
     Private totalCount As Integer
     Private pageCount As Integer
     Private indexScroll As Integer = 0
     Private indexPosition As Integer = 0
+
+    Private employeeId As Integer = 0
+    Private employmentTypeId As Integer = 0
+    Private positionId As Integer = 0
+    Private teamId As Integer = 0
+    Private departmentId As Integer = 0
 
     Public Sub New(ByVal _employeeId As Integer, ByVal _positionId As Integer, ByVal _departmentId As Integer, ByVal _teamId As Integer, ByVal _employmentTypeId As Integer)
 
@@ -58,10 +58,9 @@ Public Class frmHrRecord
 
         main.EnableDoubleBuffered(dgvList)
         Me.ActiveControl = dgvList
-    End Sub
 
-    Private Sub frmHrList_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
-        main.FormTrap(Me)
+        Me.dgvList.Columns(10).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvList.Columns(12).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
     Private Sub frmHrList_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
@@ -135,12 +134,16 @@ Public Class frmHrRecord
                 Dim _leaveFilingRow As LeaveFilingRow = Me.dsLeaveFiling.LeaveFiling.FindByLeaveFileId(_leaveFileId)
 
                 With _leaveFilingRow
-                    .RoutingStatusId = 1
+                    If .RoutingStatusId = 2 Then
+                        .RoutingStatusId = 1
+                    End If
+
+                    .IsEncoded = True
                 End With
 
                 Me.adpLeaveFiling.Update(Me.dsLeaveFiling.LeaveFiling)
                 RefreshValues()
-            End If   
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -148,7 +151,22 @@ Public Class frmHrRecord
 
     Private Sub btnDisapprove_Click(sender As Object, e As EventArgs) Handles btnDisapprove.Click
         Try
-           
+            If Me.dgvList.SelectedCells.Count > 0 Then
+                Dim _leaveFileId As Integer = CType(Me.bsLeaveFiling.Current, DataRowView).Item("LeaveFileId")
+                Me.adpLeaveFiling.FillByLeaveFileId(Me.dsLeaveFiling.LeaveFiling, _leaveFileId)
+                Dim _leaveFilingRow As LeaveFilingRow = Me.dsLeaveFiling.LeaveFiling.FindByLeaveFileId(_leaveFileId)
+
+                With _leaveFilingRow
+                    If .RoutingStatusId = 1 Then
+                        .RoutingStatusId = 2
+                    End If
+
+                    .IsEncoded = False
+                End With
+
+                Me.adpLeaveFiling.Update(Me.dsLeaveFiling.LeaveFiling)
+                RefreshValues()
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -211,11 +229,11 @@ Public Class frmHrRecord
             totalCount = 0
 
             If rdPending.Checked = True Then
-                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, 2)
+                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing)
             ElseIf rdApproved.Checked = True Then
-                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, 1)
+                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1)
             ElseIf rdDisapproved.Checked = True Then
-                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, 6)
+                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7)
             End If
 
             Me.bsLeaveFiling.DataSource = Me.dsLeaveFiling

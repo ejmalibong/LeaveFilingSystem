@@ -28,6 +28,7 @@ Partial Class frmLogin
         Me.btnClose = New PinkieControls.ButtonXP()
         Me.lblCaption = New System.Windows.Forms.Label()
         Me.picLogo = New System.Windows.Forms.PictureBox()
+        Me.lblVersion = New System.Windows.Forms.Label()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -46,21 +47,21 @@ Partial Class frmLogin
         Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnLogin.DefaultScheme = True
         Me.btnLogin.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnLogin.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnLogin.Font = New System.Drawing.Font("Verdana", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.Hint = "Login"
         Me.btnLogin.Location = New System.Drawing.Point(266, 99)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Scheme = PinkieControls.ButtonXP.Schemes.Blue
         Me.btnLogin.Size = New System.Drawing.Size(110, 36)
         Me.btnLogin.TabIndex = 91
-        Me.btnLogin.Text = "  Login"
+        Me.btnLogin.Text = "Login"
         '
         'btnClose
         '
         Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnClose.DefaultScheme = True
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnClose.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClose.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnClose.Hint = "Close"
         Me.btnClose.Location = New System.Drawing.Point(382, 99)
         Me.btnClose.Name = "btnClose"
@@ -72,9 +73,10 @@ Partial Class frmLogin
         'lblCaption
         '
         Me.lblCaption.AutoSize = True
-        Me.lblCaption.Location = New System.Drawing.Point(226, 32)
+        Me.lblCaption.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCaption.Location = New System.Drawing.Point(226, 30)
         Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.Size = New System.Drawing.Size(86, 19)
+        Me.lblCaption.Size = New System.Drawing.Size(94, 20)
         Me.lblCaption.TabIndex = 93
         Me.lblCaption.Text = "Employee ID"
         '
@@ -90,6 +92,18 @@ Partial Class frmLogin
         Me.picLogo.TabIndex = 95
         Me.picLogo.TabStop = False
         '
+        'lblVersion
+        '
+        Me.lblVersion.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblVersion.AutoSize = True
+        Me.lblVersion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblVersion.ForeColor = System.Drawing.SystemColors.ActiveCaption
+        Me.lblVersion.Location = New System.Drawing.Point(451, 189)
+        Me.lblVersion.Name = "lblVersion"
+        Me.lblVersion.Size = New System.Drawing.Size(45, 15)
+        Me.lblVersion.TabIndex = 97
+        Me.lblVersion.Text = "version"
+        '
         'frmLogin
         '
         Me.AcceptButton = Me.btnLogin
@@ -97,19 +111,20 @@ Partial Class frmLogin
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.btnClose
         Me.ClientSize = New System.Drawing.Size(504, 211)
+        Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.picLogo)
         Me.Controls.Add(Me.lblCaption)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.txtEmployeeId)
-        Me.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.Name = "frmLogin"
         Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "SL/VL Application"
+        Me.Text = "Leave Application"
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
@@ -120,4 +135,5 @@ Partial Class frmLogin
     Friend WithEvents btnClose As PinkieControls.ButtonXP
     Friend WithEvents lblCaption As System.Windows.Forms.Label
     Friend WithEvents picLogo As System.Windows.Forms.PictureBox
+    Friend WithEvents lblVersion As System.Windows.Forms.Label
 End Class

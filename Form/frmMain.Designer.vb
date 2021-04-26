@@ -31,6 +31,7 @@ Partial Class frmMain
         Me.FileToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatetimeToolStripMenuItem = New System.Windows.Forms.ToolStripLabel()
         Me.UserItemToolStripMenuItem = New System.Windows.Forms.ToolStripLabel()
@@ -47,7 +48,7 @@ Partial Class frmMain
         'mnuMain
         '
         Me.mnuMain.BackColor = System.Drawing.Color.White
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.WindowToolStripMenuItem, Me.DatetimeToolStripMenuItem, Me.UserItemToolStripMenuItem, Me.UsernameToolStripMenuItem})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.WindowToolStripMenuItem, Me.DatetimeToolStripMenuItem, Me.UserItemToolStripMenuItem, Me.UsernameToolStripMenuItem})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.mnuMain.Name = "mnuMain"
@@ -89,6 +90,12 @@ Partial Class frmMain
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
+        '
+        'ReportsToolStripMenuItem
+        '
+        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
+        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
+        Me.ReportsToolStripMenuItem.Text = "Reports"
         '
         'WindowToolStripMenuItem
         '
@@ -148,7 +155,7 @@ Partial Class frmMain
         'StatusToolStripStatusLabel
         '
         Me.StatusToolStripStatusLabel.Name = "StatusToolStripStatusLabel"
-        Me.StatusToolStripStatusLabel.Size = New System.Drawing.Size(522, 17)
+        Me.StatusToolStripStatusLabel.Size = New System.Drawing.Size(553, 17)
         Me.StatusToolStripStatusLabel.Spring = True
         Me.StatusToolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -162,16 +169,16 @@ Partial Class frmMain
         Me.ClientSize = New System.Drawing.Size(684, 261)
         Me.Controls.Add(Me.stsMain)
         Me.Controls.Add(Me.mnuMain)
-        Me.Font = New System.Drawing.Font("Segoe UI", 10!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0,Byte))
+        Me.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-        Me.Icon = CType(resources.GetObject("$this.Icon"),System.Drawing.Icon)
-        Me.IsMdiContainer = true
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IsMdiContainer = True
         Me.MainMenuStrip = Me.mnuMain
         Me.Name = "frmMain"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = " SL/VL Application"
+        Me.Text = "Leave Application"
         Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
-        Me.mnuMain.ResumeLayout(false)
+        Me.mnuMain.ResumeLayout(False)
         Me.mnuMain.PerformLayout
         Me.stsMain.ResumeLayout(false)
         Me.stsMain.PerformLayout
@@ -195,4 +202,5 @@ End Sub
     Friend WithEvents SectionToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents HrListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents StatusToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
+    Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class
