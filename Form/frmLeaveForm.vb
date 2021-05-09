@@ -15,26 +15,22 @@ Public Class frmLeaveForm
     Private main As New Main
     'server datetime
     Private serverDate As DateTime = dbLeaveFiling.GetServerDate
-    'dataset
+    'data objects
     Private dsLeaveFiling As New dsLeaveFiling
     Private dsJeonsoft As New dsJeonsoft
-    'adapters
     Private adpPositions As New tblPositionsTableAdapter
     Private adpTeams As New tblTeamsTableAdapter
     Private adpRoutingStatus As New RoutingStatusTableAdapter
     Private adpLeaveFiling As New LeaveFilingTableAdapter
     Private adpScreening As New ScreeningTableAdapter
-    'datatables
     Private dtRoutingStatus As New RoutingStatusDataTable
     Private dtLeaveFiling As New LeaveFilingDataTable
-    'datarows
     Private rowClinicPositions As tblPositionsRow
     Private rowSuperiorPositions1 As tblPositionsRow
     Private rowSuperiorPositions2 As tblPositionsRow
     Private rowManagerPositions As tblPositionsRow
     Private rowRoutingStatus As RoutingStatusRow
     Private rowScreening As ScreeningRow
-    'bindingsource
     Private bsLeaveFiling As New BindingSource
     Private WithEvents bsSuperior1 As New BindingSource
     Private WithEvents bsSuperior2 As New BindingSource
@@ -45,7 +41,9 @@ Public Class frmLeaveForm
     Private WithEvents superiorApprovalDate2 As Binding
     Private WithEvents managerApprovalDate As Binding
     Private WithEvents screenDate As Binding
-
+    'requestor's information for new filing
+    Private leaveFileId As Integer = 0
+    Private screenId As Integer = 0
     Private employeeId As Integer = 0
     Private positionId As Integer = 0
     Private departmentId As Integer = 0
@@ -54,21 +52,20 @@ Public Class frmLeaveForm
     Private emailAddress As String = String.Empty
     Private mobileNumber As String = String.Empty
     Private nbcEmailAddress As String = String.Empty
-    Private leaveFileId As Integer = 0
-    Private screenId As Integer = 0
-    'requestor's info
+    Private birthDate As Date
+    Private maritalStatusId As Integer = 0
+    Private genderId As Integer = 0
+    'requestor's information
     Private requestorEmployeeId As Integer = 0
     Private requestorDepartmentId As Integer = 0
     Private requestorTeamId As Integer = 0
     Private requestorPositionId As Integer = 0
-    'dictionary
+    Private requestorGenderId As Integer = 0
+    Private requestorEmploymentTypeId As Integer = 0
+    'dictionaries
     Private dictSuperior1 As New Dictionary(Of String, Integer)
     Private dictSuperior2 As New Dictionary(Of String, Integer)
     Private dictManager As New Dictionary(Of String, Integer)
-    'datatables for approvers
-    Private dtSuperiorName1 As New DataTable
-    Private dtSuperiorName2 As New DataTable
-    Private dtManagerName As New DataTable
 
     Public Sub New(ByVal _dataset As DataSet, ByVal _employeeId As Integer, ByVal _positionId As Integer, ByVal _departmentId As Integer, ByVal _teamId As Integer, ByVal _employmentTypeId As Integer, Optional ByVal _leaveFileId As Integer = 0)
 
@@ -86,12 +83,9 @@ Public Class frmLeaveForm
         Me.adpPositions.Fill(Me.dsJeonsoft.tblPositions)
         Me.adpTeams.Fill(Me.dsJeonsoft.tblTeams)
 
-        FillSuperiorStatus1()
-        FillSuperiorStatus2()
-        FillManagerStatus()
+        FillApproverStatus()
 
-        dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "Id", "LeaveTypeName", cmbLeaveType, "< Select Leave Type >")
-        dbLeaveFiling.FillCmbWithCaption("RdClinic", CommandType.StoredProcedure, "Id", "Name", cmbClinicName, "< Select Clinic Personnel >")
+        dbLeaveFiling.FillCmbWithCaption("RdClinic", CommandType.StoredProcedure, "EmployeeId", "EmployeeName", cmbClinicName, "< None >")
 
         'new filing
         If leaveFileId = 0 Then
@@ -101,15 +95,15 @@ Public Class frmLeaveForm
 
             ResetForm()
 
-            txtFileId.Text = "(new)"
             txtFileId.Visible = False
             lblFileId.Visible = False
             txtDateCreated.Text = String.Format("{0:MMMM dd, yyyy HH:mm}", serverDate)
             rowRoutingStatus = Me.dsLeaveFiling.RoutingStatus.FindByRoutingStatusId(6)
             txtRoutingStatus.Text = rowRoutingStatus.RoutingStatusName.ToString.Trim
-            GetEmployeeInfo(employeeId)
 
-            FillApproversNew(employeeId, departmentId, teamId, positionId)
+            FillEmployeeInformation(employeeId)
+            FillLeaveTypes(employmentTypeId, genderId, positionId)
+            FillApproversNew(employeeId)
 
             Me.ActiveControl = cmbLeaveType
 
@@ -120,7 +114,8 @@ Public Class frmLeaveForm
             Me.bsLeaveFiling.DataMember = dtLeaveFiling.TableName
             Me.bsLeaveFiling.Position = Me.bsLeaveFiling.Find("LeaveFileId", leaveFileId)
             requestorEmployeeId = CType(Me.bsLeaveFiling.Current, DataRowView).Item("EmployeeId")
-            GetEmployeeInfo(requestorEmployeeId)
+            FillEmployeeInformation(requestorEmployeeId)
+            FillLeaveTypes(requestorEmploymentTypeId, requestorGenderId, requestorPositionId)
 
             Me.adpRoutingStatus.Fill(Me.dsLeaveFiling.RoutingStatus)
             rowRoutingStatus = Me.dsLeaveFiling.RoutingStatus.FindByRoutingStatusId(CType(Me.bsLeaveFiling.Current, DataRowView).Item("RoutingStatusId"))
@@ -146,12 +141,13 @@ Public Class frmLeaveForm
                 rowScreening = Me.dsLeaveFiling.Screening.FindByScreenId(screenId)
 
                 Dim _prmEmployeeCode(0) As SqlParameter
-                _prmEmployeeCode(0) = New SqlParameter("@EmployeeCode", SqlDbType.VarChar)
+                _prmEmployeeCode(0) = New SqlParameter("@EmployeeId", SqlDbType.VarChar)
                 _prmEmployeeCode(0).Value = rowScreening.ScreenBy.ToString
+
                 Dim _reader As IDataReader = dbLeaveFiling.ExecuteReader("RdClinic", CommandType.StoredProcedure, _prmEmployeeCode)
 
                 While _reader.Read
-                    cmbClinicName.SelectedValue = _reader.Item("Id")
+                    cmbClinicName.SelectedValue = _reader.Item("EmployeeId")
                     txtClinicPosition.Text = _reader.Item("PositionName").ToString.Trim
                 End While
                 _reader.Close()
@@ -237,74 +233,171 @@ Public Class frmLeaveForm
 
     Private Sub frmLeaveFiling_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If Not leaveFileId = 0 Then
-            'disable editing if leave form is opened by others (eg. approvers, hr, clinic)
-            If Not requestorEmployeeId = employeeId Then
+            If Not requestorEmployeeId = employeeId Then  'disable editing if leave form is opened by others (eg. approvers, hr, clinic)
                 dtpFrom.Enabled = False
                 dtpTo.Enabled = False
                 txtReason.ReadOnly = True
-            Else
-                Me.ActiveControl = txtReason
-                txtReason.Select(txtReason.Text.Length, 0)
-            End If
 
-            'check if has immediate superior 1, then allow changing of approvers if still not approved
-            If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId1") Is DBNull.Value AndAlso _
-                CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId1") = employeeId Then
-                cmbSuperiorStatus1.Enabled = True
-                cmbSuperiorName1.Enabled = True
-                txtSuperiorRemarks1.ReadOnly = False
-                Me.ActiveControl = txtSuperiorRemarks1
-                txtSuperiorRemarks1.Select(txtSuperiorRemarks1.Text.Trim.Length, 0)
-            Else
-                cmbSuperiorStatus1.Enabled = False
+                'with immediate superior 1
+                If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId1") Is DBNull.Value Then
+                    If CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId1") = employeeId AndAlso _
+                        Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Then 'approved - lock editing
+                        cmbSuperiorStatus1.Enabled = False
+                        cmbSuperiorName1.Enabled = False
+                        txtSuperiorRemarks1.ReadOnly = True
 
-                If requestorEmployeeId = employeeId AndAlso CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Then
-                    cmbSuperiorName1.Enabled = True
-                    txtSuperiorRemarks1.ReadOnly = True
+                    ElseIf CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId1") = employeeId AndAlso _
+                        CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Then 'not approved - open editing
+                        cmbSuperiorStatus1.Enabled = True
+                        cmbSuperiorName1.Enabled = True
+                        txtSuperiorRemarks1.ReadOnly = False
+
+                    Else
+                        cmbSuperiorStatus1.Enabled = False
+                        cmbSuperiorName1.Enabled = False
+                        txtSuperiorRemarks1.ReadOnly = True
+                    End If
+
+                    Me.ActiveControl = txtSuperiorRemarks1
+                    txtSuperiorRemarks1.Select(txtSuperiorRemarks1.Text.Trim.Length, 0)
+
+                    'without immediate superior 1
                 Else
+                    cmbSuperiorStatus1.Enabled = False
                     cmbSuperiorName1.Enabled = False
                     txtSuperiorRemarks1.ReadOnly = True
                 End If
-            End If
 
-            'check if has immediate superior 2, then allow changing of approvers if still not approved
-            If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId2") Is DBNull.Value AndAlso _
-                CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId2") = employeeId Then
-                cmbSuperiorStatus2.Enabled = True
-                cmbSuperiorName2.Enabled = True
-                txtSuperiorRemarks2.ReadOnly = False
-                Me.ActiveControl = txtSuperiorRemarks2
-                txtSuperiorRemarks2.Select(txtSuperiorRemarks2.Text.Trim.Length, 0)
-            Else
-                cmbSuperiorStatus2.Enabled = False
+                'with immediate superior 2
+                If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId2") Is DBNull.Value Then
+                    If CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId2") = employeeId AndAlso _
+                        Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Then 'approved - lock editing
+                        cmbSuperiorStatus2.Enabled = False
+                        cmbSuperiorName2.Enabled = False
+                        txtSuperiorRemarks2.ReadOnly = True
 
-                If requestorEmployeeId = employeeId AndAlso CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Then
-                    cmbSuperiorName2.Enabled = True
-                    txtSuperiorRemarks2.ReadOnly = True
+                    ElseIf CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId2") = employeeId AndAlso _
+                        CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Then 'not approved - open editing
+                        cmbSuperiorStatus2.Enabled = True
+                        cmbSuperiorName2.Enabled = True
+                        txtSuperiorRemarks2.ReadOnly = False
+
+                    Else
+                        cmbSuperiorStatus2.Enabled = False
+                        cmbSuperiorName2.Enabled = False
+                        txtSuperiorRemarks2.ReadOnly = True
+                    End If
+
+                    Me.ActiveControl = txtSuperiorRemarks2
+                    txtSuperiorRemarks2.Select(txtSuperiorRemarks2.Text.Trim.Length, 0)
+
+                    'without immediate superior 2
                 Else
+                    cmbSuperiorStatus2.Enabled = False
                     cmbSuperiorName2.Enabled = False
                     txtSuperiorRemarks2.ReadOnly = True
                 End If
-            End If
 
-            'allow changing of manager if still not approved
-            If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerId") Is DBNull.Value AndAlso _
-                CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerId") = employeeId Then
-                cmbManagerStatus.Enabled = True
-                cmbManagerName.Enabled = True
-                txtManagerRemarks.ReadOnly = False
-                Me.ActiveControl = txtManagerRemarks
-                txtManagerRemarks.Select(txtManagerRemarks.Text.Trim.Length, 0)
-            Else
-                cmbManagerStatus.Enabled = False
+                'last approver or manager
+                If CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerId") = employeeId Then
+                    If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value Then 'approved - lock editing
+                        cmbManagerStatus.Enabled = False
+                        cmbManagerName.Enabled = False
+                        txtManagerRemarks.ReadOnly = True
 
-                If requestorEmployeeId = employeeId AndAlso CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value Then
-                    cmbManagerName.Enabled = True
-                    txtManagerRemarks.ReadOnly = True
+                    Else 'not approved - open editing
+                        cmbManagerStatus.Enabled = True
+                        cmbManagerName.Enabled = True
+                        txtManagerRemarks.ReadOnly = False
+                    End If
+
+                    Me.ActiveControl = txtManagerRemarks
+                    txtManagerRemarks.Select(txtManagerRemarks.Text.Trim.Length, 0)
                 Else
+                    cmbManagerStatus.Enabled = False
                     cmbManagerName.Enabled = False
                     txtManagerRemarks.ReadOnly = True
                 End If
+
+            Else 'opened by requestor
+                cmbSuperiorStatus1.Enabled = False
+                cmbSuperiorStatus2.Enabled = False
+                cmbManagerStatus.Enabled = False
+
+                If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId1") Is DBNull.Value Then 'with immediate superior 1
+                    If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Then 'approved - lock editing
+                        cmbSuperiorName1.Enabled = False
+                        txtSuperiorRemarks1.ReadOnly = True
+
+                    Else 'if contains approval - lock editing
+                        If (Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Or _
+                            Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value) = True Then
+                            cmbSuperiorName1.Enabled = False
+                            txtSuperiorRemarks1.ReadOnly = True
+                        Else
+                            cmbSuperiorName1.Enabled = True
+                            txtSuperiorRemarks1.ReadOnly = False
+                        End If
+                    End If
+
+                    'without immediate superior 1
+                Else
+                    If (Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Or _
+                        Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value) = True Then
+                        cmbSuperiorName1.Enabled = False
+                        txtSuperiorRemarks1.ReadOnly = True
+                    Else
+                        cmbSuperiorName1.Enabled = True
+                        txtSuperiorRemarks1.ReadOnly = False
+                    End If
+                End If
+
+                If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorId2") Is DBNull.Value Then 'with immediate superior 2
+                    If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Then 'approved - lock editing
+                        cmbSuperiorName2.Enabled = False
+                        txtSuperiorRemarks2.ReadOnly = True
+
+                    Else 'if contains approval - lock editing
+                        If (Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Or _
+                            Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value) = True Then
+                            cmbSuperiorName2.Enabled = False
+                            txtSuperiorRemarks2.ReadOnly = True
+                        Else
+                            cmbSuperiorName2.Enabled = True
+                            txtSuperiorRemarks2.ReadOnly = False
+                        End If
+                    End If
+
+                    'without immediate superior 2
+                Else
+                    If (Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Or _
+                        Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value) = True Then
+                        cmbSuperiorName2.Enabled = False
+                        txtSuperiorRemarks2.ReadOnly = True
+                    Else
+                        cmbSuperiorName2.Enabled = True
+                        txtSuperiorRemarks2.ReadOnly = False
+                    End If
+                End If
+
+                'last approver or manager
+                If Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value Then 'approved - lock editing
+                    cmbManagerName.Enabled = False
+                    txtManagerRemarks.ReadOnly = True
+
+                Else 'if contains approval - lock editing
+                    If (Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Or _
+                        Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value) = True Then
+                        cmbManagerName.Enabled = False
+                        txtManagerRemarks.ReadOnly = True
+                    Else
+                        cmbManagerName.Enabled = True
+                        txtManagerRemarks.ReadOnly = False
+                    End If
+                End If
+
+                Me.ActiveControl = txtReason
+                txtReason.Select(txtReason.Text.Length, 0)
             End If
         End If
     End Sub
@@ -312,7 +405,9 @@ Public Class frmLeaveForm
     Private Sub frmLeaveFiling_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode.Equals(Keys.Enter) Then
             e.Handled = True
-            Me.SelectNextControl(Me.ActiveControl, True, True, True, True)
+            If Not Me.ActiveControl.Equals(txtReason) Then
+                Me.SelectNextControl(Me.ActiveControl, True, True, True, True)
+            End If
         ElseIf e.KeyCode.Equals(Keys.F8) Then
             e.Handled = True
             btnDelete.PerformClick()
@@ -346,31 +441,53 @@ Public Class frmLeaveForm
             cmbManagerName.Enabled = True
         End If
 
-        If cmbLeaveType.SelectedValue = 1 Then 'sick leave
-            screenId = GetScreenId(1, employeeId)
+        Select Case cmbLeaveType.SelectedValue
+            Case 1 'sick leave
+                screenId = GetScreenId(1, employeeId)
 
-            If screenId > 0 Then
-                GetScreeningByScreenId(screenId)
-                GetTotalLeaveCredits(employeeId)
-                GetLeaveBalance(employeeId)
-            Else
-                ResetForm()
-                MessageBox.Show("No health screening record found.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                cmbLeaveType.Focus()
-                Return
-            End If
+                If screenId > 0 Then
+                    GetScreeningByScreenId(screenId)
+                    GetTotalLeaveCredits(employeeId)
+                    GetLeaveBalance(employeeId)
 
-            Me.ActiveControl = cmbSuperiorName1
-            cmbSuperiorName1.Select(cmbSuperiorName1.Text.Trim.Length, 0)
+                    Me.ActiveControl = cmbSuperiorName1
+                    cmbSuperiorName1.Select(cmbSuperiorName1.Text.Trim.Length, 0)
+                Else
+                    ResetForm()
+                    MessageBox.Show("No health screening record found.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    cmbLeaveType.Focus()
+                    Return
+                End If
 
-        ElseIf cmbLeaveType.SelectedValue = 2 Then 'vacation leave
-            screenId = GetScreenId(2, employeeId)
+            Case 2 'vacation leave
+                screenId = GetScreenId(2, employeeId)
 
-            If screenId > 0 Then
-                GetScreeningByScreenId(screenId)
-                GetTotalLeaveCredits(employeeId)
-                GetLeaveBalance(employeeId)
-            Else
+                If screenId > 0 Then
+                    GetScreeningByScreenId(screenId)
+                    GetTotalLeaveCredits(employeeId)
+                    GetLeaveBalance(employeeId)
+
+                    Me.ActiveControl = cmbSuperiorName1
+                    cmbSuperiorName1.Select(cmbSuperiorName1.Text.Trim.Length, 0)
+                Else
+                    dtpFrom.Enabled = True
+                    dtpTo.Enabled = True
+                    dtpFrom.Value = Date.Now.Date
+                    dtpTo.Value = Date.Now.Date
+                    txtReason.Clear()
+                    txtReason.ReadOnly = False
+
+                    txtClinicStatus.Text = String.Empty
+                    cmbClinicName.SelectedValue = 0
+                    txtClinicPosition.Text = String.Empty
+                    txtClinicDateApproved.Text = String.Empty
+                    txtClinicRemarks.Text = String.Empty
+
+                    Me.ActiveControl = txtReason
+                    txtReason.Select(txtReason.Text.Trim.Length, 0)
+                End If
+
+            Case 3 'birthday leave
                 dtpFrom.Enabled = True
                 dtpTo.Enabled = True
                 dtpFrom.Value = Date.Now.Date
@@ -383,30 +500,97 @@ Public Class frmLeaveForm
                 txtClinicPosition.Text = String.Empty
                 txtClinicDateApproved.Text = String.Empty
                 txtClinicRemarks.Text = String.Empty
-            End If
 
-            Me.ActiveControl = txtReason
-            txtReason.Select(txtReason.Text.Trim.Length, 0)
+                Me.ActiveControl = txtReason
+                txtReason.Select(txtReason.Text.Trim.Length, 0)
 
-        ElseIf cmbLeaveType.SelectedValue = 3 Then
-            dtpFrom.Enabled = True
-            dtpTo.Enabled = True
-            dtpFrom.Value = Date.Now.Date
-            dtpTo.Value = Date.Now.Date
-            txtReason.Clear()
-            txtReason.ReadOnly = False
+            Case 9 'ecq leave
+                screenId = GetScreenId(9, employeeId)
 
-            txtClinicStatus.Text = String.Empty
-            cmbClinicName.SelectedValue = 0
-            txtClinicPosition.Text = String.Empty
-            txtClinicDateApproved.Text = String.Empty
-            txtClinicRemarks.Text = String.Empty
+                If screenId > 0 Then
+                    GetScreeningByScreenId(screenId)
+                    GetTotalLeaveCredits(employeeId)
+                    GetLeaveBalance(employeeId)
 
-            Me.ActiveControl = txtReason
-            txtReason.Select(txtReason.Text.Trim.Length, 0)
-        Else
-            ResetForm()
-        End If
+                    Me.ActiveControl = cmbSuperiorName1
+                    cmbSuperiorName1.Select(cmbSuperiorName1.Text.Trim.Length, 0)
+                Else
+                    ResetForm()
+                    MessageBox.Show("No health screening record found.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    cmbLeaveType.Focus()
+                    Return
+                End If
+
+            Case 11 'half day leave
+                screenId = GetScreenId(11, employeeId)
+
+                If screenId > 0 Then
+                    GetScreeningByScreenId(screenId)
+                    GetTotalLeaveCredits(employeeId)
+                    GetLeaveBalance(employeeId)
+                Else
+                    dtpFrom.Enabled = True
+                    dtpTo.Enabled = True
+                    dtpFrom.Value = Date.Now.Date
+                    dtpTo.Value = Date.Now.Date
+                    txtReason.Clear()
+                    txtReason.ReadOnly = False
+
+                    txtClinicStatus.Text = String.Empty
+                    cmbClinicName.SelectedValue = 0
+                    txtClinicPosition.Text = String.Empty
+                    txtClinicDateApproved.Text = String.Empty
+                    txtClinicRemarks.Text = String.Empty
+                End If
+
+                Me.ActiveControl = cmbSuperiorName1
+                cmbSuperiorName1.Select(cmbSuperiorName1.Text.Trim.Length, 0)
+
+            Case 12 'undertime
+                screenId = GetScreenId(12, employeeId)
+
+                If screenId > 0 Then
+                    GetScreeningByScreenId(screenId)
+                    GetTotalLeaveCredits(employeeId)
+                    GetLeaveBalance(employeeId)
+                Else
+                    dtpFrom.Enabled = True
+                    dtpTo.Enabled = True
+                    dtpFrom.Value = Date.Now.Date
+                    dtpTo.Value = Date.Now.Date
+                    txtReason.Clear()
+                    txtReason.ReadOnly = False
+
+                    txtClinicStatus.Text = String.Empty
+                    cmbClinicName.SelectedValue = 0
+                    txtClinicPosition.Text = String.Empty
+                    txtClinicDateApproved.Text = String.Empty
+                    txtClinicRemarks.Text = String.Empty
+                End If
+
+                Me.ActiveControl = cmbSuperiorName1
+                cmbSuperiorName1.Select(cmbSuperiorName1.Text.Trim.Length, 0)
+
+            Case 4, 5, 7, 8, 10 'maternity leave, bereavement leave, paternity leave, offset leave, magna carta
+                dtpFrom.Enabled = True
+                dtpTo.Enabled = True
+                dtpFrom.Value = Date.Now.Date
+                dtpTo.Value = Date.Now.Date
+                txtReason.Clear()
+                txtReason.ReadOnly = False
+
+                txtClinicStatus.Text = String.Empty
+                cmbClinicName.SelectedValue = 0
+                txtClinicPosition.Text = String.Empty
+                txtClinicDateApproved.Text = String.Empty
+                txtClinicRemarks.Text = String.Empty
+
+                Me.ActiveControl = txtReason
+                txtReason.Select(txtReason.Text.Trim.Length, 0)
+
+            Case Else
+                ResetForm()
+        End Select
 
         txtNumberOfDays.Text = GetTotalDays(dtpFrom.Value.Date, dtpTo.Value.Date)
     End Sub
@@ -465,6 +649,12 @@ Public Class frmLeaveForm
         End If
     End Sub
 
+    Private Sub cmbSuperiorName1_Validated(sender As Object, e As EventArgs) Handles cmbSuperiorName1.Validated
+        If cmbSuperiorName1.Text.Trim.Length = 0 Then
+            cmbSuperiorName1.SelectedValue = 0
+        End If
+    End Sub
+
     Private Sub cmbSuperiorName2_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbSuperiorName2.SelectedValueChanged
         If Not cmbSuperiorName2.SelectedValue = 0 Then
             Dim _positionId As Integer = dbJeonsoft.ExecuteScalar("SELECT PositionId FROM dbo.tblEmployees WHERE Id = " & cmbSuperiorName2.SelectedValue & "", CommandType.Text)
@@ -482,6 +672,18 @@ Public Class frmLeaveForm
             txtManagerPosition.Text = rowManagerPositions.Name.ToString.Trim
         Else
             txtManagerPosition.Text = String.Empty
+        End If
+    End Sub
+
+    Private Sub cmbSuperiorName2_Validated(sender As Object, e As EventArgs) Handles cmbSuperiorName2.Validated
+        If cmbSuperiorName2.Text.Trim.Length = 0 Then
+            cmbSuperiorName2.SelectedValue = 0
+        End If
+    End Sub
+
+    Private Sub cmbManagerName_Validated(sender As Object, e As EventArgs) Handles cmbManagerName.Validated
+        If cmbManagerName.Text.Trim.Length = 0 Then
+            cmbManagerName.SelectedValue = 0
         End If
     End Sub
 
@@ -510,7 +712,7 @@ Public Class frmLeaveForm
             End If
 
             If String.IsNullOrEmpty(txtReason.Text.Trim) AndAlso Not cmbLeaveType.SelectedValue = 3 Then
-                MessageBox.Show("Reason cannot be empty.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                MessageBox.Show("Reason is required.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 txtReason.Focus()
                 Return
             End If
@@ -525,21 +727,9 @@ Public Class frmLeaveForm
 
             'new transaction
             If leaveFileId = 0 Then
-                If employeeId.Equals(cmbSuperiorName1.SelectedValue) Then
-                    MessageBox.Show("Please select different immediate superior 1.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    cmbSuperiorName1.Focus()
-                    Return
-                End If
-
-                If employeeId.Equals(cmbSuperiorName2.SelectedValue) Then
-                    MessageBox.Show("Please select different immediate superior 2.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    cmbSuperiorName2.Focus()
-                    Return
-                End If
-
-                If employeeId.Equals(cmbManagerName.SelectedValue) Then
-                    MessageBox.Show("Please select different manager or last approver.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    cmbSuperiorName1.Focus()
+                If cmbLeaveType.SelectedValue = 3 AndAlso IsBirthMonth(employeeId) = False Then
+                    MessageBox.Show("Birthday leave must be within your birth month.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    dtpFrom.Focus()
                     Return
                 End If
 
@@ -548,65 +738,59 @@ Public Class frmLeaveForm
                 With _newRowLeave
                     .DateCreated = DateTime.Now
 
-                    If cmbLeaveType.SelectedValue = 1 Then 'sick leave
-                        .LeaveTypeId = 1
+                    Select Case cmbLeaveType.SelectedValue
+                        Case 1, 2, 9, 11, 12 'sick leave, vacation leave, ecq leave, half day leave, undertime
 
-                        Dim _prmScreenId(0) As SqlParameter
-                        _prmScreenId(0) = New SqlParameter("@ScreenId", SqlDbType.Int)
-                        _prmScreenId(0).Value = screenId
-                        dbLeaveFiling.ExecuteNonQuery("UPDATE Screening SET IsUsed = 1 WHERE ScreenId = @ScreenId", CommandType.Text, _prmScreenId)
-                        .ScreenId = screenId
-                        .ClinicIsApproved = 1
-                        .ClinicId = cmbClinicName.SelectedValue
-                        .ClinicApprovalDate = rowScreening.ScreenDate
-                        .ClinicRemarks = rowScreening.Diagnosis.ToString.Trim
-                        .IsLateFiling = 1
+                            If screenId > 0 Then
+                                Dim _prmScreenId(0) As SqlParameter
+                                _prmScreenId(0) = New SqlParameter("@ScreenId", SqlDbType.Int)
+                                _prmScreenId(0).Value = screenId
+                                dbLeaveFiling.ExecuteNonQuery("UPDATE Screening SET IsUsed = 1 WHERE ScreenId = @ScreenId", CommandType.Text, _prmScreenId)
+                                .ScreenId = screenId
+                                .ClinicIsApproved = 1
+                                .ClinicId = cmbClinicName.SelectedValue
+                                .ClinicApprovalDate = rowScreening.ScreenDate
+                                .ClinicRemarks = rowScreening.Diagnosis.ToString.Trim
+                                .IsLateFiling = 1
 
-                    ElseIf cmbLeaveType.SelectedValue = 2 Then 'vacation leave
-                        .LeaveTypeId = 2
+                                .Reason = rowScreening.Reason.ToString.Trim
+                            Else
+                                .SetScreenIdNull()
+                                .ClinicIsApproved = 0
+                                .SetClinicIdNull()
+                                .SetClinicApprovalDateNull()
+                                .SetClinicRemarksNull()
+                                .IsLateFiling = 0
 
-                        If screenId > 0 Then
-                            Dim _prmScreenId(0) As SqlParameter
-                            _prmScreenId(0) = New SqlParameter("@ScreenId", SqlDbType.Int)
-                            _prmScreenId(0).Value = screenId
-                            dbLeaveFiling.ExecuteNonQuery("UPDATE Screening SET IsUsed = 1 WHERE ScreenId = @ScreenId", CommandType.Text, _prmScreenId)
-                            .ScreenId = screenId
-                            .ClinicIsApproved = 1
-                            .ClinicId = cmbClinicName.SelectedValue
-                            .ClinicApprovalDate = rowScreening.ScreenDate
-                            .ClinicRemarks = rowScreening.Diagnosis.ToString.Trim
-                            .IsLateFiling = 1
-                        Else
+                                .Reason = txtReason.Text.Trim
+                            End If
+
+                        Case 3  'bday leave
                             .SetScreenIdNull()
                             .ClinicIsApproved = 0
                             .SetClinicIdNull()
                             .SetClinicApprovalDateNull()
                             .SetClinicRemarksNull()
                             .IsLateFiling = 0
-                        End If
 
-                    ElseIf cmbLeaveType.SelectedValue = 3 Then 'brithday leave
-                        .LeaveTypeId = 3
+                            If String.IsNullOrEmpty(txtReason.Text.Trim) Then
+                                .SetReasonNull()
+                            Else
+                                .Reason = txtReason.Text.Trim
+                            End If
 
-                        If IsBirthMonth(employeeId) = False Then
-                            MessageBox.Show("Birthday leave must be within your birth month.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                            dtpFrom.Focus()
-                            Return
-                        End If
+                        Case 4, 5, 7, 8, 10 'marriage leave, bereavement leave, paternity leave, offset leave, magna carta
+                            .SetScreenIdNull()
+                            .ClinicIsApproved = 0
+                            .SetClinicIdNull()
+                            .SetClinicApprovalDateNull()
+                            .SetClinicRemarksNull()
+                            .IsLateFiling = 0
 
-                        .SetScreenIdNull()
-                        .ClinicIsApproved = 0
-                        .SetClinicIdNull()
-                        .SetClinicApprovalDateNull()
-                        .SetClinicRemarksNull()
-                        .IsLateFiling = 0
-
-                        If String.IsNullOrEmpty(txtReason.Text.Trim) Then
-                            .SetReasonNull()
-                        Else
                             .Reason = txtReason.Text.Trim
-                        End If
-                    End If
+                    End Select
+
+                    .LeaveTypeId = cmbLeaveType.SelectedValue
 
                     If cmbSuperiorName1.SelectedValue = 0 Then 'no immediate superior 1
                         .SetSuperiorId1Null()
@@ -615,32 +799,19 @@ Public Class frmLeaveForm
                             .SetSuperiorId2Null()
                             .RoutingStatusId = 3
 
-                            'send to manager directly if no immediate superior 1 and 2
-                            _frmMain.SendEmailApprovers(cmbManagerName.SelectedValue, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
-
                         Else 'with immediate superior 2
                             .RoutingStatusId = 4
                             .SuperiorId2 = cmbSuperiorName2.SelectedValue
-
-                            _frmMain.SendEmailApprovers(cmbSuperiorName2.SelectedValue, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
                         End If
 
                     Else 'with immediate superior 1
                         .RoutingStatusId = 5
                         .SuperiorId1 = cmbSuperiorName1.SelectedValue
 
-                        _frmMain.SendEmailApprovers(cmbSuperiorName1.SelectedValue, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
-
                         If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
                             .SetSuperiorId2Null()
                         Else
                             .SuperiorId2 = cmbSuperiorName2.SelectedValue
-                        End If
-
-                        If cmbManagerName.SelectedValue = 0 Then
-                            .SetManagerIdNull()
-                        Else
-                            .ManagerId = cmbManagerName.SelectedValue
                         End If
                     End If
 
@@ -668,7 +839,6 @@ Public Class frmLeaveForm
                     .StartDate = dtpFrom.Value.Date
                     .EndDate = dtpTo.Value.Date
                     .Quantity = GetTotalDays(dtpFrom.Value.Date, dtpTo.Value.Date)
-                    .Reason = txtReason.Text.Trim
                     .IsEncoded = False
 
                     If String.IsNullOrEmpty(txtTotalLeaveCredits.Text.Trim) Then
@@ -689,39 +859,143 @@ Public Class frmLeaveForm
 
                 Me.dsLeaveFiling.LeaveFiling.AddLeaveFilingRow(_newRowLeave)
                 Me.adpLeaveFiling.Update(Me.dsLeaveFiling.LeaveFiling)
+
+                With _newRowLeave
+                    If cmbSuperiorName1.SelectedValue = 0 Then 'no immediate superior 1
+                        .SetSuperiorId1Null()
+
+                        If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
+                            'send to manager directly if no immediate superior 1 and 2
+                            If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                            cmbManagerName.SelectedValue, _
+                                                            cmbLeaveType.Text, _
+                                                            StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                            txtDepartment.Text.Trim, _
+                                                            dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                            txtReason.Text.Trim)
+                            Else
+                                _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                            cmbManagerName.SelectedValue, _
+                                                            cmbLeaveType.Text, _
+                                                            StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                            txtDepartment.Text.Trim, _
+                                                            dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                            txtReason.Text.Trim)
+                            End If
+
+                        Else 'with immediate superior 2
+                            If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                            cmbSuperiorName2.SelectedValue, _
+                                                            cmbLeaveType.Text, _
+                                                            StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                            txtDepartment.Text.Trim, _
+                                                            dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                            txtReason.Text.Trim)
+                            Else
+                                _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                            cmbSuperiorName2.SelectedValue, _
+                                                            cmbLeaveType.Text, _
+                                                            StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                            txtDepartment.Text.Trim, _
+                                                            dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                            txtReason.Text.Trim)
+                            End If
+                        End If
+
+                    Else 'with immediate superior 1
+                        If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                            _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                        cmbSuperiorName1.SelectedValue, _
+                                                        cmbLeaveType.Text, _
+                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                        txtDepartment.Text.Trim, _
+                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                        txtReason.Text.Trim)
+                        Else
+                            _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                        cmbSuperiorName1.SelectedValue, _
+                                                        cmbLeaveType.Text, _
+                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                        txtDepartment.Text.Trim, _
+                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                        txtReason.Text.Trim)
+                        End If
+                    End If
+                End With
+
                 Me.dsLeaveFiling.AcceptChanges()
 
-            Else 'exisiting file
+            Else 'existing file
                 Dim _leaveFilingRow As LeaveFilingRow = Me.dsLeaveFiling.LeaveFiling.FindByLeaveFileId(leaveFileId)
 
                 With _leaveFilingRow
+                    'immediate superior 1
                     If .IsSuperiorId1Null = False AndAlso .SuperiorId1 = employeeId Then
-                        'If cmbSuperiorStatus1.SelectedValue = 0 Then
-                        '    MessageBox.Show("Please select status.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '    txtSuperiorRemarks1.Focus()
-                        '    txtSuperiorRemarks1.Select(txtSuperiorRemarks1.Text.Trim.Length, 0)
-                        '    Return
-                        'End If
-
-                        If cmbSuperiorStatus1.SelectedValue = 0 Then
+                        If cmbSuperiorStatus1.SelectedValue = 0 AndAlso .IsSuperiorApprovalDate1Null = True Then 'remarks only
                             If String.IsNullOrEmpty(txtSuperiorRemarks1.Text.Trim) = False Then
                                 If SaveRemarksOnly() = Windows.Forms.DialogResult.Yes Then
                                     .SuperiorRemarks1 = txtSuperiorRemarks1.Text.Trim
+
+                                    _frmMain.SendRemarksNofitication(requestorEmployeeId, _
+                                                                     "Immediate Superior 1", _
+                                                                     cmbSuperiorName1.Text.Trim, _
+                                                                     txtSuperiorRemarks1.Text.Trim, _
+                                                                     cmbLeaveType.Text, _
+                                                                     dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                     dtpTo.Value.Date.ToString("MMMM dd, yyyy"))
                                 Else
                                     Return
                                 End If
                             Else
                                 .SetSuperiorRemarks1Null()
                             End If
+
                         Else
-                            If cmbSuperiorStatus1.SelectedValue = 1 Then
+                            If cmbSuperiorStatus1.SelectedValue = 1 AndAlso .IsSuperiorApprovalDate1Null = True Then 'approved
                                 If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
                                     If .IsSuperiorId2Null = True Then
                                         .RoutingStatusId = 3
-                                        _frmMain.SendEmailApprovers(cmbManagerName.SelectedValue, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
+
+                                        If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                            _frmMain.SendEmailApprovers(leaveFileId, _
+                                                                        cmbManagerName.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        Else
+                                            _frmMain.SendEmailApprovers(leaveFileId, _
+                                                                        cmbManagerName.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        End If
+
                                     Else
                                         .RoutingStatusId = 4
-                                        _frmMain.SendEmailApprovers(cmbSuperiorName2.SelectedValue, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
+
+                                        If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                            _frmMain.SendEmailApprovers(leaveFileId, _
+                                                                        cmbSuperiorName2.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        Else
+                                            _frmMain.SendEmailApprovers(leaveFileId, _
+                                                                        cmbSuperiorName2.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        End If
                                     End If
 
                                     .SuperiorIsApproved1 = 1
@@ -729,86 +1003,183 @@ Public Class frmLeaveForm
                                     Return
                                 End If
 
-                            ElseIf cmbSuperiorStatus1.SelectedValue = 2 Then
-                                If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
-                                    .SuperiorIsApproved1 = 0
+                                .SuperiorApprovalDate1 = DateTime.Now
+                                If String.IsNullOrEmpty(txtSuperiorRemarks1.Text.Trim) Then
+                                    .SetSuperiorRemarks1Null()
+                                Else
+                                    .SuperiorRemarks1 = txtSuperiorRemarks1.Text.Trim
+                                End If
 
-                                    _frmMain.SendEmailRequestor(False, requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
-                                    _frmMain.SendEmailHr(False, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
+                            ElseIf cmbSuperiorStatus1.SelectedValue = 2 AndAlso .IsSuperiorApprovalDate1Null = True Then 'disapproved
+                                If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
+                                    _frmMain.SendEmailRequestor(False, _
+                                                                requestorEmployeeId, _
+                                                                cmbLeaveType.Text, _
+                                                                dtpFrom.Value.Date, _
+                                                                dtpTo.Value.Date)
+
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             False, _
+                                                             cmbLeaveType.Text, _
+                                                             StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                             txtDepartment.Text.Trim, _
+                                                             dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                             txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             False, _
+                                                             cmbLeaveType.Text, _
+                                                             StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                             txtDepartment.Text.Trim, _
+                                                             dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                             txtReason.Text.Trim)
+                                    End If
+
+                                    .SuperiorIsApproved1 = 0
                                 Else
                                     Return
                                 End If
-                            End If
 
-                            .SuperiorApprovalDate1 = DateTime.Now
-                            If String.IsNullOrEmpty(txtSuperiorRemarks1.Text.Trim) Then
-                                .SetSuperiorRemarks1Null()
-                            Else
-                                .SuperiorRemarks1 = txtSuperiorRemarks1.Text.Trim
+                                .SuperiorApprovalDate1 = DateTime.Now
+                                If String.IsNullOrEmpty(txtSuperiorRemarks1.Text.Trim) Then
+                                    .SetSuperiorRemarks1Null()
+                                Else
+                                    .SuperiorRemarks1 = txtSuperiorRemarks1.Text.Trim
+                                End If
+
+                            ElseIf cmbSuperiorStatus1.SelectedValue = 3 AndAlso .IsManagerApprovalDateNull = True Then 'returned for revision
+                                .RoutingStatusId = 6
+                                .SuperiorIsApproved1 = 0
+                                .SetSuperiorApprovalDate1Null()
+                                .SuperiorIsApproved2 = 0
+                                .SetSuperiorApprovalDate2Null()
+                                .ManagerIsApproved = 0
+                                .SetManagerApprovalDateNull()
+                                .ModifiedBy = employeeId
+                                .ModifiedDate = DateTime.Now
+
+                                _frmMain.SendEmailReturned(requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
                             End If
                         End If
 
                     ElseIf .IsSuperiorId2Null = False AndAlso .SuperiorId2 = employeeId Then
-                        'If cmbSuperiorStatus2.SelectedValue = 0 Then
-                        '    MessageBox.Show("Please select status.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '    txtSuperiorRemarks2.Focus()
-                        '    txtSuperiorRemarks2.Select(txtSuperiorRemarks2.Text.Trim.Length, 0)
-                        '    Return
-                        'End If
-
-                        If cmbSuperiorStatus2.SelectedValue = 0 Then
+                        If cmbSuperiorStatus2.SelectedValue = 0 AndAlso .IsSuperiorApprovalDate2Null = True Then 'remarks only
                             If String.IsNullOrEmpty(txtSuperiorRemarks2.Text.Trim) = False Then
                                 If SaveRemarksOnly() = Windows.Forms.DialogResult.Yes Then
                                     .SuperiorRemarks2 = txtSuperiorRemarks2.Text.Trim
+
+                                    _frmMain.SendRemarksNofitication(requestorEmployeeId, _
+                                                                     "Immediate Superior 2", _
+                                                                     cmbSuperiorName2.Text.Trim, _
+                                                                     txtSuperiorRemarks2.Text.Trim, _
+                                                                     cmbLeaveType.Text, _
+                                                                     dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                     dtpTo.Value.Date.ToString("MMMM dd, yyyy"))
                                 Else
                                     Return
                                 End If
                             Else
                                 .SetSuperiorRemarks2Null()
                             End If
+
                         Else
-                            If cmbSuperiorStatus2.SelectedValue = 1 Then
+                            If cmbSuperiorStatus2.SelectedValue = 1 AndAlso .IsSuperiorApprovalDate2Null = True Then 'approved
                                 If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
                                     .RoutingStatusId = 3
                                     .SuperiorIsApproved2 = 1
 
-                                    _frmMain.SendEmailApprovers(cmbManagerName.SelectedValue, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailApprovers(leaveFileId, _
+                                                                    cmbManagerName.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailApprovers(leaveFileId, _
+                                                                    cmbManagerName.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    End If
                                 Else
                                     Return
                                 End If
 
-                            ElseIf cmbSuperiorStatus2.SelectedValue = 2 Then
+                                .SuperiorApprovalDate2 = DateTime.Now
+                                If String.IsNullOrEmpty(txtSuperiorRemarks2.Text.Trim) Then
+                                    .SetSuperiorRemarks2Null()
+                                Else
+                                    .SuperiorRemarks2 = txtSuperiorRemarks2.Text.Trim
+                                End If
+
+                            ElseIf cmbSuperiorStatus2.SelectedValue = 2 AndAlso .IsSuperiorApprovalDate2Null = True Then 'disapproved
                                 If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
                                     .RoutingStatusId = 7
                                     .SuperiorIsApproved2 = 0
 
                                     _frmMain.SendEmailRequestor(False, requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
-                                    _frmMain.SendEmailHr(False, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
+
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             False, _
+                                                             cmbLeaveType.Text, _
+                                                              StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                              txtDepartment.Text.Trim, _
+                                                              dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                              txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             False, _
+                                                             cmbLeaveType.Text, _
+                                                             StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                             txtDepartment.Text.Trim, _
+                                                             dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                             txtReason.Text.Trim)
+                                    End If
                                 Else
                                     Return
                                 End If
-                            End If
 
-                            .SuperiorApprovalDate2 = DateTime.Now
-                            If String.IsNullOrEmpty(txtSuperiorRemarks2.Text.Trim) Then
-                                .SetSuperiorRemarks2Null()
-                            Else
-                                .SuperiorRemarks2 = txtSuperiorRemarks2.Text.Trim
+                                .SuperiorApprovalDate2 = DateTime.Now
+                                If String.IsNullOrEmpty(txtSuperiorRemarks2.Text.Trim) Then
+                                    .SetSuperiorRemarks2Null()
+                                Else
+                                    .SuperiorRemarks2 = txtSuperiorRemarks2.Text.Trim
+                                End If
+
+                            ElseIf cmbSuperiorStatus2.SelectedValue = 3 AndAlso .IsManagerApprovalDateNull = True Then
+                                .RoutingStatusId = 6
+                                .SuperiorIsApproved1 = 0
+                                .SetSuperiorApprovalDate1Null()
+                                .SuperiorIsApproved2 = 0
+                                .SetSuperiorApprovalDate2Null()
+                                .ManagerIsApproved = 0
+                                .SetManagerApprovalDateNull()
+                                .ModifiedBy = employeeId
+                                .ModifiedDate = DateTime.Now
+
+                                _frmMain.SendEmailReturned(requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
                             End If
                         End If
 
-                    ElseIf .ManagerId = employeeId Then
-                        'If cmbManagerStatus.SelectedValue = 0 Then
-                        '    MessageBox.Show("Please select status.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        '    txtManagerRemarks.Focus()
-                        '    txtManagerRemarks.Select(txtManagerRemarks.Text.Trim.Length, 0)
-                        '    Return
-                        'End If
-
-                        If cmbManagerStatus.SelectedValue = 0 Then
+                    ElseIf .IsManagerIdNull = False AndAlso .ManagerId = employeeId Then
+                        If cmbManagerStatus.SelectedValue = 0 AndAlso .IsManagerApprovalDateNull = True Then
                             If String.IsNullOrEmpty(txtManagerRemarks.Text.Trim) = False Then
                                 If SaveRemarksOnly() = Windows.Forms.DialogResult.Yes Then
                                     .ManagerRemarks = txtManagerRemarks.Text.Trim
+
+                                    _frmMain.SendRemarksNofitication(requestorEmployeeId, _
+                                                                     "Manager / Last Approver", _
+                                                                     cmbManagerName.Text.Trim, _
+                                                                     txtManagerRemarks.Text.Trim, _
+                                                                     cmbLeaveType.Text, _
+                                                                     dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                     dtpTo.Value.Date.ToString("MMMM dd, yyyy"))
                                 Else
                                     Return
                                 End If
@@ -816,45 +1187,363 @@ Public Class frmLeaveForm
                                 .SetManagerRemarksNull()
                             End If
 
-                        Else
-                            If cmbManagerStatus.SelectedValue = 1 Then
+                        Else 'approved or disapproved
+                            If cmbManagerStatus.SelectedValue = 1 AndAlso .IsManagerApprovalDateNull = True Then
                                 If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
                                     .RoutingStatusId = 2
                                     .ManagerIsApproved = 1
 
                                     _frmMain.SendEmailRequestor(True, requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
-                                    _frmMain.SendEmailHr(True, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
 
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             True, _
+                                                             cmbLeaveType.Text, _
+                                                             StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                             txtDepartment.Text.Trim, _
+                                                             dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                             txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             True, _
+                                                             cmbLeaveType.Text, _
+                                                             StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                             txtDepartment.Text.Trim, _
+                                                             dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                             txtReason.Text.Trim)
+                                    End If
                                 Else
                                     Return
                                 End If
 
-                            ElseIf cmbManagerStatus.SelectedValue = 2 Then
+                                .ManagerApprovalDate = DateTime.Now
+                                If String.IsNullOrEmpty(txtManagerRemarks.Text.Trim) Then
+                                    .SetManagerRemarksNull()
+                                Else
+                                    .ManagerRemarks = txtManagerRemarks.Text.Trim
+                                End If
+
+                            ElseIf cmbManagerStatus.SelectedValue = 2 AndAlso .IsManagerApprovalDateNull = True Then
                                 If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
                                     .RoutingStatusId = 7
                                     .ManagerIsApproved = 0
 
                                     _frmMain.SendEmailRequestor(False, requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
-                                    _frmMain.SendEmailHr(False, cmbLeaveType.Text, StrConv(txtName.Text.Trim, VbStrConv.ProperCase), txtDepartment.Text.Trim, dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), txtReason.Text.Trim)
+
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             False, _
+                                                             cmbLeaveType.Text, _
+                                                             StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                             txtDepartment.Text.Trim, _
+                                                             dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                             txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailHr(leaveFileId, _
+                                                             False, _
+                                                             cmbLeaveType.Text, _
+                                                             StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                             txtDepartment.Text.Trim, _
+                                                             dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                             txtReason.Text.Trim)
+                                    End If
                                 Else
                                     Return
                                 End If
-                            End If
 
-                            .ManagerApprovalDate = DateTime.Now
-                            If String.IsNullOrEmpty(txtManagerRemarks.Text.Trim) Then
-                                .SetManagerRemarksNull()
-                            Else
-                                .ManagerRemarks = txtManagerRemarks.Text.Trim
+                                .ManagerApprovalDate = DateTime.Now
+                                If String.IsNullOrEmpty(txtManagerRemarks.Text.Trim) Then
+                                    .SetManagerRemarksNull()
+                                Else
+                                    .ManagerRemarks = txtManagerRemarks.Text.Trim
+                                End If
+
+                            ElseIf cmbManagerStatus.SelectedValue = 3 AndAlso .IsManagerApprovalDateNull = True Then
+                                .RoutingStatusId = 6
+                                .SuperiorIsApproved1 = 0
+                                .SetSuperiorApprovalDate1Null()
+                                .SuperiorIsApproved2 = 0
+                                .SetSuperiorApprovalDate2Null()
+                                .ManagerIsApproved = 0
+                                .SetManagerApprovalDateNull()
+                                .ModifiedBy = employeeId
+                                .ModifiedDate = DateTime.Now
+
+                                _frmMain.SendEmailReturned(requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
                             End If
                         End If
+
                     Else
-                        If requestorEmployeeId = employeeId AndAlso txtClinicStatus.Text.Trim = "" AndAlso txtReason.Enabled = True AndAlso dtpFrom.Enabled = True Then
-                            .StartDate = dtpFrom.Value.Date
-                            .EndDate = dtpTo.Value.Date
-                            .Reason = txtReason.Text.Trim
-                            .ModifiedBy = employeeId
-                            .ModifiedDate = DateTime.Now
+                        'opened by requestor
+                        If requestorEmployeeId = employeeId AndAlso .ModifiedBy = employeeId Then
+                            If Not cmbClinicName.SelectedValue = 0 Then
+                                .StartDate = dtpFrom.Value.Date
+                                .EndDate = dtpTo.Value.Date
+                                .Reason = txtReason.Text.Trim
+                                .ModifiedBy = employeeId
+                                .ModifiedDate = DateTime.Now
+                            End If
+
+                            If cmbSuperiorName1.SelectedValue = 0 Then 'no immediate superior 1
+                                .SetSuperiorId1Null()
+
+                                If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
+                                    .SetSuperiorId2Null()
+                                    .RoutingStatusId = 3
+                                    'send to manager directly if no immediate superior 1 and 2
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                    cmbManagerName.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                    cmbManagerName.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    End If
+
+                                Else 'with immediate superior 2
+                                    .RoutingStatusId = 4
+                                    .SuperiorId2 = cmbSuperiorName2.SelectedValue
+
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                    cmbSuperiorName2.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                    cmbSuperiorName2.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    End If
+                                End If
+
+                            Else 'with immediate superior 1
+                                .RoutingStatusId = 5
+                                .SuperiorId1 = cmbSuperiorName1.SelectedValue
+
+                                If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
+                                    .SetSuperiorId2Null()
+                                Else
+                                    .SuperiorId2 = cmbSuperiorName2.SelectedValue
+                                End If
+
+                                If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                    _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                cmbSuperiorName1.SelectedValue, _
+                                                                cmbLeaveType.Text, _
+                                                                StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                txtDepartment.Text.Trim, _
+                                                                dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                txtReason.Text.Trim)
+                                Else
+                                    _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                cmbSuperiorName1.SelectedValue, _
+                                                                cmbLeaveType.Text, _
+                                                                StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                txtDepartment.Text.Trim, _
+                                                                dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                txtReason.Text.Trim)
+                                End If
+                            End If
+
+                        ElseIf requestorEmployeeId = employeeId AndAlso .ModifiedBy <> employeeId Then
+                            With _leaveFilingRow
+                                Select Case cmbLeaveType.SelectedValue
+                                    Case 1, 2, 9, 11, 12 'sick leave, vacation leave, ecq leave, half day leave, undertime
+
+                                        If screenId > 0 Then
+                                            Dim _prmScreenId(0) As SqlParameter
+                                            _prmScreenId(0) = New SqlParameter("@ScreenId", SqlDbType.Int)
+                                            _prmScreenId(0).Value = screenId
+                                            dbLeaveFiling.ExecuteNonQuery("UPDATE Screening SET IsUsed = 1 WHERE ScreenId = @ScreenId", CommandType.Text, _prmScreenId)
+                                            .ScreenId = screenId
+                                            .ClinicIsApproved = 1
+                                            .ClinicId = cmbClinicName.SelectedValue
+                                            .ClinicApprovalDate = rowScreening.ScreenDate
+                                            .ClinicRemarks = rowScreening.Diagnosis.ToString.Trim
+                                            .IsLateFiling = 1
+
+                                            .Reason = rowScreening.Reason.ToString.Trim
+                                        Else
+                                            .SetScreenIdNull()
+                                            .ClinicIsApproved = 0
+                                            .SetClinicIdNull()
+                                            .SetClinicApprovalDateNull()
+                                            .SetClinicRemarksNull()
+                                            .IsLateFiling = 0
+
+                                            .Reason = txtReason.Text.Trim
+                                        End If
+
+                                    Case 3  'bday leave
+                                        .SetScreenIdNull()
+                                        .ClinicIsApproved = 0
+                                        .SetClinicIdNull()
+                                        .SetClinicApprovalDateNull()
+                                        .SetClinicRemarksNull()
+                                        .IsLateFiling = 0
+
+                                        If String.IsNullOrEmpty(txtReason.Text.Trim) Then
+                                            .SetReasonNull()
+                                        Else
+                                            .Reason = txtReason.Text.Trim
+                                        End If
+
+                                    Case 4, 5, 7, 8, 10 'marriage leave, bereavement leave, paternity leave, offset leave, magna carta
+                                        .SetScreenIdNull()
+                                        .ClinicIsApproved = 0
+                                        .SetClinicIdNull()
+                                        .SetClinicApprovalDateNull()
+                                        .SetClinicRemarksNull()
+                                        .IsLateFiling = 0
+
+                                        .Reason = txtReason.Text.Trim
+                                End Select
+
+                                .LeaveTypeId = cmbLeaveType.SelectedValue
+
+                                If cmbSuperiorName1.SelectedValue = 0 Then 'no immediate superior 1
+                                    .SetSuperiorId1Null()
+
+                                    If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
+                                        .SetSuperiorId2Null()
+                                        .RoutingStatusId = 3
+
+                                    Else 'with immediate superior 2
+                                        .RoutingStatusId = 4
+                                        .SuperiorId2 = cmbSuperiorName2.SelectedValue
+                                    End If
+
+                                Else 'with immediate superior 1
+                                    .RoutingStatusId = 5
+                                    .SuperiorId1 = cmbSuperiorName1.SelectedValue
+
+                                    If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
+                                        .SetSuperiorId2Null()
+                                    Else
+                                        .SuperiorId2 = cmbSuperiorName2.SelectedValue
+                                    End If
+                                End If
+
+                                If teamId = 0 Then
+                                    .SetTeamIdNull()
+                                Else
+                                    .TeamId = teamId
+                                End If
+
+                                .SuperiorIsApproved1 = 0
+                                .SetSuperiorApprovalDate1Null()
+                                .SetSuperiorRemarks1Null()
+
+                                .SuperiorIsApproved2 = 0
+                                .SetSuperiorApprovalDate2Null()
+                                .SetSuperiorRemarks2Null()
+
+                                .ManagerId = cmbManagerName.SelectedValue
+                                .ManagerIsApproved = 0
+                                .SetManagerApprovalDateNull()
+                                .SetManagerRemarksNull()
+
+                                .EmployeeId = employeeId
+                                .DepartmentId = departmentId
+                                .StartDate = dtpFrom.Value.Date
+                                .EndDate = dtpTo.Value.Date
+                                .Quantity = GetTotalDays(dtpFrom.Value.Date, dtpTo.Value.Date)
+                                .IsEncoded = False
+
+                                If String.IsNullOrEmpty(txtTotalLeaveCredits.Text.Trim) Then
+                                    .LeaveCredits = 0
+                                Else
+                                    .LeaveCredits = txtTotalLeaveCredits.Text.Trim()
+                                End If
+
+                                If String.IsNullOrEmpty(txtBalance.Text.Trim) Then
+                                    .LeaveBalance = 0
+                                Else
+                                    .LeaveBalance = txtBalance.Text.Trim
+                                End If
+
+                                .ModifiedBy = employeeId
+                                .ModifiedDate = DateTime.Now
+
+                                If cmbSuperiorName1.SelectedValue = 0 Then 'no immediate superior 1
+                                    .SetSuperiorId1Null()
+
+                                    If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
+                                        'send to manager directly if no immediate superior 1 and 2
+                                        If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                            _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                        cmbManagerName.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        Else
+                                            _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                        cmbManagerName.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        End If
+
+                                    Else 'with immediate superior 2
+                                        If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                            _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                        cmbSuperiorName2.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        Else
+                                            _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                        cmbSuperiorName2.SelectedValue, _
+                                                                        cmbLeaveType.Text, _
+                                                                        StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                        txtDepartment.Text.Trim, _
+                                                                        dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                        txtReason.Text.Trim)
+                                        End If
+                                    End If
+
+                                Else 'with immediate superior 1
+                                    If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
+                                        _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                    cmbSuperiorName1.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    Else
+                                        _frmMain.SendEmailApprovers(.LeaveFileId, _
+                                                                    cmbSuperiorName1.SelectedValue, _
+                                                                    cmbLeaveType.Text, _
+                                                                    StrConv(txtName.Text.Trim, VbStrConv.ProperCase), _
+                                                                    txtDepartment.Text.Trim, _
+                                                                    dtpFrom.Value.Date.ToString("MMMM dd, yyyy") & " - " & dtpTo.Value.Date.ToString("MMMM dd, yyyy"), _
+                                                                    txtReason.Text.Trim)
+                                    End If
+                                End If
+                            End With
                         End If
                     End If
                 End With
@@ -881,14 +1570,16 @@ Public Class frmLeaveForm
         Else
             If MessageBox.Show("Delete this record?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
                 'set screening record IsUsed flag to false
-                If cmbLeaveType.SelectedValue = 1 Then
-                    Me.adpScreening.FillByScreenId(Me.dsLeaveFiling.Screening, screenId)
-                    Dim _screeningRow As ScreeningRow = Me.dsLeaveFiling.Screening.FindByScreenId(screenId)
-                    With _screeningRow
-                        .IsUsed = 0
-                    End With
-                    Me.adpScreening.Update(Me.dsLeaveFiling.Screening)
-                End If
+                Select Case cmbLeaveType.SelectedValue
+                    Case 1, 2, 9, 11, 12
+                        Me.adpScreening.FillByScreenId(Me.dsLeaveFiling.Screening, screenId)
+                        Dim _screeningRow As ScreeningRow = Me.dsLeaveFiling.Screening.FindByScreenId(screenId)
+                        With _screeningRow
+                            .IsUsed = 0
+                        End With
+                        Me.adpScreening.Update(Me.dsLeaveFiling.Screening)
+                End Select
+
                 Me.bsLeaveFiling.RemoveCurrent()
                 Me.adpLeaveFiling.Update(Me.dsLeaveFiling.LeaveFiling)
                 Me.dsLeaveFiling.AcceptChanges()
@@ -941,43 +1632,16 @@ Public Class frmLeaveForm
         End If
     End Sub
 
-#Region "Sub"
-    'check if birthday of the requestor is within the selected month
-    Private Function IsBirthMonth(ByVal _employeeId As Integer) As Boolean
-        Dim _bday As Date
+#Region "Subs"
 
-        If leaveFileId = 0 AndAlso cmbLeaveType.SelectedValue = 3 Then
-            Dim _prmBday(0) As SqlParameter
-            _prmBday(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-            _prmBday(0).Value = _employeeId
-
-            Dim _reader As IDataReader = dbJeonsoft.ExecuteReader("SELECT CAST(BirthDate AS DATE) AS BirthDate FROM dbo.tblEmployees WHERE Id = @EmployeeId", CommandType.Text, _prmBday)
-
-            While _reader.Read
-                If Not _reader.Item("BirthDate").ToString Is DBNull.Value Then
-                    _bday = _reader.Item("BirthDate").ToString
-                Else
-                    _bday = Date.Now.Date
-                End If
-            End While
-            _reader.Close()
-        End If
-
-        If Not _bday.Date.Date.Month.Equals(dtpFrom.Value.Date.Month) Then
-            Return False
-        Else
-            Return True
-        End If
-    End Function
-
-    'get requestor's employee information
-    Private Sub GetEmployeeInfo(ByVal _employeeId As Integer)
+    'get requestor's information
+    Private Sub FillEmployeeInformation(ByVal _employeeId As Integer)
         Try
-            Dim _prmEmpId(0) As SqlParameter
-            _prmEmpId(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-            _prmEmpId(0).Value = _employeeId
+            Dim _prm(0) As SqlParameter
+            _prm(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
+            _prm(0).Value = _employeeId
 
-            Dim _reader As IDataReader = dbLeaveFiling.ExecuteReader("RdEmployee", CommandType.StoredProcedure, _prmEmpId)
+            Dim _reader As IDataReader = dbLeaveFiling.ExecuteReader("RdEmployee", CommandType.StoredProcedure, _prm)
 
             While _reader.Read
                 txtIdNumber.Text = _reader.Item("EmployeeCode").ToString.Trim
@@ -989,6 +1653,7 @@ Public Class frmLeaveForm
                     Else
                         txtDepartment.Text = _reader.Item("DepartmentName").ToString.Trim & " - " & _reader.Item("TeamName").ToString.Trim
                     End If
+                    teamId = _reader.Item("TeamId")
                 Else
                     txtDepartment.Text = _reader.Item("DepartmentName").ToString.Trim
                 End If
@@ -998,7 +1663,7 @@ Public Class frmLeaveForm
                 txtDateHired.Text = CDate(_reader.Item("DateHired")).ToString("MMMM dd, yyyy")
 
                 If Not _reader.Item("EmailAddress") Is DBNull.Value Then
-                    emailAddress = _reader.Item("EmailAddress")
+                    emailAddress = _reader.Item("EmailAddress").ToString
                 Else
                     emailAddress = String.Empty
                 End If
@@ -1006,7 +1671,7 @@ Public Class frmLeaveForm
                 If Not _reader.Item("MobileNo") Is DBNull.Value Then
                     mobileNumber = _reader.Item("MobileNo")
                 Else
-                    mobileNumber = 0
+                    mobileNumber = String.Empty
                 End If
 
                 If Not _reader.Item("NbcEmailAddress") Is DBNull.Value Then
@@ -1015,16 +1680,53 @@ Public Class frmLeaveForm
                     nbcEmailAddress = String.Empty
                 End If
 
-                'exising file
+                If Not _reader.Item("BirthDate") Is DBNull.Value Then
+                    birthDate = _reader.Item("BirthDate")
+                Else
+                    birthDate = Nothing
+                End If
+
+                If Not _reader.Item("MaritalStatusId") Is DBNull.Value Then
+                    maritalStatusId = _reader.Item("MaritalStatusId")
+                Else
+                    maritalStatusId = 0
+                End If
+
+                If Not _reader.Item("GenderId") Is DBNull.Value Then
+                    genderId = _reader.Item("GenderId")
+                Else
+                    genderId = 0
+                End If
+
+                'exising record
                 If leaveFileId <> 0 Then
                     If Not _reader.Item("TeamName") Is DBNull.Value Then
                         requestorTeamId = _reader.Item("TeamId").ToString
                     End If
+
+                    requestorEmploymentTypeId = _reader.Item("EmploymentTypeId").ToString
                     requestorDepartmentId = _reader.Item("DepartmentId").ToString
                     requestorPositionId = _reader.Item("PositionId").ToString
+                    requestorGenderId = _reader.Item("GenderId").ToString
                 End If
             End While
             _reader.Close()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub FillLeaveTypes(ByVal _employmentTypeId As Integer, ByVal _genderId As Integer, ByVal _positionId As Integer)
+        Try
+            Dim _prm(2) As SqlParameter
+            _prm(0) = New SqlParameter("@EmploymentTypeId", SqlDbType.Int)
+            _prm(0).Value = _employmentTypeId
+            _prm(1) = New SqlParameter("@GenderId", SqlDbType.Int)
+            _prm(1).Value = _genderId
+            _prm(2) = New SqlParameter("@PositionId", SqlDbType.Int)
+            _prm(2).Value = _positionId
+
+            dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "Id", "LeaveTypeName", cmbLeaveType, "< Select Leave Type >", _prm)
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -1059,13 +1761,13 @@ Public Class frmLeaveForm
             txtClinicStatus.Text = "Fit To Work"
 
             Dim _prmEmployeeCode(0) As SqlParameter
-            _prmEmployeeCode(0) = New SqlParameter("@EmployeeCode", SqlDbType.VarChar)
+            _prmEmployeeCode(0) = New SqlParameter("@EmployeeId", SqlDbType.VarChar)
             _prmEmployeeCode(0).Value = rowScreening.ScreenBy.ToString
 
             Dim _reader As IDataReader = dbLeaveFiling.ExecuteReader("RdClinic", CommandType.StoredProcedure, _prmEmployeeCode)
 
             While _reader.Read
-                cmbClinicName.SelectedValue = _reader.Item("Id")
+                cmbClinicName.SelectedValue = _reader.Item("EmployeeId")
                 txtClinicPosition.Text = _reader.Item("PositionName").ToString.Trim
             End While
             _reader.Close()
@@ -1085,12 +1787,15 @@ Public Class frmLeaveForm
     'get total leave credits
     Private Sub GetTotalLeaveCredits(ByVal _empId As Integer)
         Try
+            Dim _leaveCredits As Double = 0
             Dim _prmCredits(1) As SqlParameter
-            _prmCredits(0) = New SqlParameter("@EmployeeId", _empId)
+            _prmCredits(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
             _prmCredits(0).Value = _empId
-            _prmCredits(1) = New SqlParameter("@LeaveTypeId", _empId)
+            _prmCredits(1) = New SqlParameter("@LeaveTypeId", SqlDbType.Int)
             _prmCredits(1).Value = cmbLeaveType.SelectedValue
-            txtTotalLeaveCredits.Text = dbJeonsoft.ExecuteScalar("SELECT Quantity FROM dbo.tblEmployeeLeaves WHERE EmployeeId = @EmployeeId AND LeaveTypeId = @LeaveTypeId", CommandType.Text, _prmCredits)
+
+            _leaveCredits = dbJeonsoft.ExecuteScalar("SELECT Quantity FROM dbo.tblEmployeeLeaves WHERE EmployeeId = @EmployeeId AND LeaveTypeId = @LeaveTypeId", CommandType.Text, _prmCredits)
+            txtTotalLeaveCredits.Text = _leaveCredits
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -1100,21 +1805,128 @@ Public Class frmLeaveForm
     Private Sub GetLeaveBalance(ByVal _empId As Integer)
         Try
             Dim _leaveBalance As Double
-            Dim _paramsLeaveBalance(3) As SqlParameter
-            _paramsLeaveBalance(0) = New SqlParameter("@CompanyId", SqlDbType.Int)
-            _paramsLeaveBalance(0).Value = 1
-            _paramsLeaveBalance(1) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-            _paramsLeaveBalance(1).Value = _empId
-            _paramsLeaveBalance(2) = New SqlParameter("@LeaveTypeId", SqlDbType.Int)
-            _paramsLeaveBalance(2).Value = cmbLeaveType.SelectedValue
-            _paramsLeaveBalance(3) = New SqlParameter("@Date", SqlDbType.Date)
-            _paramsLeaveBalance(3).Value = DBNull.Value
-            _leaveBalance = dbJeonsoft.ExecuteFunction(Of Double)("dbo.fnGetLeaveBalance", _paramsLeaveBalance)
+            Dim _prmBalance(3) As SqlParameter
+            _prmBalance(0) = New SqlParameter("@CompanyId", SqlDbType.Int)
+            _prmBalance(0).Value = 1
+            _prmBalance(1) = New SqlParameter("@EmployeeId", SqlDbType.Int)
+            _prmBalance(1).Value = _empId
+            _prmBalance(2) = New SqlParameter("@LeaveTypeId", SqlDbType.Int)
+            _prmBalance(2).Value = cmbLeaveType.SelectedValue
+            _prmBalance(3) = New SqlParameter("@Date", SqlDbType.Date)
+            _prmBalance(3).Value = DBNull.Value
+
+            _leaveBalance = dbJeonsoft.ExecuteFunction(Of Double)("dbo.fnGetLeaveBalance", _prmBalance)
             txtBalance.Text = _leaveBalance
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
+
+    Private Sub ResetForm()
+        cmbLeaveType.SelectedValue = 0
+        dtpFrom.Enabled = False
+        dtpFrom.Value = Date.Now.Date
+        dtpTo.Enabled = False
+        dtpTo.Value = Date.Now.Date
+        txtReason.Text = String.Empty
+        txtReason.ReadOnly = True
+
+        txtTotalLeaveCredits.Text = String.Empty
+        txtBalance.Text = String.Empty
+        txtNumberOfDays.Text = String.Empty
+
+        txtClinicStatus.Text = String.Empty
+        txtClinicPosition.Text = String.Empty
+        txtClinicDateApproved.Text = String.Empty
+        txtClinicRemarks.Text = String.Empty
+
+        cmbSuperiorStatus1.Enabled = False
+        cmbSuperiorStatus1.SelectedValue = 0
+        cmbSuperiorName1.Enabled = False
+        cmbSuperiorName1.SelectedValue = 0
+        txtSuperiorRemarks1.Text = String.Empty
+        txtSuperiorRemarks1.ReadOnly = True
+
+        cmbSuperiorStatus2.Enabled = False
+        cmbSuperiorStatus2.SelectedValue = 0
+        cmbSuperiorName2.Enabled = False
+        cmbSuperiorName2.SelectedValue = 0
+        txtSuperiorRemarks2.Text = String.Empty
+        txtSuperiorRemarks2.ReadOnly = True
+
+        cmbManagerStatus.Enabled = False
+        cmbManagerStatus.SelectedValue = 0
+        cmbManagerName.Enabled = False
+        cmbManagerName.SelectedValue = 0
+        txtManagerRemarks.Text = String.Empty
+        txtManagerRemarks.ReadOnly = True
+    End Sub
+
+    Private Sub FillApproverStatus()
+        dictSuperior1.Add(" < Select Status > ", 0)
+        dictSuperior1.Add("Approved", 1)
+        dictSuperior1.Add("Disapproved", 2)
+        dictSuperior1.Add("Return to Requestor for Revision", 3)
+        cmbSuperiorStatus1.DisplayMember = "Key"
+        cmbSuperiorStatus1.ValueMember = "Value"
+        cmbSuperiorStatus1.DataSource = New BindingSource(dictSuperior1, Nothing)
+
+        dictSuperior2.Add(" < Select Status > ", 0)
+        dictSuperior2.Add("Approved", 1)
+        dictSuperior2.Add("Disapproved", 2)
+        dictSuperior2.Add("Return to Requestor for Revision", 3)
+        cmbSuperiorStatus2.DisplayMember = "Key"
+        cmbSuperiorStatus2.ValueMember = "Value"
+        cmbSuperiorStatus2.DataSource = New BindingSource(dictSuperior2, Nothing)
+
+        dictManager.Add(" < Select Status > ", 0)
+        dictManager.Add("Approved", 1)
+        dictManager.Add("Disapproved", 2)
+        dictManager.Add("Return to Requestor for Revision", 3)
+        cmbManagerStatus.DisplayMember = "Key"
+        cmbManagerStatus.ValueMember = "Value"
+        cmbManagerStatus.DataSource = New BindingSource(dictManager, Nothing)
+    End Sub
+
+    Private Sub FillApproversNew(ByVal _employeeId As Integer)
+        Try
+            'immediate superior 1 - clerk, staff, line leader, sr line leader
+            Dim _prmSup1(0) As SqlParameter
+            _prmSup1(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
+            _prmSup1(0).Value = _employeeId
+            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "EmployeeId", "EmployeeName", cmbSuperiorName1, "< None >", _prmSup1)
+
+            'immediate superior 2 - sr mngr, asst mngr, sv, asv, sr engr, sr staff, sr line leader, sr technician, sr nurse
+            Dim _prmSup2(0) As SqlParameter
+            _prmSup2(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
+            _prmSup2(0).Value = _employeeId
+            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "EmployeeId", "EmployeeName", cmbSuperiorName2, "< None >", _prmSup2)
+
+            'last approver - dgm, sr mngr, mngr, asst mngr, sv, asv
+            dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "EmployeeId", "EmployeeName", cmbManagerName, "< None >")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub FillApproversOld(ByVal _employeeId As Integer, ByVal _departmentId As Integer, ByVal _teamId As Integer, ByVal _positionId As Integer)
+        Try
+            'immediate superior 1 - clerk, staff, line leader, sr line leader
+            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "EmployeeId", "EmployeeName", cmbSuperiorName1, "< None >")
+
+            'immediate superior 2 - sr mngr, asst mngr, sv, asv, sr engr, sr staff, sr line leader, sr technician, sr nurse
+            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "EmployeeId", "EmployeeName", cmbSuperiorName2, "< None >")
+
+            'last approver - dgm, sr mngr, mngr, asst mngr, sv, asv
+            dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "EmployeeId", "EmployeeName", cmbManagerName, "< None >")
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+#End Region
+
+#Region "Functions"
 
     'compute total days between two dates - excluding sundays, legal, special and company holidays
     Private Function GetTotalDays(ByVal _startDate As Date, ByVal _endDate As Date) As Integer
@@ -1170,672 +1982,36 @@ Public Class frmLeaveForm
         End If
     End Function
 
-    Private Sub ResetForm()
-        cmbLeaveType.SelectedValue = 0
-        dtpFrom.Enabled = False
-        dtpFrom.Value = Date.Now.Date
-        dtpTo.Enabled = False
-        dtpTo.Value = Date.Now.Date
-        txtReason.Text = String.Empty
-        txtReason.ReadOnly = True
+    'check if birthday of the requestor is within the selected month
+    Private Function IsBirthMonth(ByVal _employeeId As Integer) As Boolean
+        Dim _bday As Date
 
-        txtTotalLeaveCredits.Text = String.Empty
-        txtBalance.Text = String.Empty
-        txtNumberOfDays.Text = String.Empty
+        If leaveFileId = 0 AndAlso cmbLeaveType.SelectedValue = 3 Then
+            Dim _prmBday(0) As SqlParameter
+            _prmBday(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
+            _prmBday(0).Value = _employeeId
 
-        txtClinicStatus.Text = String.Empty
-        txtClinicPosition.Text = String.Empty
-        txtClinicDateApproved.Text = String.Empty
-        txtClinicRemarks.Text = String.Empty
+            Dim _reader As IDataReader = dbJeonsoft.ExecuteReader("SELECT CAST(BirthDate AS DATE) AS BirthDate FROM dbo.tblEmployees WHERE Id = @EmployeeId", CommandType.Text, _prmBday)
 
-        cmbSuperiorStatus1.Enabled = False
-        cmbSuperiorStatus1.SelectedValue = 0
-        cmbSuperiorName1.Enabled = False
-        cmbSuperiorName1.SelectedValue = 0
-        txtSuperiorRemarks1.Text = String.Empty
-        txtSuperiorRemarks1.ReadOnly = True
+            While _reader.Read
+                If Not _reader.Item("BirthDate").ToString Is DBNull.Value Then
+                    _bday = _reader.Item("BirthDate").ToString
+                Else
+                    _bday = Date.Now.Date
+                End If
+            End While
+            _reader.Close()
+        End If
 
-        cmbSuperiorStatus2.Enabled = False
-        cmbSuperiorStatus2.SelectedValue = 0
-        cmbSuperiorName2.Enabled = False
-        cmbSuperiorName2.SelectedValue = 0
-        txtSuperiorRemarks2.Text = String.Empty
-        txtSuperiorRemarks2.ReadOnly = True
-
-        cmbManagerStatus.Enabled = False
-        cmbManagerStatus.SelectedValue = 0
-        cmbManagerName.Enabled = False
-        cmbManagerName.SelectedValue = 0
-        txtManagerRemarks.Text = String.Empty
-        txtManagerRemarks.ReadOnly = True
-    End Sub
-
-    Private Sub FillSuperiorStatus1()
-        dictSuperior1.Add(" < Select Status > ", 0)
-        dictSuperior1.Add("Approve", 1)
-        dictSuperior1.Add("Disapprove", 2)
-        cmbSuperiorStatus1.DisplayMember = "Key"
-        cmbSuperiorStatus1.ValueMember = "Value"
-        cmbSuperiorStatus1.DataSource = New BindingSource(dictSuperior1, Nothing)
-    End Sub
-
-    Private Sub FillSuperiorStatus2()
-        dictSuperior2.Add(" < Select Status > ", 0)
-        dictSuperior2.Add("Approve", 1)
-        dictSuperior2.Add("Disapprove", 2)
-        cmbSuperiorStatus2.DisplayMember = "Key"
-        cmbSuperiorStatus2.ValueMember = "Value"
-        cmbSuperiorStatus2.DataSource = New BindingSource(dictSuperior2, Nothing)
-    End Sub
-
-    Private Sub FillManagerStatus()
-        dictManager.Add(" < Select Status > ", 0)
-        dictManager.Add("Approve", 1)
-        dictManager.Add("Disapprove", 2)
-        cmbManagerStatus.DisplayMember = "Key"
-        cmbManagerStatus.ValueMember = "Value"
-        cmbManagerStatus.DataSource = New BindingSource(dictManager, Nothing)
-    End Sub
-
-    'check if no line leader
-    Private Function IsNoLeader(ByVal _departmentId As Integer, ByVal _teamId As Integer) As Boolean
-        Dim _noLeader As Boolean = False
-        Dim _count As Integer = 0
-        Try
-            Dim _prm(1) As SqlParameter
-            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-            _prm(0).Value = _departmentId
-            _prm(1) = New SqlParameter("@TeamId", SqlDbType.Int)
-            _prm(1).Value = _teamId
-            _count = dbJeonsoft.ExecuteScalar("SELECT COUNT(Id) AS Count FROM dbo.tblEmployees WHERE DepartmentId = @DepartmentId AND TeamId = @TeamId AND PositionId = 7", CommandType.Text, _prm)
-            If _count > 0 Then
-                _noLeader = False
-            Else
-                _noLeader = True
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-
-        Return _noLeader
+        If Not _bday.Date.Date.Month.Equals(dtpFrom.Value.Date.Month) Then
+            Return False
+        Else
+            Return True
+        End If
     End Function
-
-    'check if no sr line leader
-    Private Function IsNoSrLeader(ByVal _departmentId As Integer, ByVal _teamId As Integer) As Boolean
-        Dim _noSrLeader As Boolean = False
-        Dim _count As Integer = 0
-        Try
-            Dim _prm(1) As SqlParameter
-            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-            _prm(0).Value = _departmentId
-            _prm(1) = New SqlParameter("@TeamId", SqlDbType.Int)
-            _prm(1).Value = _teamId
-            _count = dbJeonsoft.ExecuteScalar("SELECT COUNT(Id) AS Count FROM dbo.tblEmployees WHERE DepartmentId = @DepartmentId AND TeamId = @TeamId AND PositionId = 17", CommandType.Text, _prm)
-            If _count > 0 Then
-                _noSrLeader = False
-            Else
-                _noSrLeader = True
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-
-        Return _noSrLeader
-    End Function
-
-    'check if no sr mngr
-    Private Function IsNoSrMngr(ByVal _departmentId As Integer) As Boolean
-        Dim _noSrMngr As Boolean = False
-        Dim _count As Integer = 0
-        Try
-            Dim _prm(0) As SqlParameter
-            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-            _prm(0).Value = _departmentId
-            _count = dbJeonsoft.ExecuteScalar("SELECT COUNT(Id) AS Count FROM dbo.tblEmployees WHERE DepartmentId = @DepartmentId AND PositionId = 21", CommandType.Text, _prm)
-            If _count > 0 Then
-                _noSrMngr = False
-            Else
-                _noSrMngr = True
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-
-        Return _noSrMngr
-    End Function
-
-    Private Sub FillApproversOld(ByVal _employeeId As Integer, ByVal _departmentId As Integer, ByVal _teamId As Integer, ByVal _positionId As Integer)
-        'immediate superior 1
-        Select Case _departmentId
-            Case 4 'production
-                Select Case _positionId
-                    Case 21, 2, 13, 19, 4 'sr mngr, mngr, asst mngr, sv, asv
-
-                    Case 1 'staff
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 6
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-
-                    Case 17 'sr line leader
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 7
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-
-                    Case 7 'leader
-                        If IsNoSrLeader(_departmentId, _teamId) = True Then
-                            Dim _prm(1) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 7
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                        Else
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 4
-                            _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                            _prm(2).Value = _teamId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                        End If
-
-                    Case Else
-                        If IsNoLeader(_departmentId, _teamId) = True Then
-                            If IsNoSrLeader(_departmentId, _teamId) = True Then
-                                Dim _prm(2) As SqlParameter
-                                _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                                _prm(0).Value = _departmentId
-                                _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                                _prm(1).Value = 7
-                                _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                                _prm(2).Value = _teamId
-                                dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                            Else
-                                Dim _prm(2) As SqlParameter
-                                _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                                _prm(0).Value = _departmentId
-                                _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                                _prm(1).Value = 4
-                                _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                                _prm(2).Value = _teamId
-                                dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                            End If
-                        Else
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 3
-                            _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                            _prm(2).Value = _teamId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                        End If
-                End Select
-
-            Case Else
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-
-                    Case Else
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 13
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                End Select
-        End Select
-
-        'immediate superior 2
-        Select Case _departmentId
-            Case 4 'production
-                Select Case _positionId
-                    Case 21, 2, 13, 19 'sr mngr, mngr, asst mngr, sv
-
-                    Case 4 'asv
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 5
-                        _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                        _prm(2).Value = _teamId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case 1 'staff
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 4
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case 17 'sr line leader
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 4
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case 7 'leader
-                        If IsNoSrLeader(_departmentId, _teamId) = True Then
-                            Dim _prm(1) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 4
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        Else
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 3
-                            _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                            _prm(2).Value = _teamId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        End If
-
-                    Case Else
-                        If IsNoSrLeader(_departmentId, _teamId) Then
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 2
-                            _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(2).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        Else
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 3
-                            _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(2).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        End If
-                End Select
-
-            Case 14 'purchasing
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-                        Dim _prm(0) As SqlParameter 'sir funaki
-                        _prm(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(0).Value = 276
-                        dbLeaveFiling.FillCmbWithCaption("SELECT E.Id, (E.FirstName + ' ' + ISNULL(SUBSTRING(CASE WHEN LEN(TRIM(E.MiddleName)) = 0 THEN NULL WHEN TRIM(E.MiddleName) = '-' THEN NULL ELSE TRIM(E.MiddleName) END, 1, 1) + '. ' , '') + E.LastName) AS Name FROM NBCTECHDB.dbo.tblEmployees E WHERE E.Active = 1 AND E.Id <> 1 AND E.Id = @EmployeeId ORDER BY E.Name ASC", CommandType.Text, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case Else
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 3
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                End Select
-
-            Case Else
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-
-                    Case Else
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 3
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                End Select
-
-        End Select
-
-        'manager
-        Select Case _departmentId
-            Case 4 'production
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-                        Dim _prm(0) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 9
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-
-                    Case 13, 19, 4, 17, 1, 11 'asst mngr, sv, asv, sr line leader, staff, clerk
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 7
-                        _prm(1) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(1).Value = _departmentId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-
-                    Case Else
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 4
-                        _prm(1) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(1).Value = _departmentId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-                End Select
-
-            Case 19 'qc
-                Dim _prm(0) As SqlParameter 'sir alvin aranes
-                _prm(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                _prm(0).Value = 117
-                dbLeaveFiling.FillCmbWithCaption("SELECT E.Id, (E.FirstName + ' ' + ISNULL(SUBSTRING(CASE WHEN LEN(TRIM(E.MiddleName)) = 0 THEN NULL WHEN TRIM(E.MiddleName) = '-' THEN NULL ELSE TRIM(E.MiddleName) END, 1, 1) + '. ' , '') + E.LastName) AS Name FROM NBCTECHDB.dbo.tblEmployees E WHERE E.Active = 1 AND E.Id <> 1 AND E.Id = @EmployeeId ORDER BY E.Name ASC", CommandType.Text, "Id", "Name", cmbManagerName, "", _prm)
-
-            Case Else
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-                        Dim _prm(0) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 9
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-
-                    Case Else
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 7
-                        _prm(1) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(1).Value = _departmentId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-                End Select
-        End Select
-    End Sub
-
-    Private Sub FillApproversNew(ByVal _employeeId As Integer, ByVal _departmentId As Integer, ByVal _teamId As Integer, ByVal _positionId As Integer)
-        'immediate superior 1
-        Select Case _departmentId
-            Case 4 'production
-                Select Case _positionId
-                    Case 21, 2, 13, 19, 4 'sr mngr, mngr, asst mngr, sv, asv
-
-                    Case 1 'staff
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 6
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-
-                    Case 17 'sr line leader
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 7
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-
-                    Case 7 'leader
-                        If IsNoSrLeader(_departmentId, _teamId) = True Then
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 7
-                            _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(2).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                        Else
-                            Dim _prm(3) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 4
-                            _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                            _prm(2).Value = _teamId
-                            _prm(3) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(3).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                        End If
-
-                    Case Else
-                        If IsNoLeader(_departmentId, _teamId) = True Then
-                            If IsNoSrLeader(_departmentId, _teamId) = True Then
-                                Dim _prm(3) As SqlParameter
-                                _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                                _prm(0).Value = _departmentId
-                                _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                                _prm(1).Value = 7
-                                _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                                _prm(2).Value = _teamId
-                                _prm(3) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                                _prm(3).Value = _employeeId
-                                dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                            Else
-                                Dim _prm(2) As SqlParameter
-                                _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                                _prm(0).Value = _departmentId
-                                _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                                _prm(1).Value = 4
-                                _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                                _prm(2).Value = _employeeId
-                                dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                            End If
-                        Else
-                            Dim _prm(3) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 3
-                            _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                            _prm(2).Value = _teamId
-                            _prm(3) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(3).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                        End If
-                End Select
-
-            Case Else
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-
-                    Case Else
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 13
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior1", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName1, "", _prm)
-                End Select
-        End Select
-
-        'immediate superior 2
-        Select Case _departmentId
-            Case 4 'production
-                Select Case _positionId
-                    Case 21, 2, 13, 19 'sr mngr, mngr, asst mngr, sv
-
-                    Case 4 'asv
-                        Dim _prm(3) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 5
-                        _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                        _prm(2).Value = _teamId
-                        _prm(3) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(3).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case 1 'staff
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 4
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case 17 'sr line leader
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 4
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case 7 'leader
-                        If IsNoSrLeader(_departmentId, _teamId) = True Then
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 4
-                            _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(2).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        Else
-                            Dim _prm(3) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 3
-                            _prm(2) = New SqlParameter("@TeamId", SqlDbType.Int)
-                            _prm(2).Value = _teamId
-                            _prm(3) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(3).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        End If
-
-                    Case Else
-                        If IsNoSrLeader(_departmentId, _teamId) Then
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 2
-                            _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(2).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        Else
-                            Dim _prm(2) As SqlParameter
-                            _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                            _prm(0).Value = _departmentId
-                            _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                            _prm(1).Value = 3
-                            _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                            _prm(2).Value = _employeeId
-                            dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                        End If
-                End Select
-
-            Case 14 'purchasing
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-                        Dim _prm(0) As SqlParameter 'sir funaki
-                        _prm(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(0).Value = 276
-                        dbLeaveFiling.FillCmbWithCaption("SELECT E.Id, (E.FirstName + ' ' + ISNULL(SUBSTRING(CASE WHEN LEN(TRIM(E.MiddleName)) = 0 THEN NULL WHEN TRIM(E.MiddleName) = '-' THEN NULL ELSE TRIM(E.MiddleName) END, 1, 1) + '. ' , '') + E.LastName) AS Name FROM NBCTECHDB.dbo.tblEmployees E WHERE E.Active = 1 AND E.Id <> 1 AND E.Id = @EmployeeId ORDER BY E.Name ASC", CommandType.Text, "Id", "Name", cmbSuperiorName2, "", _prm)
-
-                    Case Else
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 3
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                End Select
-
-            Case Else
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-
-                    Case Else
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(0).Value = _departmentId
-                        _prm(1) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(1).Value = 3
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdSuperior2", CommandType.StoredProcedure, "Id", "Name", cmbSuperiorName2, "", _prm)
-                End Select
-
-        End Select
-
-        'manager
-        Select Case _departmentId
-            Case 4 'production
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 9
-                        _prm(1) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(1).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-
-                    Case 13, 19, 4, 17, 1, 11 'asst mngr, sv, asv, sr line leader, staff, clerk
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 7
-                        _prm(1) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(1).Value = _departmentId
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-
-                    Case Else
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 4
-                        _prm(1) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(1).Value = _departmentId
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-                End Select
-
-            Case 19 'qc
-                Dim _prm(0) As SqlParameter 'sir alvin aranes
-                _prm(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                _prm(0).Value = 117
-                dbLeaveFiling.FillCmbWithCaption("SELECT E.Id, (E.FirstName + ' ' + ISNULL(SUBSTRING(CASE WHEN LEN(TRIM(E.MiddleName)) = 0 THEN NULL WHEN TRIM(E.MiddleName) = '-' THEN NULL ELSE TRIM(E.MiddleName) END, 1, 1) + '. ' , '') + E.LastName) AS Name FROM NBCTECHDB.dbo.tblEmployees E WHERE E.Active = 1 AND E.Id <> 1 AND E.Id = @EmployeeId ORDER BY E.Name ASC", CommandType.Text, "Id", "Name", cmbManagerName, "", _prm)
-
-            Case Else
-                Select Case _positionId
-                    Case 21, 2 'sr mngr, mngr
-                        Dim _prm(1) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 9
-                        _prm(1) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(1).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-
-                    Case Else
-                        Dim _prm(2) As SqlParameter
-                        _prm(0) = New SqlParameter("@AccessLevel", SqlDbType.Int)
-                        _prm(0).Value = 7
-                        _prm(1) = New SqlParameter("@DepartmentId", SqlDbType.Int)
-                        _prm(1).Value = _departmentId
-                        _prm(2) = New SqlParameter("@EmployeeId", SqlDbType.Int)
-                        _prm(2).Value = _employeeId
-                        dbLeaveFiling.FillCmbWithCaption("RdManager", CommandType.StoredProcedure, "Id", "Name", cmbManagerName, "", _prm)
-                End Select
-        End Select
-    End Sub
 
     Private Function SaveRemarksOnly() As DialogResult
-        If MessageBox.Show("No selected status. Would you like to save only the remarks?", "", _
+        If MessageBox.Show("No selected status. Would you like to save only the remarks/comments?", "", _
                            MessageBoxButtons.YesNo, MessageBoxIcon.Question, _
                            MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
 
@@ -1847,7 +2023,7 @@ Public Class frmLeaveForm
 
     Private Function Confirmation(ByVal _status As Integer) As DialogResult
         If _status = 1 Then
-            If MessageBox.Show("Are you sure you want to approve this record?" & Environment.NewLine & "This cannot be modify.", "", _
+            If MessageBox.Show("Are you sure you want to approve this record?" & Environment.NewLine & "This cannot be modified.", "", _
                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, _
                    MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
 
@@ -1856,7 +2032,7 @@ Public Class frmLeaveForm
                 Return Windows.Forms.DialogResult.No
             End If
         Else
-            If MessageBox.Show("Are you sure you want to disapprove this record?" & Environment.NewLine & "This cannot be modify.", "", _
+            If MessageBox.Show("Are you sure you want to disapprove this record?" & Environment.NewLine & "This cannot be modified.", "", _
                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, _
                    MessageBoxDefaultButton.Button2) = DialogResult.Yes Then
 

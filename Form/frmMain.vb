@@ -13,7 +13,6 @@ Public Class frmMain
     Private main As New Main
     'server datetime
     Private serverDate As DateTime = dbLeaveFiling.GetServerDate
-
     Private employeeId As Integer = 0
     Private employeeCode As String = String.Empty
     Private employeeName As String = String.Empty
@@ -117,10 +116,10 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_MdiChildActivate(sender As Object, e As EventArgs) Handles MyBase.MdiChildActivate
-        Dim frm As Form = Me.ActiveMdiChild
+        Dim _frm As Form = Me.ActiveMdiChild
 
-        If Not frm Is Nothing Then
-            Me.Text = "Leave Application - [" & frm.Text & "]"
+        If Not _frm Is Nothing Then
+            Me.Text = "Leave Application - [" & _frm.Text & "]"
         End If
     End Sub
 
@@ -157,14 +156,133 @@ Public Class frmMain
         End If
     End Sub
 
-    'send email to requestor
-    Public Sub SendEmailRequestor(ByVal _isApproved As Boolean, _employeeId As Integer, ByVal _leaveType As String, ByVal _startDate As Date, ByVal _endDate As Date)
+    'send remarks from superiors or manager
+    Public Sub SendRemarksNofitication(ByVal _employeeId As Integer, ByVal _remarksPosition As String, ByVal _remarksFrom As String, ByVal _remarks As String, ByVal _leaveType As String, ByVal _startDate As Date, ByVal _endDate As Date)
         Try
             Dim client As New SmtpClient()
             Dim message As New MailMessage()
-            Dim messageBody As String = "<font size=""5"" face=""Segoe UI"" color=""black"">" & _
+            Dim messageBody As String = "<font size=""3"" face=""Segoe UI"" color=""black"">" & _
                                         "Good day! <br> <br> "
-            
+
+            message.From = New MailAddress("nbcleaveapplication@gmail.com", "NBC Leave Application")
+
+            Dim _prmRequestor(0) As SqlParameter
+            _prmRequestor(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
+            _prmRequestor(0).Value = _employeeId
+
+            Dim _reader As IDataReader = dbJeonsoft.ExecuteReader("SELECT TRIM(EmailAddress) AS EmailAddress FROM dbo.tblEmployees WHERE Id = @EmployeeId", CommandType.Text, _prmRequestor)
+
+            While _reader.Read
+                If _reader.Item("EmailAddress") Is DBNull.Value Then
+                    message.To.Add("it1@nbc-p.com")
+                Else
+                    message.To.Add(_reader.Item("EmailAddress").ToString.Trim)
+                    'message.To.Add("it1@nbc-p.com") 'for test
+                End If
+            End While
+            _reader.Close()
+
+            message.Subject = "Leave Notification"
+            message.IsBodyHtml = True 'set email as html to attach hyperlink
+
+            If _startDate.Date.Date.Equals(_endDate.Date.Date) Then
+                messageBody += "New notification to your " & _leaveType.ToString.Trim & " dated " & _startDate.Date.ToString("MMMM dd, yyyy") & " from your " & _remarksPosition.ToString.Trim & ". <br> <br>" & _
+                    _remarksFrom.ToString.Trim & ": " & _remarks.ToString.Trim
+            Else
+                messageBody += "New notification to your " & _leaveType.ToString.Trim & " dated " & _startDate.Date.ToString("MMMM dd, yyyy") & " to " & _endDate.Date.ToString("MMMM dd, yyyy") & " from your " & _remarksPosition.ToString.Trim & ". <br> <br>" & _
+                    _remarksFrom.ToString.Trim & ": " & _remarks.ToString.Trim
+            End If
+
+            messageBody += "<br>" & "<br>" & "<br>" & _
+                "Please check on your Leave Application System." & _
+                "<br>" & "<br>" & _
+                "If you have any concern, please call IT (Local 232). <br> <br>" & _
+                "Thank you."
+
+            message.Body = messageBody
+
+            client.Host = "smtp.gmail.com"
+            client.Port = 587
+            client.EnableSsl = True
+            client.UseDefaultCredentials = False
+            client.Credentials = New Net.NetworkCredential("nbcleaveapplication@gmail.com", "qwerty123$$")
+
+            Dim userState As String = "userState"
+            AddHandler client.SendCompleted, AddressOf SendCompletedCallback
+
+            client.SendAsync(message, userState)
+
+            StatusToolStripStatusLabel.Visible = True
+            StatusToolStripStatusLabel.Text = "Sending email. Please wait......"
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Public Sub SendEmailReturned(ByVal _employeeId As Integer, ByVal _leaveType As String, ByVal _startDate As Date, ByVal _endDate As Date)
+        Try
+            Dim client As New SmtpClient()
+            Dim message As New MailMessage()
+            Dim messageBody As String = "<font size=""3"" face=""Segoe UI"" color=""black"">" & _
+                                        "Good day! <br> <br> "
+
+            message.From = New MailAddress("nbcleaveapplication@gmail.com", "NBC Leave Application")
+
+            Dim _prmRequestor(0) As SqlParameter
+            _prmRequestor(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
+            _prmRequestor(0).Value = _employeeId
+
+            Dim _reader As IDataReader = dbJeonsoft.ExecuteReader("SELECT TRIM(EmailAddress) AS EmailAddress FROM dbo.tblEmployees WHERE Id = @EmployeeId", CommandType.Text, _prmRequestor)
+
+            While _reader.Read
+                If _reader.Item("EmailAddress") Is DBNull.Value Then
+                    message.To.Add("it1@nbc-p.com")
+                Else
+                    message.To.Add(_reader.Item("EmailAddress").ToString.Trim)
+                    'message.To.Add("it1@nbc-p.com") 'for test
+                End If
+            End While
+            _reader.Close()
+
+            message.Subject = "Leave Notification"
+            message.IsBodyHtml = True 'set email as html to attach hyperlink
+
+            If _startDate.Date.Date.Equals(_endDate.Date.Date) Then
+                messageBody += "Your " & _leaveType.ToString.Trim & " dated " & _startDate.Date.ToString("MMMM dd, yyyy") & " is returned for revision. Please update your application then resend it to approvers. <br> Thank you. <br> <br>" & _
+                    "NOTE: This is a system-generated email. Please do not reply."
+            Else
+                messageBody += "Your " & _leaveType.ToString.Trim & " dated from " & _startDate.Date.ToString("MMMM dd, yyyy") & " to " & _endDate.Date.ToString("MMMM dd, yyyy") & " is returned for revision. Please update your application then resend it to approvers. <br> Thank you. <br> <br>" & _
+                    "NOTE: This is a system-generated email. Please do not reply."
+            End If
+
+            message.Body = messageBody
+
+            client.Host = "smtp.gmail.com"
+            client.Port = 587
+            client.EnableSsl = True
+            client.UseDefaultCredentials = False
+            client.Credentials = New Net.NetworkCredential("nbcleaveapplication@gmail.com", "qwerty123$$")
+
+            Dim userState As String = "userState"
+            AddHandler client.SendCompleted, AddressOf SendCompletedCallback
+
+            client.SendAsync(message, userState)
+
+            StatusToolStripStatusLabel.Visible = True
+            StatusToolStripStatusLabel.Text = "Sending email. Please wait......"
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    'send email to requestor
+    Public Sub SendEmailRequestor(ByVal _isApproved As Boolean, ByVal _employeeId As Integer, ByVal _leaveType As String, ByVal _startDate As Date, ByVal _endDate As Date)
+        Try
+            Dim client As New SmtpClient()
+            Dim message As New MailMessage()
+            Dim messageBody As String = "<font size=""3"" face=""Segoe UI"" color=""black"">" & _
+                                        "Good day! <br> <br> "
+
             message.From = New MailAddress("nbcleaveapplication@gmail.com", "NBC Leave Application")
 
             Dim _prmRequestor(0) As SqlParameter
@@ -228,13 +346,14 @@ Public Class frmMain
     End Sub
 
     'send email to next approver
-    Public Sub SendEmailApprovers(ByVal _employeeId As Integer, ByVal _leaveType As String, ByVal _employeeName As String, ByVal _department As String, ByVal _date As String, ByVal _reason As String)
+    Public Sub SendEmailApprovers(ByVal _leaveFileId As Integer, ByVal _employeeId As Integer, ByVal _leaveType As String, ByVal _employeeName As String, ByVal _department As String, ByVal _date As String, ByVal _reason As String)
         Try
             Dim client As New SmtpClient()
             Dim message As New MailMessage()
-            Dim messageBody As String = "<font size=""5"" face=""Segoe UI"" color=""black"">" & _
+            Dim messageBody As String = "<font size=""3"" face=""Segoe UI"" color=""black"">" & _
                                         "Good day! <br> <br> " & _
                                         "New leave application for your approval. Please check the information below for your reference. <br> <br> " & _
+                                        "&nbsp;Leave File ID: " & _leaveFileId & " <br> " & _
                                         "&nbsp;Leave Type: " & _leaveType.ToString.Trim & " <br> " & _
                                         "&nbsp;Employee Name: " & _employeeName.ToString.Trim & " <br> " & _
                                         "&nbsp;Department/Section: " & _department.ToString.Trim & " <br> " & _
@@ -259,7 +378,7 @@ Public Class frmMain
                     message.To.Add("it1@nbc-p.com")
                 Else
                     message.To.Add(_reader.Item("EmailAddress").ToString.Trim)
-                    'message.To.Add("it1@nbc-p.com")
+                    'message.To.Add("it1@nbc-p.com") 'for testing
                 End If
             End While
             _reader.Close()
@@ -287,16 +406,17 @@ Public Class frmMain
     End Sub
 
     'send email to hr (mam cath) for encoding to jeonsoft
-    Public Sub SendEmailHr(ByVal _isApproved As Boolean, _leaveType As String, ByVal _employeeName As String, ByVal _department As String, ByVal _date As String, ByVal _reason As String)
+    Public Sub SendEmailHr(ByVal _leaveFileId As Integer, ByVal _isApproved As Boolean, _leaveType As String, ByVal _employeeName As String, ByVal _department As String, ByVal _date As String, ByVal _reason As String)
         Try
             Dim client As New SmtpClient()
             Dim message As New MailMessage()
             Dim messageBody As String = String.Empty
 
             If _isApproved = True Then
-                messageBody = "<font size=""5"" face=""Segoe UI"" color=""black"">" & _
+                messageBody = "<font size=""3"" face=""Segoe UI"" color=""black"">" & _
                             "Good day! <br> <br> " & _
                             "New approved leave application. Please check the information below for your reference. <br> <br> " & _
+                            "&nbsp;Leave File ID: " & _leaveFileId & " <br> " & _
                             "&nbsp;Leave Type: " & _leaveType.ToString.Trim & " <br> " & _
                             "&nbsp;Employee Name: " & _employeeName.ToString.Trim & " <br> " & _
                             "&nbsp;Department/Section: " & _department.ToString.Trim & " <br> " & _
@@ -308,9 +428,10 @@ Public Class frmMain
                             "If you have any concern, please call IT (Local 232). <br> <br>" & _
                             "Thank you."
             Else
-                messageBody = "<font size=""5"" face=""Segoe UI"" color=""black"">" & _
+                messageBody = "<font size=""3"" face=""Segoe UI"" color=""black"">" & _
                             "Good day! <br> <br> " & _
                             "New disapproved leave application. Please check the information below for your reference. <br> <br> " & _
+                            "&nbsp;Leave File ID: " & _leaveFileId & " <br> " & _
                             "&nbsp;Leave Type: " & _leaveType.ToString.Trim & " <br> " & _
                             "&nbsp;Employee Name: " & _employeeName.ToString.Trim & " <br> " & _
                             "&nbsp;Department/Section: " & _department.ToString.Trim & " <br> " & _
@@ -326,6 +447,7 @@ Public Class frmMain
             message.From = New MailAddress("nbcleaveapplication@gmail.com", "NBC Leave Application")
 
             message.To.Add("catherine.delapena@nbc-p.com")
+            'message.To.Add("it1@nbc-p.com") 'for testing
             message.Subject = "Leave Notification"
             message.IsBodyHtml = True
             message.Body = messageBody

@@ -104,6 +104,20 @@ Public Class frmLogin
         'cnc operator
         'txtEmployeeId.Text = "1902-020"
 
+        'txtEmployeeId.Text = "2005-003"
+
+        'probi
+        'txtEmployeeId.Text = "2010-011"
+
+        'mam sher
+        'txtEmployeeId.Text = "2104-020"
+
+        'mam april
+        'txtEmployeeId.Text = "1710-002"
+
+        'sir yamamoto
+        'txtEmployeeId.Text = "1907-000"
+
         If ApplicationDeployment.IsNetworkDeployed Then
             lblVersion.Text = ApplicationDeployment.CurrentDeployment.CurrentVersion.ToString
         Else

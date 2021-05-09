@@ -27,6 +27,14 @@ Public Class frmHrRecord
     Private pageCount As Integer
     Private indexScroll As Integer = 0
     Private indexPosition As Integer = 0
+    'search criteria
+    Private dictionary As New Dictionary(Of String, Integer)
+    'flag filters
+    Private isFilterByLeaveType As Boolean = False
+    Private isFilterByDateCreated As Boolean = False
+    Private isFilterByEmployeeName As Boolean = False
+    Private isFilterByDepartment As Boolean = False
+    Private isFilterByReason As Boolean = False
 
     Private employeeId As Integer = 0
     Private employmentTypeId As Integer = 0
@@ -51,13 +59,15 @@ Public Class frmHrRecord
         Application.EnableVisualStyles()
 
         pageIndex = 0
-        pageSize = 100
+        pageSize = 200
         BindPage()
 
         rdPending.Checked = True
 
         main.EnableDoubleBuffered(dgvList)
         Me.ActiveControl = dgvList
+
+        SearchCriteria()
 
         Me.dgvList.Columns(10).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
         Me.dgvList.Columns(12).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
@@ -137,7 +147,6 @@ Public Class frmHrRecord
                     If .RoutingStatusId = 2 Then
                         .RoutingStatusId = 1
                     End If
-
                     .IsEncoded = True
                 End With
 
@@ -160,7 +169,6 @@ Public Class frmHrRecord
                     If .RoutingStatusId = 1 Then
                         .RoutingStatusId = 2
                     End If
-
                     .IsEncoded = False
                 End With
 
@@ -173,7 +181,7 @@ Public Class frmHrRecord
     End Sub
 
     Private Sub trxStatus_CheckedChanged(sender As Object, e As EventArgs) Handles rdApproved.CheckedChanged, rdPending.CheckedChanged, rdDisapproved.CheckedChanged
-        pageSize = 100
+        pageSize = 200
         pageIndex = 0
         BindPage()
     End Sub
@@ -223,17 +231,190 @@ Public Class frmHrRecord
         Go()
     End Sub
 
+    Private Sub cmbSearchCriteria_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbSearchCriteria.SelectedValueChanged
+        Try
+            If cmbSearchCriteria.SelectedValue = 1 Then
+                pnlLeaveType.Visible = True
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlDepartment.Visible = False
+                pnlReason.Visible = False
+                Me.ActiveControl = cmbLeaveType
+            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = True
+                pnlEmployeeName.Visible = False
+                pnlDepartment.Visible = False
+                pnlReason.Visible = False
+                Me.ActiveControl = dtpDateCreatedFrom
+            ElseIf cmbSearchCriteria.SelectedValue = 3 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = True
+                pnlDepartment.Visible = False
+                pnlReason.Visible = False
+                Me.ActiveControl = txtEmployeeName
+            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlDepartment.Visible = True
+                pnlReason.Visible = False
+                Me.ActiveControl = cmbDepartment
+            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlDepartment.Visible = False
+                pnlReason.Visible = True
+                Me.ActiveControl = txtReason
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Try
+            If cmbSearchCriteria.SelectedValue = 1 Then
+                isFilterByLeaveType = True
+            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
+                If dtpDateCreatedFrom.Value.Date > dtpDateCreatedTo.Value.Date Then
+                    MessageBox.Show("Start date is later than end date.", "Invalid date range", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+                isFilterByDateCreated = True
+            ElseIf cmbSearchCriteria.SelectedValue = 3 Then
+                If String.IsNullOrEmpty(txtEmployeeName.Text.Trim) Then
+                    Return
+                End If
+                isFilterByEmployeeName = True
+            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                isFilterByDepartment = True
+            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
+                If String.IsNullOrEmpty(txtReason.Text.Trim) Then
+                    Return
+                End If
+                isFilterByReason = True
+            End If
+            pageIndex = 0
+            BindPage()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+        Try
+            If cmbSearchCriteria.SelectedValue = 1 Then
+                isFilterByLeaveType = False
+                cmbLeaveType.SelectedValue = 0
+                pageIndex = 0
+                BindPage()
+            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
+                isFilterByDateCreated = False
+                dtpDateCreatedFrom.Value = Date.Now.Date
+                dtpDateCreatedTo.Value = Date.Now.Date
+                pageIndex = 0
+                BindPage()
+            ElseIf cmbSearchCriteria.SelectedValue = 3 Then
+                isFilterByEmployeeName = False
+                txtEmployeeName.Clear()
+                pageIndex = 0
+                BindPage()
+            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                isFilterByDepartment = False
+                cmbDepartment.SelectedValue = 0
+                pageIndex = 0
+                BindPage()
+            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
+                isFilterByReason = False
+                txtReason.Clear()
+                pageIndex = 0
+                BindPage()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
 #Region "Sub"
     Private Sub BindPage(Optional ByVal _routingStatusId As Integer = 0)
         Try
             totalCount = 0
 
-            If rdPending.Checked = True Then
-                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing)
-            ElseIf rdApproved.Checked = True Then
-                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1)
-            ElseIf rdDisapproved.Checked = True Then
-                Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7)
+            If isFilterByLeaveType = True Then
+                If rdPending.Checked = True Then
+                    If cmbLeaveType.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByRoutingStatusIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByRoutingStatusIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, cmbLeaveType.SelectedValue)
+                    End If
+                ElseIf rdApproved.Checked = True Then
+                    If cmbLeaveType.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByRoutingStatusIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByRoutingStatusIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1, cmbLeaveType.SelectedValue)
+                    End If
+                ElseIf rdDisapproved.Checked = True Then
+                    If cmbLeaveType.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByRoutingStatusIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByRoutingStatusIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7, cmbLeaveType.SelectedValue)
+                    End If
+                End If
+            ElseIf isFilterByDateCreated = True Then
+                If rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdDateCreated(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, dtpDateCreatedFrom.Value.Date, dtpDateCreatedTo.Value.Date)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdDateCreated(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1, dtpDateCreatedFrom.Value.Date, dtpDateCreatedTo.Value.Date)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdDateCreated(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7, dtpDateCreatedFrom.Value.Date, dtpDateCreatedTo.Value.Date)
+                End If
+            ElseIf isFilterByEmployeeName = True Then
+                If rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, txtEmployeeName.Text.Trim)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1, txtEmployeeName.Text.Trim)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7, txtEmployeeName.Text.Trim)
+                End If
+            ElseIf isFilterByDepartment = True Then
+                If rdPending.Checked = True Then
+                    If cmbDepartment.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByRoutingStatusIdDepartmentId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByRoutingStatusIdDepartmentId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, cmbDepartment.SelectedValue)
+                    End If
+                ElseIf rdApproved.Checked = True Then
+                    If cmbDepartment.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByRoutingStatusIdDepartmentId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByRoutingStatusIdDepartmentId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1, cmbDepartment.SelectedValue)
+                    End If
+                ElseIf rdDisapproved.Checked = True Then
+                    If cmbDepartment.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByRoutingStatusIdDepartmentId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByRoutingStatusIdDepartmentId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7, cmbDepartment.SelectedValue)
+                    End If
+                End If
+            ElseIf isFilterByReason = True Then
+                If rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing, txtReason.Text.Trim)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1, txtReason.Text.Trim)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusIdReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7, txtReason.Text.Trim)
+                End If
+            Else
+                If rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, Nothing)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 1)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillByRoutingStatusId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, 7)
+                End If
             End If
 
             Me.bsLeaveFiling.DataSource = Me.dsLeaveFiling
@@ -309,8 +490,27 @@ Public Class frmHrRecord
 
     Private Sub SetScrollingIndex()
         dgvList.FirstDisplayedScrollingRowIndex = indexScroll
-        dgvList.Rows(indexPosition).Selected = True
+        If dgvList.Rows.Count > indexPosition Then
+            dgvList.Rows(indexPosition).Selected = True
+        Else
+            dgvList.Rows(indexPosition - 1).Selected = True
+        End If
         Me.bsLeaveFiling.Position = dgvList.SelectedCells(0).RowIndex
+    End Sub
+
+    Private Sub SearchCriteria()
+        dictionary.Add(" Leave Type", 1)
+        dictionary.Add(" Date Created", 2)
+        dictionary.Add(" Employee Name", 3)
+        dictionary.Add(" Department", 4)
+        dictionary.Add(" Reason", 5)
+        cmbSearchCriteria.DisplayMember = "Key"
+        cmbSearchCriteria.ValueMember = "Value"
+        cmbSearchCriteria.DataSource = New BindingSource(dictionary, Nothing)
+
+        dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "Id", "LeaveTypeName", cmbLeaveType, "< All > ")
+        dbLeaveFiling.FillCmbWithCaption("RdDepartment", CommandType.StoredProcedure, "Id", "DepartmentName", cmbDepartment, "< All > ")
+
     End Sub
 #End Region
 

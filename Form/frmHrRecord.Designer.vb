@@ -33,6 +33,21 @@ Partial Class frmHrRecord
         Me.btnClose = New PinkieControls.ButtonXP()
         Me.btnView = New PinkieControls.ButtonXP()
         Me.grpCriteria = New System.Windows.Forms.GroupBox()
+        Me.btnSearch = New PinkieControls.ButtonXP()
+        Me.btnReset = New PinkieControls.ButtonXP()
+        Me.pnlReason = New System.Windows.Forms.Panel()
+        Me.txtReason = New System.Windows.Forms.TextBox()
+        Me.pnlDateCreated = New System.Windows.Forms.Panel()
+        Me.dtpDateCreatedTo = New System.Windows.Forms.DateTimePicker()
+        Me.lblDateCreatedTo = New System.Windows.Forms.Label()
+        Me.lblDateCreatedFrom = New System.Windows.Forms.Label()
+        Me.dtpDateCreatedFrom = New System.Windows.Forms.DateTimePicker()
+        Me.pnlEmployeeName = New System.Windows.Forms.Panel()
+        Me.txtEmployeeName = New System.Windows.Forms.TextBox()
+        Me.lblSearchCriteria = New System.Windows.Forms.Label()
+        Me.pnlLeaveType = New System.Windows.Forms.Panel()
+        Me.cmbLeaveType = New System.Windows.Forms.ComboBox()
+        Me.cmbSearchCriteria = New System.Windows.Forms.ComboBox()
         Me.bindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.txtTotalPageNumber = New System.Windows.Forms.ToolStripLabel()
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
@@ -44,14 +59,9 @@ Partial Class frmHrRecord
         Me.BindingNavigatorMoveLastItem = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.btnGo = New System.Windows.Forms.ToolStripButton()
+        Me.pnlDepartment = New System.Windows.Forms.Panel()
+        Me.cmbDepartment = New System.Windows.Forms.ComboBox()
         Me.dgvList = New System.Windows.Forms.DataGridView()
-        Me.btnRefresh = New PinkieControls.ButtonXP()
-        Me.btnDisapprove = New PinkieControls.ButtonXP()
-        Me.btnApprove = New PinkieControls.ButtonXP()
-        Me.grpStatus = New System.Windows.Forms.GroupBox()
-        Me.rdDisapproved = New System.Windows.Forms.RadioButton()
-        Me.rdPending = New System.Windows.Forms.RadioButton()
-        Me.rdApproved = New System.Windows.Forms.RadioButton()
         Me.ColLeaveFileId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColDateCreated = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColDepartmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -65,9 +75,21 @@ Partial Class frmHrRecord
         Me.ColReason = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RoutingStatusId = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ColRoutingStatusName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnRefresh = New PinkieControls.ButtonXP()
+        Me.btnDisapprove = New PinkieControls.ButtonXP()
+        Me.btnApprove = New PinkieControls.ButtonXP()
+        Me.grpStatus = New System.Windows.Forms.GroupBox()
+        Me.rdDisapproved = New System.Windows.Forms.RadioButton()
+        Me.rdPending = New System.Windows.Forms.RadioButton()
+        Me.rdApproved = New System.Windows.Forms.RadioButton()
         Me.grpCriteria.SuspendLayout()
+        Me.pnlReason.SuspendLayout()
+        Me.pnlDateCreated.SuspendLayout()
+        Me.pnlEmployeeName.SuspendLayout()
+        Me.pnlLeaveType.SuspendLayout()
         CType(Me.bindingNavigator, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.bindingNavigator.SuspendLayout()
+        Me.pnlDepartment.SuspendLayout()
         CType(Me.dgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grpStatus.SuspendLayout()
         Me.SuspendLayout()
@@ -106,7 +128,16 @@ Partial Class frmHrRecord
         '
         Me.grpCriteria.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.grpCriteria.Controls.Add(Me.btnSearch)
+        Me.grpCriteria.Controls.Add(Me.btnReset)
+        Me.grpCriteria.Controls.Add(Me.pnlReason)
+        Me.grpCriteria.Controls.Add(Me.pnlDateCreated)
+        Me.grpCriteria.Controls.Add(Me.pnlEmployeeName)
+        Me.grpCriteria.Controls.Add(Me.lblSearchCriteria)
+        Me.grpCriteria.Controls.Add(Me.pnlLeaveType)
+        Me.grpCriteria.Controls.Add(Me.cmbSearchCriteria)
         Me.grpCriteria.Controls.Add(Me.bindingNavigator)
+        Me.grpCriteria.Controls.Add(Me.pnlDepartment)
         Me.grpCriteria.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.grpCriteria.Location = New System.Drawing.Point(1, -6)
         Me.grpCriteria.Margin = New System.Windows.Forms.Padding(0)
@@ -114,6 +145,169 @@ Partial Class frmHrRecord
         Me.grpCriteria.Size = New System.Drawing.Size(1440, 44)
         Me.grpCriteria.TabIndex = 157
         Me.grpCriteria.TabStop = False
+        '
+        'btnSearch
+        '
+        Me.btnSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.btnSearch.DefaultScheme = False
+        Me.btnSearch.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnSearch.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.btnSearch.Hint = "Search"
+        Me.btnSearch.Image = Global.LeaveFilingSystem.My.Resources.Resources.Find_16_x_16
+        Me.btnSearch.Location = New System.Drawing.Point(606, 12)
+        Me.btnSearch.Name = "btnSearch"
+        Me.btnSearch.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnSearch.Size = New System.Drawing.Size(85, 27)
+        Me.btnSearch.TabIndex = 532
+        Me.btnSearch.TabStop = False
+        Me.btnSearch.Text = "Search"
+        '
+        'btnReset
+        '
+        Me.btnReset.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer), CType(CType(240, Byte), Integer))
+        Me.btnReset.DefaultScheme = False
+        Me.btnReset.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnReset.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.btnReset.Hint = "Remove search filter"
+        Me.btnReset.Image = Global.LeaveFilingSystem.My.Resources.Resources.Undo_16_x_16
+        Me.btnReset.Location = New System.Drawing.Point(693, 12)
+        Me.btnReset.Name = "btnReset"
+        Me.btnReset.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnReset.Size = New System.Drawing.Size(85, 27)
+        Me.btnReset.TabIndex = 533
+        Me.btnReset.TabStop = False
+        Me.btnReset.Text = "Reset"
+        '
+        'pnlReason
+        '
+        Me.pnlReason.BackColor = System.Drawing.Color.White
+        Me.pnlReason.Controls.Add(Me.txtReason)
+        Me.pnlReason.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.pnlReason.Location = New System.Drawing.Point(257, 9)
+        Me.pnlReason.Name = "pnlReason"
+        Me.pnlReason.Size = New System.Drawing.Size(348, 32)
+        Me.pnlReason.TabIndex = 530
+        Me.pnlReason.Visible = False
+        '
+        'txtReason
+        '
+        Me.txtReason.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.txtReason.Location = New System.Drawing.Point(8, 5)
+        Me.txtReason.Name = "txtReason"
+        Me.txtReason.Size = New System.Drawing.Size(333, 23)
+        Me.txtReason.TabIndex = 0
+        '
+        'pnlDateCreated
+        '
+        Me.pnlDateCreated.BackColor = System.Drawing.Color.White
+        Me.pnlDateCreated.Controls.Add(Me.dtpDateCreatedTo)
+        Me.pnlDateCreated.Controls.Add(Me.lblDateCreatedTo)
+        Me.pnlDateCreated.Controls.Add(Me.lblDateCreatedFrom)
+        Me.pnlDateCreated.Controls.Add(Me.dtpDateCreatedFrom)
+        Me.pnlDateCreated.Location = New System.Drawing.Point(257, 9)
+        Me.pnlDateCreated.Name = "pnlDateCreated"
+        Me.pnlDateCreated.Size = New System.Drawing.Size(348, 32)
+        Me.pnlDateCreated.TabIndex = 530
+        Me.pnlDateCreated.Visible = False
+        '
+        'dtpDateCreatedTo
+        '
+        Me.dtpDateCreatedTo.CustomFormat = "MMM dd, yyyy"
+        Me.dtpDateCreatedTo.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.dtpDateCreatedTo.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDateCreatedTo.Location = New System.Drawing.Point(213, 5)
+        Me.dtpDateCreatedTo.Name = "dtpDateCreatedTo"
+        Me.dtpDateCreatedTo.Size = New System.Drawing.Size(130, 23)
+        Me.dtpDateCreatedTo.TabIndex = 21
+        '
+        'lblDateCreatedTo
+        '
+        Me.lblDateCreatedTo.AutoSize = True
+        Me.lblDateCreatedTo.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.lblDateCreatedTo.Location = New System.Drawing.Point(186, 9)
+        Me.lblDateCreatedTo.Name = "lblDateCreatedTo"
+        Me.lblDateCreatedTo.Size = New System.Drawing.Size(24, 16)
+        Me.lblDateCreatedTo.TabIndex = 25
+        Me.lblDateCreatedTo.Text = "To"
+        '
+        'lblDateCreatedFrom
+        '
+        Me.lblDateCreatedFrom.AutoSize = True
+        Me.lblDateCreatedFrom.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.lblDateCreatedFrom.Location = New System.Drawing.Point(6, 9)
+        Me.lblDateCreatedFrom.Name = "lblDateCreatedFrom"
+        Me.lblDateCreatedFrom.Size = New System.Drawing.Size(40, 16)
+        Me.lblDateCreatedFrom.TabIndex = 24
+        Me.lblDateCreatedFrom.Text = "From"
+        '
+        'dtpDateCreatedFrom
+        '
+        Me.dtpDateCreatedFrom.CustomFormat = "MMM dd, yyyy"
+        Me.dtpDateCreatedFrom.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.dtpDateCreatedFrom.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpDateCreatedFrom.Location = New System.Drawing.Point(50, 5)
+        Me.dtpDateCreatedFrom.Name = "dtpDateCreatedFrom"
+        Me.dtpDateCreatedFrom.Size = New System.Drawing.Size(130, 23)
+        Me.dtpDateCreatedFrom.TabIndex = 20
+        '
+        'pnlEmployeeName
+        '
+        Me.pnlEmployeeName.BackColor = System.Drawing.Color.White
+        Me.pnlEmployeeName.Controls.Add(Me.txtEmployeeName)
+        Me.pnlEmployeeName.Location = New System.Drawing.Point(257, 9)
+        Me.pnlEmployeeName.Name = "pnlEmployeeName"
+        Me.pnlEmployeeName.Size = New System.Drawing.Size(348, 32)
+        Me.pnlEmployeeName.TabIndex = 529
+        Me.pnlEmployeeName.Visible = False
+        '
+        'txtEmployeeName
+        '
+        Me.txtEmployeeName.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.txtEmployeeName.Location = New System.Drawing.Point(8, 4)
+        Me.txtEmployeeName.Name = "txtEmployeeName"
+        Me.txtEmployeeName.Size = New System.Drawing.Size(333, 23)
+        Me.txtEmployeeName.TabIndex = 0
+        '
+        'lblSearchCriteria
+        '
+        Me.lblSearchCriteria.BackColor = System.Drawing.SystemColors.Control
+        Me.lblSearchCriteria.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblSearchCriteria.ForeColor = System.Drawing.Color.Black
+        Me.lblSearchCriteria.Location = New System.Drawing.Point(6, 13)
+        Me.lblSearchCriteria.Name = "lblSearchCriteria"
+        Me.lblSearchCriteria.Size = New System.Drawing.Size(65, 24)
+        Me.lblSearchCriteria.TabIndex = 527
+        Me.lblSearchCriteria.Text = "Criteria"
+        Me.lblSearchCriteria.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'pnlLeaveType
+        '
+        Me.pnlLeaveType.BackColor = System.Drawing.Color.White
+        Me.pnlLeaveType.Controls.Add(Me.cmbLeaveType)
+        Me.pnlLeaveType.Location = New System.Drawing.Point(257, 9)
+        Me.pnlLeaveType.Name = "pnlLeaveType"
+        Me.pnlLeaveType.Size = New System.Drawing.Size(348, 32)
+        Me.pnlLeaveType.TabIndex = 530
+        '
+        'cmbLeaveType
+        '
+        Me.cmbLeaveType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbLeaveType.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.cmbLeaveType.FormattingEnabled = True
+        Me.cmbLeaveType.Location = New System.Drawing.Point(8, 4)
+        Me.cmbLeaveType.Name = "cmbLeaveType"
+        Me.cmbLeaveType.Size = New System.Drawing.Size(333, 24)
+        Me.cmbLeaveType.TabIndex = 0
+        '
+        'cmbSearchCriteria
+        '
+        Me.cmbSearchCriteria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbSearchCriteria.Font = New System.Drawing.Font("Verdana", 9.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cmbSearchCriteria.FormattingEnabled = True
+        Me.cmbSearchCriteria.Location = New System.Drawing.Point(70, 13)
+        Me.cmbSearchCriteria.Name = "cmbSearchCriteria"
+        Me.cmbSearchCriteria.Size = New System.Drawing.Size(185, 24)
+        Me.cmbSearchCriteria.TabIndex = 528
         '
         'bindingNavigator
         '
@@ -218,6 +412,27 @@ Partial Class frmHrRecord
         Me.btnGo.Text = "Go"
         Me.btnGo.ToolTipText = "Go to page number specified"
         '
+        'pnlDepartment
+        '
+        Me.pnlDepartment.BackColor = System.Drawing.Color.White
+        Me.pnlDepartment.Controls.Add(Me.cmbDepartment)
+        Me.pnlDepartment.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.pnlDepartment.Location = New System.Drawing.Point(257, 9)
+        Me.pnlDepartment.Name = "pnlDepartment"
+        Me.pnlDepartment.Size = New System.Drawing.Size(348, 32)
+        Me.pnlDepartment.TabIndex = 531
+        Me.pnlDepartment.Visible = False
+        '
+        'cmbDepartment
+        '
+        Me.cmbDepartment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbDepartment.Font = New System.Drawing.Font("Verdana", 9.5!)
+        Me.cmbDepartment.FormattingEnabled = True
+        Me.cmbDepartment.Location = New System.Drawing.Point(8, 4)
+        Me.cmbDepartment.Name = "cmbDepartment"
+        Me.cmbDepartment.Size = New System.Drawing.Size(333, 24)
+        Me.cmbDepartment.TabIndex = 0
+        '
         'dgvList
         '
         Me.dgvList.AllowUserToAddRows = False
@@ -228,7 +443,7 @@ Partial Class frmHrRecord
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.5!)
         DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
@@ -246,106 +461,6 @@ Partial Class frmHrRecord
         Me.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
         Me.dgvList.Size = New System.Drawing.Size(1442, 500)
         Me.dgvList.TabIndex = 158
-        '
-        'btnRefresh
-        '
-        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnRefresh.DefaultScheme = False
-        Me.btnRefresh.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnRefresh.Hint = "Refresh"
-        Me.btnRefresh.Image = Global.LeaveFilingSystem.My.Resources.Resources.Refresh_16_x_16
-        Me.btnRefresh.Location = New System.Drawing.Point(327, 548)
-        Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnRefresh.Size = New System.Drawing.Size(120, 40)
-        Me.btnRefresh.TabIndex = 160
-        Me.btnRefresh.Text = " Refresh"
-        '
-        'btnDisapprove
-        '
-        Me.btnDisapprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnDisapprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnDisapprove.DefaultScheme = False
-        Me.btnDisapprove.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnDisapprove.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnDisapprove.Hint = "Disapprove Leave"
-        Me.btnDisapprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Delete_16_x_16
-        Me.btnDisapprove.Location = New System.Drawing.Point(579, 548)
-        Me.btnDisapprove.Name = "btnDisapprove"
-        Me.btnDisapprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnDisapprove.Size = New System.Drawing.Size(120, 40)
-        Me.btnDisapprove.TabIndex = 162
-        Me.btnDisapprove.Text = "Disapprove"
-        '
-        'btnApprove
-        '
-        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnApprove.DefaultScheme = False
-        Me.btnApprove.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnApprove.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnApprove.Hint = "Approve Leave"
-        Me.btnApprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Apply_16_x_16
-        Me.btnApprove.Location = New System.Drawing.Point(453, 548)
-        Me.btnApprove.Name = "btnApprove"
-        Me.btnApprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnApprove.Size = New System.Drawing.Size(120, 40)
-        Me.btnApprove.TabIndex = 161
-        Me.btnApprove.Text = " Approve"
-        '
-        'grpStatus
-        '
-        Me.grpStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.grpStatus.BackColor = System.Drawing.Color.White
-        Me.grpStatus.Controls.Add(Me.rdDisapproved)
-        Me.grpStatus.Controls.Add(Me.rdPending)
-        Me.grpStatus.Controls.Add(Me.rdApproved)
-        Me.grpStatus.Font = New System.Drawing.Font("Verdana", 9.0!)
-        Me.grpStatus.Location = New System.Drawing.Point(9, 542)
-        Me.grpStatus.Margin = New System.Windows.Forms.Padding(0)
-        Me.grpStatus.Name = "grpStatus"
-        Me.grpStatus.Padding = New System.Windows.Forms.Padding(0)
-        Me.grpStatus.Size = New System.Drawing.Size(313, 46)
-        Me.grpStatus.TabIndex = 163
-        Me.grpStatus.TabStop = False
-        '
-        'rdDisapproved
-        '
-        Me.rdDisapproved.AutoSize = True
-        Me.rdDisapproved.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.rdDisapproved.Location = New System.Drawing.Point(9, 15)
-        Me.rdDisapproved.Name = "rdDisapproved"
-        Me.rdDisapproved.Size = New System.Drawing.Size(114, 21)
-        Me.rdDisapproved.TabIndex = 4
-        Me.rdDisapproved.TabStop = True
-        Me.rdDisapproved.Text = "Disapproved"
-        Me.rdDisapproved.UseVisualStyleBackColor = True
-        '
-        'rdPending
-        '
-        Me.rdPending.AutoSize = True
-        Me.rdPending.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.rdPending.Location = New System.Drawing.Point(229, 15)
-        Me.rdPending.Name = "rdPending"
-        Me.rdPending.Size = New System.Drawing.Size(81, 21)
-        Me.rdPending.TabIndex = 2
-        Me.rdPending.TabStop = True
-        Me.rdPending.Text = "Pending"
-        Me.rdPending.UseVisualStyleBackColor = True
-        '
-        'rdApproved
-        '
-        Me.rdApproved.AutoSize = True
-        Me.rdApproved.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.rdApproved.Location = New System.Drawing.Point(129, 15)
-        Me.rdApproved.Name = "rdApproved"
-        Me.rdApproved.Size = New System.Drawing.Size(94, 21)
-        Me.rdApproved.TabIndex = 1
-        Me.rdApproved.TabStop = True
-        Me.rdApproved.Text = "Approved"
-        Me.rdApproved.UseVisualStyleBackColor = True
         '
         'ColLeaveFileId
         '
@@ -458,6 +573,106 @@ Partial Class frmHrRecord
         Me.ColRoutingStatusName.ReadOnly = True
         Me.ColRoutingStatusName.Width = 300
         '
+        'btnRefresh
+        '
+        Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnRefresh.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnRefresh.DefaultScheme = False
+        Me.btnRefresh.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnRefresh.Hint = "Refresh"
+        Me.btnRefresh.Image = Global.LeaveFilingSystem.My.Resources.Resources.Refresh_16_x_16
+        Me.btnRefresh.Location = New System.Drawing.Point(327, 548)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnRefresh.Size = New System.Drawing.Size(120, 40)
+        Me.btnRefresh.TabIndex = 160
+        Me.btnRefresh.Text = " Refresh"
+        '
+        'btnDisapprove
+        '
+        Me.btnDisapprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnDisapprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnDisapprove.DefaultScheme = False
+        Me.btnDisapprove.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnDisapprove.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnDisapprove.Hint = "Disapprove Leave"
+        Me.btnDisapprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Delete_16_x_16
+        Me.btnDisapprove.Location = New System.Drawing.Point(579, 548)
+        Me.btnDisapprove.Name = "btnDisapprove"
+        Me.btnDisapprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnDisapprove.Size = New System.Drawing.Size(120, 40)
+        Me.btnDisapprove.TabIndex = 162
+        Me.btnDisapprove.Text = "Disapprove"
+        '
+        'btnApprove
+        '
+        Me.btnApprove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnApprove.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnApprove.DefaultScheme = False
+        Me.btnApprove.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnApprove.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnApprove.Hint = "Approve Leave"
+        Me.btnApprove.Image = Global.LeaveFilingSystem.My.Resources.Resources.Apply_16_x_16
+        Me.btnApprove.Location = New System.Drawing.Point(453, 548)
+        Me.btnApprove.Name = "btnApprove"
+        Me.btnApprove.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnApprove.Size = New System.Drawing.Size(120, 40)
+        Me.btnApprove.TabIndex = 161
+        Me.btnApprove.Text = " Approve"
+        '
+        'grpStatus
+        '
+        Me.grpStatus.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.grpStatus.BackColor = System.Drawing.Color.White
+        Me.grpStatus.Controls.Add(Me.rdDisapproved)
+        Me.grpStatus.Controls.Add(Me.rdPending)
+        Me.grpStatus.Controls.Add(Me.rdApproved)
+        Me.grpStatus.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.grpStatus.Location = New System.Drawing.Point(9, 542)
+        Me.grpStatus.Margin = New System.Windows.Forms.Padding(0)
+        Me.grpStatus.Name = "grpStatus"
+        Me.grpStatus.Padding = New System.Windows.Forms.Padding(0)
+        Me.grpStatus.Size = New System.Drawing.Size(313, 46)
+        Me.grpStatus.TabIndex = 163
+        Me.grpStatus.TabStop = False
+        '
+        'rdDisapproved
+        '
+        Me.rdDisapproved.AutoSize = True
+        Me.rdDisapproved.Font = New System.Drawing.Font("Verdana", 10.0!)
+        Me.rdDisapproved.Location = New System.Drawing.Point(9, 15)
+        Me.rdDisapproved.Name = "rdDisapproved"
+        Me.rdDisapproved.Size = New System.Drawing.Size(114, 21)
+        Me.rdDisapproved.TabIndex = 4
+        Me.rdDisapproved.TabStop = True
+        Me.rdDisapproved.Text = "Disapproved"
+        Me.rdDisapproved.UseVisualStyleBackColor = True
+        '
+        'rdPending
+        '
+        Me.rdPending.AutoSize = True
+        Me.rdPending.Font = New System.Drawing.Font("Verdana", 10.0!)
+        Me.rdPending.Location = New System.Drawing.Point(229, 15)
+        Me.rdPending.Name = "rdPending"
+        Me.rdPending.Size = New System.Drawing.Size(81, 21)
+        Me.rdPending.TabIndex = 2
+        Me.rdPending.TabStop = True
+        Me.rdPending.Text = "Pending"
+        Me.rdPending.UseVisualStyleBackColor = True
+        '
+        'rdApproved
+        '
+        Me.rdApproved.AutoSize = True
+        Me.rdApproved.Font = New System.Drawing.Font("Verdana", 10.0!)
+        Me.rdApproved.Location = New System.Drawing.Point(129, 15)
+        Me.rdApproved.Name = "rdApproved"
+        Me.rdApproved.Size = New System.Drawing.Size(94, 21)
+        Me.rdApproved.TabIndex = 1
+        Me.rdApproved.TabStop = True
+        Me.rdApproved.Text = "Approved"
+        Me.rdApproved.UseVisualStyleBackColor = True
+        '
         'frmHrRecord
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
@@ -484,9 +699,17 @@ Partial Class frmHrRecord
         Me.Text = "HR Records"
         Me.grpCriteria.ResumeLayout(False)
         Me.grpCriteria.PerformLayout()
+        Me.pnlReason.ResumeLayout(False)
+        Me.pnlReason.PerformLayout()
+        Me.pnlDateCreated.ResumeLayout(False)
+        Me.pnlDateCreated.PerformLayout()
+        Me.pnlEmployeeName.ResumeLayout(False)
+        Me.pnlEmployeeName.PerformLayout()
+        Me.pnlLeaveType.ResumeLayout(False)
         CType(Me.bindingNavigator, System.ComponentModel.ISupportInitialize).EndInit()
         Me.bindingNavigator.ResumeLayout(False)
         Me.bindingNavigator.PerformLayout()
+        Me.pnlDepartment.ResumeLayout(False)
         CType(Me.dgvList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grpStatus.ResumeLayout(False)
         Me.grpStatus.PerformLayout()
@@ -528,4 +751,21 @@ Partial Class frmHrRecord
     Friend WithEvents ColReason As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents RoutingStatusId As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColRoutingStatusName As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents lblSearchCriteria As System.Windows.Forms.Label
+    Friend WithEvents cmbSearchCriteria As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlEmployeeName As System.Windows.Forms.Panel
+    Friend WithEvents txtEmployeeName As System.Windows.Forms.TextBox
+    Friend WithEvents pnlLeaveType As System.Windows.Forms.Panel
+    Friend WithEvents cmbLeaveType As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlDateCreated As System.Windows.Forms.Panel
+    Friend WithEvents dtpDateCreatedTo As System.Windows.Forms.DateTimePicker
+    Friend WithEvents lblDateCreatedTo As System.Windows.Forms.Label
+    Friend WithEvents lblDateCreatedFrom As System.Windows.Forms.Label
+    Friend WithEvents dtpDateCreatedFrom As System.Windows.Forms.DateTimePicker
+    Friend WithEvents pnlDepartment As System.Windows.Forms.Panel
+    Friend WithEvents cmbDepartment As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlReason As System.Windows.Forms.Panel
+    Friend WithEvents txtReason As System.Windows.Forms.TextBox
+    Friend WithEvents btnSearch As PinkieControls.ButtonXP
+    Friend WithEvents btnReset As PinkieControls.ButtonXP
 End Class

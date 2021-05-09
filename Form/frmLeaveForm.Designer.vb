@@ -62,11 +62,11 @@ Partial Class frmLeaveForm
         Me.txtName = New System.Windows.Forms.Label()
         Me.gprLeaveInfo = New System.Windows.Forms.GroupBox()
         Me.lblManagerName = New System.Windows.Forms.Label()
+        Me.cmbManagerName = New SergeUtils.EasyCompletionComboBox()
         Me.lblSuperiorName1 = New System.Windows.Forms.Label()
         Me.lblSuperiorName2 = New System.Windows.Forms.Label()
         Me.cmbSuperiorName2 = New SergeUtils.EasyCompletionComboBox()
         Me.cmbSuperiorName1 = New SergeUtils.EasyCompletionComboBox()
-        Me.cmbManagerName = New SergeUtils.EasyCompletionComboBox()
         Me.txtClinicName = New System.Windows.Forms.Label()
         Me.lblSuperiorStatus1 = New System.Windows.Forms.Label()
         Me.cmbSuperiorStatus1 = New System.Windows.Forms.ComboBox()
@@ -342,7 +342,7 @@ Partial Class frmLeaveForm
         Me.cmbLeaveType.Items.AddRange(New Object() {"Vacation Leave", "Sick Leave"})
         Me.cmbLeaveType.Location = New System.Drawing.Point(153, 20)
         Me.cmbLeaveType.Name = "cmbLeaveType"
-        Me.cmbLeaveType.Size = New System.Drawing.Size(556, 26)
+        Me.cmbLeaveType.Size = New System.Drawing.Size(557, 26)
         Me.cmbLeaveType.TabIndex = 0
         Me.cmbLeaveType.ValueMember = "Id"
         '
@@ -553,7 +553,7 @@ Partial Class frmLeaveForm
         Me.lblName.Name = "lblName"
         Me.lblName.Size = New System.Drawing.Size(140, 24)
         Me.lblName.TabIndex = 401
-        Me.lblName.Text = " Fullname"
+        Me.lblName.Text = " Name"
         Me.lblName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'txtPosition
@@ -626,11 +626,11 @@ Partial Class frmLeaveForm
         'gprLeaveInfo
         '
         Me.gprLeaveInfo.Controls.Add(Me.lblManagerName)
+        Me.gprLeaveInfo.Controls.Add(Me.cmbManagerName)
         Me.gprLeaveInfo.Controls.Add(Me.lblSuperiorName1)
         Me.gprLeaveInfo.Controls.Add(Me.lblSuperiorName2)
         Me.gprLeaveInfo.Controls.Add(Me.cmbSuperiorName2)
         Me.gprLeaveInfo.Controls.Add(Me.cmbSuperiorName1)
-        Me.gprLeaveInfo.Controls.Add(Me.cmbManagerName)
         Me.gprLeaveInfo.Controls.Add(Me.txtClinicName)
         Me.gprLeaveInfo.Controls.Add(Me.lblSuperiorStatus1)
         Me.gprLeaveInfo.Controls.Add(Me.cmbSuperiorStatus1)
@@ -707,6 +707,17 @@ Partial Class frmLeaveForm
         Me.lblManagerName.Text = " Name"
         Me.lblManagerName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
+        'cmbManagerName
+        '
+        Me.cmbManagerName.DisplayMember = "EmployeeName"
+        Me.cmbManagerName.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.cmbManagerName.FormattingEnabled = True
+        Me.cmbManagerName.Location = New System.Drawing.Point(864, 234)
+        Me.cmbManagerName.Name = "cmbManagerName"
+        Me.cmbManagerName.Size = New System.Drawing.Size(301, 25)
+        Me.cmbManagerName.TabIndex = 536
+        Me.cmbManagerName.ValueMember = "EmployeeId"
+        '
         'lblSuperiorName1
         '
         Me.lblSuperiorName1.BackColor = System.Drawing.SystemColors.Control
@@ -750,15 +761,6 @@ Partial Class frmLeaveForm
         Me.cmbSuperiorName1.Name = "cmbSuperiorName1"
         Me.cmbSuperiorName1.Size = New System.Drawing.Size(301, 25)
         Me.cmbSuperiorName1.TabIndex = 534
-        '
-        'cmbManagerName
-        '
-        Me.cmbManagerName.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.cmbManagerName.FormattingEnabled = True
-        Me.cmbManagerName.Location = New System.Drawing.Point(864, 234)
-        Me.cmbManagerName.Name = "cmbManagerName"
-        Me.cmbManagerName.Size = New System.Drawing.Size(301, 25)
-        Me.cmbManagerName.TabIndex = 533
         '
         'txtClinicName
         '
@@ -1280,6 +1282,7 @@ Partial Class frmLeaveForm
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.grpEmpInfo)
         Me.Font = New System.Drawing.Font("Verdana", 8.5!)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -1377,7 +1380,7 @@ Partial Class frmLeaveForm
     Friend WithEvents txtSuperiorRemarks1 As System.Windows.Forms.TextBox
     Friend WithEvents txtSuperiorPosition1 As System.Windows.Forms.Label
     Friend WithEvents txtClinicName As System.Windows.Forms.Label
-    Friend WithEvents cmbManagerName As SergeUtils.EasyCompletionComboBox
     Friend WithEvents cmbSuperiorName1 As SergeUtils.EasyCompletionComboBox
     Friend WithEvents cmbSuperiorName2 As SergeUtils.EasyCompletionComboBox
+    Friend WithEvents cmbManagerName As SergeUtils.EasyCompletionComboBox
 End Class
