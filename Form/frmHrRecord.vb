@@ -278,25 +278,45 @@ Public Class frmHrRecord
         Try
             If cmbSearchCriteria.SelectedValue = 1 Then
                 isFilterByLeaveType = True
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterByDepartment = False
+                isFilterByReason = False
+
             ElseIf cmbSearchCriteria.SelectedValue = 2 Then
                 If dtpDateCreatedFrom.Value.Date > dtpDateCreatedTo.Value.Date Then
-                    MessageBox.Show("Start date is later than end date.", "Invalid date range", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     Return
                 End If
+
+                isFilterByLeaveType = False
                 isFilterByDateCreated = True
+                isFilterByEmployeeName = False
+                isFilterByDepartment = False
+                isFilterByReason = False
+
             ElseIf cmbSearchCriteria.SelectedValue = 3 Then
-                If String.IsNullOrEmpty(txtEmployeeName.Text.Trim) Then
-                    Return
-                End If
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
                 isFilterByEmployeeName = True
+                isFilterByDepartment = False
+                isFilterByReason = False
+
             ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
                 isFilterByDepartment = True
+                isFilterByReason = False
+
             ElseIf cmbSearchCriteria.SelectedValue = 5 Then
-                If String.IsNullOrEmpty(txtReason.Text.Trim) Then
-                    Return
-                End If
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterByDepartment = False
                 isFilterByReason = True
             End If
+
             pageIndex = 0
             BindPage()
         Catch ex As Exception
@@ -307,29 +327,62 @@ Public Class frmHrRecord
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
         Try
             If cmbSearchCriteria.SelectedValue = 1 Then
-                isFilterByLeaveType = False
                 cmbLeaveType.SelectedValue = 0
+
+                isFilterByLeaveType = True
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterByDepartment = False
+                isFilterByReason = False
+
                 pageIndex = 0
                 BindPage()
+
             ElseIf cmbSearchCriteria.SelectedValue = 2 Then
+                isFilterByLeaveType = False
                 isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterByDepartment = False
+                isFilterByReason = False
+
                 dtpDateCreatedFrom.Value = Date.Now.Date
                 dtpDateCreatedTo.Value = Date.Now.Date
                 pageIndex = 0
                 BindPage()
+
             ElseIf cmbSearchCriteria.SelectedValue = 3 Then
-                isFilterByEmployeeName = False
                 txtEmployeeName.Clear()
-                pageIndex = 0
-                BindPage()
-            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = True
                 isFilterByDepartment = False
-                cmbDepartment.SelectedValue = 0
+                isFilterByReason = False
+
                 pageIndex = 0
                 BindPage()
-            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
+
+            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                cmbDepartment.SelectedValue = 0
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterByDepartment = True
                 isFilterByReason = False
+
+                pageIndex = 0
+                BindPage()
+
+            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
                 txtReason.Clear()
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterByDepartment = False
+                isFilterByReason = True
+
                 pageIndex = 0
                 BindPage()
             End If
@@ -508,9 +561,8 @@ Public Class frmHrRecord
         cmbSearchCriteria.ValueMember = "Value"
         cmbSearchCriteria.DataSource = New BindingSource(dictionary, Nothing)
 
-        dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "Id", "LeaveTypeName", cmbLeaveType, "< All > ")
-        dbLeaveFiling.FillCmbWithCaption("RdDepartment", CommandType.StoredProcedure, "Id", "DepartmentName", cmbDepartment, "< All > ")
-
+        dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "LeaveTypeId", "LeaveTypeName", cmbLeaveType, "< All > ")
+        dbLeaveFiling.FillCmbWithCaption("RdDepartment", CommandType.StoredProcedure, "DepartmentId", "DepartmentName", cmbDepartment, "< All > ")
     End Sub
 #End Region
 

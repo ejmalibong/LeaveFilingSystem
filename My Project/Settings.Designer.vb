@@ -57,8 +57,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=NBCP-LT-058\SQLEXPRESS2017;Initial Catalog=LeaveFiling;Persist Securi"& _ 
-            "ty Info=True;User ID=sa;Password=Nbc12#")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.20.230;Initial Catalog=LeaveFiling;Persist Security Info=True"& _ 
+            ";User ID=sa;Password=Nbc12#")>  _
         Public ReadOnly Property LeaveFilingConnectionString() As String
             Get
                 Return CType(Me("LeaveFilingConnectionString"),String)
@@ -68,8 +68,8 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.SpecialSettingAttribute(Global.System.Configuration.SpecialSetting.ConnectionString),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=NBCP-LT-058\SQLEXPRESS2017;Initial Catalog=NBCTECHDB;Persist Security"& _ 
-            " Info=True;User ID=sa;Password=Nbc12#")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.20.230;Initial Catalog=NBCTECHDB;Persist Security Info=True;U"& _ 
+            "ser ID=sa;Password=Nbc12#")>  _
         Public ReadOnly Property NBCTECHDBConnectionString() As String
             Get
                 Return CType(Me("NBCTECHDBConnectionString"),String)

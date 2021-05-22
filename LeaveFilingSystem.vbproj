@@ -27,7 +27,7 @@
     <ProductName>Leave Application</ProductName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>42</ApplicationRevision>
+    <ApplicationRevision>54</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -136,6 +136,12 @@
     <Compile Include="Dataset\dsLeaveFiling.vb">
       <DependentUpon>dsLeaveFiling.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmHoliday.Designer.vb">
+      <DependentUpon>frmHoliday.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmHoliday.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmHrRecord.Designer.vb">
       <DependentUpon>frmHrRecord.vb</DependentUpon>
     </Compile>
@@ -183,6 +189,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\frmHoliday.resx">
+      <DependentUpon>frmHoliday.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmHrRecord.resx">
       <DependentUpon>frmHrRecord.vb</DependentUpon>
     </EmbeddedResource>

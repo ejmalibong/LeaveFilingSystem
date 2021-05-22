@@ -28,6 +28,7 @@ Partial Class frmMain
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LeaveFilingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HrListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HolidayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -57,7 +58,7 @@ Partial Class frmMain
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LeaveFilingToolStripMenuItem, Me.HrListToolStripMenuItem, Me.FileToolStripSeparator, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LeaveFilingToolStripMenuItem, Me.HrListToolStripMenuItem, Me.HolidayToolStripMenuItem, Me.FileToolStripSeparator, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -73,6 +74,12 @@ Partial Class frmMain
         Me.HrListToolStripMenuItem.Name = "HrListToolStripMenuItem"
         Me.HrListToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.HrListToolStripMenuItem.Text = "HR Records"
+        '
+        'HolidayToolStripMenuItem
+        '
+        Me.HolidayToolStripMenuItem.Name = "HolidayToolStripMenuItem"
+        Me.HolidayToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.HolidayToolStripMenuItem.Text = "Holiday"
         '
         'FileToolStripSeparator
         '
@@ -96,6 +103,7 @@ Partial Class frmMain
         Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
         Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
         Me.ReportsToolStripMenuItem.Text = "Reports"
+        Me.ReportsToolStripMenuItem.Visible = False
         '
         'WindowToolStripMenuItem
         '
@@ -203,4 +211,5 @@ End Sub
     Friend WithEvents HrListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents StatusToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents HolidayToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

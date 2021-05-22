@@ -571,7 +571,10 @@ Public Class frmLeaveForm
                 Me.ActiveControl = cmbSuperiorName1
                 cmbSuperiorName1.Select(cmbSuperiorName1.Text.Trim.Length, 0)
 
-            Case 4, 5, 7, 8, 10 'maternity leave, bereavement leave, paternity leave, offset leave, magna carta
+            Case 0
+                ResetForm()
+
+            Case Else
                 dtpFrom.Enabled = True
                 dtpTo.Enabled = True
                 dtpFrom.Value = Date.Now.Date
@@ -588,8 +591,6 @@ Public Class frmLeaveForm
                 Me.ActiveControl = txtReason
                 txtReason.Select(txtReason.Text.Trim.Length, 0)
 
-            Case Else
-                ResetForm()
         End Select
 
         txtNumberOfDays.Text = GetTotalDays(dtpFrom.Value.Date, dtpTo.Value.Date)
@@ -705,6 +706,22 @@ Public Class frmLeaveForm
             '    End If
             'End If
 
+            If cmbSuperiorName1.SelectedValue.Equals(cmbSuperiorName2.SelectedValue) AndAlso (Not cmbSuperiorName1.SelectedValue = 0 AndAlso Not cmbSuperiorName2.SelectedValue = 0) Then
+                MessageBox.Show("Immediate superior 1 and 2 cannot be the same.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                cmbSuperiorName1.Focus()
+                Return
+            ElseIf cmbSuperiorName1.SelectedValue.Equals(cmbManagerName.SelectedValue) AndAlso (Not cmbSuperiorName1.SelectedValue = 0 AndAlso Not cmbManagerName.SelectedValue = 0) Then
+                MessageBox.Show("Immediate superior 1 and the last approver cannot be the same.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                cmbSuperiorName1.Focus()
+                Return
+            Else
+                If cmbSuperiorName2.SelectedValue.Equals(cmbManagerName.SelectedValue) AndAlso (Not cmbSuperiorName2.SelectedValue = 0 AndAlso Not cmbManagerName.SelectedValue = 0) Then
+                    MessageBox.Show("Immediate superior 2 and the last approver cannot be the same.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    cmbSuperiorName2.Focus()
+                    Return
+                End If
+            End If
+
             If dtpFrom.Value.Date > dtpTo.Value.Date Then
                 MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 dtpFrom.Focus()
@@ -779,7 +796,7 @@ Public Class frmLeaveForm
                                 .Reason = txtReason.Text.Trim
                             End If
 
-                        Case 4, 5, 7, 8, 10 'marriage leave, bereavement leave, paternity leave, offset leave, magna carta
+                        Case Else
                             .SetScreenIdNull()
                             .ClinicIsApproved = 0
                             .SetClinicIdNull()
@@ -1060,10 +1077,11 @@ Public Class frmLeaveForm
                                 .ModifiedDate = DateTime.Now
 
                                 _frmMain.SendEmailReturned(requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
+
                             End If
                         End If
 
-                    ElseIf .IsSuperiorId2Null = False AndAlso .SuperiorId2 = employeeId Then
+                    ElseIf .IsSuperiorId2Null = False AndAlso .SuperiorId2 = employeeId Then 'immediate superior 2
                         If cmbSuperiorStatus2.SelectedValue = 0 AndAlso .IsSuperiorApprovalDate2Null = True Then 'remarks only
                             If String.IsNullOrEmpty(txtSuperiorRemarks2.Text.Trim) = False Then
                                 If SaveRemarksOnly() = Windows.Forms.DialogResult.Yes Then
@@ -1164,10 +1182,11 @@ Public Class frmLeaveForm
                                 .ModifiedDate = DateTime.Now
 
                                 _frmMain.SendEmailReturned(requestorEmployeeId, cmbLeaveType.Text, dtpFrom.Value.Date, dtpTo.Value.Date)
+
                             End If
                         End If
 
-                    ElseIf .IsManagerIdNull = False AndAlso .ManagerId = employeeId Then
+                    ElseIf .IsManagerIdNull = False AndAlso .ManagerId = employeeId Then 'manager/last approver
                         If cmbManagerStatus.SelectedValue = 0 AndAlso .IsManagerApprovalDateNull = True Then
                             If String.IsNullOrEmpty(txtManagerRemarks.Text.Trim) = False Then
                                 If SaveRemarksOnly() = Windows.Forms.DialogResult.Yes Then
@@ -1274,7 +1293,7 @@ Public Class frmLeaveForm
                         End If
 
                     Else
-                        'opened by requestor
+                        'opened by requestor or others (hr)
                         If requestorEmployeeId = employeeId AndAlso .ModifiedBy = employeeId Then
                             If Not cmbClinicName.SelectedValue = 0 Then
                                 .StartDate = dtpFrom.Value.Date
@@ -1290,6 +1309,7 @@ Public Class frmLeaveForm
                                 If cmbSuperiorName2.SelectedValue = 0 Then 'no immediate superior 2
                                     .SetSuperiorId2Null()
                                     .RoutingStatusId = 3
+
                                     'send to manager directly if no immediate superior 1 and 2
                                     If dtpFrom.Value.Date.Equals(dtpTo.Value.Date) Then
                                         _frmMain.SendEmailApprovers(.LeaveFileId, _
@@ -1309,7 +1329,7 @@ Public Class frmLeaveForm
                                                                     txtReason.Text.Trim)
                                     End If
 
-                                Else 'with immediate superior 2
+                                ElseIf Not cmbSuperiorName2.SelectedValue = 0 And .IsSuperiorApprovalDate2Null = True Then 'with immediate superior 2
                                     .RoutingStatusId = 4
                                     .SuperiorId2 = cmbSuperiorName2.SelectedValue
 
@@ -1332,7 +1352,7 @@ Public Class frmLeaveForm
                                     End If
                                 End If
 
-                            Else 'with immediate superior 1
+                            ElseIf Not cmbSuperiorName1.SelectedValue = 0 And .IsSuperiorApprovalDate1Null = True Then 'with immediate superior 1
                                 .RoutingStatusId = 5
                                 .SuperiorId1 = cmbSuperiorName1.SelectedValue
 
@@ -1404,7 +1424,7 @@ Public Class frmLeaveForm
                                             .Reason = txtReason.Text.Trim
                                         End If
 
-                                    Case 4, 5, 7, 8, 10 'marriage leave, bereavement leave, paternity leave, offset leave, magna carta
+                                    Case Else
                                         .SetScreenIdNull()
                                         .ClinicIsApproved = 0
                                         .SetClinicIdNull()
@@ -1544,6 +1564,7 @@ Public Class frmLeaveForm
                                     End If
                                 End If
                             End With
+
                         End If
                     End If
                 End With
@@ -1564,20 +1585,26 @@ Public Class frmLeaveForm
     End Sub
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
-        If employeeId = requestorEmployeeId AndAlso leaveFileId <> 0 And (Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Or Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Or Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value) Then
-            MessageBox.Show("Cannot delete approved/disapproved leave.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        If leaveFileId <> 0 And _
+            (Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate1") Is DBNull.Value Or _
+             Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("SuperiorApprovalDate2") Is DBNull.Value Or _
+             Not CType(Me.bsLeaveFiling.Current, DataRowView).Item("ManagerApprovalDate") Is DBNull.Value) Then
+            MessageBox.Show("Not allowed to delete approved/disapproved leave.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return
         Else
             If MessageBox.Show("Delete this record?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                'set screening record IsUsed flag to false
+                'set screening record isused flag to false
                 Select Case cmbLeaveType.SelectedValue
-                    Case 1, 2, 9, 11, 12
-                        Me.adpScreening.FillByScreenId(Me.dsLeaveFiling.Screening, screenId)
-                        Dim _screeningRow As ScreeningRow = Me.dsLeaveFiling.Screening.FindByScreenId(screenId)
-                        With _screeningRow
-                            .IsUsed = 0
-                        End With
-                        Me.adpScreening.Update(Me.dsLeaveFiling.Screening)
+                    Case 1, 2, 9, 12, 13
+                        If Not cmbClinicName.SelectedValue = 0 Then
+                            Me.adpScreening.FillByScreenId(Me.dsLeaveFiling.Screening, screenId)
+                            Dim _screeningRow As ScreeningRow = Me.dsLeaveFiling.Screening.FindByScreenId(screenId)
+                            With _screeningRow
+                                .IsUsed = 0
+                            End With
+                            Me.adpScreening.Update(Me.dsLeaveFiling.Screening)
+                            Me.dsLeaveFiling.AcceptChanges()
+                        End If
                 End Select
 
                 Me.bsLeaveFiling.RemoveCurrent()
@@ -1632,8 +1659,7 @@ Public Class frmLeaveForm
         End If
     End Sub
 
-#Region "Subs"
-
+#Region "Sub"
     'get requestor's information
     Private Sub FillEmployeeInformation(ByVal _employeeId As Integer)
         Try
@@ -1726,7 +1752,7 @@ Public Class frmLeaveForm
             _prm(2) = New SqlParameter("@PositionId", SqlDbType.Int)
             _prm(2).Value = _positionId
 
-            dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "Id", "LeaveTypeName", cmbLeaveType, "< Select Leave Type >", _prm)
+            dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "LeaveTypeId", "LeaveTypeName", cmbLeaveType, "< Select Leave Type >", _prm)
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -1927,7 +1953,6 @@ Public Class frmLeaveForm
 #End Region
 
 #Region "Functions"
-
     'compute total days between two dates - excluding sundays, legal, special and company holidays
     Private Function GetTotalDays(ByVal _startDate As Date, ByVal _endDate As Date) As Integer
         Dim _count As Integer = 0
@@ -2042,7 +2067,6 @@ Public Class frmLeaveForm
             End If
         End If
     End Function
-
 #End Region
 
 End Class

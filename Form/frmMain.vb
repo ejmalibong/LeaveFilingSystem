@@ -30,7 +30,11 @@ Public Class frmMain
     'check email if already sent
     Private Shared mailSent As Boolean = False
 
-    Public Sub New(ByVal _employeeId As Integer, ByVal _employeeCode As String, ByVal _employeeName As String, ByVal _positionId As Integer, ByVal _positionName As String, ByVal _departmentId As Integer, ByVal _departmentName As String, ByVal _teamId As Integer, ByVal _teamName As String, ByVal _employmentTypeId As Integer, ByVal _employmentTypeName As String, ByVal _emailAddress As String, ByVal _mobileNumber As String, ByVal _nbcEmailAddress As String)
+    Public Sub New(ByVal _employeeId As Integer, ByVal _employeeCode As String, ByVal _employeeName As String, _
+                   ByVal _positionId As Integer, ByVal _positionName As String, ByVal _departmentId As Integer, _
+                   ByVal _departmentName As String, ByVal _teamId As Integer, ByVal _teamName As String, _
+                   ByVal _employmentTypeId As Integer, ByVal _employmentTypeName As String, ByVal _emailAddress As String, _
+                   ByVal _mobileNumber As String, ByVal _nbcEmailAddress As String)
 
         ' This call is required by the designer.
         InitializeComponent()
@@ -72,10 +76,11 @@ Public Class frmMain
 
         If teamId = 1 Then
             HrListToolStripMenuItem.Visible = True
+            HolidayToolStripMenuItem.Visible = True
             main.FormLoader(Me, New frmHrRecord(employeeId, positionId, departmentId, teamId, employmentTypeId), True)
         Else
             HrListToolStripMenuItem.Visible = False
-            ReportsToolStripMenuItem.Visible = False
+            HolidayToolStripMenuItem.Visible = False
             main.FormLoader(Me, New frmLeaveRecord(employeeId, positionId, departmentId, teamId, employmentTypeId), True)
         End If
 
@@ -104,6 +109,10 @@ Public Class frmMain
 
     Private Sub HrListToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HrListToolStripMenuItem.Click
         main.FormLoader(Me, New frmHrRecord(employeeId, positionId, departmentId, teamId, employmentTypeId), True)
+    End Sub
+
+    Private Sub HolidayToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HolidayToolStripMenuItem.Click
+        main.FormLoader(Me, New frmHoliday, False)
     End Sub
 
     Private Sub LogOutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LogOutToolStripMenuItem.Click
@@ -378,7 +387,7 @@ Public Class frmMain
                     message.To.Add("it1@nbc-p.com")
                 Else
                     message.To.Add(_reader.Item("EmailAddress").ToString.Trim)
-                    'message.To.Add("it1@nbc-p.com") 'for testing
+                    'message.To.Add("it1@nbc-p.com") 'for test
                 End If
             End While
             _reader.Close()
@@ -447,7 +456,7 @@ Public Class frmMain
             message.From = New MailAddress("nbcleaveapplication@gmail.com", "NBC Leave Application")
 
             message.To.Add("catherine.delapena@nbc-p.com")
-            'message.To.Add("it1@nbc-p.com") 'for testing
+            'message.To.Add("it1@nbc-p.com") 'for test
             message.Subject = "Leave Notification"
             message.IsBodyHtml = True
             message.Body = messageBody

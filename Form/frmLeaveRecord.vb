@@ -11,7 +11,6 @@ Imports LeaveFilingSystem.dsJeonsoftTableAdapters
 Public Class frmLeaveRecord
     Private connection As New clsConnection
     Private dbLeaveFiling As New SqlDbMethod(connection.LocalConnection)
-    Private dbJeonsoft As New SqlDbMethod(connection.JeonsoftConnection)
     Private main As New Main
     'server datetime
     Private serverDate As DateTime = dbLeaveFiling.GetServerDate
@@ -27,18 +26,28 @@ Public Class frmLeaveRecord
     Private pageCount As Integer
     Private indexScroll As Integer = 0
     Private indexPosition As Integer = 0
-
-    Private employeeId As Integer = 0
-    Private employmentTypeId As Integer = 0
-    Private positionId As Integer = 0
-    Private teamId As Integer = 0
-    Private departmentId As Integer = 0
     'control access
     Private isSuperior As Boolean = False
     Private isManager As Boolean = False
     'list
     Private superiorLevel As New List(Of Integer) From {19, 4, 3, 6, 17, 25, 18, 7} 'sv, asv, sr engr, sr staff, sr line leader, sr nurse, sr technician, line leader
     Private managerLevel As New List(Of Integer) From {15, 21, 2, 13} 'dgm, sr mngr, mngr, asst mngr
+    'search criteria
+    Private dictionary As New Dictionary(Of String, Integer)
+    'flag filters
+    Private isFilterByLeaveType As Boolean = False
+    Private isFilterByDateCreated As Boolean = False
+    Private isFilterByEmployeeName As Boolean = False
+    Private isFilterBySection As Boolean = False
+    Private isFilterByReason As Boolean = False
+    Private isFilterByAbsentStartDate As Boolean = False
+    Private isFilterByAbsentEndDate As Boolean = False
+
+    Private employeeId As Integer = 0
+    Private employmentTypeId As Integer = 0
+    Private positionId As Integer = 0
+    Private teamId As Integer = 0
+    Private departmentId As Integer = 0
 
     Public Sub New(ByVal _employeeId As Integer, ByVal _positionId As Integer, ByVal _departmentId As Integer, ByVal _teamId As Integer, ByVal _employmentTypeId As Integer)
 
@@ -81,6 +90,8 @@ Public Class frmLeaveRecord
         BindPage()
 
         rdMyFile.Checked = True
+
+        SearchCriteria()
 
         main.EnableDoubleBuffered(dgvList)
         Me.ActiveControl = dgvList
@@ -133,7 +144,7 @@ Public Class frmLeaveRecord
                 Dim _prmLeaveType(0) As SqlParameter
                 _prmLeaveType(0) = New SqlParameter("@LeaveTypeId", SqlDbType.Int)
                 _prmLeaveType(0).Value = _leaveFilingRow.LeaveTypeId
-                _leaveTypeName = dbJeonsoft.ExecuteScalar("SELECT TRIM(Name) AS LeaveTypeName FROM dbo.tblLeaveTypes WHERE Id = @LeaveTypeId", CommandType.Text, _prmLeaveType)
+                _leaveTypeName = dbLeaveFiling.ExecuteScalar("SELECT TRIM(LeaveTypeName) AS LeaveTypeName FROM dbo.LeaveType WHERE LeaveTypeId = @LeaveTypeId", CommandType.Text, _prmLeaveType)
 
                 Dim _prmEmployee(0) As SqlParameter
                 _prmEmployee(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
@@ -158,7 +169,6 @@ Public Class frmLeaveRecord
                         If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
                             .SuperiorIsApproved1 = 1
                             .SuperiorApprovalDate1 = DateTime.Now
-                            .SetSuperiorRemarks1Null()
 
                             If .IsSuperiorId2Null = True Then
                                 .RoutingStatusId = 3
@@ -211,7 +221,6 @@ Public Class frmLeaveRecord
                         If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
                             .SuperiorIsApproved2 = 1
                             .SuperiorApprovalDate2 = DateTime.Now
-                            .SetSuperiorRemarks2Null()
                             .RoutingStatusId = 3
 
                             If _leaveFilingRow.StartDate.Date.Equals(_leaveFilingRow.EndDate.Date) Then
@@ -238,7 +247,6 @@ Public Class frmLeaveRecord
                         If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
                             .ManagerIsApproved = 1
                             .ManagerApprovalDate = DateTime.Now
-                            .SetManagerRemarksNull()
                             .RoutingStatusId = 2
 
                             _frmMain.SendEmailRequestor(True, _
@@ -292,7 +300,7 @@ Public Class frmLeaveRecord
                 Dim _prmLeaveType(0) As SqlParameter
                 _prmLeaveType(0) = New SqlParameter("@LeaveTypeId", SqlDbType.Int)
                 _prmLeaveType(0).Value = _leaveFilingRow.LeaveTypeId
-                _leaveTypeName = dbJeonsoft.ExecuteScalar("SELECT TRIM(Name) AS LeaveTypeName FROM dbo.tblLeaveTypes WHERE Id = @LeaveTypeId", CommandType.Text, _prmLeaveType)
+                _leaveTypeName = dbLeaveFiling.ExecuteScalar("SELECT TRIM(LeaveTypeName) AS LeaveTypeName FROM dbo.LeaveType WHERE LeaveTypeId = @LeaveTypeId", CommandType.Text, _prmLeaveType)
 
                 Dim _prmEmployee(0) As SqlParameter
                 _prmEmployee(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
@@ -317,7 +325,6 @@ Public Class frmLeaveRecord
                         If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
                             .SuperiorIsApproved1 = 0
                             .SuperiorApprovalDate1 = DateTime.Now
-                            .SetSuperiorRemarks1Null()
 
                             If .IsSuperiorId2Null = True Then
                                 .RoutingStatusId = 7
@@ -379,7 +386,6 @@ Public Class frmLeaveRecord
                         If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
                             .SuperiorIsApproved2 = 0
                             .SuperiorApprovalDate2 = DateTime.Now
-                            .SetSuperiorRemarks2Null()
 
                             .RoutingStatusId = 7
                             _frmMain.SendEmailRequestor(False, _
@@ -412,7 +418,6 @@ Public Class frmLeaveRecord
                         If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
                             .ManagerIsApproved = 0
                             .ManagerApprovalDate = DateTime.Now
-                            .SetManagerRemarksNull()
 
                             .RoutingStatusId = 7
                             _frmMain.SendEmailRequestor(False, _
@@ -546,19 +551,441 @@ Public Class frmLeaveRecord
         Go()
     End Sub
 
+    Private Sub cmbSearchCriteria_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbSearchCriteria.SelectedValueChanged
+        Try
+            If cmbSearchCriteria.SelectedValue = 1 Then
+                pnlLeaveType.Visible = True
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlSection.Visible = False
+                pnlReason.Visible = False
+                pnlAbsentStartDate.Visible = False
+                pnlAbsentEndDate.Visible = False
+                Me.ActiveControl = cmbLeaveType
+            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = True
+                pnlEmployeeName.Visible = False
+                pnlSection.Visible = False
+                pnlReason.Visible = False
+                pnlAbsentStartDate.Visible = False
+                pnlAbsentEndDate.Visible = False
+                Me.ActiveControl = dtpDateCreatedFrom
+            ElseIf cmbSearchCriteria.SelectedValue = 3 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = True
+                pnlSection.Visible = False
+                pnlReason.Visible = False
+                pnlAbsentStartDate.Visible = False
+                pnlAbsentEndDate.Visible = False
+                Me.ActiveControl = txtEmployeeName
+            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlSection.Visible = True
+                pnlReason.Visible = False
+                pnlAbsentStartDate.Visible = False
+                pnlAbsentEndDate.Visible = False
+                Me.ActiveControl = cmbSection
+            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlSection.Visible = False
+                pnlReason.Visible = True
+                pnlAbsentStartDate.Visible = False
+                pnlAbsentEndDate.Visible = False
+                Me.ActiveControl = txtReason
+            ElseIf cmbSearchCriteria.SelectedValue = 6 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlSection.Visible = False
+                pnlReason.Visible = False
+                pnlAbsentStartDate.Visible = True
+                pnlAbsentEndDate.Visible = False
+                Me.ActiveControl = dtpAbsentStartFrom
+            ElseIf cmbSearchCriteria.SelectedValue = 7 Then
+                pnlLeaveType.Visible = False
+                pnlDateCreated.Visible = False
+                pnlEmployeeName.Visible = False
+                pnlSection.Visible = False
+                pnlReason.Visible = False
+                pnlAbsentStartDate.Visible = False
+                pnlAbsentEndDate.Visible = True
+                Me.ActiveControl = dtpAbsentEndFrom
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+        Try
+            If cmbSearchCriteria.SelectedValue = 1 Then
+                isFilterByLeaveType = True
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
+                If dtpDateCreatedFrom.Value.Date > dtpDateCreatedTo.Value.Date Then
+                    MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = True
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+            ElseIf cmbSearchCriteria.SelectedValue = 3 Then
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = True
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = True
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = True
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+            ElseIf cmbSearchCriteria.SelectedValue = 6 Then
+                If dtpAbsentStartFrom.Value.Date > dtpAbsentStartTo.Value.Date Then
+                    MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = True
+                isFilterByAbsentEndDate = False
+
+            ElseIf cmbSearchCriteria.SelectedValue = 7 Then
+                If dtpAbsentEndFrom.Value.Date > dtpAbsentEndTo.Value.Date Then
+                    MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = True
+            End If
+
+            pageIndex = 0
+            BindPage()
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
+    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+        Try
+            If cmbSearchCriteria.SelectedValue = 1 Then
+                cmbLeaveType.SelectedValue = 0
+
+                isFilterByLeaveType = True
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+                pageIndex = 0
+                BindPage()
+
+            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
+                If dtpDateCreatedFrom.Value.Date > dtpDateCreatedTo.Value.Date Then
+                    MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+                dtpDateCreatedFrom.Value = Date.Now
+                dtpDateCreatedTo.Value = Date.Now
+                pageIndex = 0
+                BindPage()
+
+            ElseIf cmbSearchCriteria.SelectedValue = 3 Then
+                txtEmployeeName.Clear()
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = True
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+                pageIndex = 0
+                BindPage()
+
+            ElseIf cmbSearchCriteria.SelectedValue = 4 Then
+                cmbSection.SelectedValue = 0
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = True
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+                pageIndex = 0
+                BindPage()
+
+            ElseIf cmbSearchCriteria.SelectedValue = 5 Then
+                txtReason.Clear()
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = True
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+                pageIndex = 0
+                BindPage()
+
+            ElseIf cmbSearchCriteria.SelectedValue = 6 Then
+                If dtpAbsentStartFrom.Value.Date > dtpAbsentStartTo.Value.Date Then
+                    MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = False
+
+                dtpAbsentStartFrom.Value = Date.Now
+                dtpAbsentStartTo.Value = Date.Now
+                pageIndex = 0
+                BindPage()
+
+            ElseIf cmbSearchCriteria.SelectedValue = 7 Then
+                If dtpAbsentEndFrom.Value.Date > dtpAbsentEndTo.Value.Date Then
+                    MessageBox.Show("Start date is later than end date.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Return
+                End If
+
+                isFilterByLeaveType = False
+                isFilterByDateCreated = False
+                isFilterByEmployeeName = False
+                isFilterBySection = False
+                isFilterByReason = False
+                isFilterByAbsentStartDate = False
+                isFilterByAbsentEndDate = True
+
+                dtpAbsentEndFrom.Value = Date.Now
+                dtpAbsentEndTo.Value = Date.Now
+                pageIndex = 0
+                BindPage()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
 #Region "Sub"
     Private Sub BindPage()
         Try
             totalCount = 0
 
-            If rdMyFile.Checked = True Then
-                Me.adpLeaveFiling.FillByEmployeeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
-            ElseIf rdPending.Checked = True Then
-                Me.adpLeaveFiling.FillPending(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
-            ElseIf rdApproved.Checked = True Then
-                Me.adpLeaveFiling.FillApproved(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
-            ElseIf rdDisapproved.Checked = True Then
-                Me.adpLeaveFiling.FillDisapproved(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
+            If isFilterByLeaveType = True Then
+                If rdMyFile.Checked = True Then
+                    If cmbLeaveType.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByEmployeeIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByEmployeeIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbLeaveType.SelectedValue)
+                    End If
+                ElseIf rdPending.Checked = True Then
+                    If cmbLeaveType.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillPendingByEmployeeIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillPendingByEmployeeIdLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbLeaveType.SelectedValue)
+                    End If
+                ElseIf rdApproved.Checked = True Then
+                    If cmbLeaveType.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillApprovedByLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillApprovedByLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbLeaveType.SelectedValue)
+                    End If
+                ElseIf rdDisapproved.Checked = True Then
+                    If cmbLeaveType.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillDisapprovedByLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillDisapprovedByLeaveTypeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbLeaveType.SelectedValue)
+                    End If
+                End If
+
+            ElseIf isFilterByDateCreated = True Then
+                If rdMyFile.Checked = True Then
+                    Me.adpLeaveFiling.FillByEmployeeIdDateCreated(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpDateCreatedFrom.Value.Date, dtpDateCreatedTo.Value.Date)
+                ElseIf rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillPendingByDateCreated(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpDateCreatedFrom.Value.Date, dtpDateCreatedTo.Value.Date)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillApprovedByDateCreated(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpDateCreatedFrom.Value.Date, dtpDateCreatedTo.Value.Date)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillDisapprovedByDateCreated(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpDateCreatedFrom.Value.Date, dtpDateCreatedTo.Value.Date)
+                End If
+
+            ElseIf isFilterByEmployeeName = True Then
+                If rdMyFile.Checked = True Then
+                    If String.IsNullOrEmpty(txtEmployeeName.Text.Trim) Then
+                        Me.adpLeaveFiling.FillByEmployeeIdEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByEmployeeIdEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtEmployeeName.Text.Trim)
+                    End If
+                ElseIf rdPending.Checked = True Then
+                    If String.IsNullOrEmpty(txtEmployeeName.Text.Trim) Then
+                        Me.adpLeaveFiling.FillPendingByEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillPendingByEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtEmployeeName.Text.Trim)
+                    End If
+                ElseIf rdApproved.Checked = True Then
+                    If String.IsNullOrEmpty(txtEmployeeName.Text.Trim) Then
+                        Me.adpLeaveFiling.FillApprovedByEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillApprovedByEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtEmployeeName.Text.Trim)
+                    End If
+                ElseIf rdDisapproved.Checked = True Then
+                    If String.IsNullOrEmpty(txtEmployeeName.Text.Trim) Then
+                        Me.adpLeaveFiling.FillDisapprovedByEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillDisapprovedByEmployeeName(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtEmployeeName.Text.Trim)
+                    End If
+                End If
+
+            ElseIf isFilterBySection = True Then
+                If rdMyFile.Checked = True Then
+                    If cmbSection.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillByEmployeeIdTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByEmployeeIdTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbSection.SelectedValue)
+                    End If
+                ElseIf rdPending.Checked = True Then
+                    If cmbSection.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillPendingByTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillPendingByTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbSection.SelectedValue)
+                    End If
+                ElseIf rdApproved.Checked = True Then
+                    If cmbSection.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillApprovedByTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillApprovedByTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbSection.SelectedValue)
+                    End If
+                ElseIf rdDisapproved.Checked = True Then
+                    If cmbSection.SelectedValue = 0 Then
+                        Me.adpLeaveFiling.FillDisapprovedByTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillDisapprovedByTeamId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, cmbSection.SelectedValue)
+                    End If
+                End If
+
+            ElseIf isFilterByReason = True Then
+                If rdMyFile.Checked = True Then
+                    If String.IsNullOrEmpty(txtReason.Text.Trim) Then
+                        Me.adpLeaveFiling.FillByEmployeeIdReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillByEmployeeIdReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtReason.Text.Trim)
+                    End If
+                ElseIf rdPending.Checked = True Then
+                    If String.IsNullOrEmpty(txtReason.Text.Trim) Then
+                        Me.adpLeaveFiling.FillPendingByReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillPendingByReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtReason.Text.Trim)
+                    End If
+                ElseIf rdApproved.Checked = True Then
+                    If String.IsNullOrEmpty(txtReason.Text.Trim) = True Then
+                        Me.adpLeaveFiling.FillApprovedByReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillApprovedByReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtReason.Text.Trim)
+                    End If
+                ElseIf rdDisapproved.Checked = True Then
+                    If String.IsNullOrEmpty(txtReason.Text.Trim) Then
+                        Me.adpLeaveFiling.FillDisapprovedByReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, Nothing)
+                    Else
+                        Me.adpLeaveFiling.FillDisapprovedByReason(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, txtReason.Text.Trim)
+                    End If
+                End If
+
+            ElseIf isFilterByAbsentStartDate = True Then
+                If rdMyFile.Checked = True Then
+                    Me.adpLeaveFiling.FillByEmployeeIdAbsentDateFrom(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentStartFrom.Value.Date, dtpAbsentStartTo.Value.Date)
+                ElseIf rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillPendingByAbsentDateFrom(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentStartFrom.Value.Date, dtpAbsentStartTo.Value.Date)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillApprovedByAbsentDateFrom(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentStartFrom.Value.Date, dtpAbsentStartTo.Value.Date)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillDisapprovedByAbsentDateFrom(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentStartFrom.Value.Date, dtpAbsentStartTo.Value.Date)
+                End If
+
+            ElseIf isFilterByAbsentEndDate = True Then
+                If rdMyFile.Checked = True Then
+                    Me.adpLeaveFiling.FillByEmployeeIdAbsentDateTo(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentEndFrom.Value.Date, dtpAbsentEndTo.Value.Date)
+                ElseIf rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillPendingByAbsentDateTo(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentEndFrom.Value.Date, dtpAbsentEndTo.Value.Date)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillApprovedByAbsentDateTo(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentEndFrom.Value.Date, dtpAbsentEndTo.Value.Date)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillDisapprovedByAbsentDateTo(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId, dtpAbsentEndFrom.Value.Date, dtpAbsentEndFrom.Value.Date)
+                End If
+
+            Else
+                If rdMyFile.Checked = True Then
+                    Me.adpLeaveFiling.FillByEmployeeId(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
+                ElseIf rdPending.Checked = True Then
+                    Me.adpLeaveFiling.FillPending(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
+                ElseIf rdApproved.Checked = True Then
+                    Me.adpLeaveFiling.FillApproved(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
+                ElseIf rdDisapproved.Checked = True Then
+                    Me.adpLeaveFiling.FillDisapproved(Me.dsLeaveFiling.LeaveFiling, pageIndex, pageSize, totalCount, employeeId)
+                End If
             End If
 
             Me.bsLeaveFiling.DataSource = Me.dsLeaveFiling
@@ -685,6 +1112,27 @@ Public Class frmLeaveRecord
 
         Return _isApprover
     End Function
+
+    Private Sub SearchCriteria()
+        dictionary.Add(" Leave Type", 1)
+        dictionary.Add(" Date Created", 2)
+        dictionary.Add(" Employee Name", 3)
+        dictionary.Add(" Section", 4)
+        dictionary.Add(" Reason", 5)
+        dictionary.Add(" Start Date of Absent", 6)
+        dictionary.Add(" End Date of Absent", 7)
+        cmbSearchCriteria.DisplayMember = "Key"
+        cmbSearchCriteria.ValueMember = "Value"
+        cmbSearchCriteria.DataSource = New BindingSource(dictionary, Nothing)
+
+        dbLeaveFiling.FillCmbWithCaption("RdLeaveType", CommandType.StoredProcedure, "LeaveTypeId", "LeaveTypeName", cmbLeaveType, "< All > ")
+
+        Dim _prmDeptId(0) As SqlParameter
+        _prmDeptId(0) = New SqlParameter("@DepartmentId", SqlDbType.Int)
+        _prmDeptId(0).Value = departmentId
+
+        dbLeaveFiling.FillCmbWithCaption("RdTeam", CommandType.StoredProcedure, "TeamId", "TeamName", cmbSection, "< All > ", _prmDeptId)
+    End Sub
 #End Region
 
 End Class
