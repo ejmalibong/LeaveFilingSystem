@@ -834,6 +834,7 @@ Partial Class frmLeaveRecord
         Me.Name = "frmLeaveRecord"
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Leave Records"
         Me.grpCriteria.ResumeLayout(False)

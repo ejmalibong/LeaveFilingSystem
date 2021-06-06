@@ -28,11 +28,14 @@ Partial Class frmMain
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.LeaveFilingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.HrListToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.HolidayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+        Me.PasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.FileToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.LogOutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReportsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.MaintenanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.EmployeeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.HolidayToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.WindowToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.DatetimeToolStripMenuItem = New System.Windows.Forms.ToolStripLabel()
         Me.UserItemToolStripMenuItem = New System.Windows.Forms.ToolStripLabel()
@@ -49,16 +52,16 @@ Partial Class frmMain
         'mnuMain
         '
         Me.mnuMain.BackColor = System.Drawing.Color.White
-        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.ReportsToolStripMenuItem, Me.WindowToolStripMenuItem, Me.DatetimeToolStripMenuItem, Me.UserItemToolStripMenuItem, Me.UsernameToolStripMenuItem})
+        Me.mnuMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.MaintenanceToolStripMenuItem, Me.WindowToolStripMenuItem, Me.DatetimeToolStripMenuItem, Me.UserItemToolStripMenuItem, Me.UsernameToolStripMenuItem})
         Me.mnuMain.Location = New System.Drawing.Point(0, 0)
         Me.mnuMain.MdiWindowListItem = Me.WindowToolStripMenuItem
         Me.mnuMain.Name = "mnuMain"
-        Me.mnuMain.Size = New System.Drawing.Size(684, 24)
+        Me.mnuMain.Size = New System.Drawing.Size(805, 24)
         Me.mnuMain.TabIndex = 1
         '
         'FileToolStripMenuItem
         '
-        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LeaveFilingToolStripMenuItem, Me.HrListToolStripMenuItem, Me.HolidayToolStripMenuItem, Me.FileToolStripSeparator, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LeaveFilingToolStripMenuItem, Me.HrListToolStripMenuItem, Me.ToolStripSeparator1, Me.PasswordToolStripMenuItem, Me.FileToolStripSeparator, Me.LogOutToolStripMenuItem, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "File"
@@ -66,44 +69,61 @@ Partial Class frmMain
         'LeaveFilingToolStripMenuItem
         '
         Me.LeaveFilingToolStripMenuItem.Name = "LeaveFilingToolStripMenuItem"
-        Me.LeaveFilingToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.LeaveFilingToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.LeaveFilingToolStripMenuItem.Text = "Leave Records"
         '
         'HrListToolStripMenuItem
         '
         Me.HrListToolStripMenuItem.Name = "HrListToolStripMenuItem"
-        Me.HrListToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.HrListToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.HrListToolStripMenuItem.Text = "HR Records"
         '
-        'HolidayToolStripMenuItem
+        'ToolStripSeparator1
         '
-        Me.HolidayToolStripMenuItem.Name = "HolidayToolStripMenuItem"
-        Me.HolidayToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
-        Me.HolidayToolStripMenuItem.Text = "Holiday"
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(165, 6)
+        '
+        'PasswordToolStripMenuItem
+        '
+        Me.PasswordToolStripMenuItem.Name = "PasswordToolStripMenuItem"
+        Me.PasswordToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
+        Me.PasswordToolStripMenuItem.Text = "Change Password"
         '
         'FileToolStripSeparator
         '
         Me.FileToolStripSeparator.Name = "FileToolStripSeparator"
-        Me.FileToolStripSeparator.Size = New System.Drawing.Size(146, 6)
+        Me.FileToolStripSeparator.Size = New System.Drawing.Size(165, 6)
         '
         'LogOutToolStripMenuItem
         '
         Me.LogOutToolStripMenuItem.Name = "LogOutToolStripMenuItem"
-        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.LogOutToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.LogOutToolStripMenuItem.Text = "Log Out"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
-        'ReportsToolStripMenuItem
+        'MaintenanceToolStripMenuItem
         '
-        Me.ReportsToolStripMenuItem.Name = "ReportsToolStripMenuItem"
-        Me.ReportsToolStripMenuItem.Size = New System.Drawing.Size(59, 20)
-        Me.ReportsToolStripMenuItem.Text = "Reports"
-        Me.ReportsToolStripMenuItem.Visible = False
+        Me.MaintenanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmployeeToolStripMenuItem, Me.HolidayToolStripMenuItem})
+        Me.MaintenanceToolStripMenuItem.Name = "MaintenanceToolStripMenuItem"
+        Me.MaintenanceToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
+        Me.MaintenanceToolStripMenuItem.Text = "Maintenance"
+        '
+        'EmployeeToolStripMenuItem
+        '
+        Me.EmployeeToolStripMenuItem.Name = "EmployeeToolStripMenuItem"
+        Me.EmployeeToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
+        Me.EmployeeToolStripMenuItem.Text = "Employees"
+        '
+        'HolidayToolStripMenuItem
+        '
+        Me.HolidayToolStripMenuItem.Name = "HolidayToolStripMenuItem"
+        Me.HolidayToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
+        Me.HolidayToolStripMenuItem.Text = "Holidays"
         '
         'WindowToolStripMenuItem
         '
@@ -144,7 +164,7 @@ Partial Class frmMain
         Me.stsMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DepartmentToolStripStatusLabel, Me.SectionToolStripStatusLabel, Me.StatusToolStripStatusLabel})
         Me.stsMain.Location = New System.Drawing.Point(0, 239)
         Me.stsMain.Name = "stsMain"
-        Me.stsMain.Size = New System.Drawing.Size(684, 22)
+        Me.stsMain.Size = New System.Drawing.Size(805, 22)
         Me.stsMain.SizingGrip = False
         Me.stsMain.TabIndex = 2
         '
@@ -162,8 +182,10 @@ Partial Class frmMain
         '
         'StatusToolStripStatusLabel
         '
+        Me.StatusToolStripStatusLabel.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.StatusToolStripStatusLabel.ForeColor = System.Drawing.Color.Red
         Me.StatusToolStripStatusLabel.Name = "StatusToolStripStatusLabel"
-        Me.StatusToolStripStatusLabel.Size = New System.Drawing.Size(553, 17)
+        Me.StatusToolStripStatusLabel.Size = New System.Drawing.Size(674, 17)
         Me.StatusToolStripStatusLabel.Spring = True
         Me.StatusToolStripStatusLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -174,9 +196,10 @@ Partial Class frmMain
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(684, 261)
+        Me.ClientSize = New System.Drawing.Size(805, 261)
         Me.Controls.Add(Me.stsMain)
         Me.Controls.Add(Me.mnuMain)
+        Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Segoe UI", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -210,6 +233,9 @@ End Sub
     Friend WithEvents SectionToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
     Friend WithEvents HrListToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Public WithEvents StatusToolStripStatusLabel As System.Windows.Forms.ToolStripStatusLabel
-    Friend WithEvents ReportsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents PasswordToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MaintenanceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents EmployeeToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents HolidayToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 End Class

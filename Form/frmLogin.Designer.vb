@@ -26,66 +26,60 @@ Partial Class frmLogin
         Me.txtEmployeeId = New System.Windows.Forms.TextBox()
         Me.btnLogin = New PinkieControls.ButtonXP()
         Me.btnClose = New PinkieControls.ButtonXP()
-        Me.lblCaption = New System.Windows.Forms.Label()
         Me.picLogo = New System.Windows.Forms.PictureBox()
         Me.lblVersion = New System.Windows.Forms.Label()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.lblPassword = New System.Windows.Forms.Label()
+        Me.lblEmployeeId = New System.Windows.Forms.Label()
+        Me.chkBoxShow = New System.Windows.Forms.CheckBox()
         CType(Me.picLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtEmployeeId
         '
         Me.txtEmployeeId.Font = New System.Drawing.Font("Segoe UI", 14.0!)
-        Me.txtEmployeeId.Location = New System.Drawing.Point(230, 54)
-        Me.txtEmployeeId.Multiline = True
+        Me.txtEmployeeId.Location = New System.Drawing.Point(230, 37)
         Me.txtEmployeeId.Name = "txtEmployeeId"
-        Me.txtEmployeeId.Size = New System.Drawing.Size(262, 34)
+        Me.txtEmployeeId.Size = New System.Drawing.Size(262, 32)
         Me.txtEmployeeId.TabIndex = 0
         Me.txtEmployeeId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'btnLogin
         '
+        Me.btnLogin.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnLogin.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnLogin.DefaultScheme = True
         Me.btnLogin.DialogResult = System.Windows.Forms.DialogResult.None
         Me.btnLogin.Font = New System.Drawing.Font("Verdana", 10.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnLogin.Hint = "Login"
-        Me.btnLogin.Location = New System.Drawing.Point(266, 99)
+        Me.btnLogin.Location = New System.Drawing.Point(266, 178)
         Me.btnLogin.Name = "btnLogin"
         Me.btnLogin.Scheme = PinkieControls.ButtonXP.Schemes.Blue
         Me.btnLogin.Size = New System.Drawing.Size(110, 36)
-        Me.btnLogin.TabIndex = 91
+        Me.btnLogin.TabIndex = 2
         Me.btnLogin.Text = "Login"
         '
         'btnClose
         '
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnClose.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
         Me.btnClose.DefaultScheme = True
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnClose.Hint = "Close"
-        Me.btnClose.Location = New System.Drawing.Point(382, 99)
+        Me.btnClose.Location = New System.Drawing.Point(382, 178)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Scheme = PinkieControls.ButtonXP.Schemes.Blue
         Me.btnClose.Size = New System.Drawing.Size(110, 36)
-        Me.btnClose.TabIndex = 92
+        Me.btnClose.TabIndex = 3
         Me.btnClose.Text = "Close"
-        '
-        'lblCaption
-        '
-        Me.lblCaption.AutoSize = True
-        Me.lblCaption.Font = New System.Drawing.Font("Segoe UI", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCaption.Location = New System.Drawing.Point(226, 30)
-        Me.lblCaption.Name = "lblCaption"
-        Me.lblCaption.Size = New System.Drawing.Size(94, 20)
-        Me.lblCaption.TabIndex = 93
-        Me.lblCaption.Text = "Employee ID"
         '
         'picLogo
         '
         Me.picLogo.BackColor = System.Drawing.Color.White
         Me.picLogo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.picLogo.Image = CType(resources.GetObject("picLogo.Image"), System.Drawing.Image)
-        Me.picLogo.Location = New System.Drawing.Point(13, 14)
+        Me.picLogo.Location = New System.Drawing.Point(13, 28)
         Me.picLogo.Name = "picLogo"
         Me.picLogo.Size = New System.Drawing.Size(200, 170)
         Me.picLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -98,11 +92,53 @@ Partial Class frmLogin
         Me.lblVersion.AutoSize = True
         Me.lblVersion.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblVersion.ForeColor = System.Drawing.SystemColors.ActiveCaption
-        Me.lblVersion.Location = New System.Drawing.Point(451, 189)
+        Me.lblVersion.Location = New System.Drawing.Point(451, 221)
         Me.lblVersion.Name = "lblVersion"
         Me.lblVersion.Size = New System.Drawing.Size(45, 15)
         Me.lblVersion.TabIndex = 97
         Me.lblVersion.Text = "version"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Font = New System.Drawing.Font("Segoe UI", 14.0!)
+        Me.txtPassword.Location = New System.Drawing.Point(230, 95)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(9679)
+        Me.txtPassword.Size = New System.Drawing.Size(262, 32)
+        Me.txtPassword.TabIndex = 1
+        Me.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.txtPassword.UseSystemPasswordChar = True
+        '
+        'lblPassword
+        '
+        Me.lblPassword.AutoSize = True
+        Me.lblPassword.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.lblPassword.Location = New System.Drawing.Point(226, 72)
+        Me.lblPassword.Name = "lblPassword"
+        Me.lblPassword.Size = New System.Drawing.Size(70, 20)
+        Me.lblPassword.TabIndex = 100
+        Me.lblPassword.Text = "Password"
+        '
+        'lblEmployeeId
+        '
+        Me.lblEmployeeId.AutoSize = True
+        Me.lblEmployeeId.Font = New System.Drawing.Font("Segoe UI", 11.0!)
+        Me.lblEmployeeId.Location = New System.Drawing.Point(226, 14)
+        Me.lblEmployeeId.Name = "lblEmployeeId"
+        Me.lblEmployeeId.Size = New System.Drawing.Size(94, 20)
+        Me.lblEmployeeId.TabIndex = 99
+        Me.lblEmployeeId.Text = "Employee ID"
+        '
+        'chkBoxShow
+        '
+        Me.chkBoxShow.AutoSize = True
+        Me.chkBoxShow.Font = New System.Drawing.Font("Verdana", 10.0!)
+        Me.chkBoxShow.Location = New System.Drawing.Point(230, 132)
+        Me.chkBoxShow.Name = "chkBoxShow"
+        Me.chkBoxShow.Size = New System.Drawing.Size(138, 21)
+        Me.chkBoxShow.TabIndex = 538
+        Me.chkBoxShow.Text = "Show Password"
+        Me.chkBoxShow.UseVisualStyleBackColor = True
         '
         'frmLogin
         '
@@ -110,13 +146,17 @@ Partial Class frmLogin
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
         Me.CancelButton = Me.btnClose
-        Me.ClientSize = New System.Drawing.Size(504, 211)
+        Me.ClientSize = New System.Drawing.Size(504, 241)
+        Me.Controls.Add(Me.chkBoxShow)
+        Me.Controls.Add(Me.lblPassword)
+        Me.Controls.Add(Me.lblEmployeeId)
+        Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.lblVersion)
         Me.Controls.Add(Me.picLogo)
-        Me.Controls.Add(Me.lblCaption)
         Me.Controls.Add(Me.btnClose)
         Me.Controls.Add(Me.btnLogin)
         Me.Controls.Add(Me.txtEmployeeId)
+        Me.Font = New System.Drawing.Font("Segoe UI", 10.0!)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.KeyPreview = True
@@ -133,7 +173,10 @@ Partial Class frmLogin
     Friend WithEvents txtEmployeeId As System.Windows.Forms.TextBox
     Friend WithEvents btnLogin As PinkieControls.ButtonXP
     Friend WithEvents btnClose As PinkieControls.ButtonXP
-    Friend WithEvents lblCaption As System.Windows.Forms.Label
     Friend WithEvents picLogo As System.Windows.Forms.PictureBox
     Friend WithEvents lblVersion As System.Windows.Forms.Label
+    Friend WithEvents txtPassword As System.Windows.Forms.TextBox
+    Friend WithEvents lblPassword As System.Windows.Forms.Label
+    Friend WithEvents lblEmployeeId As System.Windows.Forms.Label
+    Friend WithEvents chkBoxShow As System.Windows.Forms.CheckBox
 End Class

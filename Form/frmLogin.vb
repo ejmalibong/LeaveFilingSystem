@@ -76,12 +76,14 @@ Public Class frmLogin
 
         'mam cheenee
         'txtEmployeeId.Text = "1708-001"
+        'txtPassword.Text = "diaz"
 
         'mam wella
         'txtEmployeeId.Text = "1709-001"
 
         'mam cath
         'txtEmployeeId.Text = "1802-001"
+        'txtPassword.Text = "delapena"
 
         'mam mj
         'txtEmployeeId.Text = "1701-075"
@@ -95,8 +97,9 @@ Public Class frmLogin
         'mam dette
         'txtEmployeeId.Text = "1503-001"
 
-        'me
+        ''me
         'txtEmployeeId.Text = "2009-002"
+        'txtPassword.Text = "malibong"
 
         'sir vincent
         'txtEmployeeId.Text = "2011-002"
@@ -127,93 +130,113 @@ Public Class frmLogin
         Me.ActiveControl = txtEmployeeId
     End Sub
 
+    Private Sub frmLogin_Activated(sender As Object, e As EventArgs) Handles Me.Activated
+        Me.ActiveControl = txtEmployeeId
+    End Sub
+
+    Private Sub chkBoxShow_CheckedChanged(sender As Object, e As EventArgs) Handles chkBoxShow.CheckedChanged
+        If chkBoxShow.Checked = True Then
+            txtPassword.UseSystemPasswordChar = False
+            txtPassword.PasswordChar = ""
+
+        ElseIf chkBoxShow.Checked = False Then
+            txtPassword.UseSystemPasswordChar = True
+            txtPassword.PasswordChar = "●"
+
+        End If
+    End Sub
+
     Private Sub btnLogin_Click(sender As Object, e As EventArgs) Handles btnLogin.Click
-        arrSplitted = Split(txtEmployeeId.Text.Trim, " ", 2)
-        ValidateId(arrSplitted(0).ToString)
+        Try
+            If String.IsNullOrEmpty(txtEmployeeId.Text.Trim) Then
+                MessageBox.Show("Please enter your employee ID.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                txtEmployeeId.Focus()
+                Return
+            End If
+
+            If String.IsNullOrEmpty(txtPassword.Text.Trim) Then
+                MessageBox.Show("Please enter your password.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                txtPassword.Focus()
+                Return
+            End If
+
+            Dim _count1 As Integer = 0
+            Dim _prm1(1) As SqlParameter
+            _prm1(0) = New SqlParameter("@EmployeeCode", SqlDbType.NVarChar)
+            _prm1(0).Value = txtEmployeeId.Text.Trim
+            _prm1(1) = New SqlParameter("@Password", SqlDbType.NVarChar)
+            _prm1(1).Value = txtPassword.Text.Trim
+
+            'use latin1 general collation for case-sensitive password
+            _count1 = dbLeaveFiling.ExecuteScalar("SELECT COUNT(Id) FROM VwEmployee WHERE EmployeeCode = @EmployeeCode AND " & _
+                                                  "(TRIM(Password) COLLATE Latin1_General_CS_AS = @Password)", CommandType.Text, _prm1)
+
+            If _count1 > 0 Then
+                Dim _prm2(1) As SqlParameter
+                _prm2(0) = New SqlParameter("@EmployeeCode", SqlDbType.NVarChar)
+                _prm2(0).Value = txtEmployeeId.Text.Trim
+                _prm2(1) = New SqlParameter("@Password", SqlDbType.NVarChar)
+                _prm2(1).Value = txtPassword.Text.Trim
+
+                Dim _reader As IDataReader = dbLeaveFiling.ExecuteReader("RdEmployee", CommandType.StoredProcedure, _prm2)
+
+                While _reader.Read
+                    employeeId = _reader.Item("Id")
+                    employeeCode = _reader.Item("EmployeeCode").ToString.Trim
+                    employeeName = _reader.Item("EmployeeName").ToString.Trim
+                    positionId = _reader.Item("PositionId")
+                    positionName = _reader.Item("PositionName").ToString.Trim
+                    departmentId = _reader.Item("DepartmentId")
+                    departmentName = _reader.Item("DepartmentName").ToString.Trim
+                    employmentTypeId = _reader.Item("EmploymentTypeId")
+                    employmentTypeName = _reader.Item("EmploymentTypeName").ToString.Trim
+
+                    If Not _reader.Item("EmailAddress") Is DBNull.Value Then
+                        emailAddress = _reader.Item("EmailAddress")
+                    Else
+                        emailAddress = String.Empty
+                    End If
+
+                    If Not _reader.Item("MobileNo") Is DBNull.Value Then
+                        mobileNumber = _reader.Item("MobileNo")
+                    Else
+                        mobileNumber = String.Empty
+                    End If
+
+                    If Not _reader.Item("NbcEmailAddress") Is DBNull.Value Then
+                        nbcEmailAddress = _reader.Item("NbcEmailAddress")
+                    Else
+                        nbcEmailAddress = String.Empty
+                    End If
+
+                    If _reader.Item("TeamId") Is DBNull.Value Then
+                        teamId = 0
+                        teamName = String.Empty
+                    Else
+                        teamId = _reader.Item("TeamId")
+                        teamName = _reader.Item("TeamName").ToString.Trim
+                    End If
+                End While
+                _reader.Close()
+
+                Me.Hide()
+                Dim _frmMain As New frmMain(employeeId, employeeCode, employeeName, positionId, positionName, _
+                                            departmentId, departmentName, teamId, teamName, employmentTypeId, employmentTypeName, _
+                                            emailAddress, mobileNumber, nbcEmailAddress)
+                _frmMain.Show()
+                txtEmployeeId.Clear()
+            Else
+                MessageBox.Show("Incorrect employee ID or password.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                txtPassword.Clear()
+                txtPassword.Focus()
+            End If
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
         Application.Exit()
-    End Sub
-
-    Private Sub txtEmployeeId_KeyDown(sender As Object, e As KeyEventArgs) Handles txtEmployeeId.KeyDown
-        If e.KeyCode.Equals(Keys.Enter) Then
-            e.Handled = True
-
-            arrSplitted = Split(txtEmployeeId.Text.Trim, " ", 2)
-            ValidateId(arrSplitted(0).ToString)
-        End If
-    End Sub
-
-    Private Sub ValidateId(ByVal _employeeCode As String)
-        If String.IsNullOrEmpty(txtEmployeeId.Text.Trim) Then
-            MessageBox.Show("Please enter your employee ID.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            txtEmployeeId.Focus()
-            Return
-        End If
-
-        Dim _count As Integer = 0
-        Dim _prmEmpCode1(0) As SqlParameter
-        _prmEmpCode1(0) = New SqlParameter("@EmployeeCode", SqlDbType.VarChar)
-        _prmEmpCode1(0).Value = _employeeCode
-
-        _count = dbJeonsoft.ExecuteScalar("SELECT COUNT(Id) FROM dbo.tblEmployees WHERE TRIM(EmployeeCode) = @EmployeeCode", CommandType.Text, _prmEmpCode1)
-
-        If _count > 0 Then
-            Dim _prmEmpCode2(0) As SqlParameter
-            _prmEmpCode2(0) = New SqlParameter("@EmployeeCode", SqlDbType.VarChar)
-            _prmEmpCode2(0).Value = txtEmployeeId.Text.Trim
-
-            Dim _reader As IDataReader = dbLeaveFiling.ExecuteReader("RdEmployee", CommandType.StoredProcedure, _prmEmpCode2)
-
-            While _reader.Read
-                employeeId = _reader.Item("Id")
-                employeeCode = _reader.Item("EmployeeCode").ToString.Trim
-                employeeName = _reader.Item("EmployeeName").ToString.Trim
-                positionId = _reader.Item("PositionId")
-                positionName = _reader.Item("PositionName").ToString.Trim
-                departmentId = _reader.Item("DepartmentId")
-                departmentName = _reader.Item("DepartmentName").ToString.Trim
-                employmentTypeId = _reader.Item("EmploymentTypeId")
-                employmentTypeName = _reader.Item("EmploymentTypeName").ToString.Trim
-
-                If Not _reader.Item("EmailAddress") Is DBNull.Value Then
-                    emailAddress = _reader.Item("EmailAddress")
-                Else
-                    emailAddress = String.Empty
-                End If
-
-                If Not _reader.Item("MobileNo") Is DBNull.Value Then
-                    mobileNumber = _reader.Item("MobileNo")
-                Else
-                    mobileNumber = String.Empty
-                End If
-
-                If Not _reader.Item("NbcEmailAddress") Is DBNull.Value Then
-                    nbcEmailAddress = _reader.Item("NbcEmailAddress")
-                Else
-                    nbcEmailAddress = String.Empty
-                End If
-
-                If _reader.Item("TeamId") Is DBNull.Value Then
-                    teamId = 0
-                    teamName = String.Empty
-                Else
-                    teamId = _reader.Item("TeamId")
-                    teamName = _reader.Item("TeamName").ToString.Trim
-                End If
-            End While
-            _reader.Close()
-
-            Me.Hide()
-            Dim _frmMain As New frmMain(employeeId, employeeCode, employeeName, positionId, positionName, departmentId, departmentName, teamId, teamName, employmentTypeId, employmentTypeName, emailAddress, mobileNumber, nbcEmailAddress)
-            _frmMain.Show()
-            txtEmployeeId.Clear()
-        Else
-            MessageBox.Show("Employee not found.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            txtEmployeeId.Focus()
-            txtEmployeeId.Select(txtEmployeeId.Text.Trim.Length, 0)
-        End If
     End Sub
 
 End Class

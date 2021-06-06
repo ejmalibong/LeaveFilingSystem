@@ -35,6 +35,10 @@ Partial Public Class dsLeaveFiling
     
     Private tableScreening As ScreeningDataTable
     
+    Private tableClinic As ClinicDataTable
+    
+    Private tableEmployee As EmployeeDataTable
+    
     Private relationFK_LeaveFiling_LeaveType As Global.System.Data.DataRelation
     
     Private relationFK_LeaveFiling_RoutingStatus As Global.System.Data.DataRelation
@@ -86,6 +90,12 @@ Partial Public Class dsLeaveFiling
             End If
             If (Not (ds.Tables("Screening")) Is Nothing) Then
                 MyBase.Tables.Add(New ScreeningDataTable(ds.Tables("Screening")))
+            End If
+            If (Not (ds.Tables("Clinic")) Is Nothing) Then
+                MyBase.Tables.Add(New ClinicDataTable(ds.Tables("Clinic")))
+            End If
+            If (Not (ds.Tables("Employee")) Is Nothing) Then
+                MyBase.Tables.Add(New EmployeeDataTable(ds.Tables("Employee")))
             End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
@@ -151,6 +161,26 @@ Partial Public Class dsLeaveFiling
     Public ReadOnly Property Screening() As ScreeningDataTable
         Get
             Return Me.tableScreening
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property Clinic() As ClinicDataTable
+        Get
+            Return Me.tableClinic
+        End Get
+    End Property
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property Employee() As EmployeeDataTable
+        Get
+            Return Me.tableEmployee
         End Get
     End Property
     
@@ -236,6 +266,12 @@ Partial Public Class dsLeaveFiling
             If (Not (ds.Tables("Screening")) Is Nothing) Then
                 MyBase.Tables.Add(New ScreeningDataTable(ds.Tables("Screening")))
             End If
+            If (Not (ds.Tables("Clinic")) Is Nothing) Then
+                MyBase.Tables.Add(New ClinicDataTable(ds.Tables("Clinic")))
+            End If
+            If (Not (ds.Tables("Employee")) Is Nothing) Then
+                MyBase.Tables.Add(New EmployeeDataTable(ds.Tables("Employee")))
+            End If
             Me.DataSetName = ds.DataSetName
             Me.Prefix = ds.Prefix
             Me.Namespace = ds.Namespace
@@ -298,6 +334,18 @@ Partial Public Class dsLeaveFiling
                 Me.tableScreening.InitVars
             End If
         End If
+        Me.tableClinic = CType(MyBase.Tables("Clinic"),ClinicDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableClinic) Is Nothing) Then
+                Me.tableClinic.InitVars
+            End If
+        End If
+        Me.tableEmployee = CType(MyBase.Tables("Employee"),EmployeeDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tableEmployee) Is Nothing) Then
+                Me.tableEmployee.InitVars
+            End If
+        End If
         Me.relationFK_LeaveFiling_LeaveType = Me.Relations("FK_LeaveFiling_LeaveType")
         Me.relationFK_LeaveFiling_RoutingStatus = Me.Relations("FK_LeaveFiling_RoutingStatus")
         Me.relationFK_LeaveFiling_Screening = Me.Relations("FK_LeaveFiling_Screening")
@@ -322,6 +370,10 @@ Partial Public Class dsLeaveFiling
         MyBase.Tables.Add(Me.tableLeaveFiling)
         Me.tableScreening = New ScreeningDataTable()
         MyBase.Tables.Add(Me.tableScreening)
+        Me.tableClinic = New ClinicDataTable()
+        MyBase.Tables.Add(Me.tableClinic)
+        Me.tableEmployee = New EmployeeDataTable()
+        MyBase.Tables.Add(Me.tableEmployee)
         Me.relationFK_LeaveFiling_LeaveType = New Global.System.Data.DataRelation("FK_LeaveFiling_LeaveType", New Global.System.Data.DataColumn() {Me.tableLeaveType.LeaveTypeIdColumn}, New Global.System.Data.DataColumn() {Me.tableLeaveFiling.LeaveTypeIdColumn}, false)
         Me.Relations.Add(Me.relationFK_LeaveFiling_LeaveType)
         Me.relationFK_LeaveFiling_RoutingStatus = New Global.System.Data.DataRelation("FK_LeaveFiling_RoutingStatus", New Global.System.Data.DataColumn() {Me.tableRoutingStatus.RoutingStatusIdColumn}, New Global.System.Data.DataColumn() {Me.tableLeaveFiling.RoutingStatusIdColumn}, false)
@@ -359,6 +411,18 @@ Partial Public Class dsLeaveFiling
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Private Function ShouldSerializeScreening() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Private Function ShouldSerializeClinic() As Boolean
+        Return false
+    End Function
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Private Function ShouldSerializeEmployee() As Boolean
         Return false
     End Function
     
@@ -434,6 +498,12 @@ Partial Public Class dsLeaveFiling
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub ScreeningRowChangeEventHandler(ByVal sender As Object, ByVal e As ScreeningRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Delegate Sub ClinicRowChangeEventHandler(ByVal sender As Object, ByVal e As ClinicRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Delegate Sub EmployeeRowChangeEventHandler(ByVal sender As Object, ByVal e As EmployeeRowChangeEvent)
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -2630,6 +2700,760 @@ Partial Public Class dsLeaveFiling
     End Class
     
     '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class ClinicDataTable
+        Inherits Global.System.Data.TypedTableBase(Of ClinicRow)
+        
+        Private columnEmployeeId As Global.System.Data.DataColumn
+        
+        Private columnEmployeeCode As Global.System.Data.DataColumn
+        
+        Private columnEmployeeName As Global.System.Data.DataColumn
+        
+        Private columnPositionName As Global.System.Data.DataColumn
+        
+        Private columnPassword As Global.System.Data.DataColumn
+        
+        Private columnIsActive As Global.System.Data.DataColumn
+        
+        Private columnLockId As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Clinic"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EmployeeIdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEmployeeId
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EmployeeCodeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEmployeeCode
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EmployeeNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEmployeeName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PositionNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPositionName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PasswordColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPassword
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IsActiveColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsActive
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LockIdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLockId
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As ClinicRow
+            Get
+                Return CType(Me.Rows(index),ClinicRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ClinicRowChanging As ClinicRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ClinicRowChanged As ClinicRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ClinicRowDeleting As ClinicRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event ClinicRowDeleted As ClinicRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddClinicRow(ByVal row As ClinicRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddClinicRow(ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal PositionName As String, ByVal Password As String, ByVal IsActive As Boolean, ByVal LockId() As Byte) As ClinicRow
+            Dim rowClinicRow As ClinicRow = CType(Me.NewRow,ClinicRow)
+            Dim columnValuesArray() As Object = New Object() {Nothing, EmployeeCode, EmployeeName, PositionName, Password, IsActive, LockId}
+            rowClinicRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowClinicRow)
+            Return rowClinicRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByEmployeeId(ByVal EmployeeId As Integer) As ClinicRow
+            Return CType(Me.Rows.Find(New Object() {EmployeeId}),ClinicRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As ClinicDataTable = CType(MyBase.Clone,ClinicDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New ClinicDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnEmployeeId = MyBase.Columns("EmployeeId")
+            Me.columnEmployeeCode = MyBase.Columns("EmployeeCode")
+            Me.columnEmployeeName = MyBase.Columns("EmployeeName")
+            Me.columnPositionName = MyBase.Columns("PositionName")
+            Me.columnPassword = MyBase.Columns("Password")
+            Me.columnIsActive = MyBase.Columns("IsActive")
+            Me.columnLockId = MyBase.Columns("LockId")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnEmployeeId = New Global.System.Data.DataColumn("EmployeeId", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEmployeeId)
+            Me.columnEmployeeCode = New Global.System.Data.DataColumn("EmployeeCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEmployeeCode)
+            Me.columnEmployeeName = New Global.System.Data.DataColumn("EmployeeName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEmployeeName)
+            Me.columnPositionName = New Global.System.Data.DataColumn("PositionName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPositionName)
+            Me.columnPassword = New Global.System.Data.DataColumn("Password", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPassword)
+            Me.columnIsActive = New Global.System.Data.DataColumn("IsActive", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsActive)
+            Me.columnLockId = New Global.System.Data.DataColumn("LockId", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLockId)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEmployeeId}, true))
+            Me.columnEmployeeId.AutoIncrement = true
+            Me.columnEmployeeId.AutoIncrementSeed = -1
+            Me.columnEmployeeId.AutoIncrementStep = -1
+            Me.columnEmployeeId.AllowDBNull = false
+            Me.columnEmployeeId.ReadOnly = true
+            Me.columnEmployeeId.Unique = true
+            Me.columnEmployeeCode.AllowDBNull = false
+            Me.columnEmployeeCode.MaxLength = 8
+            Me.columnEmployeeName.AllowDBNull = false
+            Me.columnEmployeeName.MaxLength = 50
+            Me.columnPositionName.MaxLength = 20
+            Me.columnPassword.MaxLength = 20
+            Me.columnIsActive.AllowDBNull = false
+            Me.columnLockId.ReadOnly = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewClinicRow() As ClinicRow
+            Return CType(Me.NewRow,ClinicRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New ClinicRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(ClinicRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.ClinicRowChangedEvent) Is Nothing) Then
+                RaiseEvent ClinicRowChanged(Me, New ClinicRowChangeEvent(CType(e.Row,ClinicRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.ClinicRowChangingEvent) Is Nothing) Then
+                RaiseEvent ClinicRowChanging(Me, New ClinicRowChangeEvent(CType(e.Row,ClinicRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.ClinicRowDeletedEvent) Is Nothing) Then
+                RaiseEvent ClinicRowDeleted(Me, New ClinicRowChangeEvent(CType(e.Row,ClinicRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.ClinicRowDeletingEvent) Is Nothing) Then
+                RaiseEvent ClinicRowDeleting(Me, New ClinicRowChangeEvent(CType(e.Row,ClinicRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveClinicRow(ByVal row As ClinicRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As dsLeaveFiling = New dsLeaveFiling()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "ClinicDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class EmployeeDataTable
+        Inherits Global.System.Data.TypedTableBase(Of EmployeeRow)
+        
+        Private columnEmployeeId As Global.System.Data.DataColumn
+        
+        Private columnEmployeeCode As Global.System.Data.DataColumn
+        
+        Private columnEmployeeName As Global.System.Data.DataColumn
+        
+        Private columnPassword As Global.System.Data.DataColumn
+        
+        Private columnNbcEmailAddress As Global.System.Data.DataColumn
+        
+        Private columnIsApprover As Global.System.Data.DataColumn
+        
+        Private columnIsHrRecords As Global.System.Data.DataColumn
+        
+        Private columnIsEmployee As Global.System.Data.DataColumn
+        
+        Private columnIsHoliday As Global.System.Data.DataColumn
+        
+        Private columnIsActive As Global.System.Data.DataColumn
+        
+        Private columnLockId As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "Employee"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EmployeeIdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEmployeeId
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EmployeeCodeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEmployeeCode
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property EmployeeNameColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnEmployeeName
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property PasswordColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnPassword
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property NbcEmailAddressColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnNbcEmailAddress
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IsApproverColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsApprover
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IsHrRecordsColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsHrRecords
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IsEmployeeColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsEmployee
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IsHolidayColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsHoliday
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property IsActiveColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnIsActive
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property LockIdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columnLockId
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As EmployeeRow
+            Get
+                Return CType(Me.Rows(index),EmployeeRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event EmployeeRowChanging As EmployeeRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event EmployeeRowChanged As EmployeeRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event EmployeeRowDeleting As EmployeeRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event EmployeeRowDeleted As EmployeeRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddEmployeeRow(ByVal row As EmployeeRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddEmployeeRow(ByVal EmployeeId As Integer, ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal Password As String, ByVal NbcEmailAddress As String, ByVal IsApprover As Boolean, ByVal IsHrRecords As Boolean, ByVal IsEmployee As Boolean, ByVal IsHoliday As Boolean, ByVal IsActive As Boolean, ByVal LockId() As Byte) As EmployeeRow
+            Dim rowEmployeeRow As EmployeeRow = CType(Me.NewRow,EmployeeRow)
+            Dim columnValuesArray() As Object = New Object() {EmployeeId, EmployeeCode, EmployeeName, Password, NbcEmailAddress, IsApprover, IsHrRecords, IsEmployee, IsHoliday, IsActive, LockId}
+            rowEmployeeRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowEmployeeRow)
+            Return rowEmployeeRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindByEmployeeId(ByVal EmployeeId As Integer) As EmployeeRow
+            Return CType(Me.Rows.Find(New Object() {EmployeeId}),EmployeeRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As EmployeeDataTable = CType(MyBase.Clone,EmployeeDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New EmployeeDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columnEmployeeId = MyBase.Columns("EmployeeId")
+            Me.columnEmployeeCode = MyBase.Columns("EmployeeCode")
+            Me.columnEmployeeName = MyBase.Columns("EmployeeName")
+            Me.columnPassword = MyBase.Columns("Password")
+            Me.columnNbcEmailAddress = MyBase.Columns("NbcEmailAddress")
+            Me.columnIsApprover = MyBase.Columns("IsApprover")
+            Me.columnIsHrRecords = MyBase.Columns("IsHrRecords")
+            Me.columnIsEmployee = MyBase.Columns("IsEmployee")
+            Me.columnIsHoliday = MyBase.Columns("IsHoliday")
+            Me.columnIsActive = MyBase.Columns("IsActive")
+            Me.columnLockId = MyBase.Columns("LockId")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columnEmployeeId = New Global.System.Data.DataColumn("EmployeeId", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEmployeeId)
+            Me.columnEmployeeCode = New Global.System.Data.DataColumn("EmployeeCode", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEmployeeCode)
+            Me.columnEmployeeName = New Global.System.Data.DataColumn("EmployeeName", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnEmployeeName)
+            Me.columnPassword = New Global.System.Data.DataColumn("Password", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnPassword)
+            Me.columnNbcEmailAddress = New Global.System.Data.DataColumn("NbcEmailAddress", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnNbcEmailAddress)
+            Me.columnIsApprover = New Global.System.Data.DataColumn("IsApprover", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsApprover)
+            Me.columnIsHrRecords = New Global.System.Data.DataColumn("IsHrRecords", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsHrRecords)
+            Me.columnIsEmployee = New Global.System.Data.DataColumn("IsEmployee", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsEmployee)
+            Me.columnIsHoliday = New Global.System.Data.DataColumn("IsHoliday", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsHoliday)
+            Me.columnIsActive = New Global.System.Data.DataColumn("IsActive", GetType(Boolean), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnIsActive)
+            Me.columnLockId = New Global.System.Data.DataColumn("LockId", GetType(Byte()), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columnLockId)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columnEmployeeId}, true))
+            Me.columnEmployeeId.AllowDBNull = false
+            Me.columnEmployeeId.Unique = true
+            Me.columnEmployeeCode.AllowDBNull = false
+            Me.columnEmployeeCode.MaxLength = 50
+            Me.columnEmployeeName.AllowDBNull = false
+            Me.columnEmployeeName.MaxLength = 50
+            Me.columnPassword.MaxLength = 50
+            Me.columnNbcEmailAddress.MaxLength = 50
+            Me.columnIsApprover.AllowDBNull = false
+            Me.columnIsHrRecords.AllowDBNull = false
+            Me.columnIsEmployee.AllowDBNull = false
+            Me.columnIsHoliday.AllowDBNull = false
+            Me.columnIsActive.AllowDBNull = false
+            Me.columnLockId.ReadOnly = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewEmployeeRow() As EmployeeRow
+            Return CType(Me.NewRow,EmployeeRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New EmployeeRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(EmployeeRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.EmployeeRowChangedEvent) Is Nothing) Then
+                RaiseEvent EmployeeRowChanged(Me, New EmployeeRowChangeEvent(CType(e.Row,EmployeeRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.EmployeeRowChangingEvent) Is Nothing) Then
+                RaiseEvent EmployeeRowChanging(Me, New EmployeeRowChangeEvent(CType(e.Row,EmployeeRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.EmployeeRowDeletedEvent) Is Nothing) Then
+                RaiseEvent EmployeeRowDeleted(Me, New EmployeeRowChangeEvent(CType(e.Row,EmployeeRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.EmployeeRowDeletingEvent) Is Nothing) Then
+                RaiseEvent EmployeeRowDeleting(Me, New EmployeeRowChangeEvent(CType(e.Row,EmployeeRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemoveEmployeeRow(ByVal row As EmployeeRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As dsLeaveFiling = New dsLeaveFiling()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "EmployeeDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
+    
+    '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
     Partial Public Class LeaveTypeRow
@@ -3839,6 +4663,332 @@ Partial Public Class dsLeaveFiling
     End Class
     
     '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class ClinicRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableClinic As ClinicDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableClinic = CType(Me.Table,ClinicDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EmployeeId() As Integer
+            Get
+                Return CType(Me(Me.tableClinic.EmployeeIdColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableClinic.EmployeeIdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EmployeeCode() As String
+            Get
+                Return CType(Me(Me.tableClinic.EmployeeCodeColumn),String)
+            End Get
+            Set
+                Me(Me.tableClinic.EmployeeCodeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EmployeeName() As String
+            Get
+                Return CType(Me(Me.tableClinic.EmployeeNameColumn),String)
+            End Get
+            Set
+                Me(Me.tableClinic.EmployeeNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property PositionName() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableClinic.PositionNameColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'PositionName' in table 'Clinic' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableClinic.PositionNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Password() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableClinic.PasswordColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Password' in table 'Clinic' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableClinic.PasswordColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property IsActive() As Boolean
+            Get
+                Return CType(Me(Me.tableClinic.IsActiveColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableClinic.IsActiveColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property LockId() As Byte()
+            Get
+                Try 
+                    Return CType(Me(Me.tableClinic.LockIdColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LockId' in table 'Clinic' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableClinic.LockIdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPositionNameNull() As Boolean
+            Return Me.IsNull(Me.tableClinic.PositionNameColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPositionNameNull()
+            Me(Me.tableClinic.PositionNameColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPasswordNull() As Boolean
+            Return Me.IsNull(Me.tableClinic.PasswordColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPasswordNull()
+            Me(Me.tableClinic.PasswordColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLockIdNull() As Boolean
+            Return Me.IsNull(Me.tableClinic.LockIdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLockIdNull()
+            Me(Me.tableClinic.LockIdColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
+    Partial Public Class EmployeeRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tableEmployee As EmployeeDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tableEmployee = CType(Me.Table,EmployeeDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EmployeeId() As Integer
+            Get
+                Return CType(Me(Me.tableEmployee.EmployeeIdColumn),Integer)
+            End Get
+            Set
+                Me(Me.tableEmployee.EmployeeIdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EmployeeCode() As String
+            Get
+                Return CType(Me(Me.tableEmployee.EmployeeCodeColumn),String)
+            End Get
+            Set
+                Me(Me.tableEmployee.EmployeeCodeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property EmployeeName() As String
+            Get
+                Return CType(Me(Me.tableEmployee.EmployeeNameColumn),String)
+            End Get
+            Set
+                Me(Me.tableEmployee.EmployeeNameColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property Password() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableEmployee.PasswordColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'Password' in table 'Employee' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableEmployee.PasswordColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property NbcEmailAddress() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tableEmployee.NbcEmailAddressColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'NbcEmailAddress' in table 'Employee' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableEmployee.NbcEmailAddressColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property IsApprover() As Boolean
+            Get
+                Return CType(Me(Me.tableEmployee.IsApproverColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableEmployee.IsApproverColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property IsHrRecords() As Boolean
+            Get
+                Return CType(Me(Me.tableEmployee.IsHrRecordsColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableEmployee.IsHrRecordsColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property IsEmployee() As Boolean
+            Get
+                Return CType(Me(Me.tableEmployee.IsEmployeeColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableEmployee.IsEmployeeColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property IsHoliday() As Boolean
+            Get
+                Return CType(Me(Me.tableEmployee.IsHolidayColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableEmployee.IsHolidayColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property IsActive() As Boolean
+            Get
+                Return CType(Me(Me.tableEmployee.IsActiveColumn),Boolean)
+            End Get
+            Set
+                Me(Me.tableEmployee.IsActiveColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property LockId() As Byte()
+            Get
+                Try 
+                    Return CType(Me(Me.tableEmployee.LockIdColumn),Byte())
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'LockId' in table 'Employee' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tableEmployee.LockIdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsPasswordNull() As Boolean
+            Return Me.IsNull(Me.tableEmployee.PasswordColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetPasswordNull()
+            Me(Me.tableEmployee.PasswordColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsNbcEmailAddressNull() As Boolean
+            Return Me.IsNull(Me.tableEmployee.NbcEmailAddressColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetNbcEmailAddressNull()
+            Me(Me.tableEmployee.NbcEmailAddressColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IsLockIdNull() As Boolean
+            Return Me.IsNull(Me.tableEmployee.LockIdColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SetLockIdNull()
+            Me(Me.tableEmployee.LockIdColumn) = Global.System.Convert.DBNull
+        End Sub
+    End Class
+    
+    '''<summary>
     '''Row event argument class
     '''</summary>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -4004,6 +5154,78 @@ Partial Public Class dsLeaveFiling
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public ReadOnly Property Row() As ScreeningRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Class ClinicRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As ClinicRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New(ByVal row As ClinicRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Row() As ClinicRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Class EmployeeRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As EmployeeRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New(ByVal row As EmployeeRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Row() As EmployeeRow
             Get
                 Return Me.eventRow
             End Get
@@ -4860,457 +6082,457 @@ Namespace dsLeaveFilingTableAdapters
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "dbo.RdHolidayByDate"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HolidayDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HolidayDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HolidayDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@HolidayDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
             Me._commandCollection(2).CommandText = "dbo.RdHolidayByName"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Name", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Name", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
             Me._commandCollection(3).CommandText = "dbo.RdHoliday"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)> _
-        Public Overridable Overloads Function Fill(ByVal dataTable As dsLeaveFiling.HolidayDataTable) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As dsLeaveFiling.HolidayDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)> _
-        Public Overridable Overloads Function GetData() As dsLeaveFiling.HolidayDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As dsLeaveFiling.HolidayDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As dsLeaveFiling.HolidayDataTable = New dsLeaveFiling.HolidayDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByHolidayDate(ByVal dataTable As dsLeaveFiling.HolidayDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal HolidayDateFrom As Global.System.Nullable(Of Date), ByVal HolidayDateTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByHolidayDate(ByVal dataTable As dsLeaveFiling.HolidayDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal HolidayDateFrom As Global.System.Nullable(Of Date), ByVal HolidayDateTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(1)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (HolidayDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(HolidayDateFrom.Value, Date)
+            If (HolidayDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(HolidayDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (HolidayDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(HolidayDateTo.Value, Date)
+            If (HolidayDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(HolidayDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByHolidayDate(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal HolidayDateFrom As Global.System.Nullable(Of Date), ByVal HolidayDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.HolidayDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByHolidayDate(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal HolidayDateFrom As Global.System.Nullable(Of Date), ByVal HolidayDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.HolidayDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(1)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (HolidayDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(HolidayDateFrom.Value, Date)
+            If (HolidayDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(HolidayDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (HolidayDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(HolidayDateTo.Value, Date)
+            If (HolidayDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(HolidayDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.HolidayDataTable = New dsLeaveFiling.HolidayDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByHolidayName(ByVal dataTable As dsLeaveFiling.HolidayDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal Name As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByHolidayName(ByVal dataTable As dsLeaveFiling.HolidayDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal Name As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(2)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
             If (Name Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(Name, String)
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(Name,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByHolidayName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal Name As String) As dsLeaveFiling.HolidayDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByHolidayName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal Name As String) As dsLeaveFiling.HolidayDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(2)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
             If (Name Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(Name, String)
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(Name,String)
             End If
             Dim dataTable As dsLeaveFiling.HolidayDataTable = New dsLeaveFiling.HolidayDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillHoliday(ByVal dataTable As dsLeaveFiling.HolidayDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillHoliday(ByVal dataTable As dsLeaveFiling.HolidayDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(3)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetHoliday(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As dsLeaveFiling.HolidayDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetHoliday(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As dsLeaveFiling.HolidayDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(3)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.HolidayDataTable = New dsLeaveFiling.HolidayDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataTable As dsLeaveFiling.HolidayDataTable) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As dsLeaveFiling.HolidayDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataSet As dsLeaveFiling) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As dsLeaveFiling) As Integer
             Return Me.Adapter.Update(dataSet, "Holiday")
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)> _
-        Public Overridable Overloads Function Delete(ByVal Original_HolidayId As Integer, ByVal Original_HolidayDate As Date, ByVal Original_HolidayName As String) As Integer
-            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_HolidayId, Integer)
-            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_HolidayDate, Date)
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_HolidayId As Integer, ByVal Original_HolidayDate As Date, ByVal Original_HolidayName As String) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_HolidayId,Integer)
+            Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_HolidayDate,Date)
             If (Original_HolidayName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_HolidayName")
             Else
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_HolidayName, String)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_HolidayName,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open()
+                Me.Adapter.DeleteCommand.Connection.Open
             End If
-            Try
+            Try 
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close()
+                    Me.Adapter.DeleteCommand.Connection.Close
                 End If
             End Try
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)> _
-        Public Overridable Overloads Function Insert(ByVal HolidayDate As Date, ByVal HolidayName As String) As Integer
-            Me.Adapter.InsertCommand.Parameters(0).Value = CType(HolidayDate, Date)
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal HolidayDate As Date, ByVal HolidayName As String) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(HolidayDate,Date)
             If (HolidayName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("HolidayName")
             Else
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(HolidayName, String)
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(HolidayName,String)
             End If
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open()
+                Me.Adapter.InsertCommand.Connection.Open
             End If
-            Try
+            Try 
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close()
+                    Me.Adapter.InsertCommand.Connection.Close
                 End If
             End Try
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
-        Public Overridable Overloads Function Update(ByVal HolidayDate As Date, ByVal HolidayName As String, ByVal Original_HolidayId As Integer, ByVal Original_HolidayDate As Date, ByVal Original_HolidayName As String, ByVal HolidayId As Integer) As Integer
-            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(HolidayDate, Date)
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal HolidayDate As Date, ByVal HolidayName As String, ByVal Original_HolidayId As Integer, ByVal Original_HolidayDate As Date, ByVal Original_HolidayName As String, ByVal HolidayId As Integer) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(HolidayDate,Date)
             If (HolidayName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("HolidayName")
             Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(HolidayName, String)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(HolidayName,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Original_HolidayId, Integer)
-            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_HolidayDate, Date)
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Original_HolidayId,Integer)
+            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Original_HolidayDate,Date)
             If (Original_HolidayName Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_HolidayName")
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_HolidayName, String)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_HolidayName,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(HolidayId, Integer)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(HolidayId,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open()
+                Me.Adapter.UpdateCommand.Connection.Open
             End If
-            Try
+            Try 
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close()
+                    Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
-        Public Overridable Overloads Function Update(ByVal HolidayDate As Date, ByVal HolidayName As String, ByVal Original_HolidayId As Integer, ByVal Original_HolidayDate As Date, ByVal Original_HolidayName As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal HolidayDate As Date, ByVal HolidayName As String, ByVal Original_HolidayId As Integer, ByVal Original_HolidayDate As Date, ByVal Original_HolidayName As String) As Integer
             Return Me.Update(HolidayDate, HolidayName, Original_HolidayId, Original_HolidayDate, Original_HolidayName, Original_HolidayId)
         End Function
     End Class
-
+    
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
     '''</summary>
-    <Global.System.ComponentModel.DesignerCategoryAttribute("code"), _
-     Global.System.ComponentModel.ToolboxItem(True), _
-     Global.System.ComponentModel.DataObjectAttribute(True), _
-     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner" & _
-        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"), _
-     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
     Partial Public Class LeaveFilingTableAdapter
         Inherits Global.System.ComponentModel.Component
-
+        
         Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
-
+        
         Private _connection As Global.System.Data.SqlClient.SqlConnection
-
+        
         Private _transaction As Global.System.Data.SqlClient.SqlTransaction
-
+        
         Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
-
+        
         Private _clearBeforeFill As Boolean
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Sub New()
-            MyBase.New()
-            Me.ClearBeforeFill = True
+            MyBase.New
+            Me.ClearBeforeFill = true
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
             Get
                 If (Me._adapter Is Nothing) Then
-                    Me.InitAdapter()
+                    Me.InitAdapter
                 End If
                 Return Me._adapter
             End Get
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
             Get
                 If (Me._connection Is Nothing) Then
-                    Me.InitConnection()
+                    Me.InitConnection
                 End If
                 Return Me._connection
             End Get
-            Set(value As Global.System.Data.SqlClient.SqlConnection)
+            Set
                 Me._connection = value
                 If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
                     Me.Adapter.InsertCommand.Connection = value
@@ -5324,65 +6546,65 @@ Namespace dsLeaveFilingTableAdapters
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     If (Not (Me.CommandCollection(i)) Is Nothing) Then
-                        CType(Me.CommandCollection(i), Global.System.Data.SqlClient.SqlCommand).Connection = value
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
                     End If
                     i = (i + 1)
                 Loop
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
             Get
                 Return Me._transaction
             End Get
-            Set(value As Global.System.Data.SqlClient.SqlTransaction)
+            Set
                 Me._transaction = value
                 Dim i As Integer = 0
                 Do While (i < Me.CommandCollection.Length)
                     Me.CommandCollection(i).Transaction = Me._transaction
                     i = (i + 1)
                 Loop
-                If ((Not (Me.Adapter) Is Nothing) _
+                If ((Not (Me.Adapter) Is Nothing)  _
                             AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
                     Me.Adapter.DeleteCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing) _
+                If ((Not (Me.Adapter) Is Nothing)  _
                             AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
                     Me.Adapter.InsertCommand.Transaction = Me._transaction
                 End If
-                If ((Not (Me.Adapter) Is Nothing) _
+                If ((Not (Me.Adapter) Is Nothing)  _
                             AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
                     Me.Adapter.UpdateCommand.Transaction = Me._transaction
                 End If
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
             Get
                 If (Me._commandCollection Is Nothing) Then
-                    Me.InitCommandCollection()
+                    Me.InitCommandCollection
                 End If
                 Return Me._commandCollection
             End Get
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property ClearBeforeFill() As Boolean
             Get
                 Return Me._clearBeforeFill
             End Get
-            Set(value As Boolean)
+            Set
                 Me._clearBeforeFill = value
             End Set
         End Property
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitAdapter()
             Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
             Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
@@ -5428,2009 +6650,2009 @@ Namespace dsLeaveFilingTableAdapters
             Me._adapter.DeleteCommand.Connection = Me.Connection
             Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[LeaveFiling] WHERE (([LeaveFileId] = @Original_LeaveFileId))"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_LeaveFileId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveFileId", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_LeaveFileId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveFileId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[LeaveFiling] ([DateCreated], [ScreenId], [EmployeeId], [Routin" & _
-                "gStatusId], [DepartmentId], [TeamId], [StartDate], [EndDate], [Quantity], [Reaso" & _
-                "n], [LeaveCredits], [LeaveBalance], [ClinicIsApproved], [ClinicId], [ClinicAppro" & _
-                "valDate], [ClinicRemarks], [SuperiorIsApproved1], [SuperiorId1], [SuperiorApprov" & _
-                "alDate1], [SuperiorRemarks1], [SuperiorIsApproved2], [SuperiorId2], [SuperiorApp" & _
-                "rovalDate2], [SuperiorRemarks2], [ManagerIsApproved], [ManagerId], [ManagerAppro" & _
-                "valDate], [ManagerRemarks], [IsLateFiling], [LeaveTypeId], [ModifiedBy], [Modifi" & _
-                "edDate], [IsEncoded]) VALUES (@DateCreated, @ScreenId, @EmployeeId, @RoutingStat" & _
-                "usId, @DepartmentId, @TeamId, @StartDate, @EndDate, @Quantity, @Reason, @LeaveCr" & _
-                "edits, @LeaveBalance, @ClinicIsApproved, @ClinicId, @ClinicApprovalDate, @Clinic" & _
-                "Remarks, @SuperiorIsApproved1, @SuperiorId1, @SuperiorApprovalDate1, @SuperiorRe" & _
-                "marks1, @SuperiorIsApproved2, @SuperiorId2, @SuperiorApprovalDate2, @SuperiorRem" & _
-                "arks2, @ManagerIsApproved, @ManagerId, @ManagerApprovalDate, @ManagerRemarks, @I" & _
-                "sLateFiling, @LeaveTypeId, @ModifiedBy, @ModifiedDate, @IsEncoded);" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT Leav" & _
-                "eFileId, DateCreated, ScreenId, EmployeeId, RoutingStatusId, DepartmentId, TeamI" & _
-                "d, StartDate, EndDate, Quantity, Reason, LeaveCredits, LeaveBalance, ClinicIsApp" & _
-                "roved, ClinicId, ClinicApprovalDate, ClinicRemarks, SuperiorIsApproved1, Superio" & _
-                "rId1, SuperiorApprovalDate1, SuperiorRemarks1, SuperiorIsApproved2, SuperiorId2," & _
-                " SuperiorApprovalDate2, SuperiorRemarks2, ManagerIsApproved, ManagerId, ManagerA" & _
-                "pprovalDate, ManagerRemarks, IsLateFiling, LeaveTypeId, ModifiedBy, ModifiedDate" & _
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[LeaveFiling] ([DateCreated], [ScreenId], [EmployeeId], [Routin"& _ 
+                "gStatusId], [DepartmentId], [TeamId], [StartDate], [EndDate], [Quantity], [Reaso"& _ 
+                "n], [LeaveCredits], [LeaveBalance], [ClinicIsApproved], [ClinicId], [ClinicAppro"& _ 
+                "valDate], [ClinicRemarks], [SuperiorIsApproved1], [SuperiorId1], [SuperiorApprov"& _ 
+                "alDate1], [SuperiorRemarks1], [SuperiorIsApproved2], [SuperiorId2], [SuperiorApp"& _ 
+                "rovalDate2], [SuperiorRemarks2], [ManagerIsApproved], [ManagerId], [ManagerAppro"& _ 
+                "valDate], [ManagerRemarks], [IsLateFiling], [LeaveTypeId], [ModifiedBy], [Modifi"& _ 
+                "edDate], [IsEncoded]) VALUES (@DateCreated, @ScreenId, @EmployeeId, @RoutingStat"& _ 
+                "usId, @DepartmentId, @TeamId, @StartDate, @EndDate, @Quantity, @Reason, @LeaveCr"& _ 
+                "edits, @LeaveBalance, @ClinicIsApproved, @ClinicId, @ClinicApprovalDate, @Clinic"& _ 
+                "Remarks, @SuperiorIsApproved1, @SuperiorId1, @SuperiorApprovalDate1, @SuperiorRe"& _ 
+                "marks1, @SuperiorIsApproved2, @SuperiorId2, @SuperiorApprovalDate2, @SuperiorRem"& _ 
+                "arks2, @ManagerIsApproved, @ManagerId, @ManagerApprovalDate, @ManagerRemarks, @I"& _ 
+                "sLateFiling, @LeaveTypeId, @ModifiedBy, @ModifiedDate, @IsEncoded);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT Leav"& _ 
+                "eFileId, DateCreated, ScreenId, EmployeeId, RoutingStatusId, DepartmentId, TeamI"& _ 
+                "d, StartDate, EndDate, Quantity, Reason, LeaveCredits, LeaveBalance, ClinicIsApp"& _ 
+                "roved, ClinicId, ClinicApprovalDate, ClinicRemarks, SuperiorIsApproved1, Superio"& _ 
+                "rId1, SuperiorApprovalDate1, SuperiorRemarks1, SuperiorIsApproved2, SuperiorId2,"& _ 
+                " SuperiorApprovalDate2, SuperiorRemarks2, ManagerIsApproved, ManagerId, ManagerA"& _ 
+                "pprovalDate, ManagerRemarks, IsLateFiling, LeaveTypeId, ModifiedBy, ModifiedDate"& _ 
                 ", LockId, IsEncoded FROM LeaveFiling WHERE (LeaveFileId = SCOPE_IDENTITY())"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreated", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DateCreated", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ScreenId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ScreenId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RoutingStatusId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DepartmentId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DepartmentId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TeamId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Reason", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveCredits", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveCredits", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveBalance", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveBalance", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicIsApproved", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicApprovalDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicRemarks", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved1", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId1", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate1", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved2", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId2", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate2", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerIsApproved", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerApprovalDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerRemarks", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsLateFiling", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsLateFiling", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveTypeId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedBy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedBy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsEncoded", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsEncoded", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreated", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DateCreated", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ScreenId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ScreenId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RoutingStatusId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DepartmentId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DepartmentId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TeamId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Reason", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveCredits", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveCredits", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveBalance", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveBalance", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicIsApproved", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicApprovalDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicRemarks", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved1", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId1", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate1", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved2", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId2", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate2", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerIsApproved", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerApprovalDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerRemarks", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsLateFiling", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsLateFiling", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveTypeId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedBy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsEncoded", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsEncoded", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[LeaveFiling] SET [DateCreated] = @DateCreated, [ScreenId] = @Screen" & _
-                "Id, [EmployeeId] = @EmployeeId, [RoutingStatusId] = @RoutingStatusId, [Departmen" & _
-                "tId] = @DepartmentId, [TeamId] = @TeamId, [StartDate] = @StartDate, [EndDate] = " & _
-                "@EndDate, [Quantity] = @Quantity, [Reason] = @Reason, [LeaveCredits] = @LeaveCre" & _
-                "dits, [LeaveBalance] = @LeaveBalance, [ClinicIsApproved] = @ClinicIsApproved, [C" & _
-                "linicId] = @ClinicId, [ClinicApprovalDate] = @ClinicApprovalDate, [ClinicRemarks" & _
-                "] = @ClinicRemarks, [SuperiorIsApproved1] = @SuperiorIsApproved1, [SuperiorId1] " & _
-                "= @SuperiorId1, [SuperiorApprovalDate1] = @SuperiorApprovalDate1, [SuperiorRemar" & _
-                "ks1] = @SuperiorRemarks1, [SuperiorIsApproved2] = @SuperiorIsApproved2, [Superio" & _
-                "rId2] = @SuperiorId2, [SuperiorApprovalDate2] = @SuperiorApprovalDate2, [Superio" & _
-                "rRemarks2] = @SuperiorRemarks2, [ManagerIsApproved] = @ManagerIsApproved, [Manag" & _
-                "erId] = @ManagerId, [ManagerApprovalDate] = @ManagerApprovalDate, [ManagerRemark" & _
-                "s] = @ManagerRemarks, [IsLateFiling] = @IsLateFiling, [LeaveTypeId] = @LeaveType" & _
-                "Id, [ModifiedBy] = @ModifiedBy, [ModifiedDate] = @ModifiedDate, [IsEncoded] = @I" & _
-                "sEncoded WHERE (([LeaveFileId] = @Original_LeaveFileId));" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT LeaveFileId, D" & _
-                "ateCreated, ScreenId, EmployeeId, RoutingStatusId, DepartmentId, TeamId, StartDa" & _
-                "te, EndDate, Quantity, Reason, LeaveCredits, LeaveBalance, ClinicIsApproved, Cli" & _
-                "nicId, ClinicApprovalDate, ClinicRemarks, SuperiorIsApproved1, SuperiorId1, Supe" & _
-                "riorApprovalDate1, SuperiorRemarks1, SuperiorIsApproved2, SuperiorId2, SuperiorA" & _
-                "pprovalDate2, SuperiorRemarks2, ManagerIsApproved, ManagerId, ManagerApprovalDat" & _
-                "e, ManagerRemarks, IsLateFiling, LeaveTypeId, ModifiedBy, ModifiedDate, LockId, " & _
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[LeaveFiling] SET [DateCreated] = @DateCreated, [ScreenId] = @Screen"& _ 
+                "Id, [EmployeeId] = @EmployeeId, [RoutingStatusId] = @RoutingStatusId, [Departmen"& _ 
+                "tId] = @DepartmentId, [TeamId] = @TeamId, [StartDate] = @StartDate, [EndDate] = "& _ 
+                "@EndDate, [Quantity] = @Quantity, [Reason] = @Reason, [LeaveCredits] = @LeaveCre"& _ 
+                "dits, [LeaveBalance] = @LeaveBalance, [ClinicIsApproved] = @ClinicIsApproved, [C"& _ 
+                "linicId] = @ClinicId, [ClinicApprovalDate] = @ClinicApprovalDate, [ClinicRemarks"& _ 
+                "] = @ClinicRemarks, [SuperiorIsApproved1] = @SuperiorIsApproved1, [SuperiorId1] "& _ 
+                "= @SuperiorId1, [SuperiorApprovalDate1] = @SuperiorApprovalDate1, [SuperiorRemar"& _ 
+                "ks1] = @SuperiorRemarks1, [SuperiorIsApproved2] = @SuperiorIsApproved2, [Superio"& _ 
+                "rId2] = @SuperiorId2, [SuperiorApprovalDate2] = @SuperiorApprovalDate2, [Superio"& _ 
+                "rRemarks2] = @SuperiorRemarks2, [ManagerIsApproved] = @ManagerIsApproved, [Manag"& _ 
+                "erId] = @ManagerId, [ManagerApprovalDate] = @ManagerApprovalDate, [ManagerRemark"& _ 
+                "s] = @ManagerRemarks, [IsLateFiling] = @IsLateFiling, [LeaveTypeId] = @LeaveType"& _ 
+                "Id, [ModifiedBy] = @ModifiedBy, [ModifiedDate] = @ModifiedDate, [IsEncoded] = @I"& _ 
+                "sEncoded WHERE (([LeaveFileId] = @Original_LeaveFileId));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT LeaveFileId, D"& _ 
+                "ateCreated, ScreenId, EmployeeId, RoutingStatusId, DepartmentId, TeamId, StartDa"& _ 
+                "te, EndDate, Quantity, Reason, LeaveCredits, LeaveBalance, ClinicIsApproved, Cli"& _ 
+                "nicId, ClinicApprovalDate, ClinicRemarks, SuperiorIsApproved1, SuperiorId1, Supe"& _ 
+                "riorApprovalDate1, SuperiorRemarks1, SuperiorIsApproved2, SuperiorId2, SuperiorA"& _ 
+                "pprovalDate2, SuperiorRemarks2, ManagerIsApproved, ManagerId, ManagerApprovalDat"& _ 
+                "e, ManagerRemarks, IsLateFiling, LeaveTypeId, ModifiedBy, ModifiedDate, LockId, "& _ 
                 "IsEncoded FROM LeaveFiling WHERE (LeaveFileId = @LeaveFileId)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreated", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DateCreated", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ScreenId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ScreenId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RoutingStatusId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DepartmentId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DepartmentId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TeamId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Reason", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveCredits", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveCredits", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveBalance", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveBalance", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicIsApproved", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicApprovalDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicRemarks", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved1", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId1", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate1", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks1", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved2", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId2", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate2", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks2", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerIsApproved", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerApprovalDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerRemarks", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsLateFiling", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsLateFiling", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveTypeId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedBy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedBy", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedDate", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsEncoded", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsEncoded", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_LeaveFileId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveFileId", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveFileId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveFileId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreated", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DateCreated", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ScreenId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ScreenId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "RoutingStatusId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DepartmentId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DepartmentId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "TeamId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@StartDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "StartDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EndDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EndDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Quantity", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Quantity", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Reason", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveCredits", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveCredits", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveBalance", Global.System.Data.SqlDbType.Float, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveBalance", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicIsApproved", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicApprovalDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ClinicRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ClinicRemarks", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved1", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId1", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate1", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorIsApproved2", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorIsApproved2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorId2", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorId2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorApprovalDate2", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorApprovalDate2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@SuperiorRemarks2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "SuperiorRemarks2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerIsApproved", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerIsApproved", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerApprovalDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerApprovalDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ManagerRemarks", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ManagerRemarks", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsLateFiling", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsLateFiling", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveTypeId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedBy", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedBy", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ModifiedDate", Global.System.Data.SqlDbType.DateTime2, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ModifiedDate", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsEncoded", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsEncoded", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_LeaveFileId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveFileId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveFileId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "LeaveFileId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitConnection()
             Me._connection = New Global.System.Data.SqlClient.SqlConnection()
             Me._connection.ConnectionString = Global.LeaveFilingSystem.My.MySettings.Default.LeaveFilingConnectionString
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Sub InitCommandCollection()
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(39) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT LeaveFileId, DateCreated, ScreenId, EmployeeId, RoutingStatusId, Departmen" & _
-                "tId, TeamId, StartDate, EndDate, Quantity, Reason, LeaveCredits, LeaveBalance, C" & _
-                "linicIsApproved, ClinicId, ClinicApprovalDate, ClinicRemarks, SuperiorIsApproved" & _
-                "1, SuperiorId1, SuperiorApprovalDate1, SuperiorRemarks1, SuperiorIsApproved2, Su" & _
-                "periorId2, SuperiorApprovalDate2, SuperiorRemarks2, ManagerIsApproved, ManagerId" & _
-                ", ManagerApprovalDate, ManagerRemarks, IsLateFiling, LeaveTypeId, ModifiedBy, Mo" & _
+            Me._commandCollection(0).CommandText = "SELECT LeaveFileId, DateCreated, ScreenId, EmployeeId, RoutingStatusId, Departmen"& _ 
+                "tId, TeamId, StartDate, EndDate, Quantity, Reason, LeaveCredits, LeaveBalance, C"& _ 
+                "linicIsApproved, ClinicId, ClinicApprovalDate, ClinicRemarks, SuperiorIsApproved"& _ 
+                "1, SuperiorId1, SuperiorApprovalDate1, SuperiorRemarks1, SuperiorIsApproved2, Su"& _ 
+                "periorId2, SuperiorApprovalDate2, SuperiorRemarks2, ManagerIsApproved, ManagerId"& _ 
+                ", ManagerApprovalDate, ManagerRemarks, IsLateFiling, LeaveTypeId, ModifiedBy, Mo"& _ 
                 "difiedDate, LockId, IsEncoded FROM dbo.LeaveFiling"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
             Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(1).Connection = Me.Connection
             Me._commandCollection(1).CommandText = "dbo.RdLeaveFilingApproved"
             Me._commandCollection(1).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(2).Connection = Me.Connection
             Me._commandCollection(2).CommandText = "dbo.RdLeaveFilingApprovedAbsentDateFrom"
             Me._commandCollection(2).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(3).Connection = Me.Connection
             Me._commandCollection(3).CommandText = "dbo.RdLeaveFilingApprovedAbsentDateTo"
             Me._commandCollection(3).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(4).Connection = Me.Connection
             Me._commandCollection(4).CommandText = "dbo.RdLeaveFilingApprovedDateCreated"
             Me._commandCollection(4).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(5) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(5).Connection = Me.Connection
             Me._commandCollection(5).CommandText = "dbo.RdLeaveFilingApprovedEmployeeName"
             Me._commandCollection(5).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(5).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(6) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(6).Connection = Me.Connection
             Me._commandCollection(6).CommandText = "dbo.RdLeaveFilingApprovedLeaveTypeId"
             Me._commandCollection(6).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(6).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(7) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(7).Connection = Me.Connection
             Me._commandCollection(7).CommandText = "dbo.RdLeaveFilingApprovedReason"
             Me._commandCollection(7).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(7).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(8) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(8).Connection = Me.Connection
             Me._commandCollection(8).CommandText = "dbo.RdLeaveFilingApprovedTeamId"
             Me._commandCollection(8).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(8).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(9) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(9).Connection = Me.Connection
             Me._commandCollection(9).CommandText = "dbo.RdLeaveFilingByEmployeeId"
             Me._commandCollection(9).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(9).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(10) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(10).Connection = Me.Connection
             Me._commandCollection(10).CommandText = "dbo.RdLeaveFilingByEmployeeIdAbsentDateFrom"
             Me._commandCollection(10).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(10).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(11) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(11).Connection = Me.Connection
             Me._commandCollection(11).CommandText = "dbo.RdLeaveFilingByEmployeeIdAbsentDateTo"
             Me._commandCollection(11).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(11).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(12) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(12).Connection = Me.Connection
             Me._commandCollection(12).CommandText = "dbo.RdLeaveFilingByEmployeeIdDateCreated"
             Me._commandCollection(12).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(12).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(13) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(13).Connection = Me.Connection
             Me._commandCollection(13).CommandText = "dbo.RdLeaveFilingByEmployeeIdEmployeeName"
             Me._commandCollection(13).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(13).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(14) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(14).Connection = Me.Connection
             Me._commandCollection(14).CommandText = "dbo.RdLeaveFilingByEmployeeIdLeaveTypeId"
             Me._commandCollection(14).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(14).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(15) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(15).Connection = Me.Connection
             Me._commandCollection(15).CommandText = "dbo.RdLeaveFilingByEmployeeIdReason"
             Me._commandCollection(15).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(15).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(16) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(16).Connection = Me.Connection
             Me._commandCollection(16).CommandText = "dbo.RdLeaveFilingByEmployeeIdTeamId"
             Me._commandCollection(16).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(16).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(17) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(17).Connection = Me.Connection
             Me._commandCollection(17).CommandText = "dbo.RdLeaveFilingByLeaveFileId"
             Me._commandCollection(17).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(17).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(17).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveFileId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(17).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(17).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveFileId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(18) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(18).Connection = Me.Connection
             Me._commandCollection(18).CommandText = "dbo.RdLeaveFilingByRoutingStatusId"
             Me._commandCollection(18).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(18).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(19) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(19).Connection = Me.Connection
             Me._commandCollection(19).CommandText = "dbo.RdLeaveFilingByRoutingStatusIdDateCreated"
             Me._commandCollection(19).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(19).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(20) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(20).Connection = Me.Connection
             Me._commandCollection(20).CommandText = "dbo.RdLeaveFilingByRoutingStatusIdDepartmentId"
             Me._commandCollection(20).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DepartmentId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(20).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DepartmentId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(21) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(21).Connection = Me.Connection
             Me._commandCollection(21).CommandText = "dbo.RdLeaveFilingByRoutingStatusIdEmployeeName"
             Me._commandCollection(21).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(21).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(22) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(22).Connection = Me.Connection
             Me._commandCollection(22).CommandText = "dbo.RdLeaveFilingByRoutingStatusIdLeaveTypeId"
             Me._commandCollection(22).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(22).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(23) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(23).Connection = Me.Connection
             Me._commandCollection(23).CommandText = "dbo.RdLeaveFilingByRoutingStatusIdReason"
             Me._commandCollection(23).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RoutingStatusId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(23).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(24) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(24).Connection = Me.Connection
             Me._commandCollection(24).CommandText = "dbo.RdLeaveFilingDisapproved"
             Me._commandCollection(24).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(24).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(25) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(25).Connection = Me.Connection
             Me._commandCollection(25).CommandText = "dbo.RdLeaveFilingDisapprovedAbsentDateFrom"
             Me._commandCollection(25).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(25).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(26) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(26).Connection = Me.Connection
             Me._commandCollection(26).CommandText = "dbo.RdLeaveFilingDisapprovedAbsentDateTo"
             Me._commandCollection(26).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(26).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(27) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(27).Connection = Me.Connection
             Me._commandCollection(27).CommandText = "dbo.RdLeaveFilingDisapprovedDateCreated"
             Me._commandCollection(27).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(27).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(28) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(28).Connection = Me.Connection
             Me._commandCollection(28).CommandText = "dbo.RdLeaveFilingDisapprovedEmployeeName"
             Me._commandCollection(28).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(28).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(29) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(29).Connection = Me.Connection
             Me._commandCollection(29).CommandText = "dbo.RdLeaveFilingDisapprovedLeaveTypeId"
             Me._commandCollection(29).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(29).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(30) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(30).Connection = Me.Connection
             Me._commandCollection(30).CommandText = "dbo.RdLeaveFilingDisapprovedReason"
             Me._commandCollection(30).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(30).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(31) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(31).Connection = Me.Connection
             Me._commandCollection(31).CommandText = "dbo.RdLeaveFilingByEmployeeIdTeamId"
             Me._commandCollection(31).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(31).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(32) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(32).Connection = Me.Connection
             Me._commandCollection(32).CommandText = "dbo.RdLeaveFilingPending"
             Me._commandCollection(32).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(32).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(33) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(33).Connection = Me.Connection
             Me._commandCollection(33).CommandText = "dbo.RdLeaveFilingPendingAbsentDateFrom"
             Me._commandCollection(33).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(33).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(34) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(34).Connection = Me.Connection
             Me._commandCollection(34).CommandText = "dbo.RdLeaveFilingPendingAbsentDateTo"
             Me._commandCollection(34).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(34).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@AbsentDateTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(35) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(35).Connection = Me.Connection
             Me._commandCollection(35).CommandText = "dbo.RdLeaveFilingPendingDateCreated"
             Me._commandCollection(35).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedFrom", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(35).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DateCreatedTo", Global.System.Data.SqlDbType.[Date], 3, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(36) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(36).Connection = Me.Connection
             Me._commandCollection(36).CommandText = "dbo.RdLeaveFilingPendingLeaveTypeId"
             Me._commandCollection(36).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(36).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@LeaveTypeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(37) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(37).Connection = Me.Connection
             Me._commandCollection(37).CommandText = "dbo.RdLeaveFilingPendingEmployeeName"
             Me._commandCollection(37).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(37).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(38) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(38).Connection = Me.Connection
             Me._commandCollection(38).CommandText = "dbo.RdLeaveFilingPendingReason"
             Me._commandCollection(38).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(38).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Reason", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._commandCollection(39) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(39).Connection = Me.Connection
             Me._commandCollection(39).CommandText = "dbo.RdLeaveFilingPendingTeamId"
             Me._commandCollection(39).CommandType = Global.System.Data.CommandType.StoredProcedure
-            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
-            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(39).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TeamId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
         End Sub
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)> _
-        Public Overridable Overloads Function Fill(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)> _
-        Public Overridable Overloads Function GetData() As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(0)
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApproved(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApproved(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(1)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApproved(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApproved(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(1)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApprovedByAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApprovedByAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(2)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApprovedByAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApprovedByAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(2)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApprovedByAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApprovedByAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(3)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApprovedByAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApprovedByAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(3)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApprovedByDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApprovedByDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(4)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApprovedByDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApprovedByDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(4)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApprovedByEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApprovedByEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(5)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApprovedByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApprovedByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(5)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApprovedByLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApprovedByLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(6)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApprovedByLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApprovedByLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(6)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApprovedByReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApprovedByReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(7)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApprovedByReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApprovedByReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(7)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillApprovedByTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillApprovedByTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(8)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetApprovedByTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetApprovedByTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(8)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(9)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(9)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeIdAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeIdAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(10)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeIdAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeIdAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(10)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeIdAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeIdAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(11)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeIdAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeIdAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(11)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeIdDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeIdDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(12)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeIdDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeIdDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(12)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeIdEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeIdEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(13)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeIdEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeIdEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(13)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeIdLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeIdLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(14)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeIdLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeIdLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(14)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeIdReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeIdReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(15)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeIdReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeIdReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(15)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByEmployeeIdTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByEmployeeIdTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(16)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByEmployeeIdTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByEmployeeIdTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(16)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByLeaveFileId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal LeaveFileId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByLeaveFileId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal LeaveFileId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(17)
-            If (LeaveFileId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(LeaveFileId.Value, Integer)
+            If (LeaveFileId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(LeaveFileId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDataByLeaveFileId(ByVal LeaveFileId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDataByLeaveFileId(ByVal LeaveFileId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(17)
-            If (LeaveFileId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(LeaveFileId.Value, Integer)
+            If (LeaveFileId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(LeaveFileId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
@@ -7438,2322 +8660,2322 @@ Namespace dsLeaveFilingTableAdapters
             Me.Adapter.Fill(dataTable)
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByRoutingStatusId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByRoutingStatusId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(18)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByRoutingStatusId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByRoutingStatusId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(18)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByRoutingStatusIdDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByRoutingStatusIdDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(19)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByRoutingStatusIdDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByRoutingStatusIdDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(19)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByRoutingStatusIdDepartmentId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DepartmentId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByRoutingStatusIdDepartmentId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DepartmentId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(20)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DepartmentId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DepartmentId.Value, Integer)
+            If (DepartmentId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DepartmentId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByRoutingStatusIdDepartmentId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DepartmentId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByRoutingStatusIdDepartmentId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal DepartmentId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(20)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DepartmentId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DepartmentId.Value, Integer)
+            If (DepartmentId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DepartmentId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByRoutingStatusIdEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByRoutingStatusIdEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(21)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByRoutingStatusIdEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByRoutingStatusIdEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(21)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByRoutingStatusIdLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByRoutingStatusIdLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(22)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByRoutingStatusIdLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByRoutingStatusIdLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(22)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillByRoutingStatusIdReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillByRoutingStatusIdReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(23)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetByRoutingStatusIdReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetByRoutingStatusIdReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal RoutingStatusId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(23)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (RoutingStatusId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value, Integer)
+            If (RoutingStatusId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(RoutingStatusId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapproved(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapproved(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(24)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapproved(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapproved(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(24)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapprovedByAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapprovedByAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(25)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapprovedByAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapprovedByAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(25)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapprovedByAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapprovedByAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(26)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapprovedByAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapprovedByAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(26)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapprovedByDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapprovedByDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(27)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapprovedByDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapprovedByDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(27)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapprovedByEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapprovedByEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(28)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapprovedByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapprovedByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(28)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapprovedByLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapprovedByLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(29)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapprovedByLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapprovedByLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(29)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapprovedByReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapprovedByReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(30)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapprovedByReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapprovedByReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(30)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillDisapprovedByTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDisapprovedByTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(31)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetDisapprovedByTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDisapprovedByTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(31)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPending(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPending(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(32)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPending(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPending(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(32)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPendingByAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPendingByAbsentDateFrom(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(33)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPendingAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPendingAbsentDateFrom(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(33)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPendingByAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPendingByAbsentDateTo(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(34)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPendingByAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPendingByAbsentDateTo(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal AbsentDateFrom As Global.System.Nullable(Of Date), ByVal AbsentDateTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(34)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value, Date)
+            If (AbsentDateFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(AbsentDateFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (AbsentDateTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value, Date)
+            If (AbsentDateTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(AbsentDateTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPendingByDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPendingByDateCreated(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(35)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPendingByDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPendingByDateCreated(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal DateCreatedFrom As Global.System.Nullable(Of Date), ByVal DateCreatedTo As Global.System.Nullable(Of Date)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(35)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedFrom.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value, Date)
+            If (DateCreatedFrom.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(DateCreatedFrom.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (DateCreatedTo.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value, Date)
+            If (DateCreatedTo.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(6).Value = CType(DateCreatedTo.Value,Date)
             Else
                 Me.Adapter.SelectCommand.Parameters(6).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPendingByEmployeeIdLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPendingByEmployeeIdLeaveTypeId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(36)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPendingByEmployeeIdLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPendingByEmployeeIdLeaveTypeId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal LeaveTypeId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(36)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (LeaveTypeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value, Integer)
+            If (LeaveTypeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(LeaveTypeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPendingByEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPendingByEmployeeName(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(37)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPendingByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPendingByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(37)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (EmployeeName Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(EmployeeName,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPendingByReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPendingByReason(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(38)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPendingByReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPendingByReason(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal Reason As String) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(38)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
             If (Reason Is Nothing) Then
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason, String)
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(Reason,String)
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
-        Public Overridable Overloads Function FillPendingByTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillPendingByTeamId(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As Integer
             Me.Adapter.SelectCommand = Me.CommandCollection(39)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            If (Me.ClearBeforeFill = True) Then
-                dataTable.Clear()
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
             End If
             Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return returnValue
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
-        Public Overridable Overloads Function GetPendingByTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetPendingByTeamId(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeId As Global.System.Nullable(Of Integer), ByVal TeamId As Global.System.Nullable(Of Integer)) As dsLeaveFiling.LeaveFilingDataTable
             Me.Adapter.SelectCommand = Me.CommandCollection(39)
-            If (PageIndex.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            If (PageSize.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
             End If
-            If (TotalCount.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
             End If
-            If (EmployeeId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value, Integer)
+            If (EmployeeId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
             End If
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.SelectCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
             Dim dataTable As dsLeaveFiling.LeaveFilingDataTable = New dsLeaveFiling.LeaveFilingDataTable()
             Me.Adapter.Fill(dataTable)
-            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
                         OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
                 TotalCount = New Global.System.Nullable(Of Integer)()
             Else
-                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
             End If
             Return dataTable
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As dsLeaveFiling.LeaveFilingDataTable) As Integer
             Return Me.Adapter.Update(dataTable)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataSet As dsLeaveFiling) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As dsLeaveFiling) As Integer
             Return Me.Adapter.Update(dataSet, "LeaveFiling")
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
-        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
             Return Me.Adapter.Update(dataRows)
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)> _
-        Public Overridable Overloads Function Delete(ByVal Original_LeaveFileId As Integer) As Integer
-            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_LeaveFileId, Integer)
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_LeaveFileId As Integer) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_LeaveFileId,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
-            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.DeleteCommand.Connection.Open()
+                Me.Adapter.DeleteCommand.Connection.Open
             End If
-            Try
+            Try 
                 Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.DeleteCommand.Connection.Close()
+                    Me.Adapter.DeleteCommand.Connection.Close
                 End If
             End Try
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)> _
-        Public Overridable Overloads Function Insert( _
-                    ByVal DateCreated As Date, _
-                    ByVal ScreenId As Global.System.Nullable(Of Integer), _
-                    ByVal EmployeeId As Integer, _
-                    ByVal RoutingStatusId As Integer, _
-                    ByVal DepartmentId As Integer, _
-                    ByVal TeamId As Global.System.Nullable(Of Integer), _
-                    ByVal StartDate As Date, _
-                    ByVal EndDate As Date, _
-                    ByVal Quantity As Double, _
-                    ByVal Reason As String, _
-                    ByVal LeaveCredits As Double, _
-                    ByVal LeaveBalance As Double, _
-                    ByVal ClinicIsApproved As Boolean, _
-                    ByVal ClinicId As Global.System.Nullable(Of Integer), _
-                    ByVal ClinicApprovalDate As Global.System.Nullable(Of Date), _
-                    ByVal ClinicRemarks As String, _
-                    ByVal SuperiorIsApproved1 As Boolean, _
-                    ByVal SuperiorId1 As Global.System.Nullable(Of Integer), _
-                    ByVal SuperiorApprovalDate1 As Global.System.Nullable(Of Date), _
-                    ByVal SuperiorRemarks1 As String, _
-                    ByVal SuperiorIsApproved2 As Boolean, _
-                    ByVal SuperiorId2 As Global.System.Nullable(Of Integer), _
-                    ByVal SuperiorApprovalDate2 As Global.System.Nullable(Of Date), _
-                    ByVal SuperiorRemarks2 As String, _
-                    ByVal ManagerIsApproved As Boolean, _
-                    ByVal ManagerId As Global.System.Nullable(Of Integer), _
-                    ByVal ManagerApprovalDate As Global.System.Nullable(Of Date), _
-                    ByVal ManagerRemarks As String, _
-                    ByVal IsLateFiling As Boolean, _
-                    ByVal LeaveTypeId As Integer, _
-                    ByVal ModifiedBy As Integer, _
-                    ByVal ModifiedDate As Date, _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert( _
+                    ByVal DateCreated As Date,  _
+                    ByVal ScreenId As Global.System.Nullable(Of Integer),  _
+                    ByVal EmployeeId As Integer,  _
+                    ByVal RoutingStatusId As Integer,  _
+                    ByVal DepartmentId As Integer,  _
+                    ByVal TeamId As Global.System.Nullable(Of Integer),  _
+                    ByVal StartDate As Date,  _
+                    ByVal EndDate As Date,  _
+                    ByVal Quantity As Double,  _
+                    ByVal Reason As String,  _
+                    ByVal LeaveCredits As Double,  _
+                    ByVal LeaveBalance As Double,  _
+                    ByVal ClinicIsApproved As Boolean,  _
+                    ByVal ClinicId As Global.System.Nullable(Of Integer),  _
+                    ByVal ClinicApprovalDate As Global.System.Nullable(Of Date),  _
+                    ByVal ClinicRemarks As String,  _
+                    ByVal SuperiorIsApproved1 As Boolean,  _
+                    ByVal SuperiorId1 As Global.System.Nullable(Of Integer),  _
+                    ByVal SuperiorApprovalDate1 As Global.System.Nullable(Of Date),  _
+                    ByVal SuperiorRemarks1 As String,  _
+                    ByVal SuperiorIsApproved2 As Boolean,  _
+                    ByVal SuperiorId2 As Global.System.Nullable(Of Integer),  _
+                    ByVal SuperiorApprovalDate2 As Global.System.Nullable(Of Date),  _
+                    ByVal SuperiorRemarks2 As String,  _
+                    ByVal ManagerIsApproved As Boolean,  _
+                    ByVal ManagerId As Global.System.Nullable(Of Integer),  _
+                    ByVal ManagerApprovalDate As Global.System.Nullable(Of Date),  _
+                    ByVal ManagerRemarks As String,  _
+                    ByVal IsLateFiling As Boolean,  _
+                    ByVal LeaveTypeId As Integer,  _
+                    ByVal ModifiedBy As Integer,  _
+                    ByVal ModifiedDate As Date,  _
                     ByVal IsEncoded As Boolean) As Integer
-            Me.Adapter.InsertCommand.Parameters(0).Value = CType(DateCreated, Date)
-            If (ScreenId.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(1).Value = CType(ScreenId.Value, Integer)
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(DateCreated,Date)
+            If (ScreenId.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(ScreenId.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(2).Value = CType(EmployeeId, Integer)
-            Me.Adapter.InsertCommand.Parameters(3).Value = CType(RoutingStatusId, Integer)
-            Me.Adapter.InsertCommand.Parameters(4).Value = CType(DepartmentId, Integer)
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            Me.Adapter.InsertCommand.Parameters(2).Value = CType(EmployeeId,Integer)
+            Me.Adapter.InsertCommand.Parameters(3).Value = CType(RoutingStatusId,Integer)
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(DepartmentId,Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.InsertCommand.Parameters(6).Value = CType(StartDate, Date)
-            Me.Adapter.InsertCommand.Parameters(7).Value = CType(EndDate, Date)
-            Me.Adapter.InsertCommand.Parameters(8).Value = CType(Quantity, Double)
+            Me.Adapter.InsertCommand.Parameters(6).Value = CType(StartDate,Date)
+            Me.Adapter.InsertCommand.Parameters(7).Value = CType(EndDate,Date)
+            Me.Adapter.InsertCommand.Parameters(8).Value = CType(Quantity,Double)
             If (Reason Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Reason, String)
+                Me.Adapter.InsertCommand.Parameters(9).Value = CType(Reason,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(10).Value = CType(LeaveCredits, Double)
-            Me.Adapter.InsertCommand.Parameters(11).Value = CType(LeaveBalance, Double)
-            Me.Adapter.InsertCommand.Parameters(12).Value = CType(ClinicIsApproved, Boolean)
-            If (ClinicId.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(13).Value = CType(ClinicId.Value, Integer)
+            Me.Adapter.InsertCommand.Parameters(10).Value = CType(LeaveCredits,Double)
+            Me.Adapter.InsertCommand.Parameters(11).Value = CType(LeaveBalance,Double)
+            Me.Adapter.InsertCommand.Parameters(12).Value = CType(ClinicIsApproved,Boolean)
+            If (ClinicId.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(13).Value = CType(ClinicId.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (ClinicApprovalDate.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(14).Value = CType(ClinicApprovalDate.Value, Date)
+            If (ClinicApprovalDate.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(14).Value = CType(ClinicApprovalDate.Value,Date)
             Else
                 Me.Adapter.InsertCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
             If (ClinicRemarks Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ClinicRemarks, String)
+                Me.Adapter.InsertCommand.Parameters(15).Value = CType(ClinicRemarks,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(16).Value = CType(SuperiorIsApproved1, Boolean)
-            If (SuperiorId1.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(17).Value = CType(SuperiorId1.Value, Integer)
+            Me.Adapter.InsertCommand.Parameters(16).Value = CType(SuperiorIsApproved1,Boolean)
+            If (SuperiorId1.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(17).Value = CType(SuperiorId1.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(17).Value = Global.System.DBNull.Value
             End If
-            If (SuperiorApprovalDate1.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(18).Value = CType(SuperiorApprovalDate1.Value, Date)
+            If (SuperiorApprovalDate1.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(18).Value = CType(SuperiorApprovalDate1.Value,Date)
             Else
                 Me.Adapter.InsertCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
             If (SuperiorRemarks1 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(19).Value = CType(SuperiorRemarks1, String)
+                Me.Adapter.InsertCommand.Parameters(19).Value = CType(SuperiorRemarks1,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(20).Value = CType(SuperiorIsApproved2, Boolean)
-            If (SuperiorId2.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(21).Value = CType(SuperiorId2.Value, Integer)
+            Me.Adapter.InsertCommand.Parameters(20).Value = CType(SuperiorIsApproved2,Boolean)
+            If (SuperiorId2.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(21).Value = CType(SuperiorId2.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (SuperiorApprovalDate2.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(22).Value = CType(SuperiorApprovalDate2.Value, Date)
+            If (SuperiorApprovalDate2.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(22).Value = CType(SuperiorApprovalDate2.Value,Date)
             Else
                 Me.Adapter.InsertCommand.Parameters(22).Value = Global.System.DBNull.Value
             End If
             If (SuperiorRemarks2 Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(23).Value = CType(SuperiorRemarks2, String)
+                Me.Adapter.InsertCommand.Parameters(23).Value = CType(SuperiorRemarks2,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(24).Value = CType(ManagerIsApproved, Boolean)
-            If (ManagerId.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(25).Value = CType(ManagerId.Value, Integer)
+            Me.Adapter.InsertCommand.Parameters(24).Value = CType(ManagerIsApproved,Boolean)
+            If (ManagerId.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(25).Value = CType(ManagerId.Value,Integer)
             Else
                 Me.Adapter.InsertCommand.Parameters(25).Value = Global.System.DBNull.Value
             End If
-            If (ManagerApprovalDate.HasValue = True) Then
-                Me.Adapter.InsertCommand.Parameters(26).Value = CType(ManagerApprovalDate.Value, Date)
+            If (ManagerApprovalDate.HasValue = true) Then
+                Me.Adapter.InsertCommand.Parameters(26).Value = CType(ManagerApprovalDate.Value,Date)
             Else
                 Me.Adapter.InsertCommand.Parameters(26).Value = Global.System.DBNull.Value
             End If
             If (ManagerRemarks Is Nothing) Then
                 Me.Adapter.InsertCommand.Parameters(27).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.InsertCommand.Parameters(27).Value = CType(ManagerRemarks, String)
+                Me.Adapter.InsertCommand.Parameters(27).Value = CType(ManagerRemarks,String)
             End If
-            Me.Adapter.InsertCommand.Parameters(28).Value = CType(IsLateFiling, Boolean)
-            Me.Adapter.InsertCommand.Parameters(29).Value = CType(LeaveTypeId, Integer)
-            Me.Adapter.InsertCommand.Parameters(30).Value = CType(ModifiedBy, Integer)
-            Me.Adapter.InsertCommand.Parameters(31).Value = CType(ModifiedDate, Date)
-            Me.Adapter.InsertCommand.Parameters(32).Value = CType(IsEncoded, Boolean)
+            Me.Adapter.InsertCommand.Parameters(28).Value = CType(IsLateFiling,Boolean)
+            Me.Adapter.InsertCommand.Parameters(29).Value = CType(LeaveTypeId,Integer)
+            Me.Adapter.InsertCommand.Parameters(30).Value = CType(ModifiedBy,Integer)
+            Me.Adapter.InsertCommand.Parameters(31).Value = CType(ModifiedDate,Date)
+            Me.Adapter.InsertCommand.Parameters(32).Value = CType(IsEncoded,Boolean)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
-            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.InsertCommand.Connection.Open()
+                Me.Adapter.InsertCommand.Connection.Open
             End If
-            Try
+            Try 
                 Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.InsertCommand.Connection.Close()
+                    Me.Adapter.InsertCommand.Connection.Close
                 End If
             End Try
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
-        Public Overridable Overloads Function Update( _
-                    ByVal DateCreated As Date, _
-                    ByVal ScreenId As Global.System.Nullable(Of Integer), _
-                    ByVal EmployeeId As Integer, _
-                    ByVal RoutingStatusId As Integer, _
-                    ByVal DepartmentId As Integer, _
-                    ByVal TeamId As Global.System.Nullable(Of Integer), _
-                    ByVal StartDate As Date, _
-                    ByVal EndDate As Date, _
-                    ByVal Quantity As Double, _
-                    ByVal Reason As String, _
-                    ByVal LeaveCredits As Double, _
-                    ByVal LeaveBalance As Double, _
-                    ByVal ClinicIsApproved As Boolean, _
-                    ByVal ClinicId As Global.System.Nullable(Of Integer), _
-                    ByVal ClinicApprovalDate As Global.System.Nullable(Of Date), _
-                    ByVal ClinicRemarks As String, _
-                    ByVal SuperiorIsApproved1 As Boolean, _
-                    ByVal SuperiorId1 As Global.System.Nullable(Of Integer), _
-                    ByVal SuperiorApprovalDate1 As Global.System.Nullable(Of Date), _
-                    ByVal SuperiorRemarks1 As String, _
-                    ByVal SuperiorIsApproved2 As Boolean, _
-                    ByVal SuperiorId2 As Global.System.Nullable(Of Integer), _
-                    ByVal SuperiorApprovalDate2 As Global.System.Nullable(Of Date), _
-                    ByVal SuperiorRemarks2 As String, _
-                    ByVal ManagerIsApproved As Boolean, _
-                    ByVal ManagerId As Global.System.Nullable(Of Integer), _
-                    ByVal ManagerApprovalDate As Global.System.Nullable(Of Date), _
-                    ByVal ManagerRemarks As String, _
-                    ByVal IsLateFiling As Boolean, _
-                    ByVal LeaveTypeId As Integer, _
-                    ByVal ModifiedBy As Integer, _
-                    ByVal ModifiedDate As Date, _
-                    ByVal IsEncoded As Boolean, _
-                    ByVal Original_LeaveFileId As Integer, _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal DateCreated As Date,  _
+                    ByVal ScreenId As Global.System.Nullable(Of Integer),  _
+                    ByVal EmployeeId As Integer,  _
+                    ByVal RoutingStatusId As Integer,  _
+                    ByVal DepartmentId As Integer,  _
+                    ByVal TeamId As Global.System.Nullable(Of Integer),  _
+                    ByVal StartDate As Date,  _
+                    ByVal EndDate As Date,  _
+                    ByVal Quantity As Double,  _
+                    ByVal Reason As String,  _
+                    ByVal LeaveCredits As Double,  _
+                    ByVal LeaveBalance As Double,  _
+                    ByVal ClinicIsApproved As Boolean,  _
+                    ByVal ClinicId As Global.System.Nullable(Of Integer),  _
+                    ByVal ClinicApprovalDate As Global.System.Nullable(Of Date),  _
+                    ByVal ClinicRemarks As String,  _
+                    ByVal SuperiorIsApproved1 As Boolean,  _
+                    ByVal SuperiorId1 As Global.System.Nullable(Of Integer),  _
+                    ByVal SuperiorApprovalDate1 As Global.System.Nullable(Of Date),  _
+                    ByVal SuperiorRemarks1 As String,  _
+                    ByVal SuperiorIsApproved2 As Boolean,  _
+                    ByVal SuperiorId2 As Global.System.Nullable(Of Integer),  _
+                    ByVal SuperiorApprovalDate2 As Global.System.Nullable(Of Date),  _
+                    ByVal SuperiorRemarks2 As String,  _
+                    ByVal ManagerIsApproved As Boolean,  _
+                    ByVal ManagerId As Global.System.Nullable(Of Integer),  _
+                    ByVal ManagerApprovalDate As Global.System.Nullable(Of Date),  _
+                    ByVal ManagerRemarks As String,  _
+                    ByVal IsLateFiling As Boolean,  _
+                    ByVal LeaveTypeId As Integer,  _
+                    ByVal ModifiedBy As Integer,  _
+                    ByVal ModifiedDate As Date,  _
+                    ByVal IsEncoded As Boolean,  _
+                    ByVal Original_LeaveFileId As Integer,  _
                     ByVal LeaveFileId As Integer) As Integer
-            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(DateCreated, Date)
-            If (ScreenId.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(ScreenId.Value, Integer)
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(DateCreated,Date)
+            If (ScreenId.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(ScreenId.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(EmployeeId, Integer)
-            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(RoutingStatusId, Integer)
-            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(DepartmentId, Integer)
-            If (TeamId.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(TeamId.Value, Integer)
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(EmployeeId,Integer)
+            Me.Adapter.UpdateCommand.Parameters(3).Value = CType(RoutingStatusId,Integer)
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(DepartmentId,Integer)
+            If (TeamId.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(TeamId.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(5).Value = Global.System.DBNull.Value
             End If
-            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(StartDate, Date)
-            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(EndDate, Date)
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Quantity, Double)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(StartDate,Date)
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(EndDate,Date)
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Quantity,Double)
             If (Reason Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(9).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Reason, String)
+                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Reason,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(LeaveCredits, Double)
-            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(LeaveBalance, Double)
-            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(ClinicIsApproved, Boolean)
-            If (ClinicId.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(ClinicId.Value, Integer)
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(LeaveCredits,Double)
+            Me.Adapter.UpdateCommand.Parameters(11).Value = CType(LeaveBalance,Double)
+            Me.Adapter.UpdateCommand.Parameters(12).Value = CType(ClinicIsApproved,Boolean)
+            If (ClinicId.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(ClinicId.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(13).Value = Global.System.DBNull.Value
             End If
-            If (ClinicApprovalDate.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(ClinicApprovalDate.Value, Date)
+            If (ClinicApprovalDate.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(ClinicApprovalDate.Value,Date)
             Else
                 Me.Adapter.UpdateCommand.Parameters(14).Value = Global.System.DBNull.Value
             End If
             If (ClinicRemarks Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(15).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ClinicRemarks, String)
+                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(ClinicRemarks,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(16).Value = CType(SuperiorIsApproved1, Boolean)
-            If (SuperiorId1.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(SuperiorId1.Value, Integer)
+            Me.Adapter.UpdateCommand.Parameters(16).Value = CType(SuperiorIsApproved1,Boolean)
+            If (SuperiorId1.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(17).Value = CType(SuperiorId1.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(17).Value = Global.System.DBNull.Value
             End If
-            If (SuperiorApprovalDate1.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(SuperiorApprovalDate1.Value, Date)
+            If (SuperiorApprovalDate1.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(18).Value = CType(SuperiorApprovalDate1.Value,Date)
             Else
                 Me.Adapter.UpdateCommand.Parameters(18).Value = Global.System.DBNull.Value
             End If
             If (SuperiorRemarks1 Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(19).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(SuperiorRemarks1, String)
+                Me.Adapter.UpdateCommand.Parameters(19).Value = CType(SuperiorRemarks1,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(SuperiorIsApproved2, Boolean)
-            If (SuperiorId2.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(SuperiorId2.Value, Integer)
+            Me.Adapter.UpdateCommand.Parameters(20).Value = CType(SuperiorIsApproved2,Boolean)
+            If (SuperiorId2.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(21).Value = CType(SuperiorId2.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(21).Value = Global.System.DBNull.Value
             End If
-            If (SuperiorApprovalDate2.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(SuperiorApprovalDate2.Value, Date)
+            If (SuperiorApprovalDate2.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(22).Value = CType(SuperiorApprovalDate2.Value,Date)
             Else
                 Me.Adapter.UpdateCommand.Parameters(22).Value = Global.System.DBNull.Value
             End If
             If (SuperiorRemarks2 Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(23).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(SuperiorRemarks2, String)
+                Me.Adapter.UpdateCommand.Parameters(23).Value = CType(SuperiorRemarks2,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(24).Value = CType(ManagerIsApproved, Boolean)
-            If (ManagerId.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(ManagerId.Value, Integer)
+            Me.Adapter.UpdateCommand.Parameters(24).Value = CType(ManagerIsApproved,Boolean)
+            If (ManagerId.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(25).Value = CType(ManagerId.Value,Integer)
             Else
                 Me.Adapter.UpdateCommand.Parameters(25).Value = Global.System.DBNull.Value
             End If
-            If (ManagerApprovalDate.HasValue = True) Then
-                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(ManagerApprovalDate.Value, Date)
+            If (ManagerApprovalDate.HasValue = true) Then
+                Me.Adapter.UpdateCommand.Parameters(26).Value = CType(ManagerApprovalDate.Value,Date)
             Else
                 Me.Adapter.UpdateCommand.Parameters(26).Value = Global.System.DBNull.Value
             End If
             If (ManagerRemarks Is Nothing) Then
                 Me.Adapter.UpdateCommand.Parameters(27).Value = Global.System.DBNull.Value
             Else
-                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(ManagerRemarks, String)
+                Me.Adapter.UpdateCommand.Parameters(27).Value = CType(ManagerRemarks,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(IsLateFiling, Boolean)
-            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(LeaveTypeId, Integer)
-            Me.Adapter.UpdateCommand.Parameters(30).Value = CType(ModifiedBy, Integer)
-            Me.Adapter.UpdateCommand.Parameters(31).Value = CType(ModifiedDate, Date)
-            Me.Adapter.UpdateCommand.Parameters(32).Value = CType(IsEncoded, Boolean)
-            Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_LeaveFileId, Integer)
-            Me.Adapter.UpdateCommand.Parameters(34).Value = CType(LeaveFileId, Integer)
+            Me.Adapter.UpdateCommand.Parameters(28).Value = CType(IsLateFiling,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(29).Value = CType(LeaveTypeId,Integer)
+            Me.Adapter.UpdateCommand.Parameters(30).Value = CType(ModifiedBy,Integer)
+            Me.Adapter.UpdateCommand.Parameters(31).Value = CType(ModifiedDate,Date)
+            Me.Adapter.UpdateCommand.Parameters(32).Value = CType(IsEncoded,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(33).Value = CType(Original_LeaveFileId,Integer)
+            Me.Adapter.UpdateCommand.Parameters(34).Value = CType(LeaveFileId,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
-            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
-                Me.Adapter.UpdateCommand.Connection.Open()
+                Me.Adapter.UpdateCommand.Connection.Open
             End If
-            Try
+            Try 
                 Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
                 Return returnValue
             Finally
                 If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
-                    Me.Adapter.UpdateCommand.Connection.Close()
+                    Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
         End Function
-
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
-        Public Overridable Overloads Function Update( _
-                    ByVal DateCreated As Date, _
-                    ByVal ScreenId As Global.System.Nullable(Of Integer), _
-                    ByVal EmployeeId As Integer, _
-                    ByVal RoutingStatusId As Integer, _
-                    ByVal DepartmentId As Integer, _
-                    ByVal TeamId As Global.System.Nullable(Of Integer), _
-                    ByVal StartDate As Date, _
-                    ByVal EndDate As Date, _
-                    ByVal Quantity As Double, _
-                    ByVal Reason As String, _
-                    ByVal LeaveCredits As Double, _
-                    ByVal LeaveBalance As Double, _
-                    ByVal ClinicIsApproved As Boolean, _
-                    ByVal ClinicId As Global.System.Nullable(Of Integer), _
-                    ByVal ClinicApprovalDate As Global.System.Nullable(Of Date), _
-                    ByVal ClinicRemarks As String, _
-                    ByVal SuperiorIsApproved1 As Boolean, _
-                    ByVal SuperiorId1 As Global.System.Nullable(Of Integer), _
-                    ByVal SuperiorApprovalDate1 As Global.System.Nullable(Of Date), _
-                    ByVal SuperiorRemarks1 As String, _
-                    ByVal SuperiorIsApproved2 As Boolean, _
-                    ByVal SuperiorId2 As Global.System.Nullable(Of Integer), _
-                    ByVal SuperiorApprovalDate2 As Global.System.Nullable(Of Date), _
-                    ByVal SuperiorRemarks2 As String, _
-                    ByVal ManagerIsApproved As Boolean, _
-                    ByVal ManagerId As Global.System.Nullable(Of Integer), _
-                    ByVal ManagerApprovalDate As Global.System.Nullable(Of Date), _
-                    ByVal ManagerRemarks As String, _
-                    ByVal IsLateFiling As Boolean, _
-                    ByVal LeaveTypeId As Integer, _
-                    ByVal ModifiedBy As Integer, _
-                    ByVal ModifiedDate As Date, _
-                    ByVal IsEncoded As Boolean, _
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update( _
+                    ByVal DateCreated As Date,  _
+                    ByVal ScreenId As Global.System.Nullable(Of Integer),  _
+                    ByVal EmployeeId As Integer,  _
+                    ByVal RoutingStatusId As Integer,  _
+                    ByVal DepartmentId As Integer,  _
+                    ByVal TeamId As Global.System.Nullable(Of Integer),  _
+                    ByVal StartDate As Date,  _
+                    ByVal EndDate As Date,  _
+                    ByVal Quantity As Double,  _
+                    ByVal Reason As String,  _
+                    ByVal LeaveCredits As Double,  _
+                    ByVal LeaveBalance As Double,  _
+                    ByVal ClinicIsApproved As Boolean,  _
+                    ByVal ClinicId As Global.System.Nullable(Of Integer),  _
+                    ByVal ClinicApprovalDate As Global.System.Nullable(Of Date),  _
+                    ByVal ClinicRemarks As String,  _
+                    ByVal SuperiorIsApproved1 As Boolean,  _
+                    ByVal SuperiorId1 As Global.System.Nullable(Of Integer),  _
+                    ByVal SuperiorApprovalDate1 As Global.System.Nullable(Of Date),  _
+                    ByVal SuperiorRemarks1 As String,  _
+                    ByVal SuperiorIsApproved2 As Boolean,  _
+                    ByVal SuperiorId2 As Global.System.Nullable(Of Integer),  _
+                    ByVal SuperiorApprovalDate2 As Global.System.Nullable(Of Date),  _
+                    ByVal SuperiorRemarks2 As String,  _
+                    ByVal ManagerIsApproved As Boolean,  _
+                    ByVal ManagerId As Global.System.Nullable(Of Integer),  _
+                    ByVal ManagerApprovalDate As Global.System.Nullable(Of Date),  _
+                    ByVal ManagerRemarks As String,  _
+                    ByVal IsLateFiling As Boolean,  _
+                    ByVal LeaveTypeId As Integer,  _
+                    ByVal ModifiedBy As Integer,  _
+                    ByVal ModifiedDate As Date,  _
+                    ByVal IsEncoded As Boolean,  _
                     ByVal Original_LeaveFileId As Integer) As Integer
             Return Me.Update(DateCreated, ScreenId, EmployeeId, RoutingStatusId, DepartmentId, TeamId, StartDate, EndDate, Quantity, Reason, LeaveCredits, LeaveBalance, ClinicIsApproved, ClinicId, ClinicApprovalDate, ClinicRemarks, SuperiorIsApproved1, SuperiorId1, SuperiorApprovalDate1, SuperiorRemarks1, SuperiorIsApproved2, SuperiorId2, SuperiorApprovalDate2, SuperiorRemarks2, ManagerIsApproved, ManagerId, ManagerApprovalDate, ManagerRemarks, IsLateFiling, LeaveTypeId, ModifiedBy, ModifiedDate, IsEncoded, Original_LeaveFileId, Original_LeaveFileId)
         End Function
@@ -10775,6 +11997,1227 @@ Namespace dsLeaveFilingTableAdapters
     End Class
     
     '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class ClinicTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "Clinic"
+            tableMapping.ColumnMappings.Add("EmployeeId", "EmployeeId")
+            tableMapping.ColumnMappings.Add("EmployeeCode", "EmployeeCode")
+            tableMapping.ColumnMappings.Add("EmployeeName", "EmployeeName")
+            tableMapping.ColumnMappings.Add("PositionName", "PositionName")
+            tableMapping.ColumnMappings.Add("Password", "Password")
+            tableMapping.ColumnMappings.Add("IsActive", "IsActive")
+            tableMapping.ColumnMappings.Add("LockId", "LockId")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Clinic] WHERE (([EmployeeId] = @Original_EmployeeId))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Clinic] ([EmployeeCode], [EmployeeName], [PositionName], [Pass"& _ 
+                "word], [IsActive]) VALUES (@EmployeeCode, @EmployeeName, @PositionName, @Passwor"& _ 
+                "d, @IsActive);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EmployeeId, EmployeeCode, EmployeeName, PositionName, Pas"& _ 
+                "sword, IsActive, LockId FROM Clinic WHERE (EmployeeId = SCOPE_IDENTITY())"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PositionName", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PositionName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Password", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Password", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsActive", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsActive", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Clinic] SET [EmployeeCode] = @EmployeeCode, [EmployeeName] = @Emplo"& _ 
+                "yeeName, [PositionName] = @PositionName, [Password] = @Password, [IsActive] = @I"& _ 
+                "sActive WHERE (([EmployeeId] = @Original_EmployeeId));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT EmployeeId, Emplo"& _ 
+                "yeeCode, EmployeeName, PositionName, Password, IsActive, LockId FROM Clinic WHER"& _ 
+                "E (EmployeeId = @EmployeeId)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeCode", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PositionName", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "PositionName", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Password", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Password", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsActive", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsActive", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.LeaveFilingSystem.My.MySettings.Default.LeaveFilingConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(2) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT EmployeeId, EmployeeCode, EmployeeName, PositionName, Password, IsActive, "& _ 
+                "LockId FROM dbo.Clinic"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "dbo.RdDoctor"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.StoredProcedure
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(2).Connection = Me.Connection
+            Me._commandCollection(2).CommandText = "dbo.RdDoctorByEmployeeName"
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.StoredProcedure
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As dsLeaveFiling.ClinicDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As dsLeaveFiling.ClinicDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As dsLeaveFiling.ClinicDataTable = New dsLeaveFiling.ClinicDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDoctor(ByVal dataTable As dsLeaveFiling.ClinicDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
+            End If
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDoctor(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As dsLeaveFiling.ClinicDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            Dim dataTable As dsLeaveFiling.ClinicDataTable = New dsLeaveFiling.ClinicDataTable()
+            Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
+            End If
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, false)>  _
+        Public Overloads Overridable Function FillDoctorByEmployeeName(ByVal dataTable As dsLeaveFiling.ClinicDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (EmployeeName Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeName,String)
+            End If
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
+            End If
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], false)>  _
+        Public Overloads Overridable Function GetDoctorByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.ClinicDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            If (PageIndex.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = true) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value,Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (EmployeeName Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeName,String)
+            End If
+            Dim dataTable As dsLeaveFiling.ClinicDataTable = New dsLeaveFiling.ClinicDataTable()
+            Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing)  _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value,Integer))
+            End If
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As dsLeaveFiling.ClinicDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As dsLeaveFiling) As Integer
+            Return Me.Adapter.Update(dataSet, "Clinic")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_EmployeeId As Integer) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_EmployeeId,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal PositionName As String, ByVal Password As String, ByVal IsActive As Boolean) As Integer
+            If (EmployeeCode Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeCode")
+            Else
+                Me.Adapter.InsertCommand.Parameters(0).Value = CType(EmployeeCode,String)
+            End If
+            If (EmployeeName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeName")
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(EmployeeName,String)
+            End If
+            If (PositionName Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(PositionName,String)
+            End If
+            If (Password Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Password,String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(4).Value = CType(IsActive,Boolean)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal PositionName As String, ByVal Password As String, ByVal IsActive As Boolean, ByVal Original_EmployeeId As Integer, ByVal EmployeeId As Integer) As Integer
+            If (EmployeeCode Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeCode")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(EmployeeCode,String)
+            End If
+            If (EmployeeName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeName")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(EmployeeName,String)
+            End If
+            If (PositionName Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(PositionName,String)
+            End If
+            If (Password Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Password,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(4).Value = CType(IsActive,Boolean)
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(Original_EmployeeId,Integer)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(EmployeeId,Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal PositionName As String, ByVal Password As String, ByVal IsActive As Boolean, ByVal Original_EmployeeId As Integer) As Integer
+            Return Me.Update(EmployeeCode, EmployeeName, PositionName, Password, IsActive, Original_EmployeeId, Original_EmployeeId)
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class EmployeeTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "Employee"
+            tableMapping.ColumnMappings.Add("EmployeeId", "EmployeeId")
+            tableMapping.ColumnMappings.Add("EmployeeCode", "EmployeeCode")
+            tableMapping.ColumnMappings.Add("EmployeeName", "EmployeeName")
+            tableMapping.ColumnMappings.Add("Password", "Password")
+            tableMapping.ColumnMappings.Add("NbcEmailAddress", "NbcEmailAddress")
+            tableMapping.ColumnMappings.Add("IsApprover", "IsApprover")
+            tableMapping.ColumnMappings.Add("IsHrRecords", "IsHrRecords")
+            tableMapping.ColumnMappings.Add("IsEmployee", "IsEmployee")
+            tableMapping.ColumnMappings.Add("IsHoliday", "IsHoliday")
+            tableMapping.ColumnMappings.Add("IsActive", "IsActive")
+            tableMapping.ColumnMappings.Add("LockId", "LockId")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Employee] WHERE (([EmployeeId] = @Original_EmployeeId))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Employee] ([EmployeeId], [EmployeeCode], [EmployeeName], [Pass" & _
+                "word], [NbcEmailAddress], [IsApprover], [IsHrRecords], [IsEmployee], [IsHoliday]" & _
+                ", [IsActive]) VALUES (@EmployeeId, @EmployeeCode, @EmployeeName, @Password, @Nbc" & _
+                "EmailAddress, @IsApprover, @IsHrRecords, @IsEmployee, @IsHoliday, @IsActive);" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "S" & _
+                "ELECT EmployeeId, EmployeeCode, EmployeeName, Password, NbcEmailAddress, IsAppro" & _
+                "ver, IsHrRecords, IsEmployee, IsHoliday, IsActive, LockId FROM Employee WHERE (E" & _
+                "mployeeId = @EmployeeId)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeCode", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeName", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Password", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Password", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NbcEmailAddress", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NbcEmailAddress", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsApprover", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsApprover", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsHrRecords", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsHrRecords", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsEmployee", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsEmployee", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsHoliday", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsHoliday", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsActive", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsActive", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Employee] SET [EmployeeId] = @EmployeeId, [EmployeeCode] = @Employe" & _
+                "eCode, [EmployeeName] = @EmployeeName, [Password] = @Password, [NbcEmailAddress]" & _
+                " = @NbcEmailAddress, [IsApprover] = @IsApprover, [IsHrRecords] = @IsHrRecords, [" & _
+                "IsEmployee] = @IsEmployee, [IsHoliday] = @IsHoliday, [IsActive] = @IsActive WHER" & _
+                "E (([EmployeeId] = @Original_EmployeeId));" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "SELECT EmployeeId, EmployeeCode, Emp" & _
+                "loyeeName, Password, NbcEmailAddress, IsApprover, IsHrRecords, IsEmployee, IsHol" & _
+                "iday, IsActive, LockId FROM Employee WHERE (EmployeeId = @EmployeeId)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeCode", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeCode", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeName", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Password", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "Password", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NbcEmailAddress", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "NbcEmailAddress", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsApprover", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsApprover", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsHrRecords", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsHrRecords", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsEmployee", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsEmployee", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsHoliday", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsHoliday", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsActive", Global.System.Data.SqlDbType.Bit, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "IsActive", Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_EmployeeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "EmployeeId", Global.System.Data.DataRowVersion.Original, False, Nothing, "", "", ""))
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.LeaveFilingSystem.My.MySettings.Default.LeaveFilingConnectionString
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")> _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(4) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT EmployeeId, EmployeeCode, EmployeeName, Password, NbcEmailAddress, IsAppro" & _
+                "ver, IsHrRecords, IsEmployee, IsHoliday, IsActive, LockId FROM dbo.Employee"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+            Me._commandCollection(1) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(1).Connection = Me.Connection
+            Me._commandCollection(1).CommandText = "dbo.RdEmployeeMasterlist"
+            Me._commandCollection(1).CommandType = Global.System.Data.CommandType.StoredProcedure
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(1).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(2) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(2).Connection = Me.Connection
+            Me._commandCollection(2).CommandText = "dbo.RdEmployeeMasterlistByEmailAddress"
+            Me._commandCollection(2).CommandType = Global.System.Data.CommandType.StoredProcedure
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(2).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@NbcEmailAddress", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(3) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(3).Connection = Me.Connection
+            Me._commandCollection(3).CommandText = "dbo.RdEmployeeMasterlistByEmployeeCode"
+            Me._commandCollection(3).CommandType = Global.System.Data.CommandType.StoredProcedure
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(3).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeCode", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(4) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(4).Connection = Me.Connection
+            Me._commandCollection(4).CommandText = "dbo.RdEmployeeMasterlistByEmployeeName"
+            Me._commandCollection(4).CommandType = Global.System.Data.CommandType.StoredProcedure
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@RETURN_VALUE", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.ReturnValue, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageIndex", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@PageSize", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@TotalCount", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.InputOutput, 10, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+            Me._commandCollection(4).Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@EmployeeName", Global.System.Data.SqlDbType.NVarChar, 2147483647, Global.System.Data.ParameterDirection.Input, 0, 0, Nothing, Global.System.Data.DataRowVersion.Current, False, Nothing, "", "", ""))
+        End Sub
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, True)> _
+        Public Overridable Overloads Function Fill(ByVal dataTable As dsLeaveFiling.EmployeeDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], True)> _
+        Public Overridable Overloads Function GetData() As dsLeaveFiling.EmployeeDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As dsLeaveFiling.EmployeeDataTable = New dsLeaveFiling.EmployeeDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
+        Public Overridable Overloads Function FillEmployeeMasterlist(ByVal dataTable As dsLeaveFiling.EmployeeDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return returnValue
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
+        Public Overridable Overloads Function GetEmployeeMasterlist(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer)) As dsLeaveFiling.EmployeeDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(1)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            Dim dataTable As dsLeaveFiling.EmployeeDataTable = New dsLeaveFiling.EmployeeDataTable()
+            Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return dataTable
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
+        Public Overridable Overloads Function FillEmployeeMasterlistByEmailAddress(ByVal dataTable As dsLeaveFiling.EmployeeDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal NbcEmailAddress As String) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (NbcEmailAddress Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(NbcEmailAddress, String)
+            End If
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return returnValue
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
+        Public Overridable Overloads Function GetEmployeeMasterlistByEmailAddress(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal NbcEmailAddress As String) As dsLeaveFiling.EmployeeDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(2)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (NbcEmailAddress Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(NbcEmailAddress, String)
+            End If
+            Dim dataTable As dsLeaveFiling.EmployeeDataTable = New dsLeaveFiling.EmployeeDataTable()
+            Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return dataTable
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
+        Public Overridable Overloads Function FillEmployeeMasterlistByEmployeeCode(ByVal dataTable As dsLeaveFiling.EmployeeDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeCode As String) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(3)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (EmployeeCode Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeCode, String)
+            End If
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return returnValue
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
+        Public Overridable Overloads Function GetEmployeeMasterlistByEmployeeCode(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeCode As String) As dsLeaveFiling.EmployeeDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(3)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (EmployeeCode Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeCode, String)
+            End If
+            Dim dataTable As dsLeaveFiling.EmployeeDataTable = New dsLeaveFiling.EmployeeDataTable()
+            Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return dataTable
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, False)> _
+        Public Overridable Overloads Function FillEmployeeMasterlistByEmployeeName(ByVal dataTable As dsLeaveFiling.EmployeeDataTable, ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (EmployeeName Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeName, String)
+            End If
+            If (Me.ClearBeforeFill = True) Then
+                dataTable.Clear()
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return returnValue
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], False)> _
+        Public Overridable Overloads Function GetEmployeeMasterlistByEmployeeName(ByVal PageIndex As Global.System.Nullable(Of Integer), ByVal PageSize As Global.System.Nullable(Of Integer), ByRef TotalCount As Global.System.Nullable(Of Integer), ByVal EmployeeName As String) As dsLeaveFiling.EmployeeDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(4)
+            If (PageIndex.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(1).Value = CType(PageIndex.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(1).Value = Global.System.DBNull.Value
+            End If
+            If (PageSize.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(2).Value = CType(PageSize.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(2).Value = Global.System.DBNull.Value
+            End If
+            If (TotalCount.HasValue = True) Then
+                Me.Adapter.SelectCommand.Parameters(3).Value = CType(TotalCount.Value, Integer)
+            Else
+                Me.Adapter.SelectCommand.Parameters(3).Value = Global.System.DBNull.Value
+            End If
+            If (EmployeeName Is Nothing) Then
+                Me.Adapter.SelectCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.SelectCommand.Parameters(4).Value = CType(EmployeeName, String)
+            End If
+            Dim dataTable As dsLeaveFiling.EmployeeDataTable = New dsLeaveFiling.EmployeeDataTable()
+            Me.Adapter.Fill(dataTable)
+            If ((Me.Adapter.SelectCommand.Parameters(3).Value Is Nothing) _
+                        OrElse (Me.Adapter.SelectCommand.Parameters(3).Value.GetType Is GetType(Global.System.DBNull))) Then
+                TotalCount = New Global.System.Nullable(Of Integer)()
+            Else
+                TotalCount = New Global.System.Nullable(Of Integer)(CType(Me.Adapter.SelectCommand.Parameters(3).Value, Integer))
+            End If
+            Return dataTable
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataTable As dsLeaveFiling.EmployeeDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataSet As dsLeaveFiling) As Integer
+            Return Me.Adapter.Update(dataSet, "Employee")
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")> _
+        Public Overridable Overloads Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, True)> _
+        Public Overridable Overloads Function Delete(ByVal Original_EmployeeId As Integer) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_EmployeeId, Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open()
+            End If
+            Try
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close()
+                End If
+            End Try
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, True)> _
+        Public Overridable Overloads Function Insert(ByVal EmployeeId As Integer, ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal Password As String, ByVal NbcEmailAddress As String, ByVal IsApprover As Boolean, ByVal IsHrRecords As Boolean, ByVal IsEmployee As Boolean, ByVal IsHoliday As Boolean, ByVal IsActive As Boolean) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(EmployeeId, Integer)
+            If (EmployeeCode Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeCode")
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(EmployeeCode, String)
+            End If
+            If (EmployeeName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeName")
+            Else
+                Me.Adapter.InsertCommand.Parameters(2).Value = CType(EmployeeName, String)
+            End If
+            If (Password Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(3).Value = CType(Password, String)
+            End If
+            If (NbcEmailAddress Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(4).Value = CType(NbcEmailAddress, String)
+            End If
+            Me.Adapter.InsertCommand.Parameters(5).Value = CType(IsApprover, Boolean)
+            Me.Adapter.InsertCommand.Parameters(6).Value = CType(IsHrRecords, Boolean)
+            Me.Adapter.InsertCommand.Parameters(7).Value = CType(IsEmployee, Boolean)
+            Me.Adapter.InsertCommand.Parameters(8).Value = CType(IsHoliday, Boolean)
+            Me.Adapter.InsertCommand.Parameters(9).Value = CType(IsActive, Boolean)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open()
+            End If
+            Try
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close()
+                End If
+            End Try
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
+        Public Overridable Overloads Function Update(ByVal EmployeeId As Integer, ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal Password As String, ByVal NbcEmailAddress As String, ByVal IsApprover As Boolean, ByVal IsHrRecords As Boolean, ByVal IsEmployee As Boolean, ByVal IsHoliday As Boolean, ByVal IsActive As Boolean, ByVal Original_EmployeeId As Integer) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(EmployeeId, Integer)
+            If (EmployeeCode Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeCode")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(EmployeeCode, String)
+            End If
+            If (EmployeeName Is Nothing) Then
+                Throw New Global.System.ArgumentNullException("EmployeeName")
+            Else
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(EmployeeName, String)
+            End If
+            If (Password Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(Password, String)
+            End If
+            If (NbcEmailAddress Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(NbcEmailAddress, String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(IsApprover, Boolean)
+            Me.Adapter.UpdateCommand.Parameters(6).Value = CType(IsHrRecords, Boolean)
+            Me.Adapter.UpdateCommand.Parameters(7).Value = CType(IsEmployee, Boolean)
+            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(IsHoliday, Boolean)
+            Me.Adapter.UpdateCommand.Parameters(9).Value = CType(IsActive, Boolean)
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_EmployeeId, Integer)
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open) _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open()
+            End If
+            Try
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close()
+                End If
+            End Try
+        End Function
+
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"), _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"), _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, True)> _
+        Public Overridable Overloads Function Update(ByVal EmployeeCode As String, ByVal EmployeeName As String, ByVal Password As String, ByVal NbcEmailAddress As String, ByVal IsApprover As Boolean, ByVal IsHrRecords As Boolean, ByVal IsEmployee As Boolean, ByVal IsHoliday As Boolean, ByVal IsActive As Boolean, ByVal Original_EmployeeId As Integer) As Integer
+            Return Me.Update(Original_EmployeeId, EmployeeCode, EmployeeName, Password, NbcEmailAddress, IsApprover, IsHrRecords, IsEmployee, IsHoliday, IsActive, Original_EmployeeId)
+        End Function
+    End Class
+    
+    '''<summary>
     '''TableAdapterManager is used to coordinate TableAdapters in the dataset to enable Hierarchical Update scenarios
     '''</summary>
     <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
@@ -10796,6 +13239,10 @@ Namespace dsLeaveFilingTableAdapters
         Private _leaveFilingTableAdapter As LeaveFilingTableAdapter
         
         Private _screeningTableAdapter As ScreeningTableAdapter
+        
+        Private _clinicTableAdapter As ClinicTableAdapter
+        
+        Private _employeeTableAdapter As EmployeeTableAdapter
         
         Private _backupDataSetBeforeUpdate As Boolean
         
@@ -10883,6 +13330,34 @@ Namespace dsLeaveFilingTableAdapters
         End Property
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property ClinicTableAdapter() As ClinicTableAdapter
+            Get
+                Return Me._clinicTableAdapter
+            End Get
+            Set
+                Me._clinicTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property EmployeeTableAdapter() As EmployeeTableAdapter
+            Get
+                Return Me._employeeTableAdapter
+            End Get
+            Set
+                Me._employeeTableAdapter = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Public Property BackupDataSetBeforeUpdate() As Boolean
             Get
@@ -10921,6 +13396,14 @@ Namespace dsLeaveFilingTableAdapters
                             AndAlso (Not (Me._screeningTableAdapter.Connection) Is Nothing)) Then
                     Return Me._screeningTableAdapter.Connection
                 End If
+                If ((Not (Me._clinicTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._clinicTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._clinicTableAdapter.Connection
+                End If
+                If ((Not (Me._employeeTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._employeeTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._employeeTableAdapter.Connection
+                End If
                 Return Nothing
             End Get
             Set
@@ -10947,6 +13430,12 @@ Namespace dsLeaveFilingTableAdapters
                     count = (count + 1)
                 End If
                 If (Not (Me._screeningTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._clinicTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
+                If (Not (Me._employeeTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
                 Return count
@@ -11005,6 +13494,24 @@ Namespace dsLeaveFilingTableAdapters
                     allChangedRows.AddRange(updatedRows)
                 End If
             End If
+            If (Not (Me._clinicTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.Clinic.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._clinicTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
+            If (Not (Me._employeeTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.Employee.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._employeeTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
             Return result
         End Function
         
@@ -11055,6 +13562,22 @@ Namespace dsLeaveFilingTableAdapters
                     allAddedRows.AddRange(addedRows)
                 End If
             End If
+            If (Not (Me._clinicTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.Clinic.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._clinicTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
+            If (Not (Me._employeeTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.Employee.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._employeeTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             Return result
         End Function
         
@@ -11065,6 +13588,22 @@ Namespace dsLeaveFilingTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateDeletedRows(ByVal dataSet As dsLeaveFiling, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._employeeTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.Employee.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._employeeTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._clinicTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.Clinic.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._clinicTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
             If (Not (Me._leaveFilingTableAdapter) Is Nothing) Then
                 Dim deletedRows() As Global.System.Data.DataRow = dataSet.LeaveFiling.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
                 If ((Not (deletedRows) Is Nothing)  _
@@ -11171,6 +13710,16 @@ Namespace dsLeaveFilingTableAdapters
                 Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
                         "tring.")
             End If
+            If ((Not (Me._clinicTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._clinicTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
+            If ((Not (Me._employeeTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._employeeTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
             Dim workConnection As Global.System.Data.IDbConnection = Me.Connection
             If (workConnection Is Nothing) Then
                 Throw New Global.System.ApplicationException("TableAdapterManager contains no connection information. Set each TableAdapterMana"& _ 
@@ -11246,6 +13795,24 @@ Namespace dsLeaveFilingTableAdapters
                     If Me._screeningTableAdapter.Adapter.AcceptChangesDuringUpdate Then
                         Me._screeningTableAdapter.Adapter.AcceptChangesDuringUpdate = false
                         adaptersWithAcceptChangesDuringUpdate.Add(Me._screeningTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._clinicTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._clinicTableAdapter, Me._clinicTableAdapter.Connection)
+                    Me._clinicTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._clinicTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._clinicTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._clinicTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._clinicTableAdapter.Adapter)
+                    End If
+                End If
+                If (Not (Me._employeeTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._employeeTableAdapter, Me._employeeTableAdapter.Connection)
+                    Me._employeeTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._employeeTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._employeeTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._employeeTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._employeeTableAdapter.Adapter)
                     End If
                 End If
                 '
@@ -11327,6 +13894,14 @@ Namespace dsLeaveFilingTableAdapters
                 If (Not (Me._screeningTableAdapter) Is Nothing) Then
                     Me._screeningTableAdapter.Connection = CType(revertConnections(Me._screeningTableAdapter),Global.System.Data.SqlClient.SqlConnection)
                     Me._screeningTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._clinicTableAdapter) Is Nothing) Then
+                    Me._clinicTableAdapter.Connection = CType(revertConnections(Me._clinicTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._clinicTableAdapter.Transaction = Nothing
+                End If
+                If (Not (Me._employeeTableAdapter) Is Nothing) Then
+                    Me._employeeTableAdapter.Connection = CType(revertConnections(Me._employeeTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._employeeTableAdapter.Transaction = Nothing
                 End If
                 If (0 < adaptersWithAcceptChangesDuringUpdate.Count) Then
                     Dim adapters((adaptersWithAcceptChangesDuringUpdate.Count) - 1) As Global.System.Data.Common.DataAdapter

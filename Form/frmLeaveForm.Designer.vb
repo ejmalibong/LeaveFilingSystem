@@ -22,8 +22,8 @@ Partial Class frmLeaveForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.txtTotalLeaveCredits = New System.Windows.Forms.Label()
-        Me.lblTotalLeaveCredits = New System.Windows.Forms.Label()
+        Me.txtLeaveCredits = New System.Windows.Forms.Label()
+        Me.lblLeaveCredits = New System.Windows.Forms.Label()
         Me.lblFrom = New System.Windows.Forms.Label()
         Me.dtpFrom = New System.Windows.Forms.DateTimePicker()
         Me.lblTo = New System.Windows.Forms.Label()
@@ -111,31 +111,31 @@ Partial Class frmLeaveForm
         Me.gprLeaveInfo.SuspendLayout()
         Me.SuspendLayout()
         '
-        'txtTotalLeaveCredits
+        'txtLeaveCredits
         '
-        Me.txtTotalLeaveCredits.BackColor = System.Drawing.SystemColors.GradientActiveCaption
-        Me.txtTotalLeaveCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtTotalLeaveCredits.Font = New System.Drawing.Font("Verdana", 14.5!)
-        Me.txtTotalLeaveCredits.ForeColor = System.Drawing.Color.Black
-        Me.txtTotalLeaveCredits.Location = New System.Drawing.Point(829, 20)
-        Me.txtTotalLeaveCredits.Name = "txtTotalLeaveCredits"
-        Me.txtTotalLeaveCredits.Size = New System.Drawing.Size(93, 26)
-        Me.txtTotalLeaveCredits.TabIndex = 304
-        Me.txtTotalLeaveCredits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        Me.txtTotalLeaveCredits.UseCompatibleTextRendering = True
+        Me.txtLeaveCredits.BackColor = System.Drawing.SystemColors.GradientActiveCaption
+        Me.txtLeaveCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtLeaveCredits.Font = New System.Drawing.Font("Verdana", 14.5!)
+        Me.txtLeaveCredits.ForeColor = System.Drawing.Color.Black
+        Me.txtLeaveCredits.Location = New System.Drawing.Point(829, 20)
+        Me.txtLeaveCredits.Name = "txtLeaveCredits"
+        Me.txtLeaveCredits.Size = New System.Drawing.Size(93, 26)
+        Me.txtLeaveCredits.TabIndex = 304
+        Me.txtLeaveCredits.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.txtLeaveCredits.UseCompatibleTextRendering = True
         '
-        'lblTotalLeaveCredits
+        'lblLeaveCredits
         '
-        Me.lblTotalLeaveCredits.BackColor = System.Drawing.SystemColors.Control
-        Me.lblTotalLeaveCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblTotalLeaveCredits.Font = New System.Drawing.Font("Verdana", 10.0!)
-        Me.lblTotalLeaveCredits.ForeColor = System.Drawing.Color.Black
-        Me.lblTotalLeaveCredits.Location = New System.Drawing.Point(713, 20)
-        Me.lblTotalLeaveCredits.Name = "lblTotalLeaveCredits"
-        Me.lblTotalLeaveCredits.Size = New System.Drawing.Size(117, 26)
-        Me.lblTotalLeaveCredits.TabIndex = 303
-        Me.lblTotalLeaveCredits.Text = " Leave Credits"
-        Me.lblTotalLeaveCredits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.lblLeaveCredits.BackColor = System.Drawing.SystemColors.Control
+        Me.lblLeaveCredits.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblLeaveCredits.Font = New System.Drawing.Font("Verdana", 10.0!)
+        Me.lblLeaveCredits.ForeColor = System.Drawing.Color.Black
+        Me.lblLeaveCredits.Location = New System.Drawing.Point(713, 20)
+        Me.lblLeaveCredits.Name = "lblLeaveCredits"
+        Me.lblLeaveCredits.Size = New System.Drawing.Size(117, 26)
+        Me.lblLeaveCredits.TabIndex = 303
+        Me.lblLeaveCredits.Text = " Leave Credits"
+        Me.lblLeaveCredits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'lblFrom
         '
@@ -675,8 +675,8 @@ Partial Class frmLeaveForm
         Me.gprLeaveInfo.Controls.Add(Me.txtClinicPosition)
         Me.gprLeaveInfo.Controls.Add(Me.lblLeaveType)
         Me.gprLeaveInfo.Controls.Add(Me.cmbLeaveType)
-        Me.gprLeaveInfo.Controls.Add(Me.txtTotalLeaveCredits)
-        Me.gprLeaveInfo.Controls.Add(Me.lblTotalLeaveCredits)
+        Me.gprLeaveInfo.Controls.Add(Me.txtLeaveCredits)
+        Me.gprLeaveInfo.Controls.Add(Me.lblLeaveCredits)
         Me.gprLeaveInfo.Controls.Add(Me.txtBalance)
         Me.gprLeaveInfo.Controls.Add(Me.lblBalance)
         Me.gprLeaveInfo.Controls.Add(Me.dtpTo)
@@ -1281,6 +1281,7 @@ Partial Class frmLeaveForm
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.grpEmpInfo)
+        Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Verdana", 8.5!)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.KeyPreview = True
@@ -1298,8 +1299,8 @@ Partial Class frmLeaveForm
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents txtTotalLeaveCredits As System.Windows.Forms.Label
-    Friend WithEvents lblTotalLeaveCredits As System.Windows.Forms.Label
+    Friend WithEvents txtLeaveCredits As System.Windows.Forms.Label
+    Friend WithEvents lblLeaveCredits As System.Windows.Forms.Label
     Friend WithEvents lblFrom As System.Windows.Forms.Label
     Public WithEvents dtpFrom As System.Windows.Forms.DateTimePicker
     Friend WithEvents lblTo As System.Windows.Forms.Label

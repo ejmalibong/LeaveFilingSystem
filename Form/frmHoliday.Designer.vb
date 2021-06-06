@@ -23,9 +23,9 @@ Partial Class frmHoliday
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmHoliday))
         Me.dgvList = New System.Windows.Forms.DataGridView()
         Me.ColHolidayId = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -44,9 +44,7 @@ Partial Class frmHoliday
         Me.pnlName = New System.Windows.Forms.Panel()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.btnClose = New PinkieControls.ButtonXP()
-        Me.btnDelete = New PinkieControls.ButtonXP()
         Me.btnCancel = New PinkieControls.ButtonXP()
-        Me.btnAdd = New PinkieControls.ButtonXP()
         Me.bindingNavigator = New System.Windows.Forms.BindingNavigator(Me.components)
         Me.txtTotalPageNumber = New System.Windows.Forms.ToolStripLabel()
         Me.BindingNavigatorMoveFirstItem = New System.Windows.Forms.ToolStripButton()
@@ -59,6 +57,9 @@ Partial Class frmHoliday
         Me.ToolStripSeparator = New System.Windows.Forms.ToolStripSeparator()
         Me.btnGo = New System.Windows.Forms.ToolStripButton()
         Me.btnSave = New PinkieControls.ButtonXP()
+        Me.btnDelete = New PinkieControls.ButtonXP()
+        Me.btnAdd = New PinkieControls.ButtonXP()
+        Me.btnSync = New PinkieControls.ButtonXP()
         CType(Me.dgvList, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlTop.SuspendLayout()
         Me.pnlDate.SuspendLayout()
@@ -71,19 +72,20 @@ Partial Class frmHoliday
         '
         Me.dgvList.AllowUserToAddRows = False
         Me.dgvList.AllowUserToDeleteRows = False
-        Me.dgvList.AllowUserToResizeColumns = False
         Me.dgvList.AllowUserToResizeRows = False
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle10.Font = New System.Drawing.Font("Verdana", 8.5!)
-        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        Me.dgvList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
+        Me.dgvList.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.5!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        Me.dgvList.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.dgvList.ColumnHeadersHeight = 26
         Me.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing
         Me.dgvList.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ColHolidayId, Me.ColHolidayDate, Me.ColHolidayName})
-        Me.dgvList.Dock = System.Windows.Forms.DockStyle.Top
         Me.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter
         Me.dgvList.Location = New System.Drawing.Point(0, 37)
         Me.dgvList.MultiSelect = False
@@ -91,7 +93,7 @@ Partial Class frmHoliday
         Me.dgvList.RowHeadersVisible = False
         Me.dgvList.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Verdana", 8.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dgvList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.dgvList.Size = New System.Drawing.Size(784, 375)
+        Me.dgvList.Size = New System.Drawing.Size(884, 375)
         Me.dgvList.TabIndex = 0
         '
         'ColHolidayId
@@ -104,10 +106,10 @@ Partial Class frmHoliday
         'ColHolidayDate
         '
         Me.ColHolidayDate.DataPropertyName = "HolidayDate"
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle11.Format = "d"
-        DataGridViewCellStyle11.NullValue = Nothing
-        Me.ColHolidayDate.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.Format = "d"
+        DataGridViewCellStyle2.NullValue = Nothing
+        Me.ColHolidayDate.DefaultCellStyle = DataGridViewCellStyle2
         Me.ColHolidayDate.HeaderText = "Date"
         Me.ColHolidayDate.Name = "ColHolidayDate"
         Me.ColHolidayDate.Width = 120
@@ -115,8 +117,8 @@ Partial Class frmHoliday
         'ColHolidayName
         '
         Me.ColHolidayName.DataPropertyName = "HolidayName"
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        Me.ColHolidayName.DefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        Me.ColHolidayName.DefaultCellStyle = DataGridViewCellStyle3
         Me.ColHolidayName.HeaderText = "Holiday Name"
         Me.ColHolidayName.Name = "ColHolidayName"
         '
@@ -130,7 +132,7 @@ Partial Class frmHoliday
         Me.pnlTop.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlTop.Location = New System.Drawing.Point(0, 0)
         Me.pnlTop.Name = "pnlTop"
-        Me.pnlTop.Size = New System.Drawing.Size(784, 37)
+        Me.pnlTop.Size = New System.Drawing.Size(884, 37)
         Me.pnlTop.TabIndex = 1
         '
         'pnlDate
@@ -266,31 +268,14 @@ Partial Class frmHoliday
         Me.btnClose.DefaultScheme = False
         Me.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnClose.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnClose.Hint = "Close form"
-        Me.btnClose.Location = New System.Drawing.Point(678, 418)
+        Me.btnClose.Hint = "Close"
+        Me.btnClose.Location = New System.Drawing.Point(778, 418)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Scheme = PinkieControls.ButtonXP.Schemes.Blue
         Me.btnClose.Size = New System.Drawing.Size(100, 36)
         Me.btnClose.TabIndex = 332
         Me.btnClose.TabStop = False
         Me.btnClose.Text = "Close"
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnDelete.DefaultScheme = False
-        Me.btnDelete.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnDelete.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnDelete.Hint = "Delete item"
-        Me.btnDelete.Image = Global.LeaveFilingSystem.My.Resources.Resources.Erase_16_x_16
-        Me.btnDelete.Location = New System.Drawing.Point(574, 418)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnDelete.Size = New System.Drawing.Size(100, 36)
-        Me.btnDelete.TabIndex = 331
-        Me.btnDelete.TabStop = False
-        Me.btnDelete.Text = "Delete"
         '
         'btnCancel
         '
@@ -300,30 +285,13 @@ Partial Class frmHoliday
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.None
         Me.btnCancel.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnCancel.Hint = "Cancel changes"
-        Me.btnCancel.Location = New System.Drawing.Point(470, 418)
+        Me.btnCancel.Location = New System.Drawing.Point(570, 418)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Scheme = PinkieControls.ButtonXP.Schemes.Blue
         Me.btnCancel.Size = New System.Drawing.Size(100, 36)
         Me.btnCancel.TabIndex = 330
         Me.btnCancel.TabStop = False
         Me.btnCancel.Text = "Cancel"
-        '
-        'btnAdd
-        '
-        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.btnAdd.DefaultScheme = False
-        Me.btnAdd.DialogResult = System.Windows.Forms.DialogResult.None
-        Me.btnAdd.Font = New System.Drawing.Font("Verdana", 10.5!)
-        Me.btnAdd.Hint = "Add new item"
-        Me.btnAdd.Image = Global.LeaveFilingSystem.My.Resources.Resources.Create_16_x_16
-        Me.btnAdd.Location = New System.Drawing.Point(262, 418)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Scheme = PinkieControls.ButtonXP.Schemes.Blue
-        Me.btnAdd.Size = New System.Drawing.Size(100, 36)
-        Me.btnAdd.TabIndex = 329
-        Me.btnAdd.TabStop = False
-        Me.btnAdd.Text = " Add"
         '
         'bindingNavigator
         '
@@ -437,7 +405,7 @@ Partial Class frmHoliday
         Me.btnSave.Font = New System.Drawing.Font("Verdana", 10.5!)
         Me.btnSave.Hint = "Save changes"
         Me.btnSave.Image = Global.LeaveFilingSystem.My.Resources.Resources.Save_16_x_16
-        Me.btnSave.Location = New System.Drawing.Point(366, 418)
+        Me.btnSave.Location = New System.Drawing.Point(466, 418)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Scheme = PinkieControls.ButtonXP.Schemes.Blue
         Me.btnSave.Size = New System.Drawing.Size(100, 36)
@@ -445,11 +413,64 @@ Partial Class frmHoliday
         Me.btnSave.TabStop = False
         Me.btnSave.Text = " Save"
         '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnDelete.DefaultScheme = False
+        Me.btnDelete.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnDelete.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnDelete.Hint = "Delete item"
+        Me.btnDelete.Image = Global.LeaveFilingSystem.My.Resources.Resources.Erase_16_x_16
+        Me.btnDelete.Location = New System.Drawing.Point(674, 418)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnDelete.Size = New System.Drawing.Size(100, 36)
+        Me.btnDelete.TabIndex = 331
+        Me.btnDelete.TabStop = False
+        Me.btnDelete.Text = "Delete"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnAdd.DefaultScheme = False
+        Me.btnAdd.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnAdd.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnAdd.Hint = "Add new item"
+        Me.btnAdd.Image = Global.LeaveFilingSystem.My.Resources.Resources.Create_16_x_16
+        Me.btnAdd.Location = New System.Drawing.Point(362, 418)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnAdd.Size = New System.Drawing.Size(100, 36)
+        Me.btnAdd.TabIndex = 329
+        Me.btnAdd.TabStop = False
+        Me.btnAdd.Text = " Add"
+        '
+        'btnSync
+        '
+        Me.btnSync.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSync.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.btnSync.DefaultScheme = False
+        Me.btnSync.DialogResult = System.Windows.Forms.DialogResult.None
+        Me.btnSync.Font = New System.Drawing.Font("Verdana", 10.5!)
+        Me.btnSync.Hint = "Synchronize items from Jeonsoft"
+        Me.btnSync.Image = Global.LeaveFilingSystem.My.Resources.Resources.Sync_16_x_16
+        Me.btnSync.Location = New System.Drawing.Point(258, 418)
+        Me.btnSync.Name = "btnSync"
+        Me.btnSync.Scheme = PinkieControls.ButtonXP.Schemes.Blue
+        Me.btnSync.Size = New System.Drawing.Size(100, 36)
+        Me.btnSync.TabIndex = 532
+        Me.btnSync.TabStop = False
+        Me.btnSync.Text = " Sync"
+        '
         'frmHoliday
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(784, 461)
+        Me.CancelButton = Me.btnClose
+        Me.ClientSize = New System.Drawing.Size(884, 461)
+        Me.Controls.Add(Me.btnSync)
         Me.Controls.Add(Me.pnlName)
         Me.Controls.Add(Me.btnSave)
         Me.Controls.Add(Me.bindingNavigator)
@@ -459,15 +480,17 @@ Partial Class frmHoliday
         Me.Controls.Add(Me.btnAdd)
         Me.Controls.Add(Me.dgvList)
         Me.Controls.Add(Me.pnlTop)
+        Me.DoubleBuffered = True
         Me.Font = New System.Drawing.Font("Verdana", 8.5!)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.KeyPreview = True
         Me.MaximizeBox = False
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(900, 500)
         Me.Name = "frmHoliday"
-        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = "Holiday"
+        Me.ShowIcon = False
+        Me.ShowInTaskbar = False
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.Text = "Holidays"
         CType(Me.dgvList, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlTop.ResumeLayout(False)
         Me.pnlDate.ResumeLayout(False)
@@ -513,4 +536,5 @@ Partial Class frmHoliday
     Friend WithEvents ColHolidayDate As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents ColHolidayName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents btnSave As PinkieControls.ButtonXP
+    Friend WithEvents btnSync As PinkieControls.ButtonXP
 End Class

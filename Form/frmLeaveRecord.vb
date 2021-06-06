@@ -14,7 +14,7 @@ Public Class frmLeaveRecord
     Private main As New Main
     'server datetime
     Private serverDate As DateTime = dbLeaveFiling.GetServerDate
-    'dataset
+    'data objects
     Private dsLeaveFiling As New dsLeaveFiling
     Private adpLeaveFiling As New LeaveFilingTableAdapter
     Private dtLeaveFiling As New LeaveFilingDataTable
@@ -26,10 +26,9 @@ Public Class frmLeaveRecord
     Private pageCount As Integer
     Private indexScroll As Integer = 0
     Private indexPosition As Integer = 0
-    'control access
+    'approvers level
     Private isSuperior As Boolean = False
     Private isManager As Boolean = False
-    'list
     Private superiorLevel As New List(Of Integer) From {19, 4, 3, 6, 17, 25, 18, 7} 'sv, asv, sr engr, sr staff, sr line leader, sr nurse, sr technician, line leader
     Private managerLevel As New List(Of Integer) From {15, 21, 2, 13} 'dgm, sr mngr, mngr, asst mngr
     'search criteria
@@ -144,7 +143,9 @@ Public Class frmLeaveRecord
                 Dim _prmLeaveType(0) As SqlParameter
                 _prmLeaveType(0) = New SqlParameter("@LeaveTypeId", SqlDbType.Int)
                 _prmLeaveType(0).Value = _leaveFilingRow.LeaveTypeId
-                _leaveTypeName = dbLeaveFiling.ExecuteScalar("SELECT TRIM(LeaveTypeName) AS LeaveTypeName FROM dbo.LeaveType WHERE LeaveTypeId = @LeaveTypeId", CommandType.Text, _prmLeaveType)
+
+                _leaveTypeName = dbLeaveFiling.ExecuteScalar("SELECT TRIM(LeaveTypeName) AS LeaveTypeName FROM dbo.LeaveType WHERE LeaveTypeId = @LeaveTypeId", _
+                                                             CommandType.Text, _prmLeaveType)
 
                 Dim _prmEmployee(0) As SqlParameter
                 _prmEmployee(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
@@ -167,9 +168,6 @@ Public Class frmLeaveRecord
                 With _leaveFilingRow
                     If .IsSuperiorId1Null = False AndAlso .SuperiorId1 = employeeId AndAlso .IsSuperiorApprovalDate1Null = True Then
                         If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
-                            .SuperiorIsApproved1 = 1
-                            .SuperiorApprovalDate1 = DateTime.Now
-
                             If .IsSuperiorId2Null = True Then
                                 .RoutingStatusId = 3
 
@@ -177,7 +175,7 @@ Public Class frmLeaveRecord
                                     _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
                                                                 _leaveFilingRow.ManagerId, _
                                                                 _leaveTypeName, _
-                                                                _employeeName, _
+                                                                StrConv(_employeeName, VbStrConv.ProperCase), _
                                                                 _departmentName, _
                                                                 CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy"), _
                                                                 dgvList.CurrentRow.Cells("ColReason").Value.ToString)
@@ -185,7 +183,7 @@ Public Class frmLeaveRecord
                                     _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
                                                                 _leaveFilingRow.ManagerId, _
                                                                 _leaveTypeName, _
-                                                                _employeeName, _
+                                                                StrConv(_employeeName, VbStrConv.ProperCase), _
                                                                 _departmentName, _
                                                                 CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy") _
                                                                 & " - " & CDate(dgvList.CurrentRow.Cells("ColEndDate").Value).ToString("MMMM dd, yyyy"), _
@@ -198,7 +196,7 @@ Public Class frmLeaveRecord
                                     _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
                                                                 _leaveFilingRow.SuperiorId2, _
                                                                 _leaveTypeName, _
-                                                                _employeeName, _
+                                                                StrConv(_employeeName, VbStrConv.ProperCase), _
                                                                 _departmentName, _
                                                                 CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy"), _
                                                                 dgvList.CurrentRow.Cells("ColReason").Value.ToString)
@@ -206,28 +204,27 @@ Public Class frmLeaveRecord
                                     _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
                                                                 _leaveFilingRow.SuperiorId2, _
                                                                 _leaveTypeName, _
-                                                                _employeeName, _
+                                                                StrConv(_employeeName, VbStrConv.ProperCase), _
                                                                 _departmentName, _
                                                                 CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy") _
                                                                 & " - " & CDate(dgvList.CurrentRow.Cells("ColEndDate").Value).ToString("MMMM dd, yyyy"), _
                                                                 dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                                 End If
                             End If
+
+                            .SuperiorIsApproved1 = 1
+                            .SuperiorApprovalDate1 = DateTime.Now
                         Else
                             Return
                         End If
 
                     ElseIf .IsSuperiorId2Null = False AndAlso .SuperiorId2 = employeeId AndAlso .IsSuperiorApprovalDate2Null = True Then
                         If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
-                            .SuperiorIsApproved2 = 1
-                            .SuperiorApprovalDate2 = DateTime.Now
-                            .RoutingStatusId = 3
-
                             If _leaveFilingRow.StartDate.Date.Equals(_leaveFilingRow.EndDate.Date) Then
                                 _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
                                                             _leaveFilingRow.ManagerId, _
                                                             _leaveTypeName, _
-                                                            _employeeName, _
+                                                             StrConv(_employeeName, VbStrConv.ProperCase), _
                                                             _departmentName, _
                                                             CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy"), _
                                                             dgvList.CurrentRow.Cells("ColReason").Value.ToString)
@@ -235,20 +232,22 @@ Public Class frmLeaveRecord
                                 _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
                                                             _leaveFilingRow.ManagerId, _
                                                             _leaveTypeName, _
-                                                            _employeeName, _
+                                                            StrConv(_employeeName, VbStrConv.ProperCase), _
                                                             _departmentName, _
                                                             CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy") _
                                                             & " - " & CDate(dgvList.CurrentRow.Cells("ColEndDate").Value).ToString("MMMM dd, yyyy"), _
                                                             dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                             End If
+
+                            .SuperiorIsApproved2 = 1
+                            .SuperiorApprovalDate2 = DateTime.Now
+                            .RoutingStatusId = 3
+                        Else
+                            Return
                         End If
 
                     ElseIf .ManagerId = employeeId AndAlso .IsManagerApprovalDateNull = True Then
                         If Confirmation(1) = Windows.Forms.DialogResult.Yes Then
-                            .ManagerIsApproved = 1
-                            .ManagerApprovalDate = DateTime.Now
-                            .RoutingStatusId = 2
-
                             _frmMain.SendEmailRequestor(True, _
                                                         _leaveFilingRow.EmployeeId, _
                                                         _leaveTypeName, _
@@ -259,7 +258,7 @@ Public Class frmLeaveRecord
                                 _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
                                                      True, _
                                                     _leaveTypeName, _
-                                                    _employeeName, _
+                                                    StrConv(_employeeName, VbStrConv.ProperCase), _
                                                     _departmentName, _
                                                     _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy"), _
                                                     dgvList.CurrentRow.Cells("ColReason").Value.ToString)
@@ -267,12 +266,18 @@ Public Class frmLeaveRecord
                                 _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
                                                      True, _
                                                      _leaveTypeName, _
-                                                     _employeeName, _
+                                                     StrConv(_employeeName, VbStrConv.ProperCase), _
                                                      _departmentName, _
                                                      _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy") _
                                                      & " - " & _leaveFilingRow.EndDate.Date.ToString("MMMM dd, yyyy"), _
                                                      dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                             End If
+
+                            .ManagerIsApproved = 1
+                            .ManagerApprovalDate = DateTime.Now
+                            .RoutingStatusId = 2
+                        Else
+                            Return
                         End If
                     End If
                 End With
@@ -300,7 +305,8 @@ Public Class frmLeaveRecord
                 Dim _prmLeaveType(0) As SqlParameter
                 _prmLeaveType(0) = New SqlParameter("@LeaveTypeId", SqlDbType.Int)
                 _prmLeaveType(0).Value = _leaveFilingRow.LeaveTypeId
-                _leaveTypeName = dbLeaveFiling.ExecuteScalar("SELECT TRIM(LeaveTypeName) AS LeaveTypeName FROM dbo.LeaveType WHERE LeaveTypeId = @LeaveTypeId", CommandType.Text, _prmLeaveType)
+                _leaveTypeName = dbLeaveFiling.ExecuteScalar("SELECT TRIM(LeaveTypeName) AS LeaveTypeName FROM dbo.LeaveType WHERE LeaveTypeId = @LeaveTypeId", _
+                                                             CommandType.Text, _prmLeaveType)
 
                 Dim _prmEmployee(0) As SqlParameter
                 _prmEmployee(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
@@ -323,103 +329,87 @@ Public Class frmLeaveRecord
                 With _leaveFilingRow
                     If .IsSuperiorId1Null = False AndAlso .SuperiorId1 = employeeId AndAlso .IsSuperiorApprovalDate1Null = True Then
                         If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
-                            .SuperiorIsApproved1 = 0
-                            .SuperiorApprovalDate1 = DateTime.Now
-
                             If .IsSuperiorId2Null = True Then
-                                .RoutingStatusId = 7
-                                _frmMain.SendEmailRequestor(False, _
-                                                            _leaveFilingRow.EmployeeId, _
-                                                            _leaveTypeName, _
-                                                            _leaveFilingRow.StartDate.Date.Date.ToString("MMMM dd, yyyy"), _
-                                                            _leaveFilingRow.EndDate.Date.Date.ToString("MMMM dd, yyyy"))
+                                .RoutingStatusId = 3
 
                                 If _leaveFilingRow.StartDate.Date.Equals(_leaveFilingRow.EndDate.Date) Then
-                                    _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
-                                                         False, _
-                                                         _leaveTypeName, _
-                                                         _employeeName, _
-                                                         _departmentName, _
-                                                         _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy"),
-                                                         dgvList.CurrentRow.Cells("ColReason").Value.ToString)
+                                    _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
+                                                                 _leaveFilingRow.ManagerId, _
+                                                                 _leaveTypeName, _
+                                                                 StrConv(_employeeName, VbStrConv.ProperCase), _
+                                                                 _departmentName, _
+                                                                 CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy"), _
+                                                                 dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                                 Else
-                                    _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
-                                                         False, _
-                                                         _leaveTypeName, _
-                                                         _employeeName, _
-                                                         _departmentName, _
-                                                         _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy") _
-                                                         & " - " & _leaveFilingRow.EndDate.Date.ToString("MMMM dd, yyyy"), _
-                                                         dgvList.CurrentRow.Cells("ColReason").Value.ToString)
+                                    _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
+                                                                _leaveFilingRow.ManagerId, _
+                                                                _leaveTypeName, _
+                                                                StrConv(_employeeName, VbStrConv.ProperCase), _
+                                                                _departmentName, _
+                                                                CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy") _
+                                                                & " - " & CDate(dgvList.CurrentRow.Cells("ColEndDate").Value).ToString("MMMM dd, yyyy"), _
+                                                                dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                                 End If
 
                             Else
-                                .RoutingStatusId = 7
-                                _frmMain.SendEmailRequestor(False, _
-                                                            _leaveFilingRow.EmployeeId, _
-                                                            _leaveTypeName, _
-                                                            _leaveFilingRow.StartDate.Date.Date.ToString("MMMM dd, yyyy"), _
-                                                            _leaveFilingRow.EndDate.Date.Date.ToString("MMMM dd, yyyy"))
+                                .RoutingStatusId = 4
 
                                 If _leaveFilingRow.StartDate.Date.Equals(_leaveFilingRow.EndDate.Date) Then
-                                    _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
-                                                         False, _
-                                                         _leaveTypeName, _
-                                                         _employeeName, _
-                                                         _departmentName, _
-                                                         _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy"), _
-                                                         dgvList.CurrentRow.Cells("ColReason").Value.ToString)
+                                    _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
+                                                                 _leaveFilingRow.ManagerId, _
+                                                                 _leaveTypeName, _
+                                                                 StrConv(_employeeName, VbStrConv.ProperCase), _
+                                                                 _departmentName, _
+                                                                 CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy"), _
+                                                                 dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                                 Else
-                                    _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
-                                                         False, _
-                                                         _leaveTypeName, _
-                                                         _employeeName, _
-                                                         _departmentName, _
-                                                         _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy") _
-                                                         & " - " & _leaveFilingRow.EndDate.Date.ToString("MMMM dd, yyyy"), _
-                                                         dgvList.CurrentRow.Cells("ColReason").Value.ToString)
+                                    _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
+                                                                _leaveFilingRow.ManagerId, _
+                                                                _leaveTypeName, _
+                                                                StrConv(_employeeName, VbStrConv.ProperCase), _
+                                                                _departmentName, _
+                                                                CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy") _
+                                                                & " - " & CDate(dgvList.CurrentRow.Cells("ColEndDate").Value).ToString("MMMM dd, yyyy"), _
+                                                                dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                                 End If
                             End If
+
+                            .SuperiorIsApproved1 = 0
+                            .SuperiorApprovalDate1 = DateTime.Now
+                        Else
+                            Return
                         End If
 
                     ElseIf .IsSuperiorId2Null = False AndAlso .SuperiorId2 = employeeId AndAlso .IsSuperiorApprovalDate2Null = True Then
                         If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
+                            If _leaveFilingRow.StartDate.Date.Equals(_leaveFilingRow.EndDate.Date) Then
+                                _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
+                                                             _leaveFilingRow.ManagerId, _
+                                                             _leaveTypeName, _
+                                                             StrConv(_employeeName, VbStrConv.ProperCase), _
+                                                             _departmentName, _
+                                                             CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy"), _
+                                                             dgvList.CurrentRow.Cells("ColReason").Value.ToString)
+                            Else
+                                _frmMain.SendEmailApprovers(_leaveFilingRow.LeaveFileId, _
+                                                            _leaveFilingRow.ManagerId, _
+                                                            _leaveTypeName, _
+                                                            StrConv(_employeeName, VbStrConv.ProperCase), _
+                                                            _departmentName, _
+                                                            CDate(dgvList.CurrentRow.Cells("ColStartDate").Value).ToString("MMMM dd, yyyy") _
+                                                            & " - " & CDate(dgvList.CurrentRow.Cells("ColEndDate").Value).ToString("MMMM dd, yyyy"), _
+                                                            dgvList.CurrentRow.Cells("ColReason").Value.ToString)
+                            End If
+
                             .SuperiorIsApproved2 = 0
                             .SuperiorApprovalDate2 = DateTime.Now
-
-                            .RoutingStatusId = 7
-                            _frmMain.SendEmailRequestor(False, _
-                                                        _leaveFilingRow.EmployeeId, _
-                                                        _leaveTypeName, _
-                                                        _leaveFilingRow.StartDate.Date.Date.ToString("MMMM dd, yyyy"), _
-                                                        _leaveFilingRow.EndDate.Date.Date.ToString("MMMM dd, yyyy"))
-
-                            If _leaveFilingRow.StartDate.Date.Equals(_leaveFilingRow.EndDate.Date) Then
-                                _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
-                                                     False, _
-                                                     _leaveTypeName, _
-                                                     _employeeName, _
-                                                     _departmentName, _
-                                                     _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy"), _
-                                                     dgvList.CurrentRow.Cells("ColReason").Value.ToString)
-                            Else
-                                _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
-                                                     False, _
-                                                     _leaveTypeName, _
-                                                     _employeeName, _
-                                                     _departmentName, _
-                                                     _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy") _
-                                                     & " - " & _leaveFilingRow.EndDate.Date.ToString("MMMM dd, yyyy"), _
-                                                     dgvList.CurrentRow.Cells("ColReason").Value.ToString)
-                            End If
+                            .RoutingStatusId = 3
+                        Else
+                            Return
                         End If
 
                     ElseIf .ManagerId = employeeId AndAlso .IsManagerApprovalDateNull = True Then
                         If Confirmation(2) = Windows.Forms.DialogResult.Yes Then
-                            .ManagerIsApproved = 0
-                            .ManagerApprovalDate = DateTime.Now
-
-                            .RoutingStatusId = 7
                             _frmMain.SendEmailRequestor(False, _
                                                         _leaveFilingRow.EmployeeId, _
                                                         _leaveTypeName, _
@@ -430,7 +420,7 @@ Public Class frmLeaveRecord
                                 _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
                                                      False, _
                                                      _leaveTypeName, _
-                                                     _employeeName, _
+                                                     StrConv(_employeeName, VbStrConv.ProperCase), _
                                                      _departmentName, _
                                                      _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy"), _
                                                      dgvList.CurrentRow.Cells("ColReason").Value.ToString)
@@ -438,12 +428,18 @@ Public Class frmLeaveRecord
                                 _frmMain.SendEmailHr(_leaveFilingRow.LeaveFileId, _
                                                      False, _
                                                      _leaveTypeName, _
-                                                     _employeeName, _
+                                                     StrConv(_employeeName, VbStrConv.ProperCase), _
                                                      _departmentName, _
                                                      _leaveFilingRow.StartDate.Date.ToString("MMMM dd, yyyy") _
                                                      & " - " & _leaveFilingRow.EndDate.Date.ToString("MMMM dd, yyyy"), _
                                                      dgvList.CurrentRow.Cells("ColReason").Value.ToString)
                             End If
+
+                            .ManagerIsApproved = 0
+                            .ManagerApprovalDate = DateTime.Now
+                            .RoutingStatusId = 7
+                        Else
+                            Return
                         End If
                     End If
                 End With
@@ -489,14 +485,16 @@ Public Class frmLeaveRecord
     End Sub
 
     Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
-        If Environment.MachineName = "NBCP-MDT-013" Or Environment.MachineName = "NBCP-MDT-016" Then
+        If Environment.MachineName.Substring(0, 8) = "NBCP-MDT" Then
             Application.Exit()
         Else
             Me.Close()
         End If
     End Sub
 
-    Private Sub trxStatus_CheckedChanged(sender As Object, e As EventArgs) Handles rdApproved.CheckedChanged, rdPending.CheckedChanged, rdMyFile.CheckedChanged, rdDisapproved.CheckedChanged
+    Private Sub trxStatus_CheckedChanged(sender As Object, e As EventArgs) Handles rdApproved.CheckedChanged, rdPending.CheckedChanged, _
+        rdMyFile.CheckedChanged, rdDisapproved.CheckedChanged
+
         pageSize = 100
         pageIndex = 0
         BindPage()
@@ -508,7 +506,6 @@ Public Class frmLeaveRecord
 
     Private Sub BindingNavigatorMoveFirstItem_Click(sender As Object, e As EventArgs) Handles BindingNavigatorMoveFirstItem.Click
         pageIndex = 0
-
         BindPage()
     End Sub
 
@@ -1094,18 +1091,15 @@ Public Class frmLeaveRecord
     'check if has the right to enable the status panel
     Private Function IsApprover(ByVal _employeeId As Integer) As Boolean
         Dim _isApprover As Boolean = False
-        Dim _count As Integer = 0
 
         Try
             Dim _prm(0) As SqlParameter
             _prm(0) = New SqlParameter("@EmployeeId", SqlDbType.Int)
             _prm(0).Value = _employeeId
-            _count = dbLeaveFiling.ExecuteScalar("SELECT COUNT(Id) FROM dbo.Employee WHERE Id = @EmployeeId", CommandType.Text, _prm)
-            If _count > 0 Then
-                _isApprover = True
-            Else
-                _isApprover = False
-            End If
+
+            _isApprover = dbLeaveFiling.ExecuteScalar("SELECT IsApprover FROM dbo.Employee WHERE EmployeeId = @EmployeeId", _
+                                                 CommandType.Text, _prm)
+
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try

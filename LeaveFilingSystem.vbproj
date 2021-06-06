@@ -27,8 +27,8 @@
     <ProductName>Leave Application</ProductName>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationRevision>54</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>2.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>true</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -122,6 +122,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="Class\clsConnection.vb" />
     <Compile Include="Dataset\dsJeonsoft.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -136,10 +137,28 @@
     <Compile Include="Dataset\dsLeaveFiling.vb">
       <DependentUpon>dsLeaveFiling.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Form\frmChangePassword.Designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmEmployee.Designer.vb">
+      <DependentUpon>frmEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmHoliday.Designer.vb">
       <DependentUpon>frmHoliday.vb</DependentUpon>
     </Compile>
     <Compile Include="Form\frmHoliday.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmHolidaySync.Designer.vb">
+      <DependentUpon>frmHolidaySync.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmHolidaySync.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmHrRecord.Designer.vb">
@@ -166,6 +185,12 @@
     <Compile Include="Form\frmLogin.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Form\frmLoginScan.Designer.vb">
+      <DependentUpon>frmLoginScan.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmLoginScan.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmMain.Designer.vb">
       <DependentUpon>frmMain.vb</DependentUpon>
     </Compile>
@@ -189,8 +214,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmEmployee.resx">
+      <DependentUpon>frmEmployee.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmHoliday.resx">
       <DependentUpon>frmHoliday.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmHolidaySync.resx">
+      <DependentUpon>frmHolidaySync.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmHrRecord.resx">
       <DependentUpon>frmHrRecord.vb</DependentUpon>
@@ -203,6 +237,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmLogin.resx">
       <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmLoginScan.resx">
+      <DependentUpon>frmLoginScan.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmMain.resx">
       <DependentUpon>frmMain.vb</DependentUpon>

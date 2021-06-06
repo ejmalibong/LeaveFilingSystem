@@ -6,15 +6,16 @@ Imports LeaveFilingSystem
 Imports LeaveFilingSystem.dsLeaveFiling
 Imports LeaveFilingSystem.dsLeaveFilingTableAdapters
 
-Public Class frmHoliday
+Public Class frmEmployee
     Private connection As New clsConnection
     Private dbLeaveFiling As New SqlDbMethod(connection.LocalConnection)
+    Private dbJeonsoft As New SqlDbMethod(connection.JeonsoftConnection)
     Private main As New Main
     'dataset
     Private dsLeaveFiling As New dsLeaveFiling
-    Private adpHoliday As New HolidayTableAdapter
-    Private dtHoliday As New HolidayDataTable
-    Private WithEvents bsHoliday As New BindingSource
+    Private adpEmployee As New EmployeeTableAdapter
+    Private dtEmployee As New EmployeeDataTable
+    Private WithEvents bsEmployee As New BindingSource
     'pagination
     Private pageSize As Integer
     Private pageIndex As Integer
@@ -25,13 +26,14 @@ Public Class frmHoliday
     'search criteria
     Private dictionary As New Dictionary(Of String, Integer)
     'flag filters
-    Private isFilterByDate As Boolean = False
-    Private isFilterByName As Boolean = False
+    Private isFilterByEmployeeName As Boolean = False
+    Private isFilterByEmployeeCode As Boolean = False
+    Private isFilterByEmailAddress As Boolean = False
     'flags
     Private isExists As Boolean = True
     Private isValidate As Boolean = True
 
-    Private Sub frmHoliday_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub frmEmployee_Load(sender As Object, e As EventArgs) Handles Me.Load
         pageIndex = 0
         pageSize = 100
         BindPage()
@@ -42,9 +44,10 @@ Public Class frmHoliday
 
         Me.ActiveControl = dgvList
         Me.dgvList.Columns(2).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
+        Me.dgvList.Columns(4).AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill
     End Sub
 
-    Private Sub frmHoliday_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
+    Private Sub frmEmployee_KeyDown(sender As Object, e As KeyEventArgs) Handles Me.KeyDown
         If e.KeyCode.Equals(Keys.F2) Then
             e.Handled = True
             btnAdd.PerformClick()
@@ -54,59 +57,16 @@ Public Class frmHoliday
         End If
     End Sub
 
-    Private Sub frmHoliday_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    Private Sub frmEmployee_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
         dgvList.Dispose()
     End Sub
 
-    Private Sub frmHoliday_LocationChanged(sender As Object, e As EventArgs) Handles MyBase.LocationChanged
+    Private Sub frmEmployee_LocationChanged(sender As Object, e As EventArgs) Handles Me.LocationChanged
         main.FormTrap(Me)
     End Sub
 
     Private Sub dgvList_CellValidating(sender As Object, e As DataGridViewCellValidatingEventArgs) Handles dgvList.CellValidating
-        Try
-            If isValidate = True Then
-                If e.ColumnIndex = 1 Then
-                    If String.IsNullOrEmpty(e.FormattedValue.ToString.Trim) Then
-                        MessageBox.Show("Holiday date is required.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        e.Cancel = True
-                    End If
 
-                    If dgvList.IsCurrentCellDirty Then
-                        dgvList.CommitEdit(DataGridViewDataErrorContexts.Commit)
-                    End If
-
-                    isExists = False
-
-                    For x As Integer = 0 To dgvList.Rows.Count - 1
-                        For y As Integer = 0 To dgvList.Rows.Count - 1
-                            If y <> x AndAlso dgvList.Rows(x).Cells(1).Value.ToString.ToLower = dgvList.Rows(y).Cells(1).Value.ToString.ToLower Then
-                                isExists = True
-                            End If
-                        Next
-                    Next
-
-                    If isExists = True Then
-                        MessageBox.Show("Holiday date is already exists.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        e.Cancel = True
-                    End If
-
-                    Dim _date As DateTime
-                    If e.FormattedValue.ToString <> String.Empty AndAlso Not DateTime.TryParse(e.FormattedValue.ToString, _date) Then
-                        MessageBox.Show("Please input date in Month/Day/Year format.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        e.Cancel = True
-                    End If
-
-                ElseIf e.ColumnIndex = 2 Then
-                    If String.IsNullOrEmpty(e.FormattedValue.ToString.Trim) Then
-                        MessageBox.Show("Holiday name is required.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        e.Cancel = True
-                    End If
-
-                End If
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
     End Sub
 
     Private Sub dgvList_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles dgvList.DataError
@@ -141,13 +101,28 @@ Public Class frmHoliday
 
     Private Sub btnSync_Click(sender As Object, e As EventArgs) Handles btnSync.Click
         Try
-            Using frmHolidaySync As New frmHolidaySync(Date.Now.Year)
-                frmHolidaySync.ShowDialog(Me)
+            Dim _count As Integer = 0
+            Dim _totalCount As Integer = 0
+            Dim _rowsAffected As Integer = 0
 
-                If frmHolidaySync.DialogResult = Windows.Forms.DialogResult.OK Then
-                    BindPage()
+            Dim _prm1(0) As SqlParameter
+            _prm1(0) = New SqlParameter("@TotalCount", SqlDbType.Int)
+            _prm1(0).Direction = ParameterDirection.Output
+
+            dbLeaveFiling.ExecuteScalar("CntEmployee", CommandType.StoredProcedure, _prm1)
+            _count = _prm1(0).Value
+
+            If _count > 0 Then
+                _rowsAffected = dbLeaveFiling.ExecuteNonQuery("InsEmployee", CommandType.StoredProcedure)
+
+                If _rowsAffected > 0 Then
+                    MessageBox.Show(_rowsAffected & " rows affected.", "", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Else
+                    MessageBox.Show("No rows affected.", "", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-            End Using
+            Else
+                MessageBox.Show("No items need to be imported.", "", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -155,26 +130,22 @@ Public Class frmHoliday
 
     Private Sub btnAddSave_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         Try
-            dgvList.ClearSelection()
-            Me.bsHoliday.AddNew()
-            Me.bsHoliday.MoveLast()
-            dgvList.CurrentCell = dgvList.CurrentRow.Cells(1)
-            dgvList.BeginEdit(True)
+            'dgvList.ClearSelection()
+            'Me.bsEmployee.AddNew()
+            'Me.bsEmployee.MoveLast()
+            'dgvList.CurrentCell = dgvList.CurrentRow.Cells(1)
+            'dgvList.BeginEdit(True)
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Try
-            Me.Validate()
-            Me.bsHoliday.EndEdit()
-            If Me.dsLeaveFiling.HasChanges Then
-                Me.adpHoliday.Update(dsLeaveFiling.Holiday)
-            End If
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
+        Me.Validate()
+        Me.bsEmployee.EndEdit()
+        If Me.dsLeaveFiling.HasChanges Then
+            Me.adpEmployee.Update(dsLeaveFiling.Employee)
+        End If
     End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
@@ -183,7 +154,7 @@ Public Class frmHoliday
 
             If dgvList.NewRowIndex Then
                 dgvList.CancelEdit()
-                Me.bsHoliday.CancelEdit()
+                Me.bsEmployee.CancelEdit()
             End If
 
             If dsLeaveFiling.HasChanges Then
@@ -191,7 +162,7 @@ Public Class frmHoliday
 
                 If _result = Windows.Forms.DialogResult.Yes Then
                     dgvList.CancelEdit()
-                    Me.bsHoliday.CancelEdit()
+                    Me.bsEmployee.CancelEdit()
                     Me.dsLeaveFiling.RejectChanges()
 
                 ElseIf _result = Windows.Forms.DialogResult.No Then
@@ -207,33 +178,33 @@ Public Class frmHoliday
 
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Try
-            If Me.bsHoliday.Current Is Nothing Then
-                Exit Sub
-            End If
+            'If Me.bsEmployee.Current Is Nothing Then
+            '    Exit Sub
+            'End If
 
-            Dim currentRow = CType(Me.bsHoliday.Current, DataRowView).Row
-            Dim state = currentRow.RowState
+            'Dim currentRow = CType(Me.bsEmployee.Current, DataRowView).Row
+            'Dim state = currentRow.RowState
 
-            Select Case state
-                Case DataRowState.Added
-                    Me.bsHoliday.RemoveCurrent()
-                Case DataRowState.Deleted
-                    MessageBox.Show("Item is already deleted.", "")
-                Case DataRowState.Detached
-                    Me.bsHoliday.CancelEdit()
-                Case DataRowState.Modified, DataRowState.Unchanged
-                    If dgvList.SelectedCells.Count > 0 AndAlso dgvList.SelectedCells(0).RowIndex = dgvList.NewRowIndex Then
-                        Me.bsHoliday.CancelEdit()
-                        Exit Sub
-                    End If
+            'Select Case state
+            '    Case DataRowState.Added
+            '        Me.bsEmployee.RemoveCurrent()
+            '    Case DataRowState.Deleted
+            '        MessageBox.Show("Item is already deleted.", "")
+            '    Case DataRowState.Detached
+            '        Me.bsEmployee.CancelEdit()
+            '    Case DataRowState.Modified, DataRowState.Unchanged
+            '        If dgvList.SelectedCells.Count > 0 AndAlso dgvList.SelectedCells(0).RowIndex = dgvList.NewRowIndex Then
+            '            Me.bsEmployee.CancelEdit()
+            '            Exit Sub
+            '        End If
 
-                    Dim message = String.Format("Delete {0}?", bsHoliday.Current("HolidayName"))
-                    If MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
-                        Me.bsHoliday.RemoveCurrent()
-                        Me.adpHoliday.Update(Me.dsLeaveFiling.Holiday)
-                    End If
-                Case Else
-            End Select
+            '        Dim message = String.Format("Delete {0}?", bsEmployee.Current("EmployeeName"))
+            '        If MessageBox.Show(message, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) = Windows.Forms.DialogResult.Yes Then
+            '            Me.bsEmployee.RemoveCurrent()
+            '            Me.adpEmployee.Update(Me.dsLeaveFiling.Employee)
+            '        End If
+            '    Case Else
+            'End Select
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -253,22 +224,8 @@ Public Class frmHoliday
 
     Private Sub cmbSearchCriteria_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbSearchCriteria.SelectedValueChanged
         Try
-            If cmbSearchCriteria.SelectedValue = 1 Then
-                pnlDate.Visible = True
-                pnlName.Visible = False
-
-                Me.ActiveControl = dtpDateFrom
-
-            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
-                pnlDate.Visible = False
-                pnlName.Visible = True
-
-                Me.ActiveControl = txtName
-            End If
-
-            dtpDateFrom.Value = Date.Now.Date
-            dtpDateTo.Value = Date.Now.Date
             txtName.Clear()
+            Me.ActiveControl = txtName
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -277,12 +234,20 @@ Public Class frmHoliday
     Private Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Try
             If cmbSearchCriteria.SelectedValue = 1 Then
-                isFilterByDate = True
-                isFilterByName = False
+                isFilterByEmployeeName = True
+                isFilterByEmployeeCode = False
+                isFilterByEmailAddress = False
 
             ElseIf cmbSearchCriteria.SelectedValue = 2 Then
-                isFilterByDate = False
-                isFilterByName = True
+                isFilterByEmployeeName = False
+                isFilterByEmployeeCode = True
+                isFilterByEmailAddress = False
+
+            ElseIf cmbSearchCriteria.SelectedValue = 3 Then
+                isFilterByEmployeeName = False
+                isFilterByEmployeeCode = False
+                isFilterByEmailAddress = True
+
             End If
 
             pageIndex = 0
@@ -294,39 +259,22 @@ Public Class frmHoliday
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
         Try
-            If cmbSearchCriteria.SelectedValue = 1 Then
-                isFilterByDate = False
-                isFilterByName = False
+            txtName.Clear()
 
-                dtpDateFrom.Value = Date.Now.Date
-                dtpDateTo.Value = Date.Now.Date
+            isFilterByEmployeeName = False
+            isFilterByEmployeeCode = False
+            isFilterByEmailAddress = False
 
-                pageIndex = 0
-                BindPage()
-
-            ElseIf cmbSearchCriteria.SelectedValue = 2 Then
-                txtName.Clear()
-
-                isFilterByDate = False
-                isFilterByName = True
-
-                pageIndex = 0
-                BindPage()
-            End If
+            pageIndex = 0
+            BindPage()
         Catch ex As Exception
             MessageBox.Show(ex.Message, main.SetExcpTitle(ex), MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
     End Sub
 
-    Private Sub bsHoliday_AddingNew(sender As Object, e As System.ComponentModel.AddingNewEventArgs) Handles bsHoliday.AddingNew
+    Private Sub bsEmployee_AddingNew(sender As Object, e As System.ComponentModel.AddingNewEventArgs) Handles bsEmployee.AddingNew
         Try
-            Dim dv As DataView = CType(Me.bsHoliday.List, DataView)
-            Dim row As DataRowView = dv.AddNew()
-
-            row("HolidayDate") = Date.Now.Date
-            e.NewObject = row
-
-            Me.bsHoliday.MoveLast()
+          
         Catch ex As Exception
             MessageBox.Show(ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End Try
@@ -353,23 +301,33 @@ Public Class frmHoliday
         Try
             totalCount = 0
 
-            If isFilterByDate = True Then
-                Me.adpHoliday.FillByHolidayDate(Me.dsLeaveFiling.Holiday, pageIndex, pageSize, totalCount, dtpDateFrom.Value.Date, dtpDateTo.Value.Date)
-            ElseIf isFilterByName = True Then
+            If isFilterByEmployeeName = True Then
                 If String.IsNullOrEmpty(txtName.Text.Trim) Then
-                    Me.adpHoliday.FillByHolidayName(Me.dsLeaveFiling.Holiday, pageIndex, pageSize, totalCount, Nothing)
+                    Me.adpEmployee.FillEmployeeMasterlistByEmployeeName(Me.dsLeaveFiling.Employee, pageIndex, pageSize, totalCount, Nothing)
                 Else
-                    Me.adpHoliday.FillByHolidayName(Me.dsLeaveFiling.Holiday, pageIndex, pageSize, totalCount, txtName.Text.Trim)
+                    Me.adpEmployee.FillEmployeeMasterlistByEmployeeName(Me.dsLeaveFiling.Employee, pageIndex, pageSize, totalCount, txtName.Text.Trim)
+                End If
+            ElseIf isFilterByEmployeeCode = True Then
+                If String.IsNullOrEmpty(txtName.Text.Trim) Then
+                    Me.adpEmployee.FillEmployeeMasterlistByEmployeeCode(Me.dsLeaveFiling.Employee, pageIndex, pageSize, totalCount, Nothing)
+                Else
+                    Me.adpEmployee.FillEmployeeMasterlistByEmployeeCode(Me.dsLeaveFiling.Employee, pageIndex, pageSize, totalCount, txtName.Text.Trim)
+                End If
+            ElseIf isFilterByEmailAddress = True Then
+                If String.IsNullOrEmpty(txtName.Text.Trim) Then
+                    Me.adpEmployee.FillEmployeeMasterlistByEmailAddress(Me.dsLeaveFiling.Employee, pageIndex, pageSize, totalCount, Nothing)
+                Else
+                    Me.adpEmployee.FillEmployeeMasterlistByEmailAddress(Me.dsLeaveFiling.Employee, pageIndex, pageSize, totalCount, txtName.Text.Trim)
                 End If
             Else
-                Me.adpHoliday.FillHoliday(Me.dsLeaveFiling.Holiday, pageIndex, pageSize, totalCount)
+                Me.adpEmployee.FillEmployeeMasterlist(Me.dsLeaveFiling.Employee, pageIndex, pageSize, totalCount)
             End If
 
-            Me.bsHoliday.DataSource = Me.dsLeaveFiling
-            Me.bsHoliday.DataMember = dtHoliday.TableName
-            Me.bsHoliday.ResetBindings(True)
+            Me.bsEmployee.DataSource = Me.dsLeaveFiling
+            Me.bsEmployee.DataMember = dtEmployee.TableName
+            Me.bsEmployee.ResetBindings(True)
             dgvList.AutoGenerateColumns = False
-            dgvList.DataSource = Me.bsHoliday
+            dgvList.DataSource = Me.bsEmployee
 
             If totalCount Mod pageSize = 0 Then
                 If totalCount = 0 Then
@@ -443,16 +401,18 @@ Public Class frmHoliday
         Else
             dgvList.Rows(indexPosition - 1).Selected = True
         End If
-        Me.bsHoliday.Position = dgvList.SelectedCells(0).RowIndex
+        Me.bsEmployee.Position = dgvList.SelectedCells(0).RowIndex
     End Sub
 
     Private Sub SearchCriteria()
-        dictionary.Add(" Date", 1)
-        dictionary.Add(" Holiday Name", 2)
+        dictionary.Add(" Employee Name", 1)
+        dictionary.Add(" Employee Code", 2)
+        dictionary.Add(" NBC Email Address", 3)
         cmbSearchCriteria.DisplayMember = "Key"
         cmbSearchCriteria.ValueMember = "Value"
         cmbSearchCriteria.DataSource = New BindingSource(dictionary, Nothing)
     End Sub
 #End Region
+
 
 End Class
