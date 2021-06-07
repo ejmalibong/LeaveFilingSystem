@@ -670,16 +670,16 @@ Public Class frmLeaveForm
                 Return
             End If
 
-            If cmbLeaveType.SelectedValue = 3 AndAlso IsBirthMonth(employeeId) = False Then
-                MessageBox.Show("Birthday leave must be within your birth month.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                dtpFrom.Focus()
-                Return
-            End If
-
             Me.Validate()
 
             'new transaction
             If leaveFileId = 0 Then
+                If cmbLeaveType.SelectedValue = 3 AndAlso IsBirthMonth(employeeId) = False Then
+                    MessageBox.Show("Birthday leave must be within your birth month.", "", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    dtpFrom.Focus()
+                    Return
+                End If
+
                 Dim _newRowLeave As LeaveFilingRow = Me.dsLeaveFiling.LeaveFiling.NewLeaveFilingRow
 
                 With _newRowLeave
@@ -709,7 +709,7 @@ Public Class frmLeaveForm
                                 .IsLateFiling = 0
                                 .Reason = txtReason.Text.Trim
                             End If
-                           
+
                         Case Else
                             .SetScreenIdNull()
                             .ClinicIsApproved = 0
