@@ -461,7 +461,7 @@ Public Class frmLeaveForm
                     Return
                 End If
 
-            Case 2, 12, 13 'vacation leave, half day, undertime
+            Case 2, 8, 11, 12, 13 'vl, offset, maternity, half-day, undertime
                 screenId = GetScreenId(cmbLeaveType.SelectedValue, employeeId)
 
                 If screenId > 0 Then
